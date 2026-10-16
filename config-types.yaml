@@ -1,0 +1,13 @@
+package: fireworks
+generate:
+  models: true
+output: types.gen.go
+output-options:
+  resolve-type-name-collisions: true
+  # Keep in sync with config.yaml: the client half references these types.
+  type-mapping:
+    number:
+      default:
+        type: float64
+compatibility:
+  always-prefix-enum-values: true
