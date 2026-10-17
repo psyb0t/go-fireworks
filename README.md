@@ -98,6 +98,8 @@ make generate
 - `scripts/fetch-spec.sh` reads `openapi_spec_url` from the `.stats.yml` of [fw-ai-external/python-sdk](https://github.com/fw-ai-external/python-sdk) and downloads that URL to `api/openapi.yaml`. Stainless hosts the spec under a URL with a content hash that changes on every update, so the script never hardcodes it.
 - oapi-codegen runs twice: `config-types.yaml` writes the models to `types.gen.go`, `config.yaml` writes the client to `client.gen.go`. One file would be about 60,000 lines. Both configs map `number` to `float64`, because oapi-codegen would otherwise use `float32`.
 
+`.github/workflows/regen.yml` does the same every day in CI. When the new spec changes the client, it runs `make lint`, `make test` and `make sec`. If a check fails, Claude edits the code and the checks run again, up to three times, and a review step reads the result. A passing change is committed with a CHANGELOG entry and tagged as the next release: a patch version for fixes and additions, a minor version for breaking changes.
+
 ## Agent integrations
 
 The [skill](.agents/skills/go-fireworks) teaches a coding agent how to use go-fireworks when it writes Go. It works in any agent that reads `.agents/skills/`, and installs natively in the clients below.
