@@ -61,6 +61,8 @@ func main() {
 
 `example_test.go` runs the same code against a local test server, so `make test` checks it.
 
+The full API, with the spec's descriptions as doc comments, is in the [Go reference](https://pkg.go.dev/github.com/psyb0t/go-fireworks) and in `go doc github.com/psyb0t/go-fireworks`.
+
 Method names come from the spec's operation IDs. The control plane ones carry a `Gateway` prefix (`GatewayListModels`, `GatewayCreateDeployment`). The inference ones are long, because the spec's IDs are (`CreateChatCompletionV1ChatCompletionsPost`).
 
 ## Base URLs

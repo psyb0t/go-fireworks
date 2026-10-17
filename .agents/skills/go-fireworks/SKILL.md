@@ -1,6 +1,7 @@
 ---
 name: go-fireworks
 description: Unofficial Go client for the Fireworks AI REST API, generated with oapi-codegen. `fireworks.NewClientWithResponses(baseURL, fireworks.WithRequestEditorFn(...))` from `github.com/psyb0t/go-fireworks` gives one typed method per spec operation, covering all 136 paths of the Fireworks AI Gateway REST API, the control plane (accounts, API keys, users, models, datasets, deployments, fine-tuning and batch jobs) under `https://api.fireworks.ai` and the inference endpoints (chat completions, completions, messages, responses) under `https://api.fireworks.ai/inference`. Responses decode into typed `JSON200` fields. Use when Go code needs to call Fireworks AI, or already imports go-fireworks.
+license: MIT
 homepage: https://github.com/psyb0t/go-fireworks
 user-invocable: true
 metadata:
@@ -9,8 +10,6 @@ metadata:
     requires:
       bins:
         - go
-      env:
-        - FIREWORKS_API_KEY
 permissions:
   filesystem: "Guides edits to the Go source of the current project. The library reads and writes no files."
   shell: "The Go toolchain (`go get`, `go build`, `go test`) to add and compile the dependency."
@@ -38,6 +37,20 @@ For install, base URLs, method naming and error handling in detail, see [referen
 
 - You need streaming. The generated client returns the whole body; for `stream: true` read `HTTPResponse.Body` from the plain `Client` methods yourself.
 - The code is not Go. Use Fireworks AI's own SDKs.
+
+## Finding endpoints and types
+
+The examples below cover a few calls. Every operation in the spec has a generated method, and the spec's descriptions are on them as Go doc comments. Look names and fields up instead of guessing. After `go get github.com/psyb0t/go-fireworks`, from inside your module:
+
+```bash
+go doc github.com/psyb0t/go-fireworks ClientWithResponsesInterface  # every endpoint method
+go doc github.com/psyb0t/go-fireworks GatewayListModelsParams       # one method, params type or model
+go doc -all github.com/psyb0t/go-fireworks                          # the whole package
+```
+
+The same documentation is at https://pkg.go.dev/github.com/psyb0t/go-fireworks.
+
+Method names come from the spec's operation IDs. `<OperationId>WithResponse` takes the context, then the path parameters in order, then `*<OperationId>Params` when the operation has query or header parameters, then the request body when it has one. The `JSON200` field (or `JSON201` and so on, per declared status) holds the decoded body; it is nil for any other status. Control plane methods carry a `Gateway` prefix, inference methods carry the spec's full ID (`CreateChatCompletionV1ChatCompletionsPost`), and some response wrappers end in `Response2` where a schema already took the plain name.
 
 ## Usage
 

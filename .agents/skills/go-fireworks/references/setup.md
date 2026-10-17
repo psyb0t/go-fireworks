@@ -57,7 +57,7 @@ Each operation has these forms on `ClientWithResponses`:
 
 The plain `Client` has the same methods returning `*http.Response`, which is the way to read a streamed body.
 
-Search `client.gen.go` for `func (c *ClientWithResponses) ` to list every method, and `types.gen.go` for request, response and params types.
+Run `go doc github.com/psyb0t/go-fireworks ClientWithResponsesInterface` to list every method, and `go doc github.com/psyb0t/go-fireworks <Type>` for a request, response or params type.
 
 ## Responses and errors
 
