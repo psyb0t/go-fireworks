@@ -14,7 +14,7 @@ Nearly all the code is generated:
 
 ## Stack
 
-- Go 1.26.9, one package at the module root.
+- Go 1.26.10, one package at the module root.
 - oapi-codegen v2 and golangci-lint run through `go tool`, pinned in `go.mod`.
 - Runtime dependency: `github.com/oapi-codegen/runtime`.
 
