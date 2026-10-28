@@ -1,6 +1,6 @@
 ---
 name: go-fireworks
-description: Unofficial Go client for the Fireworks AI REST API, generated with oapi-codegen. `fireworks.NewClientWithResponses(baseURL, fireworks.WithRequestEditorFn(...))` from `github.com/psyb0t/go-fireworks` gives one typed method per spec operation, covering all 136 paths of the Fireworks AI Gateway REST API, the control plane (accounts, API keys, users, models, datasets, deployments, fine-tuning and batch jobs) under `https://api.fireworks.ai` and the inference endpoints (chat completions, completions, messages, responses) under `https://api.fireworks.ai/inference`. Responses decode into typed `JSON200` fields. Use when Go code needs to call Fireworks AI, or already imports go-fireworks.
+description: Unofficial Go client for the Fireworks AI REST API, generated with oapi-codegen. `fireworks.NewClientWithResponses(baseURL, fireworks.WithRequestEditorFn(...))` from `github.com/psyb0t/go-fireworks` gives one typed method per spec operation, covering the Fireworks AI Gateway REST API, the control plane (accounts, API keys, users, models, datasets, deployments, evaluators, fine-tuning and batch inference jobs) under `https://api.fireworks.ai` and the inference endpoints (chat completions, completions, messages, responses) under `https://api.fireworks.ai/inference`. Responses decode into typed `JSON200` fields. Use when Go code needs to call Fireworks AI, or already imports go-fireworks.
 license: MIT
 homepage: https://github.com/psyb0t/go-fireworks
 user-invocable: true
@@ -104,7 +104,7 @@ if err := content.FromChatMessageContent0("Say hi"); err != nil {
 
 res, err := inference.CreateChatCompletionV1ChatCompletionsPostWithResponse(ctx, fireworks.ChatCompletionRequest{
 	Model:    "accounts/fireworks/models/<model-id>",
-	Messages: []fireworks.ChatMessage{{Role: "user", Content: &content}},
+	Messages: &[]fireworks.ChatMessage{{Role: "user", Content: &content}},
 })
 if err != nil {
 	return err

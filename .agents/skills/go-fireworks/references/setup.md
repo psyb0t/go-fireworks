@@ -38,7 +38,7 @@ One client has one base URL. The spec splits its paths over two:
 
 | Base URL | Paths |
 |---|---|
-| `https://api.fireworks.ai` | everything under `/v1/accounts/...`, plus `/v1/accounts`, `/v1/creditCodes:redeem`, `/v1/validateModelConfig` |
+| `https://api.fireworks.ai` | everything under `/v1/accounts/...`, plus `/v1/accounts`, `/v1/auth/refresh`, `/v1/creditCodes:redeem`, `/v1/validateModelConfig` |
 | `https://api.fireworks.ai/inference` | `/v1/chat/completions`, `/v1/completions`, `/v1/messages`, `/v1/responses`, `/v1/responses/{response_id}` |
 
 Calling an inference method on the control plane client hits the wrong URL and returns 404.

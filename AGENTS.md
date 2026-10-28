@@ -8,8 +8,8 @@ Nearly all the code is generated:
 
 `scripts/fetch-spec.sh` → `api/openapi.yaml` → oapi-codegen (`config-types.yaml`) → `types.gen.go`, and oapi-codegen (`config.yaml`) → `client.gen.go`.
 
-- `scripts/fetch-spec.sh` reads `openapi_spec_url` from the `.stats.yml` of `fw-ai-external/python-sdk` and downloads that Stainless URL. The URL carries a content hash, so it is never hardcoded.
-- There is no patch step: oapi-codegen takes the OpenAPI 3.1 spec as published.
+- `scripts/fetch-spec.sh` downloads the merged spec Fireworks AI publishes behind its API reference, `https://docs.fireworks.ai/merged.openapi.yaml`, and checks for the top-level `openapi: 3.x` and `paths` keys.
+- There is no patch step: oapi-codegen takes the OpenAPI 3.1 spec as published. Both configs exclude `Gateway_GetApiKey` and `Gateway_UpdateApiKey` through `exclude-operation-ids`, because the spec files them under a malformed path that oapi-codegen rejects; drop the exclusion once upstream fixes the path.
 - `gen.go` holds the `//go:generate` lines in order.
 
 ## Stack
@@ -42,8 +42,8 @@ make sec       # gitleaks, govulncheck, semgrep
 
 ## Project-specific landmines
 
-- The spec has two base URLs. 131 paths use `https://api.fireworks.ai`, the five inference paths use `https://api.fireworks.ai/inference`. oapi-codegen ignores per-path `servers`, so callers pick the base URL. The README and the skill document this; keep them in sync if the split changes.
-- The two oapi-codegen configs must agree on `type-mapping` and `compatibility`.
+- The spec has two base URLs. 141 paths use `https://api.fireworks.ai`, the five inference paths use `https://api.fireworks.ai/inference`. oapi-codegen ignores per-path `servers`, so callers pick the base URL. The README and the skill document this; keep them in sync if the split changes.
+- The two oapi-codegen configs must agree on `type-mapping`, `compatibility` and `exclude-operation-ids`.
 - CI skips the generate drift check, because the upstream spec changes on its own schedule. Regenerate locally and commit the result.
 - `.github/workflows/regen.yml` regenerates the client every day and releases the result. When the checks fail, Claude edits the repository to fix them, but a fix may not touch the paths listed under `fix_protected_paths` in that workflow: the workflows, the Makefile, `AGENTS.md`, `.agents/rules/`, the lint, security and spec download scripts and their configs. A problem that needs a change there fails the run and needs a manual fix.
 

@@ -110,39 +110,6 @@ type ClientInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/auditLogs (the `GatewayListAuditLogs` operationId).
 	GatewayListAuditLogs(ctx context.Context, accountId string, params *GatewayListAuditLogsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayListAwsIamRoleBindings List Aws Iam Role Bindings
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayListAwsIamRoleBindings` operationId).
-	GatewayListAwsIamRoleBindings(ctx context.Context, accountId string, params *GatewayListAwsIamRoleBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateAwsIamRoleBindingWithBody Create Aws Iam Role Binding
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-	GatewayCreateAwsIamRoleBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateAwsIamRoleBinding Create Aws Iam Role Binding
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-	GatewayCreateAwsIamRoleBinding(ctx context.Context, accountId string, body GatewayCreateAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteAwsIamRoleBindingWithBody Delete Aws Iam Role Binding
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-	GatewayDeleteAwsIamRoleBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteAwsIamRoleBinding Delete Aws Iam Role Binding
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-	GatewayDeleteAwsIamRoleBinding(ctx context.Context, accountId string, body GatewayDeleteAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GatewayListBatchInferenceJobs List Batch Inference Jobs
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/batchInferenceJobs (the `GatewayListBatchInferenceJobs` operationId).
@@ -172,96 +139,52 @@ type ClientInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/batchInferenceJobs/{batch_inference_job_id} (the `GatewayGetBatchInferenceJob` operationId).
 	GatewayGetBatchInferenceJob(ctx context.Context, accountId string, batchInferenceJobId string, params *GatewayGetBatchInferenceJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayListBatchJobs List Batch Jobs
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/batchJobs (the `GatewayListBatchJobs` operationId).
-	GatewayListBatchJobs(ctx context.Context, accountId string, params *GatewayListBatchJobsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateBatchJobWithBody Create Batch Job
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-	GatewayCreateBatchJobWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateBatchJob Create Batch Job
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-	GatewayCreateBatchJob(ctx context.Context, accountId string, body GatewayCreateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteBatchJob Delete Batch Job
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayDeleteBatchJob` operationId).
-	GatewayDeleteBatchJob(ctx context.Context, accountId string, batchJobId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetBatchJob Get Batch Job
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayGetBatchJob` operationId).
-	GatewayGetBatchJob(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateBatchJobWithBody Update Batch Job
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-	GatewayUpdateBatchJobWithBody(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateBatchJob Update Batch Job
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-	GatewayUpdateBatchJob(ctx context.Context, accountId string, batchJobId string, body GatewayUpdateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCancelBatchJobWithBody Cancel Batch Job
-	//
-	// Cancels an existing batch job if it is queued, pending, or running.
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-	GatewayCancelBatchJobWithBody(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCancelBatchJob Cancel Batch Job
-	//
-	// Cancels an existing batch job if it is queued, pending, or running.
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-	GatewayCancelBatchJob(ctx context.Context, accountId string, batchJobId string, body GatewayCancelBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetBatchJobLogs Get Batch Job Logs
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id}:getLogs (the `GatewayGetBatchJobLogs` operationId).
-	GatewayGetBatchJobLogs(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobLogsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayBatchDeleteBatchJobsWithBody Batch Delete Batch Jobs
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-	GatewayBatchDeleteBatchJobsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayBatchDeleteBatchJobs Batch Delete Batch Jobs
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-	GatewayBatchDeleteBatchJobs(ctx context.Context, accountId string, body GatewayBatchDeleteBatchJobsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GatewayGetBillingSummary Get billing summary information for an account
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/billing/summary (the `GatewayGetBillingSummary` operationId).
 	GatewayGetBillingSummary(ctx context.Context, accountId string, params *GatewayGetBillingSummaryParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayGetAccountUsage Get account usage (serverless and dedicated deployments).
-	// Optionally filter by usage type via the usage_type field. If not specified, returns all usage types.
+	// GatewayGetBillingSettings Returns the singleton BillingSettings for the given account.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/billingSettings (the `GatewayGetBillingSettings` operationId).
+	GatewayGetBillingSettings(ctx context.Context, accountId string, params *GatewayGetBillingSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateBillingSettingsWithBody Updates the singleton BillingSettings for the given account.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+	GatewayUpdateBillingSettingsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateBillingSettings Updates the singleton BillingSettings for the given account.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+	GatewayUpdateBillingSettings(ctx context.Context, accountId string, body GatewayUpdateBillingSettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetAccountUsage Get Account Usage
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/billingUsage (the `GatewayGetAccountUsage` operationId).
 	GatewayGetAccountUsage(ctx context.Context, accountId string, params *GatewayGetAccountUsageParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayPromoteCheckpointWithBody Promote a checkpoint to a model.
+	// The checkpoint is identified by account + snapshot ID; the trainer job ID
+	// is passed in the request body to resolve the GCS bucket.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+	GatewayPromoteCheckpointWithBody(ctx context.Context, accountId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayPromoteCheckpoint Promote a checkpoint to a model.
+	// The checkpoint is identified by account + snapshot ID; the trainer job ID
+	// is passed in the request body to resolve the GCS bucket.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+	GatewayPromoteCheckpoint(ctx context.Context, accountId string, checkpointId string, body GatewayPromoteCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayListClusters List Clusters
 	//
@@ -454,6 +377,24 @@ type ClientInterface interface {
 	// Corresponds with PATCH /v1/accounts/{account_id}/deployedModels/{deployed_model_id} (the `GatewayUpdateDeployedModel` operationId).
 	GatewayUpdateDeployedModel(ctx context.Context, accountId string, deployedModelId string, body GatewayUpdateDeployedModelJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayMatchDeploymentShapeVersionsWithBody Match Deployment Shape Versions
+	//
+	// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+	GatewayMatchDeploymentShapeVersionsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayMatchDeploymentShapeVersions Match Deployment Shape Versions
+	//
+	// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+	GatewayMatchDeploymentShapeVersions(ctx context.Context, accountId string, body GatewayMatchDeploymentShapeVersionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayListDeploymentShapes List Deployment Shapes
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/deploymentShapes (the `GatewayListDeploymentShapes` operationId).
@@ -619,6 +560,46 @@ type ClientInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/deployments/{deployment_id}:undelete (the `GatewayUndeleteDeployment` operationId).
 	GatewayUndeleteDeployment(ctx context.Context, accountId string, deploymentId string, body GatewayUndeleteDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayListDeveloperPasses List Developer Passes
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/developerPasses (the `GatewayListDeveloperPasses` operationId).
+	GatewayListDeveloperPasses(ctx context.Context, accountId string, params *GatewayListDeveloperPassesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateDeveloperPassWithBody CRUD APIs for developer passes.
+	// Create Developer Pass
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+	GatewayCreateDeveloperPassWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateDeveloperPass CRUD APIs for developer passes.
+	// Create Developer Pass
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+	GatewayCreateDeveloperPass(ctx context.Context, accountId string, body GatewayCreateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetDeveloperPass Get Developer Pass
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayGetDeveloperPass` operationId).
+	GatewayGetDeveloperPass(ctx context.Context, accountId string, developerPasseId string, params *GatewayGetDeveloperPassParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateDeveloperPassWithBody Update Developer Pass
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+	GatewayUpdateDeveloperPassWithBody(ctx context.Context, accountId string, developerPasseId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateDeveloperPass Update Developer Pass
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+	GatewayUpdateDeveloperPass(ctx context.Context, accountId string, developerPasseId string, body GatewayUpdateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayListDpoJobs performs a GET /v1/accounts/{account_id}/dpoJobs (the `GatewayListDpoJobs` operationId) request.
 	GatewayListDpoJobs(ctx context.Context, accountId string, params *GatewayListDpoJobsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -666,103 +647,6 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}/dpoJobs/{dpo_job_id}:resume (the `GatewayResumeDpoJob` operationId).
 	GatewayResumeDpoJob(ctx context.Context, accountId string, dpoJobId string, body GatewayResumeDpoJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayListEnvironments List Environments
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/environments (the `GatewayListEnvironments` operationId).
-	GatewayListEnvironments(ctx context.Context, accountId string, params *GatewayListEnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateEnvironmentWithBody Create Environment
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-	GatewayCreateEnvironmentWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateEnvironment Create Environment
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-	GatewayCreateEnvironment(ctx context.Context, accountId string, body GatewayCreateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteEnvironment Delete Environment
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayDeleteEnvironment` operationId).
-	GatewayDeleteEnvironment(ctx context.Context, accountId string, environmentId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetEnvironment Get Environment
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayGetEnvironment` operationId).
-	GatewayGetEnvironment(ctx context.Context, accountId string, environmentId string, params *GatewayGetEnvironmentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateEnvironmentWithBody Update Environment
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-	GatewayUpdateEnvironmentWithBody(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateEnvironment Update Environment
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-	GatewayUpdateEnvironment(ctx context.Context, accountId string, environmentId string, body GatewayUpdateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayConnectEnvironmentWithBody Connect Environment
-	//
-	// Connects the environment to a node pool.
-	// Returns an error if there is an existing pending connection.
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-	GatewayConnectEnvironmentWithBody(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayConnectEnvironment Connect Environment
-	//
-	// Connects the environment to a node pool.
-	// Returns an error if there is an existing pending connection.
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-	GatewayConnectEnvironment(ctx context.Context, accountId string, environmentId string, body GatewayConnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDisconnectEnvironmentWithBody Disconnect Environment
-	//
-	// Disconnects the environment from the node pool. Returns an error
-	// if the environment is not connected to a node pool.
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-	GatewayDisconnectEnvironmentWithBody(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDisconnectEnvironment Disconnect Environment
-	//
-	// Disconnects the environment from the node pool. Returns an error
-	// if the environment is not connected to a node pool.
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-	GatewayDisconnectEnvironment(ctx context.Context, accountId string, environmentId string, body GatewayDisconnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayBatchDeleteEnvironmentsWithBody Batch Delete Environments
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-	GatewayBatchDeleteEnvironmentsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayBatchDeleteEnvironments Batch Delete Environments
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-	GatewayBatchDeleteEnvironments(ctx context.Context, accountId string, body GatewayBatchDeleteEnvironmentsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayListEvaluationJobs List Evaluation Jobs
 	//
@@ -1121,101 +1005,48 @@ type ClientInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/evaluatorsV2 (the `GatewayCreateEvaluatorV2` operationId).
 	GatewayCreateEvaluatorV2(ctx context.Context, accountId string, body GatewayCreateEvaluatorV2JSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayListGenericDeploymentTypes List the generic deployment types under an account
+	// GatewayListExternalKeys List External Keys
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayListGenericDeploymentTypes` operationId).
-	GatewayListGenericDeploymentTypes(ctx context.Context, accountId string, params *GatewayListGenericDeploymentTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /v1/accounts/{account_id}/externalKeys (the `GatewayListExternalKeys` operationId).
+	GatewayListExternalKeys(ctx context.Context, accountId string, params *GatewayListExternalKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayCreateGenericDeploymentTypeWithBody Create Generic Deployment Type
+	// GatewayCreateExternalKeyWithBody Create External Key
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-	GatewayCreateGenericDeploymentTypeWithBody(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+	GatewayCreateExternalKeyWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayCreateGenericDeploymentType Create Generic Deployment Type
+	// GatewayCreateExternalKey Create External Key
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-	GatewayCreateGenericDeploymentType(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, body GatewayCreateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+	GatewayCreateExternalKey(ctx context.Context, accountId string, body GatewayCreateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayDeleteGenericDeploymentType Delete Generic Deployment Type
+	// GatewayDeleteExternalKey Delete External Key
 	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayDeleteGenericDeploymentType` operationId).
-	GatewayDeleteGenericDeploymentType(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayDeleteGenericDeploymentTypeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with DELETE /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayDeleteExternalKey` operationId).
+	GatewayDeleteExternalKey(ctx context.Context, accountId string, externalKeyId string, params *GatewayDeleteExternalKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayListGenericDeploymentTypeVersions List all generic deployment type version
+	// GatewayGetExternalKey Get External Key
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayListGenericDeploymentTypeVersions` operationId).
-	GatewayListGenericDeploymentTypeVersions(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayListGenericDeploymentTypeVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayGetExternalKey` operationId).
+	GatewayGetExternalKey(ctx context.Context, accountId string, externalKeyId string, params *GatewayGetExternalKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayUpdateGenericDeploymentTypeWithBody Update Generic Deployment Type
+	// GatewayUpdateExternalKeyWithBody Update External Key
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-	GatewayUpdateGenericDeploymentTypeWithBody(ctx context.Context, accountId string, genericDeploymentTypeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+	GatewayUpdateExternalKeyWithBody(ctx context.Context, accountId string, externalKeyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayUpdateGenericDeploymentType Update Generic Deployment Type
+	// GatewayUpdateExternalKey Update External Key
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-	GatewayUpdateGenericDeploymentType(ctx context.Context, accountId string, genericDeploymentTypeId string, body GatewayUpdateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteGenericDeploymentTypeVersion Delete the generic deployment type version
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayDeleteGenericDeploymentTypeVersion` operationId).
-	GatewayDeleteGenericDeploymentTypeVersion(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayDeleteGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetGenericDeploymentTypeVersion Get generic deployment type version
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayGetGenericDeploymentTypeVersion` operationId).
-	GatewayGetGenericDeploymentTypeVersion(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayGetGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayListGenericDeployments List all the generic deployments under an account
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeployments (the `GatewayListGenericDeployments` operationId).
-	GatewayListGenericDeployments(ctx context.Context, accountId string, params *GatewayListGenericDeploymentsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateGenericDeploymentWithBody Create Generic Deployment
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-	GatewayCreateGenericDeploymentWithBody(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateGenericDeployment Create Generic Deployment
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-	GatewayCreateGenericDeployment(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, body GatewayCreateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteGenericDeployment Delete Generic Deployment
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayDeleteGenericDeployment` operationId).
-	GatewayDeleteGenericDeployment(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayDeleteGenericDeploymentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetGenericDeployment Get Generic Deployment
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayGetGenericDeployment` operationId).
-	GatewayGetGenericDeployment(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayGetGenericDeploymentParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateGenericDeploymentWithBody Create Generic Deployment
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-	GatewayUpdateGenericDeploymentWithBody(ctx context.Context, accountId string, genericDeploymentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateGenericDeployment Create Generic Deployment
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-	GatewayUpdateGenericDeployment(ctx context.Context, accountId string, genericDeploymentId string, body GatewayUpdateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+	GatewayUpdateExternalKey(ctx context.Context, accountId string, externalKeyId string, body GatewayUpdateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayListIdentityProviders List Identity Providers
 	//
@@ -1259,77 +1090,6 @@ type ClientInterface interface {
 	//
 	// Corresponds with PATCH /v1/accounts/{account_id}/identityProviders/{identity_provider_id} (the `GatewayUpdateIdentityProvider` operationId).
 	GatewayUpdateIdentityProvider(ctx context.Context, accountId string, identityProviderId string, body GatewayUpdateIdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayListLeaderboards performs a GET /v1/accounts/{account_id}/leaderboards (the `GatewayListLeaderboards` operationId) request.
-	GatewayListLeaderboards(ctx context.Context, accountId string, params *GatewayListLeaderboardsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateLeaderboardWithBody CRUD APIs for leaderboards.
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-	GatewayCreateLeaderboardWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateLeaderboard CRUD APIs for leaderboards.
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-	GatewayCreateLeaderboard(ctx context.Context, accountId string, body GatewayCreateLeaderboardJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteLeaderboard performs a DELETE /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayDeleteLeaderboard` operationId) request.
-	GatewayDeleteLeaderboard(ctx context.Context, accountId string, leaderboardId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetLeaderboard performs a GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayGetLeaderboard` operationId) request.
-	GatewayGetLeaderboard(ctx context.Context, accountId string, leaderboardId string, params *GatewayGetLeaderboardParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayListLeaderboardEvaluationJobs List evaluation jobs for a leaderboard (custom method)
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id}:listEvaluationJobs (the `GatewayListLeaderboardEvaluationJobs` operationId).
-	GatewayListLeaderboardEvaluationJobs(ctx context.Context, accountId string, leaderboardId string, params *GatewayListLeaderboardEvaluationJobsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayListMcpServers List MCP Servers
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/mcpServers (the `GatewayListMcpServers` operationId).
-	GatewayListMcpServers(ctx context.Context, accountId string, params *GatewayListMcpServersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateMcpServerWithBody Create MCP Server
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-	GatewayCreateMcpServerWithBody(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateMcpServer Create MCP Server
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-	GatewayCreateMcpServer(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, body GatewayCreateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteMcpServer Delete MCP Server
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayDeleteMcpServer` operationId).
-	GatewayDeleteMcpServer(ctx context.Context, accountId string, mcpServerId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetMcpServer Get MCP Server
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayGetMcpServer` operationId).
-	GatewayGetMcpServer(ctx context.Context, accountId string, mcpServerId string, params *GatewayGetMcpServerParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateMcpServerWithBody Update MCP Server
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-	GatewayUpdateMcpServerWithBody(ctx context.Context, accountId string, mcpServerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateMcpServer Update MCP Server
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-	GatewayUpdateMcpServer(ctx context.Context, accountId string, mcpServerId string, body GatewayUpdateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayListModels List Models
 	//
@@ -1461,100 +1221,24 @@ type ClientInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/models/{model_id}:validateUpload (the `GatewayValidateModelUpload` operationId).
 	GatewayValidateModelUpload(ctx context.Context, accountId string, modelId string, params *GatewayValidateModelUploadParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayListNodePoolBindings List Node Pool Bindings
+	// GatewayGetPolicySettings Returns the singleton PolicySettings for the given account.
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePoolBindings (the `GatewayListNodePoolBindings` operationId).
-	GatewayListNodePoolBindings(ctx context.Context, accountId string, params *GatewayListNodePoolBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /v1/accounts/{account_id}/policySettings (the `GatewayGetPolicySettings` operationId).
+	GatewayGetPolicySettings(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayCreateNodePoolBindingWithBody Create Node Pool Binding
+	// GatewayUpdatePolicySettingsWithBody Updates the per-account PolicySettings singleton.
 	//
 	// Takes any type of body and a specified content type.
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-	GatewayCreateNodePoolBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+	GatewayUpdatePolicySettingsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayCreateNodePoolBinding Create Node Pool Binding
+	// GatewayUpdatePolicySettings Updates the per-account PolicySettings singleton.
 	//
 	// Takes a body of the `application/json` content type.
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-	GatewayCreateNodePoolBinding(ctx context.Context, accountId string, body GatewayCreateNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteNodePoolBindingWithBody Delete Node Pool Binding
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-	GatewayDeleteNodePoolBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteNodePoolBinding Delete Node Pool Binding
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-	GatewayDeleteNodePoolBinding(ctx context.Context, accountId string, body GatewayDeleteNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayListNodePools List Node Pools
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePools (the `GatewayListNodePools` operationId).
-	GatewayListNodePools(ctx context.Context, accountId string, params *GatewayListNodePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateNodePoolWithBody Create Node Pool
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-	GatewayCreateNodePoolWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayCreateNodePool Create Node Pool
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-	GatewayCreateNodePool(ctx context.Context, accountId string, body GatewayCreateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteNodePool Delete Node Pool
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayDeleteNodePool` operationId).
-	GatewayDeleteNodePool(ctx context.Context, accountId string, nodePoolId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetNodePool Get Node Pool
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayGetNodePool` operationId).
-	GatewayGetNodePool(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateNodePoolWithBody Update Node Pool
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-	GatewayUpdateNodePoolWithBody(ctx context.Context, accountId string, nodePoolId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayUpdateNodePool Update Node Pool
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-	GatewayUpdateNodePool(ctx context.Context, accountId string, nodePoolId string, body GatewayUpdateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetNodePoolStats Get Node Pool Stats
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id}:getStats (the `GatewayGetNodePoolStats` operationId).
-	GatewayGetNodePoolStats(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolStatsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayBatchDeleteNodePoolsWithBody Batch Delete Node Pools
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-	GatewayBatchDeleteNodePoolsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayBatchDeleteNodePools Batch Delete Node Pools
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-	GatewayBatchDeleteNodePools(ctx context.Context, accountId string, body GatewayBatchDeleteNodePoolsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+	GatewayUpdatePolicySettings(ctx context.Context, accountId string, body GatewayUpdatePolicySettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayListPricingPlans List Pricing Plans
 	//
@@ -1628,6 +1312,20 @@ type ClientInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayGetReinforcementFineTuningJob` operationId).
 	GatewayGetReinforcementFineTuningJob(ctx context.Context, accountId string, reinforcementFineTuningJobId string, params *GatewayGetReinforcementFineTuningJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayUpdateReinforcementFineTuningJobWithBody Update Reinforcement Fine-tuning Job
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+	GatewayUpdateReinforcementFineTuningJobWithBody(ctx context.Context, accountId string, reinforcementFineTuningJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateReinforcementFineTuningJob Update Reinforcement Fine-tuning Job
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+	GatewayUpdateReinforcementFineTuningJob(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayUpdateReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayCancelReinforcementFineTuningJobWithBody Cancel Reinforcement Fine-tuning Job
 	//
 	// Takes any type of body and a specified content type.
@@ -1655,6 +1353,9 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:debug (the `GatewayDebugReinforcementFineTuningJob` operationId).
 	GatewayDebugReinforcementFineTuningJob(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayDebugReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetReinforcementFineTuningJobMetricsFileEndpoint performs a GET /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:getMetricsFileEndpoint (the `GatewayGetReinforcementFineTuningJobMetricsFileEndpoint` operationId) request.
+	GatewayGetReinforcementFineTuningJobMetricsFileEndpoint(ctx context.Context, accountId string, reinforcementFineTuningJobId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayResumeReinforcementFineTuningJobWithBody Resume Reinforcement Fine-tuning Job
 	//
@@ -1699,6 +1400,38 @@ type ClientInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id} (the `GatewayGetRlorTrainerJob` operationId).
 	GatewayGetRlorTrainerJob(ctx context.Context, accountId string, rlorTrainerJobId string, params *GatewayGetRlorTrainerJobParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayListRlorTrainerJobCheckpoints List checkpoints for an RLOR Trainer Job
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints (the `GatewayListRlorTrainerJobCheckpoints` operationId).
+	GatewayListRlorTrainerJobCheckpoints(ctx context.Context, accountId string, rlorTrainerJobId string, params *GatewayListRlorTrainerJobCheckpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewaySyncRlorTrainerJobCheckpointWithBody Ensure an RLOR training checkpoint is present in the requested storage
+	// availability class. By default this copies a single-region runtime
+	// checkpoint into managed durable storage. Set
+	// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+	// into request.region before restoring there.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+	GatewaySyncRlorTrainerJobCheckpointWithBody(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewaySyncRlorTrainerJobCheckpoint Ensure an RLOR training checkpoint is present in the requested storage
+	// availability class. By default this copies a single-region runtime
+	// checkpoint into managed durable storage. Set
+	// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+	// into request.region before restoring there.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+	GatewaySyncRlorTrainerJobCheckpoint(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, body GatewaySyncRlorTrainerJobCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetRlorTrainerJobPublicLogs Get a signed URL for the public trainer logs of an RLOR Trainer Job.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/publicLogs (the `GatewayGetRlorTrainerJobPublicLogs` operationId).
+	GatewayGetRlorTrainerJobPublicLogs(ctx context.Context, accountId string, rlorTrainerJobId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayCancelRlorTrainerJobWithBody Cancel Rlor Trainer Job
 	//
 	// Takes any type of body and a specified content type.
@@ -1712,20 +1445,6 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:cancel (the `GatewayCancelRlorTrainerJob` operationId).
 	GatewayCancelRlorTrainerJob(ctx context.Context, accountId string, rlorTrainerJobId string, body GatewayCancelRlorTrainerJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayExecuteRlorTrainStepWithBody Execute one training step for keep-alive Reinforcement Fine-tuning Step
-	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-	GatewayExecuteRlorTrainStepWithBody(ctx context.Context, accountId string, rlorTrainerJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayExecuteRlorTrainStep Execute one training step for keep-alive Reinforcement Fine-tuning Step
-	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-	GatewayExecuteRlorTrainStep(ctx context.Context, accountId string, rlorTrainerJobId string, body GatewayExecuteRlorTrainStepJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayResumeRlorTrainerJobWithBody Resume Rlor Trainer Job
 	//
@@ -1818,34 +1537,22 @@ type ClientInterface interface {
 	// Takes a body of the `application/json` content type.
 	GatewayUpdateSecret(ctx context.Context, accountId string, secretId string, body GatewayUpdateSecretJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayListSnapshots List Snapshots
+	// GatewayListServerlessModels List serverless models available to the account (public catalog).
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/snapshots (the `GatewayListSnapshots` operationId).
-	GatewayListSnapshots(ctx context.Context, accountId string, params *GatewayListSnapshotsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /v1/accounts/{account_id}/serverlessModels (the `GatewayListServerlessModels` operationId).
+	GatewayListServerlessModels(ctx context.Context, accountId string, params *GatewayListServerlessModelsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayCreateSnapshotWithBody Create Snapshot
+	// GatewayListAccountServerlessRateLimits Lists effective global rate limits for shared serverless pool deployments (fireworks-owned).
+	// Values reflect configured limits as observed in production monitoring.
 	//
-	// Takes any type of body and a specified content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-	GatewayCreateSnapshotWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /v1/accounts/{account_id}/serverlessRateLimits (the `GatewayListAccountServerlessRateLimits` operationId).
+	GatewayListAccountServerlessRateLimits(ctx context.Context, accountId string, params *GatewayListAccountServerlessRateLimitsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// GatewayCreateSnapshot Create Snapshot
+	// GatewayGetAccountServerlessTokenUsage Serverless pool token throughput (tokens per minute) by time bucket and base model, from
+	// production usage metrics.
 	//
-	// Takes a body of the `application/json` content type.
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-	GatewayCreateSnapshot(ctx context.Context, accountId string, body GatewayCreateSnapshotJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayDeleteSnapshot Delete Snapshot
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayDeleteSnapshot` operationId).
-	GatewayDeleteSnapshot(ctx context.Context, accountId string, snapshotId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GatewayGetSnapshot Get Snapshot
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayGetSnapshot` operationId).
-	GatewayGetSnapshot(ctx context.Context, accountId string, snapshotId string, params *GatewayGetSnapshotParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+	// Corresponds with GET /v1/accounts/{account_id}/serverlessTokenUsage (the `GatewayGetAccountServerlessTokenUsage` operationId).
+	GatewayGetAccountServerlessTokenUsage(ctx context.Context, accountId string, params *GatewayGetAccountServerlessTokenUsageParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// GatewayListSupervisedFineTuningJobs List Supervised Fine-tuning Jobs
 	//
@@ -1948,6 +1655,361 @@ type ClientInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayGetTrail` operationId).
 	GatewayGetTrail(ctx context.Context, accountId string, trailId string, params *GatewayGetTrailParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayUpdateTrailWithBody Update Trail
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+	GatewayUpdateTrailWithBody(ctx context.Context, accountId string, trailId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateTrail Update Trail
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+	GatewayUpdateTrail(ctx context.Context, accountId string, trailId string, body GatewayUpdateTrailJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetTrailMetrics Get Trail Metrics (trace counts, token usage from tracing service)
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trails/{trail_id}:getMetrics (the `GatewayGetTrailMetrics` operationId).
+	GatewayGetTrailMetrics(ctx context.Context, accountId string, trailId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListTrainingRuns List training runs under an account (Tinker RestClient list_training_runs).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingRuns (the `GatewayListTrainingRuns` operationId).
+	GatewayListTrainingRuns(ctx context.Context, accountId string, params *GatewayListTrainingRunsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingRunWithBody Create a training run: the durable, account-owned model lineage for a
+	// Tinker create_lora_training_client. A session may host many runs, and a run
+	// may span sessions across resume.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+	GatewayCreateTrainingRunWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingRun Create a training run: the durable, account-owned model lineage for a
+	// Tinker create_lora_training_client. A session may host many runs, and a run
+	// may span sessions across resume.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+	GatewayCreateTrainingRun(ctx context.Context, accountId string, body GatewayCreateTrainingRunJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetTrainingRun Get a training run (Tinker RestClient get_training_run parity).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingRuns/{training_run_id} (the `GatewayGetTrainingRun` operationId).
+	GatewayGetTrainingRun(ctx context.Context, accountId string, trainingRunId string, params *GatewayGetTrainingRunParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayAbortTrainingRunMaterializationWithBody Abort a pending training run when trainer materialization failed or timed
+	// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+	GatewayAbortTrainingRunMaterializationWithBody(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayAbortTrainingRunMaterialization Abort a pending training run when trainer materialization failed or timed
+	// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+	GatewayAbortTrainingRunMaterialization(ctx context.Context, accountId string, trainingRunId string, body GatewayAbortTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayFinalizeTrainingRunMaterializationWithBody Finalize a training run after the trainer has successfully materialized
+	// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+	// Tinker create_model to the trainer.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+	GatewayFinalizeTrainingRunMaterializationWithBody(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayFinalizeTrainingRunMaterialization Finalize a training run after the trainer has successfully materialized
+	// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+	// Tinker create_model to the trainer.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+	GatewayFinalizeTrainingRunMaterialization(ctx context.Context, accountId string, trainingRunId string, body GatewayFinalizeTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListTrainingSessions List training sessions under an account.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions (the `GatewayListTrainingSessions` operationId).
+	GatewayListTrainingSessions(ctx context.Context, accountId string, params *GatewayListTrainingSessionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingSessionWithBody Create a training session under an account.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+	GatewayCreateTrainingSessionWithBody(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingSession Create a training session under an account.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+	GatewayCreateTrainingSession(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, body GatewayCreateTrainingSessionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayDeleteTrainingSession Delete a training session. Releases the shared-trainer binding before
+	// removing the row; the session transitions DELETING → gone.
+	//
+	// Corresponds with DELETE /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayDeleteTrainingSession` operationId).
+	GatewayDeleteTrainingSession(ctx context.Context, accountId string, trainingSessionId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetTrainingSession Get a training session.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayGetTrainingSession` operationId).
+	GatewayGetTrainingSession(ctx context.Context, accountId string, trainingSessionId string, params *GatewayGetTrainingSessionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListTrainingSessionCheckpoints List the checkpoints saved during a TrainingSession. Access is scoped
+	// to the session's account.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints (the `GatewayListTrainingSessionCheckpoints` operationId).
+	GatewayListTrainingSessionCheckpoints(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionCheckpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayPromoteTrainingSessionCheckpointWithBody Promote a checkpoint saved during a TrainingSession into a
+	// customer-owned Model, identified by checkpoint_name. Only promotable
+	// (inference) checkpoints can be promoted.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+	GatewayPromoteTrainingSessionCheckpointWithBody(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayPromoteTrainingSessionCheckpoint Promote a checkpoint saved during a TrainingSession into a
+	// customer-owned Model, identified by checkpoint_name. Only promotable
+	// (inference) checkpoints can be promoted.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+	GatewayPromoteTrainingSessionCheckpoint(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, body GatewayPromoteTrainingSessionCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListTrainingSessionChunkOutputs List chunk completion events on a TrainingSession.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayListTrainingSessionChunkOutputs` operationId).
+	GatewayListTrainingSessionChunkOutputs(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionChunkOutputsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingSessionChunkOutputWithBody Create a chunk-completion row on a TrainingSession (per-chunk
+	// distributions, dataset refs, checkpoints). Trainer-driven write; the
+	// server validates the parent session and materializes the row.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+	GatewayCreateTrainingSessionChunkOutputWithBody(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingSessionChunkOutput Create a chunk-completion row on a TrainingSession (per-chunk
+	// distributions, dataset refs, checkpoints). Trainer-driven write; the
+	// server validates the parent session and materializes the row.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+	GatewayCreateTrainingSessionChunkOutput(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, body GatewayCreateTrainingSessionChunkOutputJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListTrainingSessionTrainingCurves List scalar training curves for line charts on a TrainingSession.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/trainingCurves (the `GatewayListTrainingSessionTrainingCurves` operationId).
+	GatewayListTrainingSessionTrainingCurves(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionTrainingCurvesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayLoadTrainingSessionStateWithBody Load or switch the LoRA adapter state for a training session.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+	GatewayLoadTrainingSessionStateWithBody(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayLoadTrainingSessionState Load or switch the LoRA adapter state for a training session.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+	GatewayLoadTrainingSessionState(ctx context.Context, accountId string, trainingSessionId string, body GatewayLoadTrainingSessionStateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayLogTrainingSessionMetricsWithBody Log scalar training metrics on a TrainingSession (append-only time-series,
+	// upserts on (session, key, step) so retries are idempotent).
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+	GatewayLogTrainingSessionMetricsWithBody(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayLogTrainingSessionMetrics Log scalar training metrics on a TrainingSession (append-only time-series,
+	// upserts on (session, key, step) so retries are idempotent).
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+	GatewayLogTrainingSessionMetrics(ctx context.Context, accountId string, trainingSessionId string, body GatewayLogTrainingSessionMetricsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListTrainingShapes List Training Shapes
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes (the `GatewayListTrainingShapes` operationId).
+	GatewayListTrainingShapes(ctx context.Context, accountId string, params *GatewayListTrainingShapesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingShapeWithBody CRUD APIs for training shape.
+	// Create Training Shape
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+	GatewayCreateTrainingShapeWithBody(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateTrainingShape CRUD APIs for training shape.
+	// Create Training Shape
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+	GatewayCreateTrainingShape(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, body GatewayCreateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayDeleteTrainingShape Delete Training Shape
+	//
+	// Corresponds with DELETE /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayDeleteTrainingShape` operationId).
+	GatewayDeleteTrainingShape(ctx context.Context, accountId string, trainingShapeId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetTrainingShape Get Training Shape
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayGetTrainingShape` operationId).
+	GatewayGetTrainingShape(ctx context.Context, accountId string, trainingShapeId string, params *GatewayGetTrainingShapeParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateTrainingShapeWithBody Update Training Shape
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+	GatewayUpdateTrainingShapeWithBody(ctx context.Context, accountId string, trainingShapeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateTrainingShape Update Training Shape
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+	GatewayUpdateTrainingShape(ctx context.Context, accountId string, trainingShapeId string, body GatewayUpdateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListTrainingShapeVersions List Training Shapes Versions
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions (the `GatewayListTrainingShapeVersions` operationId).
+	GatewayListTrainingShapeVersions(ctx context.Context, accountId string, trainingShapeId string, params *GatewayListTrainingShapeVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetTrainingShapeVersion Get Training Shape Version
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayGetTrainingShapeVersion` operationId).
+	GatewayGetTrainingShapeVersion(ctx context.Context, accountId string, trainingShapeId string, versionId string, params *GatewayGetTrainingShapeVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateTrainingShapeVersionWithBody Update Training Shape Version
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+	GatewayUpdateTrainingShapeVersionWithBody(ctx context.Context, accountId string, trainingShapeId string, versionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateTrainingShapeVersion Update Training Shape Version
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+	GatewayUpdateTrainingShapeVersion(ctx context.Context, accountId string, trainingShapeId string, versionId string, body GatewayUpdateTrainingShapeVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayQueryUsageCostsWithBody Query grouped usage cost subtotals for an account.
+	//
+	// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+	GatewayQueryUsageCostsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayQueryUsageCosts Query grouped usage cost subtotals for an account.
+	//
+	// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+	GatewayQueryUsageCosts(ctx context.Context, accountId string, body GatewayQueryUsageCostsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListUserUsageLimitIncreaseRequests Lists the account's limit-increase requests (admin), filterable by state.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayListUserUsageLimitIncreaseRequests` operationId).
+	GatewayListUserUsageLimitIncreaseRequests(ctx context.Context, accountId string, params *GatewayListUserUsageLimitIncreaseRequestsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateUserUsageLimitIncreaseRequestWithBody Files a member's request to raise their own per-user serverless cap.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+	GatewayCreateUserUsageLimitIncreaseRequestWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayCreateUserUsageLimitIncreaseRequest Files a member's request to raise their own per-user serverless cap.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+	GatewayCreateUserUsageLimitIncreaseRequest(ctx context.Context, accountId string, body GatewayCreateUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayApproveUserUsageLimitIncreaseRequestWithBody Approves a pending limit-increase request (admin).
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+	GatewayApproveUserUsageLimitIncreaseRequestWithBody(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayApproveUserUsageLimitIncreaseRequest Approves a pending limit-increase request (admin).
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+	GatewayApproveUserUsageLimitIncreaseRequest(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayApproveUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayRejectUserUsageLimitIncreaseRequestWithBody Rejects a pending limit-increase request (admin).
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+	GatewayRejectUserUsageLimitIncreaseRequestWithBody(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayRejectUserUsageLimitIncreaseRequest Rejects a pending limit-increase request (admin).
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+	GatewayRejectUserUsageLimitIncreaseRequest(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayRejectUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetAccountUsageLimits Returns the account-level usage-limits singleton (default per-user cap,
+	// enforcement, account-wide usage rollup).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/usageLimits (the `GatewayGetAccountUsageLimits` operationId).
+	GatewayGetAccountUsageLimits(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateAccountUsageLimitsWithBody Updates the account-level usage-limits singleton (default per-user cap,
+	// enforcement).
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+	GatewayUpdateAccountUsageLimitsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateAccountUsageLimits Updates the account-level usage-limits singleton (default per-user cap,
+	// enforcement).
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+	GatewayUpdateAccountUsageLimits(ctx context.Context, accountId string, body GatewayUpdateAccountUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayListUserUsageLimits Lists every user's usage limits in the account (the roster: usage vs.
+	// effective cap and over-limit status per user).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/userUsageLimits (the `GatewayListUserUsageLimits` operationId).
+	GatewayListUserUsageLimits(ctx context.Context, accountId string, params *GatewayListUserUsageLimitsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayListUsers List Users
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/users (the `GatewayListUsers` operationId).
@@ -2019,6 +2081,28 @@ type ClientInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/users/{user_id}/apiKeys:delete (the `GatewayDeleteApiKey` operationId).
 	GatewayDeleteApiKey(ctx context.Context, accountId string, userId string, body GatewayDeleteApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayGetUserUsageLimits Returns a single user's usage-limits singleton (override, effective cap,
+	// usage, and whether they are over limit).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayGetUserUsageLimits` operationId).
+	GatewayGetUserUsageLimits(ctx context.Context, accountId string, userId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateUserUsageLimitsWithBody Updates a single user's usage-limits singleton (limit_override). Clearing
+	// the override reverts the user to the account default.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+	GatewayUpdateUserUsageLimitsWithBody(ctx context.Context, accountId string, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayUpdateUserUsageLimits Updates a single user's usage-limits singleton (limit_override). Clearing
+	// the override reverts the user to the account default.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+	GatewayUpdateUserUsageLimits(ctx context.Context, accountId string, userId string, body GatewayUpdateUserUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayTestEvaluationWithBody Similar to preview evaluation, but no need to create the evaluation entry first.
 	//
 	// Takes any type of body and a specified content type.
@@ -2032,6 +2116,20 @@ type ClientInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}:testeval (the `GatewayTestEvaluation` operationId).
 	GatewayTestEvaluation(ctx context.Context, accountId string, body GatewayTestEvaluationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayRefreshSessionTokenWithBody Refresh a session JWT before expiry with a fresh TTL.
+	//
+	// Takes any type of body and a specified content type.
+	//
+	// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+	GatewayRefreshSessionTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayRefreshSessionToken Refresh a session JWT before expiry with a fresh TTL.
+	//
+	// Takes a body of the `application/json` content type.
+	//
+	// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+	GatewayRefreshSessionToken(ctx context.Context, body GatewayRefreshSessionTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// CreateChatCompletionV1ChatCompletionsPostWithBody Create Chat Completion
 	//
@@ -2165,11 +2263,11 @@ type ClientInterface interface {
 	//
 	// Explore our cookbooks for detailed examples:
 	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -2182,11 +2280,11 @@ type ClientInterface interface {
 	//
 	// Explore our cookbooks for detailed examples:
 	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -2282,89 +2380,6 @@ func (c *Client) GatewayListAuditLogs(ctx context.Context, accountId string, par
 	return c.Client.Do(req)
 }
 
-// GatewayListAwsIamRoleBindings List Aws Iam Role Bindings
-//
-// Corresponds with GET /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayListAwsIamRoleBindings` operationId).
-func (c *Client) GatewayListAwsIamRoleBindings(ctx context.Context, accountId string, params *GatewayListAwsIamRoleBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListAwsIamRoleBindingsRequest(c.Server, accountId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateAwsIamRoleBindingWithBody Create Aws Iam Role Binding
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-func (c *Client) GatewayCreateAwsIamRoleBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateAwsIamRoleBindingRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateAwsIamRoleBinding Create Aws Iam Role Binding
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-func (c *Client) GatewayCreateAwsIamRoleBinding(ctx context.Context, accountId string, body GatewayCreateAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateAwsIamRoleBindingRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteAwsIamRoleBindingWithBody Delete Aws Iam Role Binding
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-func (c *Client) GatewayDeleteAwsIamRoleBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteAwsIamRoleBindingRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteAwsIamRoleBinding Delete Aws Iam Role Binding
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-func (c *Client) GatewayDeleteAwsIamRoleBinding(ctx context.Context, accountId string, body GatewayDeleteAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteAwsIamRoleBindingRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 // GatewayListBatchInferenceJobs List Batch Inference Jobs
 //
 // Corresponds with GET /v1/accounts/{account_id}/batchInferenceJobs (the `GatewayListBatchInferenceJobs` operationId).
@@ -2444,206 +2459,6 @@ func (c *Client) GatewayGetBatchInferenceJob(ctx context.Context, accountId stri
 	return c.Client.Do(req)
 }
 
-// GatewayListBatchJobs List Batch Jobs
-//
-// Corresponds with GET /v1/accounts/{account_id}/batchJobs (the `GatewayListBatchJobs` operationId).
-func (c *Client) GatewayListBatchJobs(ctx context.Context, accountId string, params *GatewayListBatchJobsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListBatchJobsRequest(c.Server, accountId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateBatchJobWithBody Create Batch Job
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-func (c *Client) GatewayCreateBatchJobWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateBatchJobRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateBatchJob Create Batch Job
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-func (c *Client) GatewayCreateBatchJob(ctx context.Context, accountId string, body GatewayCreateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateBatchJobRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteBatchJob Delete Batch Job
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayDeleteBatchJob` operationId).
-func (c *Client) GatewayDeleteBatchJob(ctx context.Context, accountId string, batchJobId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteBatchJobRequest(c.Server, accountId, batchJobId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetBatchJob Get Batch Job
-//
-// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayGetBatchJob` operationId).
-func (c *Client) GatewayGetBatchJob(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetBatchJobRequest(c.Server, accountId, batchJobId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateBatchJobWithBody Update Batch Job
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-func (c *Client) GatewayUpdateBatchJobWithBody(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateBatchJobRequestWithBody(c.Server, accountId, batchJobId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateBatchJob Update Batch Job
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-func (c *Client) GatewayUpdateBatchJob(ctx context.Context, accountId string, batchJobId string, body GatewayUpdateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateBatchJobRequest(c.Server, accountId, batchJobId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCancelBatchJobWithBody Cancel Batch Job
-//
-// Cancels an existing batch job if it is queued, pending, or running.
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-func (c *Client) GatewayCancelBatchJobWithBody(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCancelBatchJobRequestWithBody(c.Server, accountId, batchJobId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCancelBatchJob Cancel Batch Job
-//
-// Cancels an existing batch job if it is queued, pending, or running.
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-func (c *Client) GatewayCancelBatchJob(ctx context.Context, accountId string, batchJobId string, body GatewayCancelBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCancelBatchJobRequest(c.Server, accountId, batchJobId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetBatchJobLogs Get Batch Job Logs
-//
-// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id}:getLogs (the `GatewayGetBatchJobLogs` operationId).
-func (c *Client) GatewayGetBatchJobLogs(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobLogsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetBatchJobLogsRequest(c.Server, accountId, batchJobId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayBatchDeleteBatchJobsWithBody Batch Delete Batch Jobs
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-func (c *Client) GatewayBatchDeleteBatchJobsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayBatchDeleteBatchJobsRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayBatchDeleteBatchJobs Batch Delete Batch Jobs
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-func (c *Client) GatewayBatchDeleteBatchJobs(ctx context.Context, accountId string, body GatewayBatchDeleteBatchJobsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayBatchDeleteBatchJobsRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 // GatewayGetBillingSummary Get billing summary information for an account
 //
 // Corresponds with GET /v1/accounts/{account_id}/billing/summary (the `GatewayGetBillingSummary` operationId).
@@ -2659,12 +2474,98 @@ func (c *Client) GatewayGetBillingSummary(ctx context.Context, accountId string,
 	return c.Client.Do(req)
 }
 
-// GatewayGetAccountUsage Get account usage (serverless and dedicated deployments).
-// Optionally filter by usage type via the usage_type field. If not specified, returns all usage types.
+// GatewayGetBillingSettings Returns the singleton BillingSettings for the given account.
+//
+// Corresponds with GET /v1/accounts/{account_id}/billingSettings (the `GatewayGetBillingSettings` operationId).
+func (c *Client) GatewayGetBillingSettings(ctx context.Context, accountId string, params *GatewayGetBillingSettingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetBillingSettingsRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateBillingSettingsWithBody Updates the singleton BillingSettings for the given account.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+func (c *Client) GatewayUpdateBillingSettingsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateBillingSettingsRequestWithBody(c.Server, accountId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateBillingSettings Updates the singleton BillingSettings for the given account.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+func (c *Client) GatewayUpdateBillingSettings(ctx context.Context, accountId string, body GatewayUpdateBillingSettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateBillingSettingsRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetAccountUsage Get Account Usage
 //
 // Corresponds with GET /v1/accounts/{account_id}/billingUsage (the `GatewayGetAccountUsage` operationId).
 func (c *Client) GatewayGetAccountUsage(ctx context.Context, accountId string, params *GatewayGetAccountUsageParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayGetAccountUsageRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayPromoteCheckpointWithBody Promote a checkpoint to a model.
+// The checkpoint is identified by account + snapshot ID; the trainer job ID
+// is passed in the request body to resolve the GCS bucket.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+func (c *Client) GatewayPromoteCheckpointWithBody(ctx context.Context, accountId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayPromoteCheckpointRequestWithBody(c.Server, accountId, checkpointId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayPromoteCheckpoint Promote a checkpoint to a model.
+// The checkpoint is identified by account + snapshot ID; the trainer job ID
+// is passed in the request body to resolve the GCS bucket.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+func (c *Client) GatewayPromoteCheckpoint(ctx context.Context, accountId string, checkpointId string, body GatewayPromoteCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayPromoteCheckpointRequest(c.Server, accountId, checkpointId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -3176,6 +3077,44 @@ func (c *Client) GatewayUpdateDeployedModel(ctx context.Context, accountId strin
 	return c.Client.Do(req)
 }
 
+// GatewayMatchDeploymentShapeVersionsWithBody Match Deployment Shape Versions
+//
+// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+func (c *Client) GatewayMatchDeploymentShapeVersionsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayMatchDeploymentShapeVersionsRequestWithBody(c.Server, accountId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayMatchDeploymentShapeVersions Match Deployment Shape Versions
+//
+// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+func (c *Client) GatewayMatchDeploymentShapeVersions(ctx context.Context, accountId string, body GatewayMatchDeploymentShapeVersionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayMatchDeploymentShapeVersionsRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // GatewayListDeploymentShapes List Deployment Shapes
 //
 // Corresponds with GET /v1/accounts/{account_id}/deploymentShapes (the `GatewayListDeploymentShapes` operationId).
@@ -3611,6 +3550,106 @@ func (c *Client) GatewayUndeleteDeployment(ctx context.Context, accountId string
 	return c.Client.Do(req)
 }
 
+// GatewayListDeveloperPasses List Developer Passes
+//
+// Corresponds with GET /v1/accounts/{account_id}/developerPasses (the `GatewayListDeveloperPasses` operationId).
+func (c *Client) GatewayListDeveloperPasses(ctx context.Context, accountId string, params *GatewayListDeveloperPassesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListDeveloperPassesRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateDeveloperPassWithBody CRUD APIs for developer passes.
+// Create Developer Pass
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+func (c *Client) GatewayCreateDeveloperPassWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateDeveloperPassRequestWithBody(c.Server, accountId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateDeveloperPass CRUD APIs for developer passes.
+// Create Developer Pass
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+func (c *Client) GatewayCreateDeveloperPass(ctx context.Context, accountId string, body GatewayCreateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateDeveloperPassRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetDeveloperPass Get Developer Pass
+//
+// Corresponds with GET /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayGetDeveloperPass` operationId).
+func (c *Client) GatewayGetDeveloperPass(ctx context.Context, accountId string, developerPasseId string, params *GatewayGetDeveloperPassParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetDeveloperPassRequest(c.Server, accountId, developerPasseId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateDeveloperPassWithBody Update Developer Pass
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+func (c *Client) GatewayUpdateDeveloperPassWithBody(ctx context.Context, accountId string, developerPasseId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateDeveloperPassRequestWithBody(c.Server, accountId, developerPasseId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateDeveloperPass Update Developer Pass
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+func (c *Client) GatewayUpdateDeveloperPass(ctx context.Context, accountId string, developerPasseId string, body GatewayUpdateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateDeveloperPassRequest(c.Server, accountId, developerPasseId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // GatewayListDpoJobs performs a GET /v1/accounts/{account_id}/dpoJobs (the `GatewayListDpoJobs` operationId) request.
 func (c *Client) GatewayListDpoJobs(ctx context.Context, accountId string, params *GatewayListDpoJobsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayListDpoJobsRequest(c.Server, accountId, params)
@@ -3749,233 +3788,6 @@ func (c *Client) GatewayResumeDpoJobWithBody(ctx context.Context, accountId stri
 // Corresponds with POST /v1/accounts/{account_id}/dpoJobs/{dpo_job_id}:resume (the `GatewayResumeDpoJob` operationId).
 func (c *Client) GatewayResumeDpoJob(ctx context.Context, accountId string, dpoJobId string, body GatewayResumeDpoJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayResumeDpoJobRequest(c.Server, accountId, dpoJobId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayListEnvironments List Environments
-//
-// Corresponds with GET /v1/accounts/{account_id}/environments (the `GatewayListEnvironments` operationId).
-func (c *Client) GatewayListEnvironments(ctx context.Context, accountId string, params *GatewayListEnvironmentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListEnvironmentsRequest(c.Server, accountId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateEnvironmentWithBody Create Environment
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-func (c *Client) GatewayCreateEnvironmentWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateEnvironmentRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateEnvironment Create Environment
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-func (c *Client) GatewayCreateEnvironment(ctx context.Context, accountId string, body GatewayCreateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateEnvironmentRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteEnvironment Delete Environment
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayDeleteEnvironment` operationId).
-func (c *Client) GatewayDeleteEnvironment(ctx context.Context, accountId string, environmentId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteEnvironmentRequest(c.Server, accountId, environmentId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetEnvironment Get Environment
-//
-// Corresponds with GET /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayGetEnvironment` operationId).
-func (c *Client) GatewayGetEnvironment(ctx context.Context, accountId string, environmentId string, params *GatewayGetEnvironmentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetEnvironmentRequest(c.Server, accountId, environmentId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateEnvironmentWithBody Update Environment
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-func (c *Client) GatewayUpdateEnvironmentWithBody(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateEnvironmentRequestWithBody(c.Server, accountId, environmentId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateEnvironment Update Environment
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-func (c *Client) GatewayUpdateEnvironment(ctx context.Context, accountId string, environmentId string, body GatewayUpdateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateEnvironmentRequest(c.Server, accountId, environmentId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayConnectEnvironmentWithBody Connect Environment
-//
-// Connects the environment to a node pool.
-// Returns an error if there is an existing pending connection.
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-func (c *Client) GatewayConnectEnvironmentWithBody(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayConnectEnvironmentRequestWithBody(c.Server, accountId, environmentId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayConnectEnvironment Connect Environment
-//
-// Connects the environment to a node pool.
-// Returns an error if there is an existing pending connection.
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-func (c *Client) GatewayConnectEnvironment(ctx context.Context, accountId string, environmentId string, body GatewayConnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayConnectEnvironmentRequest(c.Server, accountId, environmentId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDisconnectEnvironmentWithBody Disconnect Environment
-//
-// Disconnects the environment from the node pool. Returns an error
-// if the environment is not connected to a node pool.
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-func (c *Client) GatewayDisconnectEnvironmentWithBody(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDisconnectEnvironmentRequestWithBody(c.Server, accountId, environmentId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDisconnectEnvironment Disconnect Environment
-//
-// Disconnects the environment from the node pool. Returns an error
-// if the environment is not connected to a node pool.
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-func (c *Client) GatewayDisconnectEnvironment(ctx context.Context, accountId string, environmentId string, body GatewayDisconnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDisconnectEnvironmentRequest(c.Server, accountId, environmentId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayBatchDeleteEnvironmentsWithBody Batch Delete Environments
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-func (c *Client) GatewayBatchDeleteEnvironmentsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayBatchDeleteEnvironmentsRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayBatchDeleteEnvironments Batch Delete Environments
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-func (c *Client) GatewayBatchDeleteEnvironments(ctx context.Context, accountId string, body GatewayBatchDeleteEnvironmentsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayBatchDeleteEnvironmentsRequest(c.Server, accountId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -4735,11 +4547,11 @@ func (c *Client) GatewayCreateEvaluatorV2(ctx context.Context, accountId string,
 	return c.Client.Do(req)
 }
 
-// GatewayListGenericDeploymentTypes List the generic deployment types under an account
+// GatewayListExternalKeys List External Keys
 //
-// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayListGenericDeploymentTypes` operationId).
-func (c *Client) GatewayListGenericDeploymentTypes(ctx context.Context, accountId string, params *GatewayListGenericDeploymentTypesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListGenericDeploymentTypesRequest(c.Server, accountId, params)
+// Corresponds with GET /v1/accounts/{account_id}/externalKeys (the `GatewayListExternalKeys` operationId).
+func (c *Client) GatewayListExternalKeys(ctx context.Context, accountId string, params *GatewayListExternalKeysParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListExternalKeysRequest(c.Server, accountId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4750,13 +4562,13 @@ func (c *Client) GatewayListGenericDeploymentTypes(ctx context.Context, accountI
 	return c.Client.Do(req)
 }
 
-// GatewayCreateGenericDeploymentTypeWithBody Create Generic Deployment Type
+// GatewayCreateExternalKeyWithBody Create External Key
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-func (c *Client) GatewayCreateGenericDeploymentTypeWithBody(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateGenericDeploymentTypeRequestWithBody(c.Server, accountId, params, contentType, body)
+// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+func (c *Client) GatewayCreateExternalKeyWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateExternalKeyRequestWithBody(c.Server, accountId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -4767,13 +4579,13 @@ func (c *Client) GatewayCreateGenericDeploymentTypeWithBody(ctx context.Context,
 	return c.Client.Do(req)
 }
 
-// GatewayCreateGenericDeploymentType Create Generic Deployment Type
+// GatewayCreateExternalKey Create External Key
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-func (c *Client) GatewayCreateGenericDeploymentType(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, body GatewayCreateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateGenericDeploymentTypeRequest(c.Server, accountId, params, body)
+// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+func (c *Client) GatewayCreateExternalKey(ctx context.Context, accountId string, body GatewayCreateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateExternalKeyRequest(c.Server, accountId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -4784,11 +4596,11 @@ func (c *Client) GatewayCreateGenericDeploymentType(ctx context.Context, account
 	return c.Client.Do(req)
 }
 
-// GatewayDeleteGenericDeploymentType Delete Generic Deployment Type
+// GatewayDeleteExternalKey Delete External Key
 //
-// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayDeleteGenericDeploymentType` operationId).
-func (c *Client) GatewayDeleteGenericDeploymentType(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayDeleteGenericDeploymentTypeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteGenericDeploymentTypeRequest(c.Server, accountId, genericDeploymentTypeId, params)
+// Corresponds with DELETE /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayDeleteExternalKey` operationId).
+func (c *Client) GatewayDeleteExternalKey(ctx context.Context, accountId string, externalKeyId string, params *GatewayDeleteExternalKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayDeleteExternalKeyRequest(c.Server, accountId, externalKeyId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4799,11 +4611,11 @@ func (c *Client) GatewayDeleteGenericDeploymentType(ctx context.Context, account
 	return c.Client.Do(req)
 }
 
-// GatewayListGenericDeploymentTypeVersions List all generic deployment type version
+// GatewayGetExternalKey Get External Key
 //
-// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayListGenericDeploymentTypeVersions` operationId).
-func (c *Client) GatewayListGenericDeploymentTypeVersions(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayListGenericDeploymentTypeVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListGenericDeploymentTypeVersionsRequest(c.Server, accountId, genericDeploymentTypeId, params)
+// Corresponds with GET /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayGetExternalKey` operationId).
+func (c *Client) GatewayGetExternalKey(ctx context.Context, accountId string, externalKeyId string, params *GatewayGetExternalKeyParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetExternalKeyRequest(c.Server, accountId, externalKeyId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -4814,13 +4626,13 @@ func (c *Client) GatewayListGenericDeploymentTypeVersions(ctx context.Context, a
 	return c.Client.Do(req)
 }
 
-// GatewayUpdateGenericDeploymentTypeWithBody Update Generic Deployment Type
+// GatewayUpdateExternalKeyWithBody Update External Key
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-func (c *Client) GatewayUpdateGenericDeploymentTypeWithBody(ctx context.Context, accountId string, genericDeploymentTypeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateGenericDeploymentTypeRequestWithBody(c.Server, accountId, genericDeploymentTypeId, contentType, body)
+// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+func (c *Client) GatewayUpdateExternalKeyWithBody(ctx context.Context, accountId string, externalKeyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateExternalKeyRequestWithBody(c.Server, accountId, externalKeyId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -4831,156 +4643,13 @@ func (c *Client) GatewayUpdateGenericDeploymentTypeWithBody(ctx context.Context,
 	return c.Client.Do(req)
 }
 
-// GatewayUpdateGenericDeploymentType Update Generic Deployment Type
+// GatewayUpdateExternalKey Update External Key
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-func (c *Client) GatewayUpdateGenericDeploymentType(ctx context.Context, accountId string, genericDeploymentTypeId string, body GatewayUpdateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateGenericDeploymentTypeRequest(c.Server, accountId, genericDeploymentTypeId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteGenericDeploymentTypeVersion Delete the generic deployment type version
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayDeleteGenericDeploymentTypeVersion` operationId).
-func (c *Client) GatewayDeleteGenericDeploymentTypeVersion(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayDeleteGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteGenericDeploymentTypeVersionRequest(c.Server, accountId, genericDeploymentTypeId, versionId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetGenericDeploymentTypeVersion Get generic deployment type version
-//
-// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayGetGenericDeploymentTypeVersion` operationId).
-func (c *Client) GatewayGetGenericDeploymentTypeVersion(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayGetGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetGenericDeploymentTypeVersionRequest(c.Server, accountId, genericDeploymentTypeId, versionId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayListGenericDeployments List all the generic deployments under an account
-//
-// Corresponds with GET /v1/accounts/{account_id}/genericDeployments (the `GatewayListGenericDeployments` operationId).
-func (c *Client) GatewayListGenericDeployments(ctx context.Context, accountId string, params *GatewayListGenericDeploymentsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListGenericDeploymentsRequest(c.Server, accountId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateGenericDeploymentWithBody Create Generic Deployment
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-func (c *Client) GatewayCreateGenericDeploymentWithBody(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateGenericDeploymentRequestWithBody(c.Server, accountId, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateGenericDeployment Create Generic Deployment
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-func (c *Client) GatewayCreateGenericDeployment(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, body GatewayCreateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateGenericDeploymentRequest(c.Server, accountId, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteGenericDeployment Delete Generic Deployment
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayDeleteGenericDeployment` operationId).
-func (c *Client) GatewayDeleteGenericDeployment(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayDeleteGenericDeploymentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteGenericDeploymentRequest(c.Server, accountId, genericDeploymentId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetGenericDeployment Get Generic Deployment
-//
-// Corresponds with GET /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayGetGenericDeployment` operationId).
-func (c *Client) GatewayGetGenericDeployment(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayGetGenericDeploymentParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetGenericDeploymentRequest(c.Server, accountId, genericDeploymentId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateGenericDeploymentWithBody Create Generic Deployment
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-func (c *Client) GatewayUpdateGenericDeploymentWithBody(ctx context.Context, accountId string, genericDeploymentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateGenericDeploymentRequestWithBody(c.Server, accountId, genericDeploymentId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateGenericDeployment Create Generic Deployment
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-func (c *Client) GatewayUpdateGenericDeployment(ctx context.Context, accountId string, genericDeploymentId string, body GatewayUpdateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateGenericDeploymentRequest(c.Server, accountId, genericDeploymentId, body)
+// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+func (c *Client) GatewayUpdateExternalKey(ctx context.Context, accountId string, externalKeyId string, body GatewayUpdateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateExternalKeyRequest(c.Server, accountId, externalKeyId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -5094,207 +4763,6 @@ func (c *Client) GatewayUpdateIdentityProviderWithBody(ctx context.Context, acco
 // Corresponds with PATCH /v1/accounts/{account_id}/identityProviders/{identity_provider_id} (the `GatewayUpdateIdentityProvider` operationId).
 func (c *Client) GatewayUpdateIdentityProvider(ctx context.Context, accountId string, identityProviderId string, body GatewayUpdateIdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayUpdateIdentityProviderRequest(c.Server, accountId, identityProviderId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayListLeaderboards performs a GET /v1/accounts/{account_id}/leaderboards (the `GatewayListLeaderboards` operationId) request.
-func (c *Client) GatewayListLeaderboards(ctx context.Context, accountId string, params *GatewayListLeaderboardsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListLeaderboardsRequest(c.Server, accountId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateLeaderboardWithBody CRUD APIs for leaderboards.
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-func (c *Client) GatewayCreateLeaderboardWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateLeaderboardRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateLeaderboard CRUD APIs for leaderboards.
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-func (c *Client) GatewayCreateLeaderboard(ctx context.Context, accountId string, body GatewayCreateLeaderboardJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateLeaderboardRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteLeaderboard performs a DELETE /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayDeleteLeaderboard` operationId) request.
-func (c *Client) GatewayDeleteLeaderboard(ctx context.Context, accountId string, leaderboardId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteLeaderboardRequest(c.Server, accountId, leaderboardId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetLeaderboard performs a GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayGetLeaderboard` operationId) request.
-func (c *Client) GatewayGetLeaderboard(ctx context.Context, accountId string, leaderboardId string, params *GatewayGetLeaderboardParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetLeaderboardRequest(c.Server, accountId, leaderboardId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayListLeaderboardEvaluationJobs List evaluation jobs for a leaderboard (custom method)
-//
-// Corresponds with GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id}:listEvaluationJobs (the `GatewayListLeaderboardEvaluationJobs` operationId).
-func (c *Client) GatewayListLeaderboardEvaluationJobs(ctx context.Context, accountId string, leaderboardId string, params *GatewayListLeaderboardEvaluationJobsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListLeaderboardEvaluationJobsRequest(c.Server, accountId, leaderboardId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayListMcpServers List MCP Servers
-//
-// Corresponds with GET /v1/accounts/{account_id}/mcpServers (the `GatewayListMcpServers` operationId).
-func (c *Client) GatewayListMcpServers(ctx context.Context, accountId string, params *GatewayListMcpServersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListMcpServersRequest(c.Server, accountId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateMcpServerWithBody Create MCP Server
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-func (c *Client) GatewayCreateMcpServerWithBody(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateMcpServerRequestWithBody(c.Server, accountId, params, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateMcpServer Create MCP Server
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-func (c *Client) GatewayCreateMcpServer(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, body GatewayCreateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateMcpServerRequest(c.Server, accountId, params, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteMcpServer Delete MCP Server
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayDeleteMcpServer` operationId).
-func (c *Client) GatewayDeleteMcpServer(ctx context.Context, accountId string, mcpServerId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteMcpServerRequest(c.Server, accountId, mcpServerId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetMcpServer Get MCP Server
-//
-// Corresponds with GET /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayGetMcpServer` operationId).
-func (c *Client) GatewayGetMcpServer(ctx context.Context, accountId string, mcpServerId string, params *GatewayGetMcpServerParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetMcpServerRequest(c.Server, accountId, mcpServerId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateMcpServerWithBody Update MCP Server
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-func (c *Client) GatewayUpdateMcpServerWithBody(ctx context.Context, accountId string, mcpServerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateMcpServerRequestWithBody(c.Server, accountId, mcpServerId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateMcpServer Update MCP Server
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-func (c *Client) GatewayUpdateMcpServer(ctx context.Context, accountId string, mcpServerId string, body GatewayUpdateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateMcpServerRequest(c.Server, accountId, mcpServerId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -5635,11 +5103,11 @@ func (c *Client) GatewayValidateModelUpload(ctx context.Context, accountId strin
 	return c.Client.Do(req)
 }
 
-// GatewayListNodePoolBindings List Node Pool Bindings
+// GatewayGetPolicySettings Returns the singleton PolicySettings for the given account.
 //
-// Corresponds with GET /v1/accounts/{account_id}/nodePoolBindings (the `GatewayListNodePoolBindings` operationId).
-func (c *Client) GatewayListNodePoolBindings(ctx context.Context, accountId string, params *GatewayListNodePoolBindingsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListNodePoolBindingsRequest(c.Server, accountId, params)
+// Corresponds with GET /v1/accounts/{account_id}/policySettings (the `GatewayGetPolicySettings` operationId).
+func (c *Client) GatewayGetPolicySettings(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetPolicySettingsRequest(c.Server, accountId)
 	if err != nil {
 		return nil, err
 	}
@@ -5650,13 +5118,13 @@ func (c *Client) GatewayListNodePoolBindings(ctx context.Context, accountId stri
 	return c.Client.Do(req)
 }
 
-// GatewayCreateNodePoolBindingWithBody Create Node Pool Binding
+// GatewayUpdatePolicySettingsWithBody Updates the per-account PolicySettings singleton.
 //
 // Takes any type of body and a specified content type.
 //
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-func (c *Client) GatewayCreateNodePoolBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateNodePoolBindingRequestWithBody(c.Server, accountId, contentType, body)
+// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+func (c *Client) GatewayUpdatePolicySettingsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdatePolicySettingsRequestWithBody(c.Server, accountId, contentType, body)
 	if err != nil {
 		return nil, err
 	}
@@ -5667,209 +5135,13 @@ func (c *Client) GatewayCreateNodePoolBindingWithBody(ctx context.Context, accou
 	return c.Client.Do(req)
 }
 
-// GatewayCreateNodePoolBinding Create Node Pool Binding
+// GatewayUpdatePolicySettings Updates the per-account PolicySettings singleton.
 //
 // Takes a body of the `application/json` content type.
 //
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-func (c *Client) GatewayCreateNodePoolBinding(ctx context.Context, accountId string, body GatewayCreateNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateNodePoolBindingRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteNodePoolBindingWithBody Delete Node Pool Binding
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-func (c *Client) GatewayDeleteNodePoolBindingWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteNodePoolBindingRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteNodePoolBinding Delete Node Pool Binding
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-func (c *Client) GatewayDeleteNodePoolBinding(ctx context.Context, accountId string, body GatewayDeleteNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteNodePoolBindingRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayListNodePools List Node Pools
-//
-// Corresponds with GET /v1/accounts/{account_id}/nodePools (the `GatewayListNodePools` operationId).
-func (c *Client) GatewayListNodePools(ctx context.Context, accountId string, params *GatewayListNodePoolsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListNodePoolsRequest(c.Server, accountId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateNodePoolWithBody Create Node Pool
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-func (c *Client) GatewayCreateNodePoolWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateNodePoolRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayCreateNodePool Create Node Pool
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-func (c *Client) GatewayCreateNodePool(ctx context.Context, accountId string, body GatewayCreateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateNodePoolRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteNodePool Delete Node Pool
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayDeleteNodePool` operationId).
-func (c *Client) GatewayDeleteNodePool(ctx context.Context, accountId string, nodePoolId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteNodePoolRequest(c.Server, accountId, nodePoolId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetNodePool Get Node Pool
-//
-// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayGetNodePool` operationId).
-func (c *Client) GatewayGetNodePool(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetNodePoolRequest(c.Server, accountId, nodePoolId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateNodePoolWithBody Update Node Pool
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-func (c *Client) GatewayUpdateNodePoolWithBody(ctx context.Context, accountId string, nodePoolId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateNodePoolRequestWithBody(c.Server, accountId, nodePoolId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayUpdateNodePool Update Node Pool
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-func (c *Client) GatewayUpdateNodePool(ctx context.Context, accountId string, nodePoolId string, body GatewayUpdateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayUpdateNodePoolRequest(c.Server, accountId, nodePoolId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetNodePoolStats Get Node Pool Stats
-//
-// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id}:getStats (the `GatewayGetNodePoolStats` operationId).
-func (c *Client) GatewayGetNodePoolStats(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolStatsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetNodePoolStatsRequest(c.Server, accountId, nodePoolId, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayBatchDeleteNodePoolsWithBody Batch Delete Node Pools
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-func (c *Client) GatewayBatchDeleteNodePoolsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayBatchDeleteNodePoolsRequestWithBody(c.Server, accountId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayBatchDeleteNodePools Batch Delete Node Pools
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-func (c *Client) GatewayBatchDeleteNodePools(ctx context.Context, accountId string, body GatewayBatchDeleteNodePoolsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayBatchDeleteNodePoolsRequest(c.Server, accountId, body)
+// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+func (c *Client) GatewayUpdatePolicySettings(ctx context.Context, accountId string, body GatewayUpdatePolicySettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdatePolicySettingsRequest(c.Server, accountId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -6062,6 +5334,40 @@ func (c *Client) GatewayGetReinforcementFineTuningJob(ctx context.Context, accou
 	return c.Client.Do(req)
 }
 
+// GatewayUpdateReinforcementFineTuningJobWithBody Update Reinforcement Fine-tuning Job
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+func (c *Client) GatewayUpdateReinforcementFineTuningJobWithBody(ctx context.Context, accountId string, reinforcementFineTuningJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateReinforcementFineTuningJobRequestWithBody(c.Server, accountId, reinforcementFineTuningJobId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateReinforcementFineTuningJob Update Reinforcement Fine-tuning Job
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+func (c *Client) GatewayUpdateReinforcementFineTuningJob(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayUpdateReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateReinforcementFineTuningJobRequest(c.Server, accountId, reinforcementFineTuningJobId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // GatewayCancelReinforcementFineTuningJobWithBody Cancel Reinforcement Fine-tuning Job
 //
 // Takes any type of body and a specified content type.
@@ -6120,6 +5426,19 @@ func (c *Client) GatewayDebugReinforcementFineTuningJobWithBody(ctx context.Cont
 // Corresponds with POST /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:debug (the `GatewayDebugReinforcementFineTuningJob` operationId).
 func (c *Client) GatewayDebugReinforcementFineTuningJob(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayDebugReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayDebugReinforcementFineTuningJobRequest(c.Server, accountId, reinforcementFineTuningJobId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetReinforcementFineTuningJobMetricsFileEndpoint performs a GET /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:getMetricsFileEndpoint (the `GatewayGetReinforcementFineTuningJobMetricsFileEndpoint` operationId) request.
+func (c *Client) GatewayGetReinforcementFineTuningJobMetricsFileEndpoint(ctx context.Context, accountId string, reinforcementFineTuningJobId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetReinforcementFineTuningJobMetricsFileEndpointRequest(c.Server, accountId, reinforcementFineTuningJobId)
 	if err != nil {
 		return nil, err
 	}
@@ -6243,6 +5562,78 @@ func (c *Client) GatewayGetRlorTrainerJob(ctx context.Context, accountId string,
 	return c.Client.Do(req)
 }
 
+// GatewayListRlorTrainerJobCheckpoints List checkpoints for an RLOR Trainer Job
+//
+// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints (the `GatewayListRlorTrainerJobCheckpoints` operationId).
+func (c *Client) GatewayListRlorTrainerJobCheckpoints(ctx context.Context, accountId string, rlorTrainerJobId string, params *GatewayListRlorTrainerJobCheckpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListRlorTrainerJobCheckpointsRequest(c.Server, accountId, rlorTrainerJobId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewaySyncRlorTrainerJobCheckpointWithBody Ensure an RLOR training checkpoint is present in the requested storage
+// availability class. By default this copies a single-region runtime
+// checkpoint into managed durable storage. Set
+// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+// into request.region before restoring there.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+func (c *Client) GatewaySyncRlorTrainerJobCheckpointWithBody(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewaySyncRlorTrainerJobCheckpointRequestWithBody(c.Server, accountId, rlorTrainerJobId, checkpointId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewaySyncRlorTrainerJobCheckpoint Ensure an RLOR training checkpoint is present in the requested storage
+// availability class. By default this copies a single-region runtime
+// checkpoint into managed durable storage. Set
+// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+// into request.region before restoring there.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+func (c *Client) GatewaySyncRlorTrainerJobCheckpoint(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, body GatewaySyncRlorTrainerJobCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewaySyncRlorTrainerJobCheckpointRequest(c.Server, accountId, rlorTrainerJobId, checkpointId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetRlorTrainerJobPublicLogs Get a signed URL for the public trainer logs of an RLOR Trainer Job.
+//
+// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/publicLogs (the `GatewayGetRlorTrainerJobPublicLogs` operationId).
+func (c *Client) GatewayGetRlorTrainerJobPublicLogs(ctx context.Context, accountId string, rlorTrainerJobId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetRlorTrainerJobPublicLogsRequest(c.Server, accountId, rlorTrainerJobId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // GatewayCancelRlorTrainerJobWithBody Cancel Rlor Trainer Job
 //
 // Takes any type of body and a specified content type.
@@ -6267,40 +5658,6 @@ func (c *Client) GatewayCancelRlorTrainerJobWithBody(ctx context.Context, accoun
 // Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:cancel (the `GatewayCancelRlorTrainerJob` operationId).
 func (c *Client) GatewayCancelRlorTrainerJob(ctx context.Context, accountId string, rlorTrainerJobId string, body GatewayCancelRlorTrainerJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayCancelRlorTrainerJobRequest(c.Server, accountId, rlorTrainerJobId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayExecuteRlorTrainStepWithBody Execute one training step for keep-alive Reinforcement Fine-tuning Step
-//
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-func (c *Client) GatewayExecuteRlorTrainStepWithBody(ctx context.Context, accountId string, rlorTrainerJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayExecuteRlorTrainStepRequestWithBody(c.Server, accountId, rlorTrainerJobId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayExecuteRlorTrainStep Execute one training step for keep-alive Reinforcement Fine-tuning Step
-//
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-func (c *Client) GatewayExecuteRlorTrainStep(ctx context.Context, accountId string, rlorTrainerJobId string, body GatewayExecuteRlorTrainStepJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayExecuteRlorTrainStepRequest(c.Server, accountId, rlorTrainerJobId, body)
 	if err != nil {
 		return nil, err
 	}
@@ -6562,11 +5919,11 @@ func (c *Client) GatewayUpdateSecret(ctx context.Context, accountId string, secr
 	return c.Client.Do(req)
 }
 
-// GatewayListSnapshots List Snapshots
+// GatewayListServerlessModels List serverless models available to the account (public catalog).
 //
-// Corresponds with GET /v1/accounts/{account_id}/snapshots (the `GatewayListSnapshots` operationId).
-func (c *Client) GatewayListSnapshots(ctx context.Context, accountId string, params *GatewayListSnapshotsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayListSnapshotsRequest(c.Server, accountId, params)
+// Corresponds with GET /v1/accounts/{account_id}/serverlessModels (the `GatewayListServerlessModels` operationId).
+func (c *Client) GatewayListServerlessModels(ctx context.Context, accountId string, params *GatewayListServerlessModelsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListServerlessModelsRequest(c.Server, accountId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -6577,13 +5934,12 @@ func (c *Client) GatewayListSnapshots(ctx context.Context, accountId string, par
 	return c.Client.Do(req)
 }
 
-// GatewayCreateSnapshotWithBody Create Snapshot
+// GatewayListAccountServerlessRateLimits Lists effective global rate limits for shared serverless pool deployments (fireworks-owned).
+// Values reflect configured limits as observed in production monitoring.
 //
-// Takes any type of body and a specified content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-func (c *Client) GatewayCreateSnapshotWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateSnapshotRequestWithBody(c.Server, accountId, contentType, body)
+// Corresponds with GET /v1/accounts/{account_id}/serverlessRateLimits (the `GatewayListAccountServerlessRateLimits` operationId).
+func (c *Client) GatewayListAccountServerlessRateLimits(ctx context.Context, accountId string, params *GatewayListAccountServerlessRateLimitsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListAccountServerlessRateLimitsRequest(c.Server, accountId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -6594,43 +5950,12 @@ func (c *Client) GatewayCreateSnapshotWithBody(ctx context.Context, accountId st
 	return c.Client.Do(req)
 }
 
-// GatewayCreateSnapshot Create Snapshot
+// GatewayGetAccountServerlessTokenUsage Serverless pool token throughput (tokens per minute) by time bucket and base model, from
+// production usage metrics.
 //
-// Takes a body of the `application/json` content type.
-//
-// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-func (c *Client) GatewayCreateSnapshot(ctx context.Context, accountId string, body GatewayCreateSnapshotJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayCreateSnapshotRequest(c.Server, accountId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayDeleteSnapshot Delete Snapshot
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayDeleteSnapshot` operationId).
-func (c *Client) GatewayDeleteSnapshot(ctx context.Context, accountId string, snapshotId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayDeleteSnapshotRequest(c.Server, accountId, snapshotId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// GatewayGetSnapshot Get Snapshot
-//
-// Corresponds with GET /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayGetSnapshot` operationId).
-func (c *Client) GatewayGetSnapshot(ctx context.Context, accountId string, snapshotId string, params *GatewayGetSnapshotParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGatewayGetSnapshotRequest(c.Server, accountId, snapshotId, params)
+// Corresponds with GET /v1/accounts/{account_id}/serverlessTokenUsage (the `GatewayGetAccountServerlessTokenUsage` operationId).
+func (c *Client) GatewayGetAccountServerlessTokenUsage(ctx context.Context, accountId string, params *GatewayGetAccountServerlessTokenUsageParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetAccountServerlessTokenUsageRequest(c.Server, accountId, params)
 	if err != nil {
 		return nil, err
 	}
@@ -6902,6 +6227,871 @@ func (c *Client) GatewayGetTrail(ctx context.Context, accountId string, trailId 
 	return c.Client.Do(req)
 }
 
+// GatewayUpdateTrailWithBody Update Trail
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+func (c *Client) GatewayUpdateTrailWithBody(ctx context.Context, accountId string, trailId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateTrailRequestWithBody(c.Server, accountId, trailId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateTrail Update Trail
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+func (c *Client) GatewayUpdateTrail(ctx context.Context, accountId string, trailId string, body GatewayUpdateTrailJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateTrailRequest(c.Server, accountId, trailId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetTrailMetrics Get Trail Metrics (trace counts, token usage from tracing service)
+//
+// Corresponds with GET /v1/accounts/{account_id}/trails/{trail_id}:getMetrics (the `GatewayGetTrailMetrics` operationId).
+func (c *Client) GatewayGetTrailMetrics(ctx context.Context, accountId string, trailId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetTrailMetricsRequest(c.Server, accountId, trailId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListTrainingRuns List training runs under an account (Tinker RestClient list_training_runs).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingRuns (the `GatewayListTrainingRuns` operationId).
+func (c *Client) GatewayListTrainingRuns(ctx context.Context, accountId string, params *GatewayListTrainingRunsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListTrainingRunsRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingRunWithBody Create a training run: the durable, account-owned model lineage for a
+// Tinker create_lora_training_client. A session may host many runs, and a run
+// may span sessions across resume.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+func (c *Client) GatewayCreateTrainingRunWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingRunRequestWithBody(c.Server, accountId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingRun Create a training run: the durable, account-owned model lineage for a
+// Tinker create_lora_training_client. A session may host many runs, and a run
+// may span sessions across resume.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+func (c *Client) GatewayCreateTrainingRun(ctx context.Context, accountId string, body GatewayCreateTrainingRunJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingRunRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetTrainingRun Get a training run (Tinker RestClient get_training_run parity).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingRuns/{training_run_id} (the `GatewayGetTrainingRun` operationId).
+func (c *Client) GatewayGetTrainingRun(ctx context.Context, accountId string, trainingRunId string, params *GatewayGetTrainingRunParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetTrainingRunRequest(c.Server, accountId, trainingRunId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayAbortTrainingRunMaterializationWithBody Abort a pending training run when trainer materialization failed or timed
+// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+func (c *Client) GatewayAbortTrainingRunMaterializationWithBody(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayAbortTrainingRunMaterializationRequestWithBody(c.Server, accountId, trainingRunId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayAbortTrainingRunMaterialization Abort a pending training run when trainer materialization failed or timed
+// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+func (c *Client) GatewayAbortTrainingRunMaterialization(ctx context.Context, accountId string, trainingRunId string, body GatewayAbortTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayAbortTrainingRunMaterializationRequest(c.Server, accountId, trainingRunId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayFinalizeTrainingRunMaterializationWithBody Finalize a training run after the trainer has successfully materialized
+// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+// Tinker create_model to the trainer.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+func (c *Client) GatewayFinalizeTrainingRunMaterializationWithBody(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayFinalizeTrainingRunMaterializationRequestWithBody(c.Server, accountId, trainingRunId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayFinalizeTrainingRunMaterialization Finalize a training run after the trainer has successfully materialized
+// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+// Tinker create_model to the trainer.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+func (c *Client) GatewayFinalizeTrainingRunMaterialization(ctx context.Context, accountId string, trainingRunId string, body GatewayFinalizeTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayFinalizeTrainingRunMaterializationRequest(c.Server, accountId, trainingRunId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListTrainingSessions List training sessions under an account.
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions (the `GatewayListTrainingSessions` operationId).
+func (c *Client) GatewayListTrainingSessions(ctx context.Context, accountId string, params *GatewayListTrainingSessionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListTrainingSessionsRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingSessionWithBody Create a training session under an account.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+func (c *Client) GatewayCreateTrainingSessionWithBody(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingSessionRequestWithBody(c.Server, accountId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingSession Create a training session under an account.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+func (c *Client) GatewayCreateTrainingSession(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, body GatewayCreateTrainingSessionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingSessionRequest(c.Server, accountId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayDeleteTrainingSession Delete a training session. Releases the shared-trainer binding before
+// removing the row; the session transitions DELETING → gone.
+//
+// Corresponds with DELETE /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayDeleteTrainingSession` operationId).
+func (c *Client) GatewayDeleteTrainingSession(ctx context.Context, accountId string, trainingSessionId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayDeleteTrainingSessionRequest(c.Server, accountId, trainingSessionId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetTrainingSession Get a training session.
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayGetTrainingSession` operationId).
+func (c *Client) GatewayGetTrainingSession(ctx context.Context, accountId string, trainingSessionId string, params *GatewayGetTrainingSessionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetTrainingSessionRequest(c.Server, accountId, trainingSessionId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListTrainingSessionCheckpoints List the checkpoints saved during a TrainingSession. Access is scoped
+// to the session's account.
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints (the `GatewayListTrainingSessionCheckpoints` operationId).
+func (c *Client) GatewayListTrainingSessionCheckpoints(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionCheckpointsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListTrainingSessionCheckpointsRequest(c.Server, accountId, trainingSessionId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayPromoteTrainingSessionCheckpointWithBody Promote a checkpoint saved during a TrainingSession into a
+// customer-owned Model, identified by checkpoint_name. Only promotable
+// (inference) checkpoints can be promoted.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+func (c *Client) GatewayPromoteTrainingSessionCheckpointWithBody(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayPromoteTrainingSessionCheckpointRequestWithBody(c.Server, accountId, trainingSessionId, checkpointId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayPromoteTrainingSessionCheckpoint Promote a checkpoint saved during a TrainingSession into a
+// customer-owned Model, identified by checkpoint_name. Only promotable
+// (inference) checkpoints can be promoted.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+func (c *Client) GatewayPromoteTrainingSessionCheckpoint(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, body GatewayPromoteTrainingSessionCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayPromoteTrainingSessionCheckpointRequest(c.Server, accountId, trainingSessionId, checkpointId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListTrainingSessionChunkOutputs List chunk completion events on a TrainingSession.
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayListTrainingSessionChunkOutputs` operationId).
+func (c *Client) GatewayListTrainingSessionChunkOutputs(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionChunkOutputsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListTrainingSessionChunkOutputsRequest(c.Server, accountId, trainingSessionId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingSessionChunkOutputWithBody Create a chunk-completion row on a TrainingSession (per-chunk
+// distributions, dataset refs, checkpoints). Trainer-driven write; the
+// server validates the parent session and materializes the row.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+func (c *Client) GatewayCreateTrainingSessionChunkOutputWithBody(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingSessionChunkOutputRequestWithBody(c.Server, accountId, trainingSessionId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingSessionChunkOutput Create a chunk-completion row on a TrainingSession (per-chunk
+// distributions, dataset refs, checkpoints). Trainer-driven write; the
+// server validates the parent session and materializes the row.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+func (c *Client) GatewayCreateTrainingSessionChunkOutput(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, body GatewayCreateTrainingSessionChunkOutputJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingSessionChunkOutputRequest(c.Server, accountId, trainingSessionId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListTrainingSessionTrainingCurves List scalar training curves for line charts on a TrainingSession.
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/trainingCurves (the `GatewayListTrainingSessionTrainingCurves` operationId).
+func (c *Client) GatewayListTrainingSessionTrainingCurves(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionTrainingCurvesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListTrainingSessionTrainingCurvesRequest(c.Server, accountId, trainingSessionId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayLoadTrainingSessionStateWithBody Load or switch the LoRA adapter state for a training session.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+func (c *Client) GatewayLoadTrainingSessionStateWithBody(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayLoadTrainingSessionStateRequestWithBody(c.Server, accountId, trainingSessionId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayLoadTrainingSessionState Load or switch the LoRA adapter state for a training session.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+func (c *Client) GatewayLoadTrainingSessionState(ctx context.Context, accountId string, trainingSessionId string, body GatewayLoadTrainingSessionStateJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayLoadTrainingSessionStateRequest(c.Server, accountId, trainingSessionId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayLogTrainingSessionMetricsWithBody Log scalar training metrics on a TrainingSession (append-only time-series,
+// upserts on (session, key, step) so retries are idempotent).
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+func (c *Client) GatewayLogTrainingSessionMetricsWithBody(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayLogTrainingSessionMetricsRequestWithBody(c.Server, accountId, trainingSessionId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayLogTrainingSessionMetrics Log scalar training metrics on a TrainingSession (append-only time-series,
+// upserts on (session, key, step) so retries are idempotent).
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+func (c *Client) GatewayLogTrainingSessionMetrics(ctx context.Context, accountId string, trainingSessionId string, body GatewayLogTrainingSessionMetricsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayLogTrainingSessionMetricsRequest(c.Server, accountId, trainingSessionId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListTrainingShapes List Training Shapes
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes (the `GatewayListTrainingShapes` operationId).
+func (c *Client) GatewayListTrainingShapes(ctx context.Context, accountId string, params *GatewayListTrainingShapesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListTrainingShapesRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingShapeWithBody CRUD APIs for training shape.
+// Create Training Shape
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+func (c *Client) GatewayCreateTrainingShapeWithBody(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingShapeRequestWithBody(c.Server, accountId, params, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateTrainingShape CRUD APIs for training shape.
+// Create Training Shape
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+func (c *Client) GatewayCreateTrainingShape(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, body GatewayCreateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateTrainingShapeRequest(c.Server, accountId, params, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayDeleteTrainingShape Delete Training Shape
+//
+// Corresponds with DELETE /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayDeleteTrainingShape` operationId).
+func (c *Client) GatewayDeleteTrainingShape(ctx context.Context, accountId string, trainingShapeId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayDeleteTrainingShapeRequest(c.Server, accountId, trainingShapeId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetTrainingShape Get Training Shape
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayGetTrainingShape` operationId).
+func (c *Client) GatewayGetTrainingShape(ctx context.Context, accountId string, trainingShapeId string, params *GatewayGetTrainingShapeParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetTrainingShapeRequest(c.Server, accountId, trainingShapeId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateTrainingShapeWithBody Update Training Shape
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+func (c *Client) GatewayUpdateTrainingShapeWithBody(ctx context.Context, accountId string, trainingShapeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateTrainingShapeRequestWithBody(c.Server, accountId, trainingShapeId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateTrainingShape Update Training Shape
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+func (c *Client) GatewayUpdateTrainingShape(ctx context.Context, accountId string, trainingShapeId string, body GatewayUpdateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateTrainingShapeRequest(c.Server, accountId, trainingShapeId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListTrainingShapeVersions List Training Shapes Versions
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions (the `GatewayListTrainingShapeVersions` operationId).
+func (c *Client) GatewayListTrainingShapeVersions(ctx context.Context, accountId string, trainingShapeId string, params *GatewayListTrainingShapeVersionsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListTrainingShapeVersionsRequest(c.Server, accountId, trainingShapeId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetTrainingShapeVersion Get Training Shape Version
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayGetTrainingShapeVersion` operationId).
+func (c *Client) GatewayGetTrainingShapeVersion(ctx context.Context, accountId string, trainingShapeId string, versionId string, params *GatewayGetTrainingShapeVersionParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetTrainingShapeVersionRequest(c.Server, accountId, trainingShapeId, versionId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateTrainingShapeVersionWithBody Update Training Shape Version
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+func (c *Client) GatewayUpdateTrainingShapeVersionWithBody(ctx context.Context, accountId string, trainingShapeId string, versionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateTrainingShapeVersionRequestWithBody(c.Server, accountId, trainingShapeId, versionId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateTrainingShapeVersion Update Training Shape Version
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+func (c *Client) GatewayUpdateTrainingShapeVersion(ctx context.Context, accountId string, trainingShapeId string, versionId string, body GatewayUpdateTrainingShapeVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateTrainingShapeVersionRequest(c.Server, accountId, trainingShapeId, versionId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayQueryUsageCostsWithBody Query grouped usage cost subtotals for an account.
+//
+// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+func (c *Client) GatewayQueryUsageCostsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayQueryUsageCostsRequestWithBody(c.Server, accountId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayQueryUsageCosts Query grouped usage cost subtotals for an account.
+//
+// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+func (c *Client) GatewayQueryUsageCosts(ctx context.Context, accountId string, body GatewayQueryUsageCostsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayQueryUsageCostsRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListUserUsageLimitIncreaseRequests Lists the account's limit-increase requests (admin), filterable by state.
+//
+// Corresponds with GET /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayListUserUsageLimitIncreaseRequests` operationId).
+func (c *Client) GatewayListUserUsageLimitIncreaseRequests(ctx context.Context, accountId string, params *GatewayListUserUsageLimitIncreaseRequestsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListUserUsageLimitIncreaseRequestsRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateUserUsageLimitIncreaseRequestWithBody Files a member's request to raise their own per-user serverless cap.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+func (c *Client) GatewayCreateUserUsageLimitIncreaseRequestWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateUserUsageLimitIncreaseRequestRequestWithBody(c.Server, accountId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayCreateUserUsageLimitIncreaseRequest Files a member's request to raise their own per-user serverless cap.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+func (c *Client) GatewayCreateUserUsageLimitIncreaseRequest(ctx context.Context, accountId string, body GatewayCreateUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayCreateUserUsageLimitIncreaseRequestRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayApproveUserUsageLimitIncreaseRequestWithBody Approves a pending limit-increase request (admin).
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+func (c *Client) GatewayApproveUserUsageLimitIncreaseRequestWithBody(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayApproveUserUsageLimitIncreaseRequestRequestWithBody(c.Server, accountId, usageLimitIncreaseRequestId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayApproveUserUsageLimitIncreaseRequest Approves a pending limit-increase request (admin).
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+func (c *Client) GatewayApproveUserUsageLimitIncreaseRequest(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayApproveUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayApproveUserUsageLimitIncreaseRequestRequest(c.Server, accountId, usageLimitIncreaseRequestId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayRejectUserUsageLimitIncreaseRequestWithBody Rejects a pending limit-increase request (admin).
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+func (c *Client) GatewayRejectUserUsageLimitIncreaseRequestWithBody(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayRejectUserUsageLimitIncreaseRequestRequestWithBody(c.Server, accountId, usageLimitIncreaseRequestId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayRejectUserUsageLimitIncreaseRequest Rejects a pending limit-increase request (admin).
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+func (c *Client) GatewayRejectUserUsageLimitIncreaseRequest(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayRejectUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayRejectUserUsageLimitIncreaseRequestRequest(c.Server, accountId, usageLimitIncreaseRequestId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetAccountUsageLimits Returns the account-level usage-limits singleton (default per-user cap,
+// enforcement, account-wide usage rollup).
+//
+// Corresponds with GET /v1/accounts/{account_id}/usageLimits (the `GatewayGetAccountUsageLimits` operationId).
+func (c *Client) GatewayGetAccountUsageLimits(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetAccountUsageLimitsRequest(c.Server, accountId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateAccountUsageLimitsWithBody Updates the account-level usage-limits singleton (default per-user cap,
+// enforcement).
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+func (c *Client) GatewayUpdateAccountUsageLimitsWithBody(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateAccountUsageLimitsRequestWithBody(c.Server, accountId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateAccountUsageLimits Updates the account-level usage-limits singleton (default per-user cap,
+// enforcement).
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+func (c *Client) GatewayUpdateAccountUsageLimits(ctx context.Context, accountId string, body GatewayUpdateAccountUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateAccountUsageLimitsRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayListUserUsageLimits Lists every user's usage limits in the account (the roster: usage vs.
+// effective cap and over-limit status per user).
+//
+// Corresponds with GET /v1/accounts/{account_id}/userUsageLimits (the `GatewayListUserUsageLimits` operationId).
+func (c *Client) GatewayListUserUsageLimits(ctx context.Context, accountId string, params *GatewayListUserUsageLimitsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListUserUsageLimitsRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // GatewayListUsers List Users
 //
 // Corresponds with GET /v1/accounts/{account_id}/users (the `GatewayListUsers` operationId).
@@ -7083,6 +7273,58 @@ func (c *Client) GatewayDeleteApiKey(ctx context.Context, accountId string, user
 	return c.Client.Do(req)
 }
 
+// GatewayGetUserUsageLimits Returns a single user's usage-limits singleton (override, effective cap,
+// usage, and whether they are over limit).
+//
+// Corresponds with GET /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayGetUserUsageLimits` operationId).
+func (c *Client) GatewayGetUserUsageLimits(ctx context.Context, accountId string, userId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetUserUsageLimitsRequest(c.Server, accountId, userId)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateUserUsageLimitsWithBody Updates a single user's usage-limits singleton (limit_override). Clearing
+// the override reverts the user to the account default.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+func (c *Client) GatewayUpdateUserUsageLimitsWithBody(ctx context.Context, accountId string, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateUserUsageLimitsRequestWithBody(c.Server, accountId, userId, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayUpdateUserUsageLimits Updates a single user's usage-limits singleton (limit_override). Clearing
+// the override reverts the user to the account default.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+func (c *Client) GatewayUpdateUserUsageLimits(ctx context.Context, accountId string, userId string, body GatewayUpdateUserUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayUpdateUserUsageLimitsRequest(c.Server, accountId, userId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // GatewayTestEvaluationWithBody Similar to preview evaluation, but no need to create the evaluation entry first.
 //
 // Takes any type of body and a specified content type.
@@ -7107,6 +7349,40 @@ func (c *Client) GatewayTestEvaluationWithBody(ctx context.Context, accountId st
 // Corresponds with POST /v1/accounts/{account_id}:testeval (the `GatewayTestEvaluation` operationId).
 func (c *Client) GatewayTestEvaluation(ctx context.Context, accountId string, body GatewayTestEvaluationJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayTestEvaluationRequest(c.Server, accountId, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayRefreshSessionTokenWithBody Refresh a session JWT before expiry with a fresh TTL.
+//
+// Takes any type of body and a specified content type.
+//
+// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+func (c *Client) GatewayRefreshSessionTokenWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayRefreshSessionTokenRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayRefreshSessionToken Refresh a session JWT before expiry with a fresh TTL.
+//
+// Takes a body of the `application/json` content type.
+//
+// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+func (c *Client) GatewayRefreshSessionToken(ctx context.Context, body GatewayRefreshSessionTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayRefreshSessionTokenRequest(c.Server, body)
 	if err != nil {
 		return nil, err
 	}
@@ -7340,11 +7616,11 @@ func (c *Client) ListResponsesV1ResponsesGet(ctx context.Context, params *ListRe
 //
 // Explore our cookbooks for detailed examples:
 //
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 //
 // Takes any type of body and a specified content type.
 //
@@ -7367,11 +7643,11 @@ func (c *Client) CreateResponseV1ResponsesPostWithBody(ctx context.Context, cont
 //
 // Explore our cookbooks for detailed examples:
 //
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 //
 // Takes a body of the `application/json` content type.
 //
@@ -7841,209 +8117,6 @@ func NewGatewayListAuditLogsRequest(server string, accountId string, params *Gat
 	return req, nil
 }
 
-// NewGatewayListAwsIamRoleBindingsRequest constructs an http.Request for the GatewayListAwsIamRoleBindings method
-func NewGatewayListAwsIamRoleBindingsRequest(server string, accountId string, params *GatewayListAwsIamRoleBindingsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/awsIamRoleBindings", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayCreateAwsIamRoleBindingRequest calls the generic GatewayCreateAwsIamRoleBinding builder with application/json body
-func NewGatewayCreateAwsIamRoleBindingRequest(server string, accountId string, body GatewayCreateAwsIamRoleBindingJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateAwsIamRoleBindingRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayCreateAwsIamRoleBindingRequestWithBody constructs an http.Request for the GatewayCreateAwsIamRoleBinding method, with any body, and a specified content type
-func NewGatewayCreateAwsIamRoleBindingRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/awsIamRoleBindings", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteAwsIamRoleBindingRequest calls the generic GatewayDeleteAwsIamRoleBinding builder with application/json body
-func NewGatewayDeleteAwsIamRoleBindingRequest(server string, accountId string, body GatewayDeleteAwsIamRoleBindingJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayDeleteAwsIamRoleBindingRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayDeleteAwsIamRoleBindingRequestWithBody constructs an http.Request for the GatewayDeleteAwsIamRoleBinding method, with any body, and a specified content type
-func NewGatewayDeleteAwsIamRoleBindingRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/awsIamRoleBindings:delete", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
 // NewGatewayListBatchInferenceJobsRequest constructs an http.Request for the GatewayListBatchInferenceJobs method
 func NewGatewayListBatchInferenceJobsRequest(server string, accountId string, params *GatewayListBatchInferenceJobsParams) (*http.Request, error) {
 	var err error
@@ -8336,566 +8409,6 @@ func NewGatewayGetBatchInferenceJobRequest(server string, accountId string, batc
 	return req, nil
 }
 
-// NewGatewayListBatchJobsRequest constructs an http.Request for the GatewayListBatchJobs method
-func NewGatewayListBatchJobsRequest(server string, accountId string, params *GatewayListBatchJobsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayCreateBatchJobRequest calls the generic GatewayCreateBatchJob builder with application/json body
-func NewGatewayCreateBatchJobRequest(server string, accountId string, body GatewayCreateBatchJobJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateBatchJobRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayCreateBatchJobRequestWithBody constructs an http.Request for the GatewayCreateBatchJob method, with any body, and a specified content type
-func NewGatewayCreateBatchJobRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteBatchJobRequest constructs an http.Request for the GatewayDeleteBatchJob method
-func NewGatewayDeleteBatchJobRequest(server string, accountId string, batchJobId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "batch_job_id", batchJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetBatchJobRequest constructs an http.Request for the GatewayGetBatchJob method
-func NewGatewayGetBatchJobRequest(server string, accountId string, batchJobId string, params *GatewayGetBatchJobParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "batch_job_id", batchJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayUpdateBatchJobRequest calls the generic GatewayUpdateBatchJob builder with application/json body
-func NewGatewayUpdateBatchJobRequest(server string, accountId string, batchJobId string, body GatewayUpdateBatchJobJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayUpdateBatchJobRequestWithBody(server, accountId, batchJobId, "application/json", bodyReader)
-}
-
-// NewGatewayUpdateBatchJobRequestWithBody constructs an http.Request for the GatewayUpdateBatchJob method, with any body, and a specified content type
-func NewGatewayUpdateBatchJobRequestWithBody(server string, accountId string, batchJobId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "batch_job_id", batchJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayCancelBatchJobRequest calls the generic GatewayCancelBatchJob builder with application/json body
-func NewGatewayCancelBatchJobRequest(server string, accountId string, batchJobId string, body GatewayCancelBatchJobJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCancelBatchJobRequestWithBody(server, accountId, batchJobId, "application/json", bodyReader)
-}
-
-// NewGatewayCancelBatchJobRequestWithBody constructs an http.Request for the GatewayCancelBatchJob method, with any body, and a specified content type
-func NewGatewayCancelBatchJobRequestWithBody(server string, accountId string, batchJobId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "batch_job_id", batchJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs/%s:cancel", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayGetBatchJobLogsRequest constructs an http.Request for the GatewayGetBatchJobLogs method
-func NewGatewayGetBatchJobLogsRequest(server string, accountId string, batchJobId string, params *GatewayGetBatchJobLogsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "batch_job_id", batchJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs/%s:getLogs", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.Ranks != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "ranks", *params.Ranks, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.StartTime != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "startTime", *params.StartTime, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.StartFromHead != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "startFromHead", *params.StartFromHead, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayBatchDeleteBatchJobsRequest calls the generic GatewayBatchDeleteBatchJobs builder with application/json body
-func NewGatewayBatchDeleteBatchJobsRequest(server string, accountId string, body GatewayBatchDeleteBatchJobsJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayBatchDeleteBatchJobsRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayBatchDeleteBatchJobsRequestWithBody constructs an http.Request for the GatewayBatchDeleteBatchJobs method, with any body, and a specified content type
-func NewGatewayBatchDeleteBatchJobsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/batchJobs:batchDelete", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
 // NewGatewayGetBillingSummaryRequest constructs an http.Request for the GatewayGetBillingSummary method
 func NewGatewayGetBillingSummaryRequest(server string, accountId string, params *GatewayGetBillingSummaryParams) (*http.Request, error) {
 	var err error
@@ -8947,6 +8460,18 @@ func NewGatewayGetBillingSummaryRequest(server string, accountId string, params 
 			}
 		}
 
+		if params.Granularity != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "granularity", *params.Granularity, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if encoded := queryValues.Encode(); encoded != "" {
 			rawQueryFragments = append(rawQueryFragments, encoded)
 		}
@@ -8957,6 +8482,114 @@ func NewGatewayGetBillingSummaryRequest(server string, accountId string, params 
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewGatewayGetBillingSettingsRequest constructs an http.Request for the GatewayGetBillingSettings method
+func NewGatewayGetBillingSettingsRequest(server string, accountId string, params *GatewayGetBillingSettingsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/billingSettings", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayUpdateBillingSettingsRequest calls the generic GatewayUpdateBillingSettings builder with application/json body
+func NewGatewayUpdateBillingSettingsRequest(server string, accountId string, body GatewayUpdateBillingSettingsJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateBillingSettingsRequestWithBody(server, accountId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateBillingSettingsRequestWithBody constructs an http.Request for the GatewayUpdateBillingSettings method, with any body, and a specified content type
+func NewGatewayUpdateBillingSettingsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/billingSettings", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -9036,6 +8669,30 @@ func NewGatewayGetAccountUsageRequest(server string, accountId string, params *G
 
 		}
 
+		if params.GroupBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "groupBy", *params.GroupBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if encoded := queryValues.Encode(); encoded != "" {
 			rawQueryFragments = append(rawQueryFragments, encoded)
 		}
@@ -9046,6 +8703,60 @@ func NewGatewayGetAccountUsageRequest(server string, accountId string, params *G
 	if err != nil {
 		return nil, err
 	}
+
+	return req, nil
+}
+
+// NewGatewayPromoteCheckpointRequest calls the generic GatewayPromoteCheckpoint builder with application/json body
+func NewGatewayPromoteCheckpointRequest(server string, accountId string, checkpointId string, body GatewayPromoteCheckpointJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayPromoteCheckpointRequestWithBody(server, accountId, checkpointId, "application/json", bodyReader)
+}
+
+// NewGatewayPromoteCheckpointRequestWithBody constructs an http.Request for the GatewayPromoteCheckpoint method, with any body, and a specified content type
+func NewGatewayPromoteCheckpointRequestWithBody(server string, accountId string, checkpointId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "checkpoint_id", checkpointId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/checkpoints/%s:promote", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
 
 	return req, nil
 }
@@ -10496,6 +10207,53 @@ func NewGatewayUpdateDeployedModelRequestWithBody(server string, accountId strin
 	return req, nil
 }
 
+// NewGatewayMatchDeploymentShapeVersionsRequest calls the generic GatewayMatchDeploymentShapeVersions builder with application/json body
+func NewGatewayMatchDeploymentShapeVersionsRequest(server string, accountId string, body GatewayMatchDeploymentShapeVersionsJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayMatchDeploymentShapeVersionsRequestWithBody(server, accountId, "application/json", bodyReader)
+}
+
+// NewGatewayMatchDeploymentShapeVersionsRequestWithBody constructs an http.Request for the GatewayMatchDeploymentShapeVersions method, with any body, and a specified content type
+func NewGatewayMatchDeploymentShapeVersionsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/deploymentShapeVersions:match", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewGatewayListDeploymentShapesRequest constructs an http.Request for the GatewayListDeploymentShapes method
 func NewGatewayListDeploymentShapesRequest(server string, accountId string, params *GatewayListDeploymentShapesParams) (*http.Request, error) {
 	var err error
@@ -10777,6 +10535,18 @@ func NewGatewayGetDeploymentShapeRequest(server string, accountId string, deploy
 		if params.ReadMask != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.SkipShapeValidation != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "skipShapeValidation", *params.SkipShapeValidation, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -12044,6 +11814,284 @@ func NewGatewayUndeleteDeploymentRequestWithBody(server string, accountId string
 	return req, nil
 }
 
+// NewGatewayListDeveloperPassesRequest constructs an http.Request for the GatewayListDeveloperPasses method
+func NewGatewayListDeveloperPassesRequest(server string, accountId string, params *GatewayListDeveloperPassesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/developerPasses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayCreateDeveloperPassRequest calls the generic GatewayCreateDeveloperPass builder with application/json body
+func NewGatewayCreateDeveloperPassRequest(server string, accountId string, body GatewayCreateDeveloperPassJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayCreateDeveloperPassRequestWithBody(server, accountId, "application/json", bodyReader)
+}
+
+// NewGatewayCreateDeveloperPassRequestWithBody constructs an http.Request for the GatewayCreateDeveloperPass method, with any body, and a specified content type
+func NewGatewayCreateDeveloperPassRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/developerPasses", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayGetDeveloperPassRequest constructs an http.Request for the GatewayGetDeveloperPass method
+func NewGatewayGetDeveloperPassRequest(server string, accountId string, developerPasseId string, params *GatewayGetDeveloperPassParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "developer_passe_id", developerPasseId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/developerPasses/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayUpdateDeveloperPassRequest calls the generic GatewayUpdateDeveloperPass builder with application/json body
+func NewGatewayUpdateDeveloperPassRequest(server string, accountId string, developerPasseId string, body GatewayUpdateDeveloperPassJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateDeveloperPassRequestWithBody(server, accountId, developerPasseId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateDeveloperPassRequestWithBody constructs an http.Request for the GatewayUpdateDeveloperPass method, with any body, and a specified content type
+func NewGatewayUpdateDeveloperPassRequestWithBody(server string, accountId string, developerPasseId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "developer_passe_id", developerPasseId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/developerPasses/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewGatewayListDpoJobsRequest constructs an http.Request for the GatewayListDpoJobs method
 func NewGatewayListDpoJobsRequest(server string, accountId string, params *GatewayListDpoJobsParams) (*http.Request, error) {
 	var err error
@@ -12130,6 +12178,18 @@ func NewGatewayListDpoJobsRequest(server string, accountId string, params *Gatew
 		if params.ReadMask != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.IncludeArchived != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "includeArchived", *params.IncludeArchived, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -12466,480 +12526,6 @@ func NewGatewayResumeDpoJobRequestWithBody(server string, accountId string, dpoJ
 	}
 
 	operationPath := fmt.Sprintf("/v1/accounts/%s/dpoJobs/%s:resume", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayListEnvironmentsRequest constructs an http.Request for the GatewayListEnvironments method
-func NewGatewayListEnvironmentsRequest(server string, accountId string, params *GatewayListEnvironmentsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayCreateEnvironmentRequest calls the generic GatewayCreateEnvironment builder with application/json body
-func NewGatewayCreateEnvironmentRequest(server string, accountId string, body GatewayCreateEnvironmentJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateEnvironmentRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayCreateEnvironmentRequestWithBody constructs an http.Request for the GatewayCreateEnvironment method, with any body, and a specified content type
-func NewGatewayCreateEnvironmentRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteEnvironmentRequest constructs an http.Request for the GatewayDeleteEnvironment method
-func NewGatewayDeleteEnvironmentRequest(server string, accountId string, environmentId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "environment_id", environmentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetEnvironmentRequest constructs an http.Request for the GatewayGetEnvironment method
-func NewGatewayGetEnvironmentRequest(server string, accountId string, environmentId string, params *GatewayGetEnvironmentParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "environment_id", environmentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayUpdateEnvironmentRequest calls the generic GatewayUpdateEnvironment builder with application/json body
-func NewGatewayUpdateEnvironmentRequest(server string, accountId string, environmentId string, body GatewayUpdateEnvironmentJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayUpdateEnvironmentRequestWithBody(server, accountId, environmentId, "application/json", bodyReader)
-}
-
-// NewGatewayUpdateEnvironmentRequestWithBody constructs an http.Request for the GatewayUpdateEnvironment method, with any body, and a specified content type
-func NewGatewayUpdateEnvironmentRequestWithBody(server string, accountId string, environmentId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "environment_id", environmentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayConnectEnvironmentRequest calls the generic GatewayConnectEnvironment builder with application/json body
-func NewGatewayConnectEnvironmentRequest(server string, accountId string, environmentId string, body GatewayConnectEnvironmentJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayConnectEnvironmentRequestWithBody(server, accountId, environmentId, "application/json", bodyReader)
-}
-
-// NewGatewayConnectEnvironmentRequestWithBody constructs an http.Request for the GatewayConnectEnvironment method, with any body, and a specified content type
-func NewGatewayConnectEnvironmentRequestWithBody(server string, accountId string, environmentId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "environment_id", environmentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments/%s:connect", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDisconnectEnvironmentRequest calls the generic GatewayDisconnectEnvironment builder with application/json body
-func NewGatewayDisconnectEnvironmentRequest(server string, accountId string, environmentId string, body GatewayDisconnectEnvironmentJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayDisconnectEnvironmentRequestWithBody(server, accountId, environmentId, "application/json", bodyReader)
-}
-
-// NewGatewayDisconnectEnvironmentRequestWithBody constructs an http.Request for the GatewayDisconnectEnvironment method, with any body, and a specified content type
-func NewGatewayDisconnectEnvironmentRequestWithBody(server string, accountId string, environmentId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "environment_id", environmentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments/%s:disconnect", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayBatchDeleteEnvironmentsRequest calls the generic GatewayBatchDeleteEnvironments builder with application/json body
-func NewGatewayBatchDeleteEnvironmentsRequest(server string, accountId string, body GatewayBatchDeleteEnvironmentsJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayBatchDeleteEnvironmentsRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayBatchDeleteEnvironmentsRequestWithBody constructs an http.Request for the GatewayBatchDeleteEnvironments method, with any body, and a specified content type
-func NewGatewayBatchDeleteEnvironmentsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/environments:batchDelete", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14676,8 +14262,8 @@ func NewGatewayCreateEvaluatorV2RequestWithBody(server string, accountId string,
 	return req, nil
 }
 
-// NewGatewayListGenericDeploymentTypesRequest constructs an http.Request for the GatewayListGenericDeploymentTypes method
-func NewGatewayListGenericDeploymentTypesRequest(server string, accountId string, params *GatewayListGenericDeploymentTypesParams) (*http.Request, error) {
+// NewGatewayListExternalKeysRequest constructs an http.Request for the GatewayListExternalKeys method
+func NewGatewayListExternalKeysRequest(server string, accountId string, params *GatewayListExternalKeysParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -14692,7 +14278,7 @@ func NewGatewayListGenericDeploymentTypesRequest(server string, accountId string
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeploymentTypes", pathParam0)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/externalKeys", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14785,19 +14371,19 @@ func NewGatewayListGenericDeploymentTypesRequest(server string, accountId string
 	return req, nil
 }
 
-// NewGatewayCreateGenericDeploymentTypeRequest calls the generic GatewayCreateGenericDeploymentType builder with application/json body
-func NewGatewayCreateGenericDeploymentTypeRequest(server string, accountId string, params *GatewayCreateGenericDeploymentTypeParams, body GatewayCreateGenericDeploymentTypeJSONRequestBody) (*http.Request, error) {
+// NewGatewayCreateExternalKeyRequest calls the generic GatewayCreateExternalKey builder with application/json body
+func NewGatewayCreateExternalKeyRequest(server string, accountId string, body GatewayCreateExternalKeyJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateGenericDeploymentTypeRequestWithBody(server, accountId, params, "application/json", bodyReader)
+	return NewGatewayCreateExternalKeyRequestWithBody(server, accountId, "application/json", bodyReader)
 }
 
-// NewGatewayCreateGenericDeploymentTypeRequestWithBody constructs an http.Request for the GatewayCreateGenericDeploymentType method, with any body, and a specified content type
-func NewGatewayCreateGenericDeploymentTypeRequestWithBody(server string, accountId string, params *GatewayCreateGenericDeploymentTypeParams, contentType string, body io.Reader) (*http.Request, error) {
+// NewGatewayCreateExternalKeyRequestWithBody constructs an http.Request for the GatewayCreateExternalKey method, with any body, and a specified content type
+func NewGatewayCreateExternalKeyRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -14812,7 +14398,7 @@ func NewGatewayCreateGenericDeploymentTypeRequestWithBody(server string, account
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeploymentTypes", pathParam0)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/externalKeys", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14820,29 +14406,6 @@ func NewGatewayCreateGenericDeploymentTypeRequestWithBody(server string, account
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "genericDeploymentTypeId", params.GenericDeploymentTypeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
-			}
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
 	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
@@ -14855,8 +14418,8 @@ func NewGatewayCreateGenericDeploymentTypeRequestWithBody(server string, account
 	return req, nil
 }
 
-// NewGatewayDeleteGenericDeploymentTypeRequest constructs an http.Request for the GatewayDeleteGenericDeploymentType method
-func NewGatewayDeleteGenericDeploymentTypeRequest(server string, accountId string, genericDeploymentTypeId string, params *GatewayDeleteGenericDeploymentTypeParams) (*http.Request, error) {
+// NewGatewayDeleteExternalKeyRequest constructs an http.Request for the GatewayDeleteExternalKey method
+func NewGatewayDeleteExternalKeyRequest(server string, accountId string, externalKeyId string, params *GatewayDeleteExternalKeyParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -14868,7 +14431,7 @@ func NewGatewayDeleteGenericDeploymentTypeRequest(server string, accountId strin
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_type_id", genericDeploymentTypeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "external_key_id", externalKeyId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -14878,7 +14441,7 @@ func NewGatewayDeleteGenericDeploymentTypeRequest(server string, accountId strin
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeploymentTypes/%s", pathParam0, pathParam1)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/externalKeys/%s", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14897,9 +14460,9 @@ func NewGatewayDeleteGenericDeploymentTypeRequest(server string, accountId strin
 		// per the OpenAPI spec (e.g. "color=blue,black,brown").
 		var rawQueryFragments []string
 
-		if params.Hard != nil {
+		if params.ReadMask != nil {
 
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "hard", *params.Hard, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -14923,8 +14486,8 @@ func NewGatewayDeleteGenericDeploymentTypeRequest(server string, accountId strin
 	return req, nil
 }
 
-// NewGatewayListGenericDeploymentTypeVersionsRequest constructs an http.Request for the GatewayListGenericDeploymentTypeVersions method
-func NewGatewayListGenericDeploymentTypeVersionsRequest(server string, accountId string, genericDeploymentTypeId string, params *GatewayListGenericDeploymentTypeVersionsParams) (*http.Request, error) {
+// NewGatewayGetExternalKeyRequest constructs an http.Request for the GatewayGetExternalKey method
+func NewGatewayGetExternalKeyRequest(server string, accountId string, externalKeyId string, params *GatewayGetExternalKeyParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -14936,7 +14499,7 @@ func NewGatewayListGenericDeploymentTypeVersionsRequest(server string, accountId
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_type_id", genericDeploymentTypeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "external_key_id", externalKeyId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -14946,7 +14509,7 @@ func NewGatewayListGenericDeploymentTypeVersionsRequest(server string, accountId
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeploymentTypes/%s", pathParam0, pathParam1)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/externalKeys/%s", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -14964,54 +14527,6 @@ func NewGatewayListGenericDeploymentTypeVersionsRequest(server string, accountId
 		// styled parameters, preserving literal commas as delimiters
 		// per the OpenAPI spec (e.g. "color=blue,black,brown").
 		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
 
 		if params.ReadMask != nil {
 
@@ -15039,19 +14554,19 @@ func NewGatewayListGenericDeploymentTypeVersionsRequest(server string, accountId
 	return req, nil
 }
 
-// NewGatewayUpdateGenericDeploymentTypeRequest calls the generic GatewayUpdateGenericDeploymentType builder with application/json body
-func NewGatewayUpdateGenericDeploymentTypeRequest(server string, accountId string, genericDeploymentTypeId string, body GatewayUpdateGenericDeploymentTypeJSONRequestBody) (*http.Request, error) {
+// NewGatewayUpdateExternalKeyRequest calls the generic GatewayUpdateExternalKey builder with application/json body
+func NewGatewayUpdateExternalKeyRequest(server string, accountId string, externalKeyId string, body GatewayUpdateExternalKeyJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewGatewayUpdateGenericDeploymentTypeRequestWithBody(server, accountId, genericDeploymentTypeId, "application/json", bodyReader)
+	return NewGatewayUpdateExternalKeyRequestWithBody(server, accountId, externalKeyId, "application/json", bodyReader)
 }
 
-// NewGatewayUpdateGenericDeploymentTypeRequestWithBody constructs an http.Request for the GatewayUpdateGenericDeploymentType method, with any body, and a specified content type
-func NewGatewayUpdateGenericDeploymentTypeRequestWithBody(server string, accountId string, genericDeploymentTypeId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewGatewayUpdateExternalKeyRequestWithBody constructs an http.Request for the GatewayUpdateExternalKey method, with any body, and a specified content type
+func NewGatewayUpdateExternalKeyRequestWithBody(server string, accountId string, externalKeyId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -15063,7 +14578,7 @@ func NewGatewayUpdateGenericDeploymentTypeRequestWithBody(server string, account
 
 	var pathParam1 string
 
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_type_id", genericDeploymentTypeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "external_key_id", externalKeyId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
 	if err != nil {
 		return nil, err
 	}
@@ -15073,554 +14588,7 @@ func NewGatewayUpdateGenericDeploymentTypeRequestWithBody(server string, account
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeploymentTypes/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteGenericDeploymentTypeVersionRequest constructs an http.Request for the GatewayDeleteGenericDeploymentTypeVersion method
-func NewGatewayDeleteGenericDeploymentTypeVersionRequest(server string, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayDeleteGenericDeploymentTypeVersionParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_type_id", genericDeploymentTypeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam2 string
-
-	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "version_id", versionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeploymentTypes/%s/versions/%s", pathParam0, pathParam1, pathParam2)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.Hard != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "hard", *params.Hard, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetGenericDeploymentTypeVersionRequest constructs an http.Request for the GatewayGetGenericDeploymentTypeVersion method
-func NewGatewayGetGenericDeploymentTypeVersionRequest(server string, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayGetGenericDeploymentTypeVersionParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_type_id", genericDeploymentTypeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam2 string
-
-	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "version_id", versionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeploymentTypes/%s/versions/%s", pathParam0, pathParam1, pathParam2)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayListGenericDeploymentsRequest constructs an http.Request for the GatewayListGenericDeployments method
-func NewGatewayListGenericDeploymentsRequest(server string, accountId string, params *GatewayListGenericDeploymentsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeployments", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayCreateGenericDeploymentRequest calls the generic GatewayCreateGenericDeployment builder with application/json body
-func NewGatewayCreateGenericDeploymentRequest(server string, accountId string, params *GatewayCreateGenericDeploymentParams, body GatewayCreateGenericDeploymentJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateGenericDeploymentRequestWithBody(server, accountId, params, "application/json", bodyReader)
-}
-
-// NewGatewayCreateGenericDeploymentRequestWithBody constructs an http.Request for the GatewayCreateGenericDeployment method, with any body, and a specified content type
-func NewGatewayCreateGenericDeploymentRequestWithBody(server string, accountId string, params *GatewayCreateGenericDeploymentParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeployments", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.GenericDeploymentId != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "genericDeploymentId", *params.GenericDeploymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ValidateOnly != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "validateOnly", *params.ValidateOnly, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteGenericDeploymentRequest constructs an http.Request for the GatewayDeleteGenericDeployment method
-func NewGatewayDeleteGenericDeploymentRequest(server string, accountId string, genericDeploymentId string, params *GatewayDeleteGenericDeploymentParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_id", genericDeploymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeployments/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.Hard != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "hard", *params.Hard, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.IgnoreChecks != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "ignoreChecks", *params.IgnoreChecks, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetGenericDeploymentRequest constructs an http.Request for the GatewayGetGenericDeployment method
-func NewGatewayGetGenericDeploymentRequest(server string, accountId string, genericDeploymentId string, params *GatewayGetGenericDeploymentParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_id", genericDeploymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeployments/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayUpdateGenericDeploymentRequest calls the generic GatewayUpdateGenericDeployment builder with application/json body
-func NewGatewayUpdateGenericDeploymentRequest(server string, accountId string, genericDeploymentId string, body GatewayUpdateGenericDeploymentJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayUpdateGenericDeploymentRequestWithBody(server, accountId, genericDeploymentId, "application/json", bodyReader)
-}
-
-// NewGatewayUpdateGenericDeploymentRequestWithBody constructs an http.Request for the GatewayUpdateGenericDeployment method, with any body, and a specified content type
-func NewGatewayUpdateGenericDeploymentRequestWithBody(server string, accountId string, genericDeploymentId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "generic_deployment_id", genericDeploymentId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/genericDeployments/%s", pathParam0, pathParam1)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/externalKeys/%s", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -15967,717 +14935,6 @@ func NewGatewayUpdateIdentityProviderRequestWithBody(server string, accountId st
 	}
 
 	operationPath := fmt.Sprintf("/v1/accounts/%s/identityProviders/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayListLeaderboardsRequest constructs an http.Request for the GatewayListLeaderboards method
-func NewGatewayListLeaderboardsRequest(server string, accountId string, params *GatewayListLeaderboardsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/leaderboards", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayCreateLeaderboardRequest calls the generic GatewayCreateLeaderboard builder with application/json body
-func NewGatewayCreateLeaderboardRequest(server string, accountId string, body GatewayCreateLeaderboardJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateLeaderboardRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayCreateLeaderboardRequestWithBody constructs an http.Request for the GatewayCreateLeaderboard method, with any body, and a specified content type
-func NewGatewayCreateLeaderboardRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/leaderboards", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteLeaderboardRequest constructs an http.Request for the GatewayDeleteLeaderboard method
-func NewGatewayDeleteLeaderboardRequest(server string, accountId string, leaderboardId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "leaderboard_id", leaderboardId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/leaderboards/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetLeaderboardRequest constructs an http.Request for the GatewayGetLeaderboard method
-func NewGatewayGetLeaderboardRequest(server string, accountId string, leaderboardId string, params *GatewayGetLeaderboardParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "leaderboard_id", leaderboardId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/leaderboards/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayListLeaderboardEvaluationJobsRequest constructs an http.Request for the GatewayListLeaderboardEvaluationJobs method
-func NewGatewayListLeaderboardEvaluationJobsRequest(server string, accountId string, leaderboardId string, params *GatewayListLeaderboardEvaluationJobsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "leaderboard_id", leaderboardId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/leaderboards/%s:listEvaluationJobs", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayListMcpServersRequest constructs an http.Request for the GatewayListMcpServers method
-func NewGatewayListMcpServersRequest(server string, accountId string, params *GatewayListMcpServersParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/mcpServers", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayCreateMcpServerRequest calls the generic GatewayCreateMcpServer builder with application/json body
-func NewGatewayCreateMcpServerRequest(server string, accountId string, params *GatewayCreateMcpServerParams, body GatewayCreateMcpServerJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateMcpServerRequestWithBody(server, accountId, params, "application/json", bodyReader)
-}
-
-// NewGatewayCreateMcpServerRequestWithBody constructs an http.Request for the GatewayCreateMcpServer method, with any body, and a specified content type
-func NewGatewayCreateMcpServerRequestWithBody(server string, accountId string, params *GatewayCreateMcpServerParams, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/mcpServers", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if queryFrag, err := runtime.StyleParamWithOptions("form", true, "mcpServerId", params.McpServerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-			return nil, err
-		} else {
-			for _, qp := range strings.Split(queryFrag, "&") {
-				rawQueryFragments = append(rawQueryFragments, qp)
-			}
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteMcpServerRequest constructs an http.Request for the GatewayDeleteMcpServer method
-func NewGatewayDeleteMcpServerRequest(server string, accountId string, mcpServerId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "mcp_server_id", mcpServerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/mcpServers/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetMcpServerRequest constructs an http.Request for the GatewayGetMcpServer method
-func NewGatewayGetMcpServerRequest(server string, accountId string, mcpServerId string, params *GatewayGetMcpServerParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "mcp_server_id", mcpServerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/mcpServers/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayUpdateMcpServerRequest calls the generic GatewayUpdateMcpServer builder with application/json body
-func NewGatewayUpdateMcpServerRequest(server string, accountId string, mcpServerId string, body GatewayUpdateMcpServerJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayUpdateMcpServerRequestWithBody(server, accountId, mcpServerId, "application/json", bodyReader)
-}
-
-// NewGatewayUpdateMcpServerRequestWithBody constructs an http.Request for the GatewayUpdateMcpServer method, with any body, and a specified content type
-func NewGatewayUpdateMcpServerRequestWithBody(server string, accountId string, mcpServerId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "mcp_server_id", mcpServerId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/mcpServers/%s", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17521,8 +15778,8 @@ func NewGatewayValidateModelUploadRequest(server string, accountId string, model
 	return req, nil
 }
 
-// NewGatewayListNodePoolBindingsRequest constructs an http.Request for the GatewayListNodePoolBindings method
-func NewGatewayListNodePoolBindingsRequest(server string, accountId string, params *GatewayListNodePoolBindingsParams) (*http.Request, error) {
+// NewGatewayGetPolicySettingsRequest constructs an http.Request for the GatewayGetPolicySettings method
+func NewGatewayGetPolicySettingsRequest(server string, accountId string) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -17537,7 +15794,7 @@ func NewGatewayListNodePoolBindingsRequest(server string, accountId string, para
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePoolBindings", pathParam0)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/policySettings", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -17545,81 +15802,6 @@ func NewGatewayListNodePoolBindingsRequest(server string, accountId string, para
 	queryURL, err := serverURL.Parse(operationPath)
 	if err != nil {
 		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
@@ -17630,19 +15812,19 @@ func NewGatewayListNodePoolBindingsRequest(server string, accountId string, para
 	return req, nil
 }
 
-// NewGatewayCreateNodePoolBindingRequest calls the generic GatewayCreateNodePoolBinding builder with application/json body
-func NewGatewayCreateNodePoolBindingRequest(server string, accountId string, body GatewayCreateNodePoolBindingJSONRequestBody) (*http.Request, error) {
+// NewGatewayUpdatePolicySettingsRequest calls the generic GatewayUpdatePolicySettings builder with application/json body
+func NewGatewayUpdatePolicySettingsRequest(server string, accountId string, body GatewayUpdatePolicySettingsJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
 	buf, err := json.Marshal(body)
 	if err != nil {
 		return nil, err
 	}
 	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateNodePoolBindingRequestWithBody(server, accountId, "application/json", bodyReader)
+	return NewGatewayUpdatePolicySettingsRequestWithBody(server, accountId, "application/json", bodyReader)
 }
 
-// NewGatewayCreateNodePoolBindingRequestWithBody constructs an http.Request for the GatewayCreateNodePoolBinding method, with any body, and a specified content type
-func NewGatewayCreateNodePoolBindingRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewGatewayUpdatePolicySettingsRequestWithBody constructs an http.Request for the GatewayUpdatePolicySettings method, with any body, and a specified content type
+func NewGatewayUpdatePolicySettingsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -17657,373 +15839,7 @@ func NewGatewayCreateNodePoolBindingRequestWithBody(server string, accountId str
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePoolBindings", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteNodePoolBindingRequest calls the generic GatewayDeleteNodePoolBinding builder with application/json body
-func NewGatewayDeleteNodePoolBindingRequest(server string, accountId string, body GatewayDeleteNodePoolBindingJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayDeleteNodePoolBindingRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayDeleteNodePoolBindingRequestWithBody constructs an http.Request for the GatewayDeleteNodePoolBinding method, with any body, and a specified content type
-func NewGatewayDeleteNodePoolBindingRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePoolBindings:delete", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayListNodePoolsRequest constructs an http.Request for the GatewayListNodePools method
-func NewGatewayListNodePoolsRequest(server string, accountId string, params *GatewayListNodePoolsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePools", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.PageSize != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.PageToken != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.Filter != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.OrderBy != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayCreateNodePoolRequest calls the generic GatewayCreateNodePool builder with application/json body
-func NewGatewayCreateNodePoolRequest(server string, accountId string, body GatewayCreateNodePoolJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateNodePoolRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayCreateNodePoolRequestWithBody constructs an http.Request for the GatewayCreateNodePool method, with any body, and a specified content type
-func NewGatewayCreateNodePoolRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePools", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteNodePoolRequest constructs an http.Request for the GatewayDeleteNodePool method
-func NewGatewayDeleteNodePoolRequest(server string, accountId string, nodePoolId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "node_pool_id", nodePoolId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePools/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetNodePoolRequest constructs an http.Request for the GatewayGetNodePool method
-func NewGatewayGetNodePoolRequest(server string, accountId string, nodePoolId string, params *GatewayGetNodePoolParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "node_pool_id", nodePoolId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePools/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayUpdateNodePoolRequest calls the generic GatewayUpdateNodePool builder with application/json body
-func NewGatewayUpdateNodePoolRequest(server string, accountId string, nodePoolId string, body GatewayUpdateNodePoolJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayUpdateNodePoolRequestWithBody(server, accountId, nodePoolId, "application/json", bodyReader)
-}
-
-// NewGatewayUpdateNodePoolRequestWithBody constructs an http.Request for the GatewayUpdateNodePool method, with any body, and a specified content type
-func NewGatewayUpdateNodePoolRequestWithBody(server string, accountId string, nodePoolId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "node_pool_id", nodePoolId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePools/%s", pathParam0, pathParam1)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/policySettings", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -18034,121 +15850,6 @@ func NewGatewayUpdateNodePoolRequestWithBody(server string, accountId string, no
 	}
 
 	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayGetNodePoolStatsRequest constructs an http.Request for the GatewayGetNodePoolStats method
-func NewGatewayGetNodePoolStatsRequest(server string, accountId string, nodePoolId string, params *GatewayGetNodePoolStatsParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "node_pool_id", nodePoolId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePools/%s:getStats", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	if params != nil {
-		// queryValues collects non-styled parameters (passthrough, JSON)
-		// that are safe to round-trip through url.Values.Encode().
-		queryValues := queryURL.Query()
-		// rawQueryFragments collects pre-encoded query fragments from
-		// styled parameters, preserving literal commas as delimiters
-		// per the OpenAPI spec (e.g. "color=blue,black,brown").
-		var rawQueryFragments []string
-
-		if params.ReadMask != nil {
-
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
-				return nil, err
-			} else {
-				for _, qp := range strings.Split(queryFrag, "&") {
-					rawQueryFragments = append(rawQueryFragments, qp)
-				}
-			}
-
-		}
-
-		if encoded := queryValues.Encode(); encoded != "" {
-			rawQueryFragments = append(rawQueryFragments, encoded)
-		}
-		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
-	}
-
-	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayBatchDeleteNodePoolsRequest calls the generic GatewayBatchDeleteNodePools builder with application/json body
-func NewGatewayBatchDeleteNodePoolsRequest(server string, accountId string, body GatewayBatchDeleteNodePoolsJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayBatchDeleteNodePoolsRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayBatchDeleteNodePoolsRequestWithBody constructs an http.Request for the GatewayBatchDeleteNodePools method, with any body, and a specified content type
-func NewGatewayBatchDeleteNodePoolsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/nodePools:batchDelete", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
 	if err != nil {
 		return nil, err
 	}
@@ -18885,6 +16586,60 @@ func NewGatewayGetReinforcementFineTuningJobRequest(server string, accountId str
 	return req, nil
 }
 
+// NewGatewayUpdateReinforcementFineTuningJobRequest calls the generic GatewayUpdateReinforcementFineTuningJob builder with application/json body
+func NewGatewayUpdateReinforcementFineTuningJobRequest(server string, accountId string, reinforcementFineTuningJobId string, body GatewayUpdateReinforcementFineTuningJobJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateReinforcementFineTuningJobRequestWithBody(server, accountId, reinforcementFineTuningJobId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateReinforcementFineTuningJobRequestWithBody constructs an http.Request for the GatewayUpdateReinforcementFineTuningJob method, with any body, and a specified content type
+func NewGatewayUpdateReinforcementFineTuningJobRequestWithBody(server string, accountId string, reinforcementFineTuningJobId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "reinforcement_fine_tuning_job_id", reinforcementFineTuningJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/reinforcementFineTuningJobs/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewGatewayCancelReinforcementFineTuningJobRequest calls the generic GatewayCancelReinforcementFineTuningJob builder with application/json body
 func NewGatewayCancelReinforcementFineTuningJobRequest(server string, accountId string, reinforcementFineTuningJobId string, body GatewayCancelReinforcementFineTuningJobJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -18989,6 +16744,47 @@ func NewGatewayDebugReinforcementFineTuningJobRequestWithBody(server string, acc
 	}
 
 	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayGetReinforcementFineTuningJobMetricsFileEndpointRequest constructs an http.Request for the GatewayGetReinforcementFineTuningJobMetricsFileEndpoint method
+func NewGatewayGetReinforcementFineTuningJobMetricsFileEndpointRequest(server string, accountId string, reinforcementFineTuningJobId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "reinforcement_fine_tuning_job_id", reinforcementFineTuningJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/reinforcementFineTuningJobs/%s:getMetricsFileEndpoint", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
 
 	return req, nil
 }
@@ -19142,6 +16938,18 @@ func NewGatewayListRlorTrainerJobsRequest(server string, accountId string, param
 
 		}
 
+		if params.IncludeArchived != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "includeArchived", *params.IncludeArchived, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
 		if encoded := queryValues.Encode(); encoded != "" {
 			rawQueryFragments = append(rawQueryFragments, encoded)
 		}
@@ -19205,6 +17013,18 @@ func NewGatewayCreateRlorTrainerJobRequestWithBody(server string, accountId stri
 		if params.RlorTrainerJobId != nil {
 
 			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "rlorTrainerJobId", *params.RlorTrainerJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.TrainingShape != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "trainingShape", *params.TrainingShape, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -19339,6 +17159,188 @@ func NewGatewayGetRlorTrainerJobRequest(server string, accountId string, rlorTra
 	return req, nil
 }
 
+// NewGatewayListRlorTrainerJobCheckpointsRequest constructs an http.Request for the GatewayListRlorTrainerJobCheckpoints method
+func NewGatewayListRlorTrainerJobCheckpointsRequest(server string, accountId string, rlorTrainerJobId string, params *GatewayListRlorTrainerJobCheckpointsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "rlor_trainer_job_id", rlorTrainerJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/rlorTrainerJobs/%s/checkpoints", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewaySyncRlorTrainerJobCheckpointRequest calls the generic GatewaySyncRlorTrainerJobCheckpoint builder with application/json body
+func NewGatewaySyncRlorTrainerJobCheckpointRequest(server string, accountId string, rlorTrainerJobId string, checkpointId string, body GatewaySyncRlorTrainerJobCheckpointJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewaySyncRlorTrainerJobCheckpointRequestWithBody(server, accountId, rlorTrainerJobId, checkpointId, "application/json", bodyReader)
+}
+
+// NewGatewaySyncRlorTrainerJobCheckpointRequestWithBody constructs an http.Request for the GatewaySyncRlorTrainerJobCheckpoint method, with any body, and a specified content type
+func NewGatewaySyncRlorTrainerJobCheckpointRequestWithBody(server string, accountId string, rlorTrainerJobId string, checkpointId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "rlor_trainer_job_id", rlorTrainerJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "checkpoint_id", checkpointId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/rlorTrainerJobs/%s/checkpoints/%s:sync", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayGetRlorTrainerJobPublicLogsRequest constructs an http.Request for the GatewayGetRlorTrainerJobPublicLogs method
+func NewGatewayGetRlorTrainerJobPublicLogsRequest(server string, accountId string, rlorTrainerJobId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "rlor_trainer_job_id", rlorTrainerJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/rlorTrainerJobs/%s/publicLogs", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGatewayCancelRlorTrainerJobRequest calls the generic GatewayCancelRlorTrainerJob builder with application/json body
 func NewGatewayCancelRlorTrainerJobRequest(server string, accountId string, rlorTrainerJobId string, body GatewayCancelRlorTrainerJobJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -19374,60 +17376,6 @@ func NewGatewayCancelRlorTrainerJobRequestWithBody(server string, accountId stri
 	}
 
 	operationPath := fmt.Sprintf("/v1/accounts/%s/rlorTrainerJobs/%s:cancel", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayExecuteRlorTrainStepRequest calls the generic GatewayExecuteRlorTrainStep builder with application/json body
-func NewGatewayExecuteRlorTrainStepRequest(server string, accountId string, rlorTrainerJobId string, body GatewayExecuteRlorTrainStepJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayExecuteRlorTrainStepRequestWithBody(server, accountId, rlorTrainerJobId, "application/json", bodyReader)
-}
-
-// NewGatewayExecuteRlorTrainStepRequestWithBody constructs an http.Request for the GatewayExecuteRlorTrainStep method, with any body, and a specified content type
-func NewGatewayExecuteRlorTrainStepRequestWithBody(server string, accountId string, rlorTrainerJobId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "rlor_trainer_job_id", rlorTrainerJobId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/rlorTrainerJobs/%s:executeTrainStep", pathParam0, pathParam1)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -20166,8 +18114,8 @@ func NewGatewayUpdateSecretRequestWithBody(server string, accountId string, secr
 	return req, nil
 }
 
-// NewGatewayListSnapshotsRequest constructs an http.Request for the GatewayListSnapshots method
-func NewGatewayListSnapshotsRequest(server string, accountId string, params *GatewayListSnapshotsParams) (*http.Request, error) {
+// NewGatewayListServerlessModelsRequest constructs an http.Request for the GatewayListServerlessModels method
+func NewGatewayListServerlessModelsRequest(server string, accountId string, params *GatewayListServerlessModelsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -20182,7 +18130,7 @@ func NewGatewayListSnapshotsRequest(server string, accountId string, params *Gat
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/snapshots", pathParam0)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/serverlessModels", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -20275,19 +18223,8 @@ func NewGatewayListSnapshotsRequest(server string, accountId string, params *Gat
 	return req, nil
 }
 
-// NewGatewayCreateSnapshotRequest calls the generic GatewayCreateSnapshot builder with application/json body
-func NewGatewayCreateSnapshotRequest(server string, accountId string, body GatewayCreateSnapshotJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewGatewayCreateSnapshotRequestWithBody(server, accountId, "application/json", bodyReader)
-}
-
-// NewGatewayCreateSnapshotRequestWithBody constructs an http.Request for the GatewayCreateSnapshot method, with any body, and a specified content type
-func NewGatewayCreateSnapshotRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+// NewGatewayListAccountServerlessRateLimitsRequest constructs an http.Request for the GatewayListAccountServerlessRateLimits method
+func NewGatewayListAccountServerlessRateLimitsRequest(server string, accountId string, params *GatewayListAccountServerlessRateLimitsParams) (*http.Request, error) {
 	var err error
 
 	var pathParam0 string
@@ -20302,91 +18239,7 @@ func NewGatewayCreateSnapshotRequestWithBody(server string, accountId string, co
 		return nil, err
 	}
 
-	operationPath := fmt.Sprintf("/v1/accounts/%s/snapshots", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGatewayDeleteSnapshotRequest constructs an http.Request for the GatewayDeleteSnapshot method
-func NewGatewayDeleteSnapshotRequest(server string, accountId string, snapshotId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "snapshot_id", snapshotId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/snapshots/%s", pathParam0, pathParam1)
-	if operationPath[0] == '/' {
-		operationPath = "." + operationPath
-	}
-
-	queryURL, err := serverURL.Parse(operationPath)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewGatewayGetSnapshotRequest constructs an http.Request for the GatewayGetSnapshot method
-func NewGatewayGetSnapshotRequest(server string, accountId string, snapshotId string, params *GatewayGetSnapshotParams) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	var pathParam1 string
-
-	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "snapshot_id", snapshotId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/v1/accounts/%s/snapshots/%s", pathParam0, pathParam1)
+	operationPath := fmt.Sprintf("/v1/accounts/%s/serverlessRateLimits", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -20405,9 +18258,154 @@ func NewGatewayGetSnapshotRequest(server string, accountId string, snapshotId st
 		// per the OpenAPI spec (e.g. "color=blue,black,brown").
 		var rawQueryFragments []string
 
-		if params.ReadMask != nil {
+		if params.Deployment != nil {
 
-			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "deployment", *params.Deployment, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Start != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start", *params.Start, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.End != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end", *params.End, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Interval != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "interval", *params.Interval, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayGetAccountServerlessTokenUsageRequest constructs an http.Request for the GatewayGetAccountServerlessTokenUsage method
+func NewGatewayGetAccountServerlessTokenUsageRequest(server string, accountId string, params *GatewayGetAccountServerlessTokenUsageParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/serverlessTokenUsage", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Start != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "start", *params.Start, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.End != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "end", *params.End, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: "date-time"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Interval != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "interval", *params.Interval, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.IncludePeakTokensPerMinuteByBaseModel != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "includePeakTokensPerMinuteByBaseModel", *params.IncludePeakTokensPerMinuteByBaseModel, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.IncludeAverageTokensPerMinuteByBaseModel != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "includeAverageTokensPerMinuteByBaseModel", *params.IncludeAverageTokensPerMinuteByBaseModel, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "boolean", Format: ""}); err != nil {
 				return nil, err
 			} else {
 				for _, qp := range strings.Split(queryFrag, "&") {
@@ -21170,6 +19168,2374 @@ func NewGatewayGetTrailRequest(server string, accountId string, trailId string, 
 	return req, nil
 }
 
+// NewGatewayUpdateTrailRequest calls the generic GatewayUpdateTrail builder with application/json body
+func NewGatewayUpdateTrailRequest(server string, accountId string, trailId string, body GatewayUpdateTrailJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateTrailRequestWithBody(server, accountId, trailId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateTrailRequestWithBody constructs an http.Request for the GatewayUpdateTrail method, with any body, and a specified content type
+func NewGatewayUpdateTrailRequestWithBody(server string, accountId string, trailId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "trail_id", trailId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trails/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayGetTrailMetricsRequest constructs an http.Request for the GatewayGetTrailMetrics method
+func NewGatewayGetTrailMetricsRequest(server string, accountId string, trailId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "trail_id", trailId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trails/%s:getMetrics", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayListTrainingRunsRequest constructs an http.Request for the GatewayListTrainingRuns method
+func NewGatewayListTrainingRunsRequest(server string, accountId string, params *GatewayListTrainingRunsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingRuns", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayCreateTrainingRunRequest calls the generic GatewayCreateTrainingRun builder with application/json body
+func NewGatewayCreateTrainingRunRequest(server string, accountId string, body GatewayCreateTrainingRunJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayCreateTrainingRunRequestWithBody(server, accountId, "application/json", bodyReader)
+}
+
+// NewGatewayCreateTrainingRunRequestWithBody constructs an http.Request for the GatewayCreateTrainingRun method, with any body, and a specified content type
+func NewGatewayCreateTrainingRunRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingRuns", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayGetTrainingRunRequest constructs an http.Request for the GatewayGetTrainingRun method
+func NewGatewayGetTrainingRunRequest(server string, accountId string, trainingRunId string, params *GatewayGetTrainingRunParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_run_id", trainingRunId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingRuns/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayAbortTrainingRunMaterializationRequest calls the generic GatewayAbortTrainingRunMaterialization builder with application/json body
+func NewGatewayAbortTrainingRunMaterializationRequest(server string, accountId string, trainingRunId string, body GatewayAbortTrainingRunMaterializationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayAbortTrainingRunMaterializationRequestWithBody(server, accountId, trainingRunId, "application/json", bodyReader)
+}
+
+// NewGatewayAbortTrainingRunMaterializationRequestWithBody constructs an http.Request for the GatewayAbortTrainingRunMaterialization method, with any body, and a specified content type
+func NewGatewayAbortTrainingRunMaterializationRequestWithBody(server string, accountId string, trainingRunId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_run_id", trainingRunId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingRuns/%s:abortMaterialization", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayFinalizeTrainingRunMaterializationRequest calls the generic GatewayFinalizeTrainingRunMaterialization builder with application/json body
+func NewGatewayFinalizeTrainingRunMaterializationRequest(server string, accountId string, trainingRunId string, body GatewayFinalizeTrainingRunMaterializationJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayFinalizeTrainingRunMaterializationRequestWithBody(server, accountId, trainingRunId, "application/json", bodyReader)
+}
+
+// NewGatewayFinalizeTrainingRunMaterializationRequestWithBody constructs an http.Request for the GatewayFinalizeTrainingRunMaterialization method, with any body, and a specified content type
+func NewGatewayFinalizeTrainingRunMaterializationRequestWithBody(server string, accountId string, trainingRunId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_run_id", trainingRunId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingRuns/%s:finalizeMaterialization", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayListTrainingSessionsRequest constructs an http.Request for the GatewayListTrainingSessions method
+func NewGatewayListTrainingSessionsRequest(server string, accountId string, params *GatewayListTrainingSessionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayCreateTrainingSessionRequest calls the generic GatewayCreateTrainingSession builder with application/json body
+func NewGatewayCreateTrainingSessionRequest(server string, accountId string, params *GatewayCreateTrainingSessionParams, body GatewayCreateTrainingSessionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayCreateTrainingSessionRequestWithBody(server, accountId, params, "application/json", bodyReader)
+}
+
+// NewGatewayCreateTrainingSessionRequestWithBody constructs an http.Request for the GatewayCreateTrainingSession method, with any body, and a specified content type
+func NewGatewayCreateTrainingSessionRequestWithBody(server string, accountId string, params *GatewayCreateTrainingSessionParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.TrainingSessionId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "trainingSessionId", *params.TrainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayDeleteTrainingSessionRequest constructs an http.Request for the GatewayDeleteTrainingSession method
+func NewGatewayDeleteTrainingSessionRequest(server string, accountId string, trainingSessionId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayGetTrainingSessionRequest constructs an http.Request for the GatewayGetTrainingSession method
+func NewGatewayGetTrainingSessionRequest(server string, accountId string, trainingSessionId string, params *GatewayGetTrainingSessionParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayListTrainingSessionCheckpointsRequest constructs an http.Request for the GatewayListTrainingSessionCheckpoints method
+func NewGatewayListTrainingSessionCheckpointsRequest(server string, accountId string, trainingSessionId string, params *GatewayListTrainingSessionCheckpointsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s/checkpoints", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayPromoteTrainingSessionCheckpointRequest calls the generic GatewayPromoteTrainingSessionCheckpoint builder with application/json body
+func NewGatewayPromoteTrainingSessionCheckpointRequest(server string, accountId string, trainingSessionId string, checkpointId string, body GatewayPromoteTrainingSessionCheckpointJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayPromoteTrainingSessionCheckpointRequestWithBody(server, accountId, trainingSessionId, checkpointId, "application/json", bodyReader)
+}
+
+// NewGatewayPromoteTrainingSessionCheckpointRequestWithBody constructs an http.Request for the GatewayPromoteTrainingSessionCheckpoint method, with any body, and a specified content type
+func NewGatewayPromoteTrainingSessionCheckpointRequestWithBody(server string, accountId string, trainingSessionId string, checkpointId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "checkpoint_id", checkpointId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s/checkpoints/%s:promote", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayListTrainingSessionChunkOutputsRequest constructs an http.Request for the GatewayListTrainingSessionChunkOutputs method
+func NewGatewayListTrainingSessionChunkOutputsRequest(server string, accountId string, trainingSessionId string, params *GatewayListTrainingSessionChunkOutputsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s/chunkOutputs", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayCreateTrainingSessionChunkOutputRequest calls the generic GatewayCreateTrainingSessionChunkOutput builder with application/json body
+func NewGatewayCreateTrainingSessionChunkOutputRequest(server string, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, body GatewayCreateTrainingSessionChunkOutputJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayCreateTrainingSessionChunkOutputRequestWithBody(server, accountId, trainingSessionId, params, "application/json", bodyReader)
+}
+
+// NewGatewayCreateTrainingSessionChunkOutputRequestWithBody constructs an http.Request for the GatewayCreateTrainingSessionChunkOutput method, with any body, and a specified content type
+func NewGatewayCreateTrainingSessionChunkOutputRequestWithBody(server string, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s/chunkOutputs", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.TrainingSessionChunkOutputId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "trainingSessionChunkOutputId", *params.TrainingSessionChunkOutputId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayListTrainingSessionTrainingCurvesRequest constructs an http.Request for the GatewayListTrainingSessionTrainingCurves method
+func NewGatewayListTrainingSessionTrainingCurvesRequest(server string, accountId string, trainingSessionId string, params *GatewayListTrainingSessionTrainingCurvesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s/trainingCurves", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.MetricKeys != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "metricKeys", *params.MetricKeys, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "array", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.MaxPoints != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "maxPoints", *params.MaxPoints, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayLoadTrainingSessionStateRequest calls the generic GatewayLoadTrainingSessionState builder with application/json body
+func NewGatewayLoadTrainingSessionStateRequest(server string, accountId string, trainingSessionId string, body GatewayLoadTrainingSessionStateJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayLoadTrainingSessionStateRequestWithBody(server, accountId, trainingSessionId, "application/json", bodyReader)
+}
+
+// NewGatewayLoadTrainingSessionStateRequestWithBody constructs an http.Request for the GatewayLoadTrainingSessionState method, with any body, and a specified content type
+func NewGatewayLoadTrainingSessionStateRequestWithBody(server string, accountId string, trainingSessionId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s:loadState", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayLogTrainingSessionMetricsRequest calls the generic GatewayLogTrainingSessionMetrics builder with application/json body
+func NewGatewayLogTrainingSessionMetricsRequest(server string, accountId string, trainingSessionId string, body GatewayLogTrainingSessionMetricsJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayLogTrainingSessionMetricsRequestWithBody(server, accountId, trainingSessionId, "application/json", bodyReader)
+}
+
+// NewGatewayLogTrainingSessionMetricsRequestWithBody constructs an http.Request for the GatewayLogTrainingSessionMetrics method, with any body, and a specified content type
+func NewGatewayLogTrainingSessionMetricsRequestWithBody(server string, accountId string, trainingSessionId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_session_id", trainingSessionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingSessions/%s:logMetrics", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayListTrainingShapesRequest constructs an http.Request for the GatewayListTrainingShapes method
+func NewGatewayListTrainingShapesRequest(server string, accountId string, params *GatewayListTrainingShapesParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayCreateTrainingShapeRequest calls the generic GatewayCreateTrainingShape builder with application/json body
+func NewGatewayCreateTrainingShapeRequest(server string, accountId string, params *GatewayCreateTrainingShapeParams, body GatewayCreateTrainingShapeJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayCreateTrainingShapeRequestWithBody(server, accountId, params, "application/json", bodyReader)
+}
+
+// NewGatewayCreateTrainingShapeRequestWithBody constructs an http.Request for the GatewayCreateTrainingShape method, with any body, and a specified content type
+func NewGatewayCreateTrainingShapeRequestWithBody(server string, accountId string, params *GatewayCreateTrainingShapeParams, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.TrainingShapeId != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "trainingShapeId", *params.TrainingShapeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayDeleteTrainingShapeRequest constructs an http.Request for the GatewayDeleteTrainingShape method
+func NewGatewayDeleteTrainingShapeRequest(server string, accountId string, trainingShapeId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_shape_id", trainingShapeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodDelete, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayGetTrainingShapeRequest constructs an http.Request for the GatewayGetTrainingShape method
+func NewGatewayGetTrainingShapeRequest(server string, accountId string, trainingShapeId string, params *GatewayGetTrainingShapeParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_shape_id", trainingShapeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayUpdateTrainingShapeRequest calls the generic GatewayUpdateTrainingShape builder with application/json body
+func NewGatewayUpdateTrainingShapeRequest(server string, accountId string, trainingShapeId string, body GatewayUpdateTrainingShapeJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateTrainingShapeRequestWithBody(server, accountId, trainingShapeId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateTrainingShapeRequestWithBody constructs an http.Request for the GatewayUpdateTrainingShape method, with any body, and a specified content type
+func NewGatewayUpdateTrainingShapeRequestWithBody(server string, accountId string, trainingShapeId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_shape_id", trainingShapeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayListTrainingShapeVersionsRequest constructs an http.Request for the GatewayListTrainingShapeVersions method
+func NewGatewayListTrainingShapeVersionsRequest(server string, accountId string, trainingShapeId string, params *GatewayListTrainingShapeVersionsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_shape_id", trainingShapeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes/%s/versions", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayGetTrainingShapeVersionRequest constructs an http.Request for the GatewayGetTrainingShapeVersion method
+func NewGatewayGetTrainingShapeVersionRequest(server string, accountId string, trainingShapeId string, versionId string, params *GatewayGetTrainingShapeVersionParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_shape_id", trainingShapeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "version_id", versionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes/%s/versions/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayUpdateTrainingShapeVersionRequest calls the generic GatewayUpdateTrainingShapeVersion builder with application/json body
+func NewGatewayUpdateTrainingShapeVersionRequest(server string, accountId string, trainingShapeId string, versionId string, body GatewayUpdateTrainingShapeVersionJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateTrainingShapeVersionRequestWithBody(server, accountId, trainingShapeId, versionId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateTrainingShapeVersionRequestWithBody constructs an http.Request for the GatewayUpdateTrainingShapeVersion method, with any body, and a specified content type
+func NewGatewayUpdateTrainingShapeVersionRequestWithBody(server string, accountId string, trainingShapeId string, versionId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "training_shape_id", trainingShapeId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam2 string
+
+	pathParam2, err = runtime.StyleParamWithOptions("simple", false, "version_id", versionId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/trainingShapes/%s/versions/%s", pathParam0, pathParam1, pathParam2)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayQueryUsageCostsRequest calls the generic GatewayQueryUsageCosts builder with application/json body
+func NewGatewayQueryUsageCostsRequest(server string, accountId string, body GatewayQueryUsageCostsJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayQueryUsageCostsRequestWithBody(server, accountId, "application/json", bodyReader)
+}
+
+// NewGatewayQueryUsageCostsRequestWithBody constructs an http.Request for the GatewayQueryUsageCosts method, with any body, and a specified content type
+func NewGatewayQueryUsageCostsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/usageCosts:query", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayListUserUsageLimitIncreaseRequestsRequest constructs an http.Request for the GatewayListUserUsageLimitIncreaseRequests method
+func NewGatewayListUserUsageLimitIncreaseRequestsRequest(server string, accountId string, params *GatewayListUserUsageLimitIncreaseRequestsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/usageLimitIncreaseRequests", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayCreateUserUsageLimitIncreaseRequestRequest calls the generic GatewayCreateUserUsageLimitIncreaseRequest builder with application/json body
+func NewGatewayCreateUserUsageLimitIncreaseRequestRequest(server string, accountId string, body GatewayCreateUserUsageLimitIncreaseRequestJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayCreateUserUsageLimitIncreaseRequestRequestWithBody(server, accountId, "application/json", bodyReader)
+}
+
+// NewGatewayCreateUserUsageLimitIncreaseRequestRequestWithBody constructs an http.Request for the GatewayCreateUserUsageLimitIncreaseRequest method, with any body, and a specified content type
+func NewGatewayCreateUserUsageLimitIncreaseRequestRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/usageLimitIncreaseRequests", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayApproveUserUsageLimitIncreaseRequestRequest calls the generic GatewayApproveUserUsageLimitIncreaseRequest builder with application/json body
+func NewGatewayApproveUserUsageLimitIncreaseRequestRequest(server string, accountId string, usageLimitIncreaseRequestId string, body GatewayApproveUserUsageLimitIncreaseRequestJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayApproveUserUsageLimitIncreaseRequestRequestWithBody(server, accountId, usageLimitIncreaseRequestId, "application/json", bodyReader)
+}
+
+// NewGatewayApproveUserUsageLimitIncreaseRequestRequestWithBody constructs an http.Request for the GatewayApproveUserUsageLimitIncreaseRequest method, with any body, and a specified content type
+func NewGatewayApproveUserUsageLimitIncreaseRequestRequestWithBody(server string, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "usage_limit_increase_request_id", usageLimitIncreaseRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/usageLimitIncreaseRequests/%s:approve", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayRejectUserUsageLimitIncreaseRequestRequest calls the generic GatewayRejectUserUsageLimitIncreaseRequest builder with application/json body
+func NewGatewayRejectUserUsageLimitIncreaseRequestRequest(server string, accountId string, usageLimitIncreaseRequestId string, body GatewayRejectUserUsageLimitIncreaseRequestJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayRejectUserUsageLimitIncreaseRequestRequestWithBody(server, accountId, usageLimitIncreaseRequestId, "application/json", bodyReader)
+}
+
+// NewGatewayRejectUserUsageLimitIncreaseRequestRequestWithBody constructs an http.Request for the GatewayRejectUserUsageLimitIncreaseRequest method, with any body, and a specified content type
+func NewGatewayRejectUserUsageLimitIncreaseRequestRequestWithBody(server string, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "usage_limit_increase_request_id", usageLimitIncreaseRequestId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/usageLimitIncreaseRequests/%s:reject", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayGetAccountUsageLimitsRequest constructs an http.Request for the GatewayGetAccountUsageLimits method
+func NewGatewayGetAccountUsageLimitsRequest(server string, accountId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/usageLimits", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayUpdateAccountUsageLimitsRequest calls the generic GatewayUpdateAccountUsageLimits builder with application/json body
+func NewGatewayUpdateAccountUsageLimitsRequest(server string, accountId string, body GatewayUpdateAccountUsageLimitsJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateAccountUsageLimitsRequestWithBody(server, accountId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateAccountUsageLimitsRequestWithBody constructs an http.Request for the GatewayUpdateAccountUsageLimits method, with any body, and a specified content type
+func NewGatewayUpdateAccountUsageLimitsRequestWithBody(server string, accountId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/usageLimits", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayListUserUsageLimitsRequest constructs an http.Request for the GatewayListUserUsageLimits method
+func NewGatewayListUserUsageLimitsRequest(server string, accountId string, params *GatewayListUserUsageLimitsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/userUsageLimits", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGatewayListUsersRequest constructs an http.Request for the GatewayListUsers method
 func NewGatewayListUsersRequest(server string, accountId string, params *GatewayListUsersParams) (*http.Request, error) {
 	var err error
@@ -21699,6 +22065,101 @@ func NewGatewayDeleteApiKeyRequestWithBody(server string, accountId string, user
 	return req, nil
 }
 
+// NewGatewayGetUserUsageLimitsRequest constructs an http.Request for the GatewayGetUserUsageLimits method
+func NewGatewayGetUserUsageLimitsRequest(server string, accountId string, userId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "user_id", userId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/users/%s/usageLimits", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayUpdateUserUsageLimitsRequest calls the generic GatewayUpdateUserUsageLimits builder with application/json body
+func NewGatewayUpdateUserUsageLimitsRequest(server string, accountId string, userId string, body GatewayUpdateUserUsageLimitsJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayUpdateUserUsageLimitsRequestWithBody(server, accountId, userId, "application/json", bodyReader)
+}
+
+// NewGatewayUpdateUserUsageLimitsRequestWithBody constructs an http.Request for the GatewayUpdateUserUsageLimits method, with any body, and a specified content type
+func NewGatewayUpdateUserUsageLimitsRequestWithBody(server string, accountId string, userId string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "user_id", userId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/users/%s/usageLimits", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPatch, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
 // NewGatewayTestEvaluationRequest calls the generic GatewayTestEvaluation builder with application/json body
 func NewGatewayTestEvaluationRequest(server string, accountId string, body GatewayTestEvaluationJSONRequestBody) (*http.Request, error) {
 	var bodyReader io.Reader
@@ -21727,6 +22188,46 @@ func NewGatewayTestEvaluationRequestWithBody(server string, accountId string, co
 	}
 
 	operationPath := fmt.Sprintf("/v1/accounts/%s:testeval", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(http.MethodPost, queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
+
+// NewGatewayRefreshSessionTokenRequest calls the generic GatewayRefreshSessionToken builder with application/json body
+func NewGatewayRefreshSessionTokenRequest(server string, body GatewayRefreshSessionTokenJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewGatewayRefreshSessionTokenRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewGatewayRefreshSessionTokenRequestWithBody constructs an http.Request for the GatewayRefreshSessionToken method, with any body, and a specified content type
+func NewGatewayRefreshSessionTokenRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/auth/refresh")
 	if operationPath[0] == '/' {
 		operationPath = "." + operationPath
 	}
@@ -22204,41 +22705,6 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/auditLogs (the `GatewayListAuditLogs` operationId).
 	GatewayListAuditLogsWithResponse(ctx context.Context, accountId string, params *GatewayListAuditLogsParams, reqEditors ...RequestEditorFn) (*GatewayListAuditLogsResponse2, error)
 
-	// GatewayListAwsIamRoleBindingsWithResponse List Aws Iam Role Bindings
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayListAwsIamRoleBindings` operationId).
-	GatewayListAwsIamRoleBindingsWithResponse(ctx context.Context, accountId string, params *GatewayListAwsIamRoleBindingsParams, reqEditors ...RequestEditorFn) (*GatewayListAwsIamRoleBindingsResponse2, error)
-
-	// GatewayCreateAwsIamRoleBindingWithBodyWithResponse Create Aws Iam Role Binding
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-	GatewayCreateAwsIamRoleBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateAwsIamRoleBindingResponse, error)
-
-	// GatewayCreateAwsIamRoleBindingWithResponse Create Aws Iam Role Binding
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-	GatewayCreateAwsIamRoleBindingWithResponse(ctx context.Context, accountId string, body GatewayCreateAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateAwsIamRoleBindingResponse, error)
-
-	// GatewayDeleteAwsIamRoleBindingWithBodyWithResponse Delete Aws Iam Role Binding
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-	GatewayDeleteAwsIamRoleBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayDeleteAwsIamRoleBindingResponse, error)
-
-	// GatewayDeleteAwsIamRoleBindingWithResponse Delete Aws Iam Role Binding
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-	GatewayDeleteAwsIamRoleBindingWithResponse(ctx context.Context, accountId string, body GatewayDeleteAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDeleteAwsIamRoleBindingResponse, error)
-
 	// GatewayListBatchInferenceJobsWithResponse List Batch Inference Jobs
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -22274,94 +22740,6 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/batchInferenceJobs/{batch_inference_job_id} (the `GatewayGetBatchInferenceJob` operationId).
 	GatewayGetBatchInferenceJobWithResponse(ctx context.Context, accountId string, batchInferenceJobId string, params *GatewayGetBatchInferenceJobParams, reqEditors ...RequestEditorFn) (*GatewayGetBatchInferenceJobResponse, error)
 
-	// GatewayListBatchJobsWithResponse List Batch Jobs
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/batchJobs (the `GatewayListBatchJobs` operationId).
-	GatewayListBatchJobsWithResponse(ctx context.Context, accountId string, params *GatewayListBatchJobsParams, reqEditors ...RequestEditorFn) (*GatewayListBatchJobsResponse2, error)
-
-	// GatewayCreateBatchJobWithBodyWithResponse Create Batch Job
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-	GatewayCreateBatchJobWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateBatchJobResponse, error)
-
-	// GatewayCreateBatchJobWithResponse Create Batch Job
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-	GatewayCreateBatchJobWithResponse(ctx context.Context, accountId string, body GatewayCreateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateBatchJobResponse, error)
-
-	// GatewayDeleteBatchJobWithResponse Delete Batch Job
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayDeleteBatchJob` operationId).
-	GatewayDeleteBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, reqEditors ...RequestEditorFn) (*GatewayDeleteBatchJobResponse, error)
-
-	// GatewayGetBatchJobWithResponse Get Batch Job
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayGetBatchJob` operationId).
-	GatewayGetBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobParams, reqEditors ...RequestEditorFn) (*GatewayGetBatchJobResponse, error)
-
-	// GatewayUpdateBatchJobWithBodyWithResponse Update Batch Job
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-	GatewayUpdateBatchJobWithBodyWithResponse(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateBatchJobResponse, error)
-
-	// GatewayUpdateBatchJobWithResponse Update Batch Job
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-	GatewayUpdateBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, body GatewayUpdateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateBatchJobResponse, error)
-
-	// GatewayCancelBatchJobWithBodyWithResponse Cancel Batch Job
-	//
-	// Cancels an existing batch job if it is queued, pending, or running.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-	GatewayCancelBatchJobWithBodyWithResponse(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCancelBatchJobResponse, error)
-
-	// GatewayCancelBatchJobWithResponse Cancel Batch Job
-	//
-	// Cancels an existing batch job if it is queued, pending, or running.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-	GatewayCancelBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, body GatewayCancelBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCancelBatchJobResponse, error)
-
-	// GatewayGetBatchJobLogsWithResponse Get Batch Job Logs
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id}:getLogs (the `GatewayGetBatchJobLogs` operationId).
-	GatewayGetBatchJobLogsWithResponse(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobLogsParams, reqEditors ...RequestEditorFn) (*GatewayGetBatchJobLogsResponse2, error)
-
-	// GatewayBatchDeleteBatchJobsWithBodyWithResponse Batch Delete Batch Jobs
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-	GatewayBatchDeleteBatchJobsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteBatchJobsResponse, error)
-
-	// GatewayBatchDeleteBatchJobsWithResponse Batch Delete Batch Jobs
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-	GatewayBatchDeleteBatchJobsWithResponse(ctx context.Context, accountId string, body GatewayBatchDeleteBatchJobsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteBatchJobsResponse, error)
-
 	// GatewayGetBillingSummaryWithResponse Get billing summary information for an account
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -22369,13 +22747,51 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/billing/summary (the `GatewayGetBillingSummary` operationId).
 	GatewayGetBillingSummaryWithResponse(ctx context.Context, accountId string, params *GatewayGetBillingSummaryParams, reqEditors ...RequestEditorFn) (*GatewayGetBillingSummaryResponse2, error)
 
-	// GatewayGetAccountUsageWithResponse Get account usage (serverless and dedicated deployments).
-	// Optionally filter by usage type via the usage_type field. If not specified, returns all usage types.
+	// GatewayGetBillingSettingsWithResponse Returns the singleton BillingSettings for the given account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/billingSettings (the `GatewayGetBillingSettings` operationId).
+	GatewayGetBillingSettingsWithResponse(ctx context.Context, accountId string, params *GatewayGetBillingSettingsParams, reqEditors ...RequestEditorFn) (*GatewayGetBillingSettingsResponse, error)
+
+	// GatewayUpdateBillingSettingsWithBodyWithResponse Updates the singleton BillingSettings for the given account.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+	GatewayUpdateBillingSettingsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateBillingSettingsResponse, error)
+
+	// GatewayUpdateBillingSettingsWithResponse Updates the singleton BillingSettings for the given account.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+	GatewayUpdateBillingSettingsWithResponse(ctx context.Context, accountId string, body GatewayUpdateBillingSettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateBillingSettingsResponse, error)
+
+	// GatewayGetAccountUsageWithResponse Get Account Usage
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/billingUsage (the `GatewayGetAccountUsage` operationId).
 	GatewayGetAccountUsageWithResponse(ctx context.Context, accountId string, params *GatewayGetAccountUsageParams, reqEditors ...RequestEditorFn) (*GatewayGetAccountUsageResponse, error)
+
+	// GatewayPromoteCheckpointWithBodyWithResponse Promote a checkpoint to a model.
+	// The checkpoint is identified by account + snapshot ID; the trainer job ID
+	// is passed in the request body to resolve the GCS bucket.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+	GatewayPromoteCheckpointWithBodyWithResponse(ctx context.Context, accountId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayPromoteCheckpointResponse2, error)
+
+	// GatewayPromoteCheckpointWithResponse Promote a checkpoint to a model.
+	// The checkpoint is identified by account + snapshot ID; the trainer job ID
+	// is passed in the request body to resolve the GCS bucket.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+	GatewayPromoteCheckpointWithResponse(ctx context.Context, accountId string, checkpointId string, body GatewayPromoteCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayPromoteCheckpointResponse2, error)
 
 	// GatewayListClustersWithResponse List Clusters
 	//
@@ -22594,6 +23010,24 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with PATCH /v1/accounts/{account_id}/deployedModels/{deployed_model_id} (the `GatewayUpdateDeployedModel` operationId).
 	GatewayUpdateDeployedModelWithResponse(ctx context.Context, accountId string, deployedModelId string, body GatewayUpdateDeployedModelJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateDeployedModelResponse, error)
 
+	// GatewayMatchDeploymentShapeVersionsWithBodyWithResponse Match Deployment Shape Versions
+	//
+	// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+	GatewayMatchDeploymentShapeVersionsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayMatchDeploymentShapeVersionsResponse, error)
+
+	// GatewayMatchDeploymentShapeVersionsWithResponse Match Deployment Shape Versions
+	//
+	// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+	GatewayMatchDeploymentShapeVersionsWithResponse(ctx context.Context, accountId string, body GatewayMatchDeploymentShapeVersionsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayMatchDeploymentShapeVersionsResponse, error)
+
 	// GatewayListDeploymentShapesWithResponse List Deployment Shapes
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -22785,6 +23219,50 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/deployments/{deployment_id}:undelete (the `GatewayUndeleteDeployment` operationId).
 	GatewayUndeleteDeploymentWithResponse(ctx context.Context, accountId string, deploymentId string, body GatewayUndeleteDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUndeleteDeploymentResponse, error)
 
+	// GatewayListDeveloperPassesWithResponse List Developer Passes
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/developerPasses (the `GatewayListDeveloperPasses` operationId).
+	GatewayListDeveloperPassesWithResponse(ctx context.Context, accountId string, params *GatewayListDeveloperPassesParams, reqEditors ...RequestEditorFn) (*GatewayListDeveloperPassesResponse2, error)
+
+	// GatewayCreateDeveloperPassWithBodyWithResponse CRUD APIs for developer passes.
+	// Create Developer Pass
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+	GatewayCreateDeveloperPassWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateDeveloperPassResponse, error)
+
+	// GatewayCreateDeveloperPassWithResponse CRUD APIs for developer passes.
+	// Create Developer Pass
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+	GatewayCreateDeveloperPassWithResponse(ctx context.Context, accountId string, body GatewayCreateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateDeveloperPassResponse, error)
+
+	// GatewayGetDeveloperPassWithResponse Get Developer Pass
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayGetDeveloperPass` operationId).
+	GatewayGetDeveloperPassWithResponse(ctx context.Context, accountId string, developerPasseId string, params *GatewayGetDeveloperPassParams, reqEditors ...RequestEditorFn) (*GatewayGetDeveloperPassResponse, error)
+
+	// GatewayUpdateDeveloperPassWithBodyWithResponse Update Developer Pass
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+	GatewayUpdateDeveloperPassWithBodyWithResponse(ctx context.Context, accountId string, developerPasseId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateDeveloperPassResponse, error)
+
+	// GatewayUpdateDeveloperPassWithResponse Update Developer Pass
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+	GatewayUpdateDeveloperPassWithResponse(ctx context.Context, accountId string, developerPasseId string, body GatewayUpdateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateDeveloperPassResponse, error)
+
 	// GatewayListDpoJobsWithResponse performs a GET /v1/accounts/{account_id}/dpoJobs (the `GatewayListDpoJobs` operationId) request.
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -22842,109 +23320,6 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}/dpoJobs/{dpo_job_id}:resume (the `GatewayResumeDpoJob` operationId).
 	GatewayResumeDpoJobWithResponse(ctx context.Context, accountId string, dpoJobId string, body GatewayResumeDpoJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayResumeDpoJobResponse, error)
-
-	// GatewayListEnvironmentsWithResponse List Environments
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/environments (the `GatewayListEnvironments` operationId).
-	GatewayListEnvironmentsWithResponse(ctx context.Context, accountId string, params *GatewayListEnvironmentsParams, reqEditors ...RequestEditorFn) (*GatewayListEnvironmentsResponse2, error)
-
-	// GatewayCreateEnvironmentWithBodyWithResponse Create Environment
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-	GatewayCreateEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateEnvironmentResponse, error)
-
-	// GatewayCreateEnvironmentWithResponse Create Environment
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-	GatewayCreateEnvironmentWithResponse(ctx context.Context, accountId string, body GatewayCreateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateEnvironmentResponse, error)
-
-	// GatewayDeleteEnvironmentWithResponse Delete Environment
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayDeleteEnvironment` operationId).
-	GatewayDeleteEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, reqEditors ...RequestEditorFn) (*GatewayDeleteEnvironmentResponse, error)
-
-	// GatewayGetEnvironmentWithResponse Get Environment
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayGetEnvironment` operationId).
-	GatewayGetEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, params *GatewayGetEnvironmentParams, reqEditors ...RequestEditorFn) (*GatewayGetEnvironmentResponse, error)
-
-	// GatewayUpdateEnvironmentWithBodyWithResponse Update Environment
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-	GatewayUpdateEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateEnvironmentResponse, error)
-
-	// GatewayUpdateEnvironmentWithResponse Update Environment
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-	GatewayUpdateEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, body GatewayUpdateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateEnvironmentResponse, error)
-
-	// GatewayConnectEnvironmentWithBodyWithResponse Connect Environment
-	//
-	// Connects the environment to a node pool.
-	// Returns an error if there is an existing pending connection.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-	GatewayConnectEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayConnectEnvironmentResponse, error)
-
-	// GatewayConnectEnvironmentWithResponse Connect Environment
-	//
-	// Connects the environment to a node pool.
-	// Returns an error if there is an existing pending connection.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-	GatewayConnectEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, body GatewayConnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayConnectEnvironmentResponse, error)
-
-	// GatewayDisconnectEnvironmentWithBodyWithResponse Disconnect Environment
-	//
-	// Disconnects the environment from the node pool. Returns an error
-	// if the environment is not connected to a node pool.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-	GatewayDisconnectEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayDisconnectEnvironmentResponse, error)
-
-	// GatewayDisconnectEnvironmentWithResponse Disconnect Environment
-	//
-	// Disconnects the environment from the node pool. Returns an error
-	// if the environment is not connected to a node pool.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-	GatewayDisconnectEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, body GatewayDisconnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDisconnectEnvironmentResponse, error)
-
-	// GatewayBatchDeleteEnvironmentsWithBodyWithResponse Batch Delete Environments
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-	GatewayBatchDeleteEnvironmentsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteEnvironmentsResponse, error)
-
-	// GatewayBatchDeleteEnvironmentsWithResponse Batch Delete Environments
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-	GatewayBatchDeleteEnvironmentsWithResponse(ctx context.Context, accountId string, body GatewayBatchDeleteEnvironmentsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteEnvironmentsResponse, error)
 
 	// GatewayListEvaluationJobsWithResponse List Evaluation Jobs
 	//
@@ -23335,117 +23710,54 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/evaluatorsV2 (the `GatewayCreateEvaluatorV2` operationId).
 	GatewayCreateEvaluatorV2WithResponse(ctx context.Context, accountId string, body GatewayCreateEvaluatorV2JSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateEvaluatorV2Response, error)
 
-	// GatewayListGenericDeploymentTypesWithResponse List the generic deployment types under an account
+	// GatewayListExternalKeysWithResponse List External Keys
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayListGenericDeploymentTypes` operationId).
-	GatewayListGenericDeploymentTypesWithResponse(ctx context.Context, accountId string, params *GatewayListGenericDeploymentTypesParams, reqEditors ...RequestEditorFn) (*GatewayListGenericDeploymentTypesResponse2, error)
+	// Corresponds with GET /v1/accounts/{account_id}/externalKeys (the `GatewayListExternalKeys` operationId).
+	GatewayListExternalKeysWithResponse(ctx context.Context, accountId string, params *GatewayListExternalKeysParams, reqEditors ...RequestEditorFn) (*GatewayListExternalKeysResponse2, error)
 
-	// GatewayCreateGenericDeploymentTypeWithBodyWithResponse Create Generic Deployment Type
+	// GatewayCreateExternalKeyWithBodyWithResponse Create External Key
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-	GatewayCreateGenericDeploymentTypeWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentTypeResponse, error)
+	// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+	GatewayCreateExternalKeyWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateExternalKeyResponse, error)
 
-	// GatewayCreateGenericDeploymentTypeWithResponse Create Generic Deployment Type
+	// GatewayCreateExternalKeyWithResponse Create External Key
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-	GatewayCreateGenericDeploymentTypeWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, body GatewayCreateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentTypeResponse, error)
+	// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+	GatewayCreateExternalKeyWithResponse(ctx context.Context, accountId string, body GatewayCreateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateExternalKeyResponse, error)
 
-	// GatewayDeleteGenericDeploymentTypeWithResponse Delete Generic Deployment Type
+	// GatewayDeleteExternalKeyWithResponse Delete External Key
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayDeleteGenericDeploymentType` operationId).
-	GatewayDeleteGenericDeploymentTypeWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayDeleteGenericDeploymentTypeParams, reqEditors ...RequestEditorFn) (*GatewayDeleteGenericDeploymentTypeResponse, error)
+	// Corresponds with DELETE /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayDeleteExternalKey` operationId).
+	GatewayDeleteExternalKeyWithResponse(ctx context.Context, accountId string, externalKeyId string, params *GatewayDeleteExternalKeyParams, reqEditors ...RequestEditorFn) (*GatewayDeleteExternalKeyResponse, error)
 
-	// GatewayListGenericDeploymentTypeVersionsWithResponse List all generic deployment type version
+	// GatewayGetExternalKeyWithResponse Get External Key
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayListGenericDeploymentTypeVersions` operationId).
-	GatewayListGenericDeploymentTypeVersionsWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayListGenericDeploymentTypeVersionsParams, reqEditors ...RequestEditorFn) (*GatewayListGenericDeploymentTypeVersionsResponse2, error)
+	// Corresponds with GET /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayGetExternalKey` operationId).
+	GatewayGetExternalKeyWithResponse(ctx context.Context, accountId string, externalKeyId string, params *GatewayGetExternalKeyParams, reqEditors ...RequestEditorFn) (*GatewayGetExternalKeyResponse, error)
 
-	// GatewayUpdateGenericDeploymentTypeWithBodyWithResponse Update Generic Deployment Type
+	// GatewayUpdateExternalKeyWithBodyWithResponse Update External Key
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-	GatewayUpdateGenericDeploymentTypeWithBodyWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentTypeResponse, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+	GatewayUpdateExternalKeyWithBodyWithResponse(ctx context.Context, accountId string, externalKeyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateExternalKeyResponse, error)
 
-	// GatewayUpdateGenericDeploymentTypeWithResponse Update Generic Deployment Type
+	// GatewayUpdateExternalKeyWithResponse Update External Key
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-	GatewayUpdateGenericDeploymentTypeWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, body GatewayUpdateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentTypeResponse, error)
-
-	// GatewayDeleteGenericDeploymentTypeVersionWithResponse Delete the generic deployment type version
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayDeleteGenericDeploymentTypeVersion` operationId).
-	GatewayDeleteGenericDeploymentTypeVersionWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayDeleteGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*GatewayDeleteGenericDeploymentTypeVersionResponse, error)
-
-	// GatewayGetGenericDeploymentTypeVersionWithResponse Get generic deployment type version
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayGetGenericDeploymentTypeVersion` operationId).
-	GatewayGetGenericDeploymentTypeVersionWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayGetGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*GatewayGetGenericDeploymentTypeVersionResponse, error)
-
-	// GatewayListGenericDeploymentsWithResponse List all the generic deployments under an account
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeployments (the `GatewayListGenericDeployments` operationId).
-	GatewayListGenericDeploymentsWithResponse(ctx context.Context, accountId string, params *GatewayListGenericDeploymentsParams, reqEditors ...RequestEditorFn) (*GatewayListGenericDeploymentsResponse2, error)
-
-	// GatewayCreateGenericDeploymentWithBodyWithResponse Create Generic Deployment
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-	GatewayCreateGenericDeploymentWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentResponse, error)
-
-	// GatewayCreateGenericDeploymentWithResponse Create Generic Deployment
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-	GatewayCreateGenericDeploymentWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, body GatewayCreateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentResponse, error)
-
-	// GatewayDeleteGenericDeploymentWithResponse Delete Generic Deployment
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayDeleteGenericDeployment` operationId).
-	GatewayDeleteGenericDeploymentWithResponse(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayDeleteGenericDeploymentParams, reqEditors ...RequestEditorFn) (*GatewayDeleteGenericDeploymentResponse, error)
-
-	// GatewayGetGenericDeploymentWithResponse Get Generic Deployment
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayGetGenericDeployment` operationId).
-	GatewayGetGenericDeploymentWithResponse(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayGetGenericDeploymentParams, reqEditors ...RequestEditorFn) (*GatewayGetGenericDeploymentResponse, error)
-
-	// GatewayUpdateGenericDeploymentWithBodyWithResponse Create Generic Deployment
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-	GatewayUpdateGenericDeploymentWithBodyWithResponse(ctx context.Context, accountId string, genericDeploymentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentResponse, error)
-
-	// GatewayUpdateGenericDeploymentWithResponse Create Generic Deployment
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-	GatewayUpdateGenericDeploymentWithResponse(ctx context.Context, accountId string, genericDeploymentId string, body GatewayUpdateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentResponse, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+	GatewayUpdateExternalKeyWithResponse(ctx context.Context, accountId string, externalKeyId string, body GatewayUpdateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateExternalKeyResponse, error)
 
 	// GatewayListIdentityProvidersWithResponse List Identity Providers
 	//
@@ -23495,91 +23807,6 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with PATCH /v1/accounts/{account_id}/identityProviders/{identity_provider_id} (the `GatewayUpdateIdentityProvider` operationId).
 	GatewayUpdateIdentityProviderWithResponse(ctx context.Context, accountId string, identityProviderId string, body GatewayUpdateIdentityProviderJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateIdentityProviderResponse, error)
-
-	// GatewayListLeaderboardsWithResponse performs a GET /v1/accounts/{account_id}/leaderboards (the `GatewayListLeaderboards` operationId) request.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	GatewayListLeaderboardsWithResponse(ctx context.Context, accountId string, params *GatewayListLeaderboardsParams, reqEditors ...RequestEditorFn) (*GatewayListLeaderboardsResponse2, error)
-
-	// GatewayCreateLeaderboardWithBodyWithResponse CRUD APIs for leaderboards.
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-	GatewayCreateLeaderboardWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateLeaderboardResponse, error)
-
-	// GatewayCreateLeaderboardWithResponse CRUD APIs for leaderboards.
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-	GatewayCreateLeaderboardWithResponse(ctx context.Context, accountId string, body GatewayCreateLeaderboardJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateLeaderboardResponse, error)
-
-	// GatewayDeleteLeaderboardWithResponse performs a DELETE /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayDeleteLeaderboard` operationId) request.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	GatewayDeleteLeaderboardWithResponse(ctx context.Context, accountId string, leaderboardId string, reqEditors ...RequestEditorFn) (*GatewayDeleteLeaderboardResponse, error)
-
-	// GatewayGetLeaderboardWithResponse performs a GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayGetLeaderboard` operationId) request.
-	//
-	// Returns a wrapper object for the known response body format(s).
-	GatewayGetLeaderboardWithResponse(ctx context.Context, accountId string, leaderboardId string, params *GatewayGetLeaderboardParams, reqEditors ...RequestEditorFn) (*GatewayGetLeaderboardResponse2, error)
-
-	// GatewayListLeaderboardEvaluationJobsWithResponse List evaluation jobs for a leaderboard (custom method)
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id}:listEvaluationJobs (the `GatewayListLeaderboardEvaluationJobs` operationId).
-	GatewayListLeaderboardEvaluationJobsWithResponse(ctx context.Context, accountId string, leaderboardId string, params *GatewayListLeaderboardEvaluationJobsParams, reqEditors ...RequestEditorFn) (*GatewayListLeaderboardEvaluationJobsResponse2, error)
-
-	// GatewayListMcpServersWithResponse List MCP Servers
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/mcpServers (the `GatewayListMcpServers` operationId).
-	GatewayListMcpServersWithResponse(ctx context.Context, accountId string, params *GatewayListMcpServersParams, reqEditors ...RequestEditorFn) (*GatewayListMcpServersResponse2, error)
-
-	// GatewayCreateMcpServerWithBodyWithResponse Create MCP Server
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-	GatewayCreateMcpServerWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateMcpServerResponse, error)
-
-	// GatewayCreateMcpServerWithResponse Create MCP Server
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-	GatewayCreateMcpServerWithResponse(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, body GatewayCreateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateMcpServerResponse, error)
-
-	// GatewayDeleteMcpServerWithResponse Delete MCP Server
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayDeleteMcpServer` operationId).
-	GatewayDeleteMcpServerWithResponse(ctx context.Context, accountId string, mcpServerId string, reqEditors ...RequestEditorFn) (*GatewayDeleteMcpServerResponse, error)
-
-	// GatewayGetMcpServerWithResponse Get MCP Server
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayGetMcpServer` operationId).
-	GatewayGetMcpServerWithResponse(ctx context.Context, accountId string, mcpServerId string, params *GatewayGetMcpServerParams, reqEditors ...RequestEditorFn) (*GatewayGetMcpServerResponse, error)
-
-	// GatewayUpdateMcpServerWithBodyWithResponse Update MCP Server
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-	GatewayUpdateMcpServerWithBodyWithResponse(ctx context.Context, accountId string, mcpServerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateMcpServerResponse, error)
-
-	// GatewayUpdateMcpServerWithResponse Update MCP Server
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-	GatewayUpdateMcpServerWithResponse(ctx context.Context, accountId string, mcpServerId string, body GatewayUpdateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateMcpServerResponse, error)
 
 	// GatewayListModelsWithResponse List Models
 	//
@@ -23723,110 +23950,26 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/models/{model_id}:validateUpload (the `GatewayValidateModelUpload` operationId).
 	GatewayValidateModelUploadWithResponse(ctx context.Context, accountId string, modelId string, params *GatewayValidateModelUploadParams, reqEditors ...RequestEditorFn) (*GatewayValidateModelUploadResponse2, error)
 
-	// GatewayListNodePoolBindingsWithResponse List Node Pool Bindings
+	// GatewayGetPolicySettingsWithResponse Returns the singleton PolicySettings for the given account.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePoolBindings (the `GatewayListNodePoolBindings` operationId).
-	GatewayListNodePoolBindingsWithResponse(ctx context.Context, accountId string, params *GatewayListNodePoolBindingsParams, reqEditors ...RequestEditorFn) (*GatewayListNodePoolBindingsResponse2, error)
+	// Corresponds with GET /v1/accounts/{account_id}/policySettings (the `GatewayGetPolicySettings` operationId).
+	GatewayGetPolicySettingsWithResponse(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*GatewayGetPolicySettingsResponse, error)
 
-	// GatewayCreateNodePoolBindingWithBodyWithResponse Create Node Pool Binding
+	// GatewayUpdatePolicySettingsWithBodyWithResponse Updates the per-account PolicySettings singleton.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-	GatewayCreateNodePoolBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolBindingResponse, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+	GatewayUpdatePolicySettingsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdatePolicySettingsResponse, error)
 
-	// GatewayCreateNodePoolBindingWithResponse Create Node Pool Binding
+	// GatewayUpdatePolicySettingsWithResponse Updates the per-account PolicySettings singleton.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-	GatewayCreateNodePoolBindingWithResponse(ctx context.Context, accountId string, body GatewayCreateNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolBindingResponse, error)
-
-	// GatewayDeleteNodePoolBindingWithBodyWithResponse Delete Node Pool Binding
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-	GatewayDeleteNodePoolBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayDeleteNodePoolBindingResponse, error)
-
-	// GatewayDeleteNodePoolBindingWithResponse Delete Node Pool Binding
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-	GatewayDeleteNodePoolBindingWithResponse(ctx context.Context, accountId string, body GatewayDeleteNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDeleteNodePoolBindingResponse, error)
-
-	// GatewayListNodePoolsWithResponse List Node Pools
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePools (the `GatewayListNodePools` operationId).
-	GatewayListNodePoolsWithResponse(ctx context.Context, accountId string, params *GatewayListNodePoolsParams, reqEditors ...RequestEditorFn) (*GatewayListNodePoolsResponse2, error)
-
-	// GatewayCreateNodePoolWithBodyWithResponse Create Node Pool
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-	GatewayCreateNodePoolWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolResponse, error)
-
-	// GatewayCreateNodePoolWithResponse Create Node Pool
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-	GatewayCreateNodePoolWithResponse(ctx context.Context, accountId string, body GatewayCreateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolResponse, error)
-
-	// GatewayDeleteNodePoolWithResponse Delete Node Pool
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayDeleteNodePool` operationId).
-	GatewayDeleteNodePoolWithResponse(ctx context.Context, accountId string, nodePoolId string, reqEditors ...RequestEditorFn) (*GatewayDeleteNodePoolResponse, error)
-
-	// GatewayGetNodePoolWithResponse Get Node Pool
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayGetNodePool` operationId).
-	GatewayGetNodePoolWithResponse(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolParams, reqEditors ...RequestEditorFn) (*GatewayGetNodePoolResponse, error)
-
-	// GatewayUpdateNodePoolWithBodyWithResponse Update Node Pool
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-	GatewayUpdateNodePoolWithBodyWithResponse(ctx context.Context, accountId string, nodePoolId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateNodePoolResponse, error)
-
-	// GatewayUpdateNodePoolWithResponse Update Node Pool
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-	GatewayUpdateNodePoolWithResponse(ctx context.Context, accountId string, nodePoolId string, body GatewayUpdateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateNodePoolResponse, error)
-
-	// GatewayGetNodePoolStatsWithResponse Get Node Pool Stats
-	//
-	// Returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id}:getStats (the `GatewayGetNodePoolStats` operationId).
-	GatewayGetNodePoolStatsWithResponse(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolStatsParams, reqEditors ...RequestEditorFn) (*GatewayGetNodePoolStatsResponse, error)
-
-	// GatewayBatchDeleteNodePoolsWithBodyWithResponse Batch Delete Node Pools
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-	GatewayBatchDeleteNodePoolsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteNodePoolsResponse, error)
-
-	// GatewayBatchDeleteNodePoolsWithResponse Batch Delete Node Pools
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-	GatewayBatchDeleteNodePoolsWithResponse(ctx context.Context, accountId string, body GatewayBatchDeleteNodePoolsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteNodePoolsResponse, error)
+	// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+	GatewayUpdatePolicySettingsWithResponse(ctx context.Context, accountId string, body GatewayUpdatePolicySettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdatePolicySettingsResponse, error)
 
 	// GatewayListPricingPlansWithResponse List Pricing Plans
 	//
@@ -23914,6 +24057,20 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayGetReinforcementFineTuningJob` operationId).
 	GatewayGetReinforcementFineTuningJobWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, params *GatewayGetReinforcementFineTuningJobParams, reqEditors ...RequestEditorFn) (*GatewayGetReinforcementFineTuningJobResponse, error)
 
+	// GatewayUpdateReinforcementFineTuningJobWithBodyWithResponse Update Reinforcement Fine-tuning Job
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+	GatewayUpdateReinforcementFineTuningJobWithBodyWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateReinforcementFineTuningJobResponse, error)
+
+	// GatewayUpdateReinforcementFineTuningJobWithResponse Update Reinforcement Fine-tuning Job
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+	GatewayUpdateReinforcementFineTuningJobWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayUpdateReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateReinforcementFineTuningJobResponse, error)
+
 	// GatewayCancelReinforcementFineTuningJobWithBodyWithResponse Cancel Reinforcement Fine-tuning Job
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -23941,6 +24098,11 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:debug (the `GatewayDebugReinforcementFineTuningJob` operationId).
 	GatewayDebugReinforcementFineTuningJobWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayDebugReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDebugReinforcementFineTuningJobResponse2, error)
+
+	// GatewayGetReinforcementFineTuningJobMetricsFileEndpointWithResponse performs a GET /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:getMetricsFileEndpoint (the `GatewayGetReinforcementFineTuningJobMetricsFileEndpoint` operationId) request.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	GatewayGetReinforcementFineTuningJobMetricsFileEndpointWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, reqEditors ...RequestEditorFn) (*GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse, error)
 
 	// GatewayResumeReinforcementFineTuningJobWithBodyWithResponse Resume Reinforcement Fine-tuning Job
 	//
@@ -23991,6 +24153,42 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id} (the `GatewayGetRlorTrainerJob` operationId).
 	GatewayGetRlorTrainerJobWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, params *GatewayGetRlorTrainerJobParams, reqEditors ...RequestEditorFn) (*GatewayGetRlorTrainerJobResponse, error)
 
+	// GatewayListRlorTrainerJobCheckpointsWithResponse List checkpoints for an RLOR Trainer Job
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints (the `GatewayListRlorTrainerJobCheckpoints` operationId).
+	GatewayListRlorTrainerJobCheckpointsWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, params *GatewayListRlorTrainerJobCheckpointsParams, reqEditors ...RequestEditorFn) (*GatewayListRlorTrainerJobCheckpointsResponse2, error)
+
+	// GatewaySyncRlorTrainerJobCheckpointWithBodyWithResponse Ensure an RLOR training checkpoint is present in the requested storage
+	// availability class. By default this copies a single-region runtime
+	// checkpoint into managed durable storage. Set
+	// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+	// into request.region before restoring there.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+	GatewaySyncRlorTrainerJobCheckpointWithBodyWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewaySyncRlorTrainerJobCheckpointResponse2, error)
+
+	// GatewaySyncRlorTrainerJobCheckpointWithResponse Ensure an RLOR training checkpoint is present in the requested storage
+	// availability class. By default this copies a single-region runtime
+	// checkpoint into managed durable storage. Set
+	// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+	// into request.region before restoring there.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+	GatewaySyncRlorTrainerJobCheckpointWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, body GatewaySyncRlorTrainerJobCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewaySyncRlorTrainerJobCheckpointResponse2, error)
+
+	// GatewayGetRlorTrainerJobPublicLogsWithResponse Get a signed URL for the public trainer logs of an RLOR Trainer Job.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/publicLogs (the `GatewayGetRlorTrainerJobPublicLogs` operationId).
+	GatewayGetRlorTrainerJobPublicLogsWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, reqEditors ...RequestEditorFn) (*GatewayGetRlorTrainerJobPublicLogsResponse2, error)
+
 	// GatewayCancelRlorTrainerJobWithBodyWithResponse Cancel Rlor Trainer Job
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -24004,20 +24202,6 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:cancel (the `GatewayCancelRlorTrainerJob` operationId).
 	GatewayCancelRlorTrainerJobWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, body GatewayCancelRlorTrainerJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCancelRlorTrainerJobResponse, error)
-
-	// GatewayExecuteRlorTrainStepWithBodyWithResponse Execute one training step for keep-alive Reinforcement Fine-tuning Step
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-	GatewayExecuteRlorTrainStepWithBodyWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayExecuteRlorTrainStepResponse, error)
-
-	// GatewayExecuteRlorTrainStepWithResponse Execute one training step for keep-alive Reinforcement Fine-tuning Step
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-	GatewayExecuteRlorTrainStepWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, body GatewayExecuteRlorTrainStepJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayExecuteRlorTrainStepResponse, error)
 
 	// GatewayResumeRlorTrainerJobWithBodyWithResponse Resume Rlor Trainer Job
 	//
@@ -24126,40 +24310,28 @@ type ClientWithResponsesInterface interface {
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	GatewayUpdateSecretWithResponse(ctx context.Context, accountId string, secretId string, body GatewayUpdateSecretJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateSecretResponse, error)
 
-	// GatewayListSnapshotsWithResponse List Snapshots
+	// GatewayListServerlessModelsWithResponse List serverless models available to the account (public catalog).
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/snapshots (the `GatewayListSnapshots` operationId).
-	GatewayListSnapshotsWithResponse(ctx context.Context, accountId string, params *GatewayListSnapshotsParams, reqEditors ...RequestEditorFn) (*GatewayListSnapshotsResponse2, error)
+	// Corresponds with GET /v1/accounts/{account_id}/serverlessModels (the `GatewayListServerlessModels` operationId).
+	GatewayListServerlessModelsWithResponse(ctx context.Context, accountId string, params *GatewayListServerlessModelsParams, reqEditors ...RequestEditorFn) (*GatewayListServerlessModelsResponse2, error)
 
-	// GatewayCreateSnapshotWithBodyWithResponse Create Snapshot
-	//
-	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-	GatewayCreateSnapshotWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateSnapshotResponse, error)
-
-	// GatewayCreateSnapshotWithResponse Create Snapshot
-	//
-	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-	//
-	// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-	GatewayCreateSnapshotWithResponse(ctx context.Context, accountId string, body GatewayCreateSnapshotJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateSnapshotResponse, error)
-
-	// GatewayDeleteSnapshotWithResponse Delete Snapshot
+	// GatewayListAccountServerlessRateLimitsWithResponse Lists effective global rate limits for shared serverless pool deployments (fireworks-owned).
+	// Values reflect configured limits as observed in production monitoring.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with DELETE /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayDeleteSnapshot` operationId).
-	GatewayDeleteSnapshotWithResponse(ctx context.Context, accountId string, snapshotId string, reqEditors ...RequestEditorFn) (*GatewayDeleteSnapshotResponse, error)
+	// Corresponds with GET /v1/accounts/{account_id}/serverlessRateLimits (the `GatewayListAccountServerlessRateLimits` operationId).
+	GatewayListAccountServerlessRateLimitsWithResponse(ctx context.Context, accountId string, params *GatewayListAccountServerlessRateLimitsParams, reqEditors ...RequestEditorFn) (*GatewayListAccountServerlessRateLimitsResponse2, error)
 
-	// GatewayGetSnapshotWithResponse Get Snapshot
+	// GatewayGetAccountServerlessTokenUsageWithResponse Serverless pool token throughput (tokens per minute) by time bucket and base model, from
+	// production usage metrics.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
-	// Corresponds with GET /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayGetSnapshot` operationId).
-	GatewayGetSnapshotWithResponse(ctx context.Context, accountId string, snapshotId string, params *GatewayGetSnapshotParams, reqEditors ...RequestEditorFn) (*GatewayGetSnapshotResponse, error)
+	// Corresponds with GET /v1/accounts/{account_id}/serverlessTokenUsage (the `GatewayGetAccountServerlessTokenUsage` operationId).
+	GatewayGetAccountServerlessTokenUsageWithResponse(ctx context.Context, accountId string, params *GatewayGetAccountServerlessTokenUsageParams, reqEditors ...RequestEditorFn) (*GatewayGetAccountServerlessTokenUsageResponse2, error)
 
 	// GatewayListSupervisedFineTuningJobsWithResponse List Supervised Fine-tuning Jobs
 	//
@@ -24274,6 +24446,395 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayGetTrail` operationId).
 	GatewayGetTrailWithResponse(ctx context.Context, accountId string, trailId string, params *GatewayGetTrailParams, reqEditors ...RequestEditorFn) (*GatewayGetTrailResponse, error)
 
+	// GatewayUpdateTrailWithBodyWithResponse Update Trail
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+	GatewayUpdateTrailWithBodyWithResponse(ctx context.Context, accountId string, trailId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateTrailResponse, error)
+
+	// GatewayUpdateTrailWithResponse Update Trail
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+	GatewayUpdateTrailWithResponse(ctx context.Context, accountId string, trailId string, body GatewayUpdateTrailJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateTrailResponse, error)
+
+	// GatewayGetTrailMetricsWithResponse Get Trail Metrics (trace counts, token usage from tracing service)
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trails/{trail_id}:getMetrics (the `GatewayGetTrailMetrics` operationId).
+	GatewayGetTrailMetricsWithResponse(ctx context.Context, accountId string, trailId string, reqEditors ...RequestEditorFn) (*GatewayGetTrailMetricsResponse, error)
+
+	// GatewayListTrainingRunsWithResponse List training runs under an account (Tinker RestClient list_training_runs).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingRuns (the `GatewayListTrainingRuns` operationId).
+	GatewayListTrainingRunsWithResponse(ctx context.Context, accountId string, params *GatewayListTrainingRunsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingRunsResponse2, error)
+
+	// GatewayCreateTrainingRunWithBodyWithResponse Create a training run: the durable, account-owned model lineage for a
+	// Tinker create_lora_training_client. A session may host many runs, and a run
+	// may span sessions across resume.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+	GatewayCreateTrainingRunWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingRunResponse, error)
+
+	// GatewayCreateTrainingRunWithResponse Create a training run: the durable, account-owned model lineage for a
+	// Tinker create_lora_training_client. A session may host many runs, and a run
+	// may span sessions across resume.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+	GatewayCreateTrainingRunWithResponse(ctx context.Context, accountId string, body GatewayCreateTrainingRunJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingRunResponse, error)
+
+	// GatewayGetTrainingRunWithResponse Get a training run (Tinker RestClient get_training_run parity).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingRuns/{training_run_id} (the `GatewayGetTrainingRun` operationId).
+	GatewayGetTrainingRunWithResponse(ctx context.Context, accountId string, trainingRunId string, params *GatewayGetTrainingRunParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingRunResponse, error)
+
+	// GatewayAbortTrainingRunMaterializationWithBodyWithResponse Abort a pending training run when trainer materialization failed or timed
+	// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+	GatewayAbortTrainingRunMaterializationWithBodyWithResponse(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayAbortTrainingRunMaterializationResponse, error)
+
+	// GatewayAbortTrainingRunMaterializationWithResponse Abort a pending training run when trainer materialization failed or timed
+	// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+	GatewayAbortTrainingRunMaterializationWithResponse(ctx context.Context, accountId string, trainingRunId string, body GatewayAbortTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayAbortTrainingRunMaterializationResponse, error)
+
+	// GatewayFinalizeTrainingRunMaterializationWithBodyWithResponse Finalize a training run after the trainer has successfully materialized
+	// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+	// Tinker create_model to the trainer.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+	GatewayFinalizeTrainingRunMaterializationWithBodyWithResponse(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayFinalizeTrainingRunMaterializationResponse, error)
+
+	// GatewayFinalizeTrainingRunMaterializationWithResponse Finalize a training run after the trainer has successfully materialized
+	// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+	// Tinker create_model to the trainer.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+	GatewayFinalizeTrainingRunMaterializationWithResponse(ctx context.Context, accountId string, trainingRunId string, body GatewayFinalizeTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayFinalizeTrainingRunMaterializationResponse, error)
+
+	// GatewayListTrainingSessionsWithResponse List training sessions under an account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions (the `GatewayListTrainingSessions` operationId).
+	GatewayListTrainingSessionsWithResponse(ctx context.Context, accountId string, params *GatewayListTrainingSessionsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionsResponse2, error)
+
+	// GatewayCreateTrainingSessionWithBodyWithResponse Create a training session under an account.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+	GatewayCreateTrainingSessionWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionResponse, error)
+
+	// GatewayCreateTrainingSessionWithResponse Create a training session under an account.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+	GatewayCreateTrainingSessionWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, body GatewayCreateTrainingSessionJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionResponse, error)
+
+	// GatewayDeleteTrainingSessionWithResponse Delete a training session. Releases the shared-trainer binding before
+	// removing the row; the session transitions DELETING → gone.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayDeleteTrainingSession` operationId).
+	GatewayDeleteTrainingSessionWithResponse(ctx context.Context, accountId string, trainingSessionId string, reqEditors ...RequestEditorFn) (*GatewayDeleteTrainingSessionResponse, error)
+
+	// GatewayGetTrainingSessionWithResponse Get a training session.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayGetTrainingSession` operationId).
+	GatewayGetTrainingSessionWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayGetTrainingSessionParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingSessionResponse, error)
+
+	// GatewayListTrainingSessionCheckpointsWithResponse List the checkpoints saved during a TrainingSession. Access is scoped
+	// to the session's account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints (the `GatewayListTrainingSessionCheckpoints` operationId).
+	GatewayListTrainingSessionCheckpointsWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionCheckpointsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionCheckpointsResponse2, error)
+
+	// GatewayPromoteTrainingSessionCheckpointWithBodyWithResponse Promote a checkpoint saved during a TrainingSession into a
+	// customer-owned Model, identified by checkpoint_name. Only promotable
+	// (inference) checkpoints can be promoted.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+	GatewayPromoteTrainingSessionCheckpointWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayPromoteTrainingSessionCheckpointResponse2, error)
+
+	// GatewayPromoteTrainingSessionCheckpointWithResponse Promote a checkpoint saved during a TrainingSession into a
+	// customer-owned Model, identified by checkpoint_name. Only promotable
+	// (inference) checkpoints can be promoted.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+	GatewayPromoteTrainingSessionCheckpointWithResponse(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, body GatewayPromoteTrainingSessionCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayPromoteTrainingSessionCheckpointResponse2, error)
+
+	// GatewayListTrainingSessionChunkOutputsWithResponse List chunk completion events on a TrainingSession.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayListTrainingSessionChunkOutputs` operationId).
+	GatewayListTrainingSessionChunkOutputsWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionChunkOutputsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionChunkOutputsResponse2, error)
+
+	// GatewayCreateTrainingSessionChunkOutputWithBodyWithResponse Create a chunk-completion row on a TrainingSession (per-chunk
+	// distributions, dataset refs, checkpoints). Trainer-driven write; the
+	// server validates the parent session and materializes the row.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+	GatewayCreateTrainingSessionChunkOutputWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionChunkOutputResponse, error)
+
+	// GatewayCreateTrainingSessionChunkOutputWithResponse Create a chunk-completion row on a TrainingSession (per-chunk
+	// distributions, dataset refs, checkpoints). Trainer-driven write; the
+	// server validates the parent session and materializes the row.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+	GatewayCreateTrainingSessionChunkOutputWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, body GatewayCreateTrainingSessionChunkOutputJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionChunkOutputResponse, error)
+
+	// GatewayListTrainingSessionTrainingCurvesWithResponse List scalar training curves for line charts on a TrainingSession.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/trainingCurves (the `GatewayListTrainingSessionTrainingCurves` operationId).
+	GatewayListTrainingSessionTrainingCurvesWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionTrainingCurvesParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionTrainingCurvesResponse2, error)
+
+	// GatewayLoadTrainingSessionStateWithBodyWithResponse Load or switch the LoRA adapter state for a training session.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+	GatewayLoadTrainingSessionStateWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayLoadTrainingSessionStateResponse, error)
+
+	// GatewayLoadTrainingSessionStateWithResponse Load or switch the LoRA adapter state for a training session.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+	GatewayLoadTrainingSessionStateWithResponse(ctx context.Context, accountId string, trainingSessionId string, body GatewayLoadTrainingSessionStateJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayLoadTrainingSessionStateResponse, error)
+
+	// GatewayLogTrainingSessionMetricsWithBodyWithResponse Log scalar training metrics on a TrainingSession (append-only time-series,
+	// upserts on (session, key, step) so retries are idempotent).
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+	GatewayLogTrainingSessionMetricsWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayLogTrainingSessionMetricsResponse2, error)
+
+	// GatewayLogTrainingSessionMetricsWithResponse Log scalar training metrics on a TrainingSession (append-only time-series,
+	// upserts on (session, key, step) so retries are idempotent).
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+	GatewayLogTrainingSessionMetricsWithResponse(ctx context.Context, accountId string, trainingSessionId string, body GatewayLogTrainingSessionMetricsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayLogTrainingSessionMetricsResponse2, error)
+
+	// GatewayListTrainingShapesWithResponse List Training Shapes
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes (the `GatewayListTrainingShapes` operationId).
+	GatewayListTrainingShapesWithResponse(ctx context.Context, accountId string, params *GatewayListTrainingShapesParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingShapesResponse2, error)
+
+	// GatewayCreateTrainingShapeWithBodyWithResponse CRUD APIs for training shape.
+	// Create Training Shape
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+	GatewayCreateTrainingShapeWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingShapeResponse, error)
+
+	// GatewayCreateTrainingShapeWithResponse CRUD APIs for training shape.
+	// Create Training Shape
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+	GatewayCreateTrainingShapeWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, body GatewayCreateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingShapeResponse, error)
+
+	// GatewayDeleteTrainingShapeWithResponse Delete Training Shape
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with DELETE /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayDeleteTrainingShape` operationId).
+	GatewayDeleteTrainingShapeWithResponse(ctx context.Context, accountId string, trainingShapeId string, reqEditors ...RequestEditorFn) (*GatewayDeleteTrainingShapeResponse, error)
+
+	// GatewayGetTrainingShapeWithResponse Get Training Shape
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayGetTrainingShape` operationId).
+	GatewayGetTrainingShapeWithResponse(ctx context.Context, accountId string, trainingShapeId string, params *GatewayGetTrainingShapeParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingShapeResponse, error)
+
+	// GatewayUpdateTrainingShapeWithBodyWithResponse Update Training Shape
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+	GatewayUpdateTrainingShapeWithBodyWithResponse(ctx context.Context, accountId string, trainingShapeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeResponse, error)
+
+	// GatewayUpdateTrainingShapeWithResponse Update Training Shape
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+	GatewayUpdateTrainingShapeWithResponse(ctx context.Context, accountId string, trainingShapeId string, body GatewayUpdateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeResponse, error)
+
+	// GatewayListTrainingShapeVersionsWithResponse List Training Shapes Versions
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions (the `GatewayListTrainingShapeVersions` operationId).
+	GatewayListTrainingShapeVersionsWithResponse(ctx context.Context, accountId string, trainingShapeId string, params *GatewayListTrainingShapeVersionsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingShapeVersionsResponse2, error)
+
+	// GatewayGetTrainingShapeVersionWithResponse Get Training Shape Version
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayGetTrainingShapeVersion` operationId).
+	GatewayGetTrainingShapeVersionWithResponse(ctx context.Context, accountId string, trainingShapeId string, versionId string, params *GatewayGetTrainingShapeVersionParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingShapeVersionResponse, error)
+
+	// GatewayUpdateTrainingShapeVersionWithBodyWithResponse Update Training Shape Version
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+	GatewayUpdateTrainingShapeVersionWithBodyWithResponse(ctx context.Context, accountId string, trainingShapeId string, versionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeVersionResponse, error)
+
+	// GatewayUpdateTrainingShapeVersionWithResponse Update Training Shape Version
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+	GatewayUpdateTrainingShapeVersionWithResponse(ctx context.Context, accountId string, trainingShapeId string, versionId string, body GatewayUpdateTrainingShapeVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeVersionResponse, error)
+
+	// GatewayQueryUsageCostsWithBodyWithResponse Query grouped usage cost subtotals for an account.
+	//
+	// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+	GatewayQueryUsageCostsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayQueryUsageCostsResponse2, error)
+
+	// GatewayQueryUsageCostsWithResponse Query grouped usage cost subtotals for an account.
+	//
+	// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+	GatewayQueryUsageCostsWithResponse(ctx context.Context, accountId string, body GatewayQueryUsageCostsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayQueryUsageCostsResponse2, error)
+
+	// GatewayListUserUsageLimitIncreaseRequestsWithResponse Lists the account's limit-increase requests (admin), filterable by state.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayListUserUsageLimitIncreaseRequests` operationId).
+	GatewayListUserUsageLimitIncreaseRequestsWithResponse(ctx context.Context, accountId string, params *GatewayListUserUsageLimitIncreaseRequestsParams, reqEditors ...RequestEditorFn) (*GatewayListUserUsageLimitIncreaseRequestsResponse2, error)
+
+	// GatewayCreateUserUsageLimitIncreaseRequestWithBodyWithResponse Files a member's request to raise their own per-user serverless cap.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+	GatewayCreateUserUsageLimitIncreaseRequestWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateUserUsageLimitIncreaseRequestResponse, error)
+
+	// GatewayCreateUserUsageLimitIncreaseRequestWithResponse Files a member's request to raise their own per-user serverless cap.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+	GatewayCreateUserUsageLimitIncreaseRequestWithResponse(ctx context.Context, accountId string, body GatewayCreateUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateUserUsageLimitIncreaseRequestResponse, error)
+
+	// GatewayApproveUserUsageLimitIncreaseRequestWithBodyWithResponse Approves a pending limit-increase request (admin).
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+	GatewayApproveUserUsageLimitIncreaseRequestWithBodyWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayApproveUserUsageLimitIncreaseRequestResponse, error)
+
+	// GatewayApproveUserUsageLimitIncreaseRequestWithResponse Approves a pending limit-increase request (admin).
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+	GatewayApproveUserUsageLimitIncreaseRequestWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayApproveUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayApproveUserUsageLimitIncreaseRequestResponse, error)
+
+	// GatewayRejectUserUsageLimitIncreaseRequestWithBodyWithResponse Rejects a pending limit-increase request (admin).
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+	GatewayRejectUserUsageLimitIncreaseRequestWithBodyWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayRejectUserUsageLimitIncreaseRequestResponse, error)
+
+	// GatewayRejectUserUsageLimitIncreaseRequestWithResponse Rejects a pending limit-increase request (admin).
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+	GatewayRejectUserUsageLimitIncreaseRequestWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayRejectUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayRejectUserUsageLimitIncreaseRequestResponse, error)
+
+	// GatewayGetAccountUsageLimitsWithResponse Returns the account-level usage-limits singleton (default per-user cap,
+	// enforcement, account-wide usage rollup).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/usageLimits (the `GatewayGetAccountUsageLimits` operationId).
+	GatewayGetAccountUsageLimitsWithResponse(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*GatewayGetAccountUsageLimitsResponse, error)
+
+	// GatewayUpdateAccountUsageLimitsWithBodyWithResponse Updates the account-level usage-limits singleton (default per-user cap,
+	// enforcement).
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+	GatewayUpdateAccountUsageLimitsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateAccountUsageLimitsResponse, error)
+
+	// GatewayUpdateAccountUsageLimitsWithResponse Updates the account-level usage-limits singleton (default per-user cap,
+	// enforcement).
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+	GatewayUpdateAccountUsageLimitsWithResponse(ctx context.Context, accountId string, body GatewayUpdateAccountUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateAccountUsageLimitsResponse, error)
+
+	// GatewayListUserUsageLimitsWithResponse Lists every user's usage limits in the account (the roster: usage vs.
+	// effective cap and over-limit status per user).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/userUsageLimits (the `GatewayListUserUsageLimits` operationId).
+	GatewayListUserUsageLimitsWithResponse(ctx context.Context, accountId string, params *GatewayListUserUsageLimitsParams, reqEditors ...RequestEditorFn) (*GatewayListUserUsageLimitsResponse2, error)
+
 	// GatewayListUsersWithResponse List Users
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -24351,6 +24912,30 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/users/{user_id}/apiKeys:delete (the `GatewayDeleteApiKey` operationId).
 	GatewayDeleteApiKeyWithResponse(ctx context.Context, accountId string, userId string, body GatewayDeleteApiKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDeleteApiKeyResponse, error)
 
+	// GatewayGetUserUsageLimitsWithResponse Returns a single user's usage-limits singleton (override, effective cap,
+	// usage, and whether they are over limit).
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayGetUserUsageLimits` operationId).
+	GatewayGetUserUsageLimitsWithResponse(ctx context.Context, accountId string, userId string, reqEditors ...RequestEditorFn) (*GatewayGetUserUsageLimitsResponse, error)
+
+	// GatewayUpdateUserUsageLimitsWithBodyWithResponse Updates a single user's usage-limits singleton (limit_override). Clearing
+	// the override reverts the user to the account default.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+	GatewayUpdateUserUsageLimitsWithBodyWithResponse(ctx context.Context, accountId string, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateUserUsageLimitsResponse, error)
+
+	// GatewayUpdateUserUsageLimitsWithResponse Updates a single user's usage-limits singleton (limit_override). Clearing
+	// the override reverts the user to the account default.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+	GatewayUpdateUserUsageLimitsWithResponse(ctx context.Context, accountId string, userId string, body GatewayUpdateUserUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateUserUsageLimitsResponse, error)
+
 	// GatewayTestEvaluationWithBodyWithResponse Similar to preview evaluation, but no need to create the evaluation entry first.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -24364,6 +24949,20 @@ type ClientWithResponsesInterface interface {
 	//
 	// Corresponds with POST /v1/accounts/{account_id}:testeval (the `GatewayTestEvaluation` operationId).
 	GatewayTestEvaluationWithResponse(ctx context.Context, accountId string, body GatewayTestEvaluationJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayTestEvaluationResponse, error)
+
+	// GatewayRefreshSessionTokenWithBodyWithResponse Refresh a session JWT before expiry with a fresh TTL.
+	//
+	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+	GatewayRefreshSessionTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayRefreshSessionTokenResponse2, error)
+
+	// GatewayRefreshSessionTokenWithResponse Refresh a session JWT before expiry with a fresh TTL.
+	//
+	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+	GatewayRefreshSessionTokenWithResponse(ctx context.Context, body GatewayRefreshSessionTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayRefreshSessionTokenResponse2, error)
 
 	// CreateChatCompletionV1ChatCompletionsPostWithBodyWithResponse Create Chat Completion
 	//
@@ -24499,11 +25098,11 @@ type ClientWithResponsesInterface interface {
 	//
 	// Explore our cookbooks for detailed examples:
 	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -24516,11 +25115,11 @@ type ClientWithResponsesInterface interface {
 	//
 	// Explore our cookbooks for detailed examples:
 	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -24724,129 +25323,6 @@ func (r GatewayListAuditLogsResponse2) ContentType() string {
 	return ""
 }
 
-type GatewayListAwsIamRoleBindingsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListAwsIamRoleBindingsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListAwsIamRoleBindingsResponse2) GetJSON200() *GatewayListAwsIamRoleBindingsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListAwsIamRoleBindingsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListAwsIamRoleBindingsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListAwsIamRoleBindingsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListAwsIamRoleBindingsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCreateAwsIamRoleBindingResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayAwsIamRoleBinding
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateAwsIamRoleBindingResponse) GetJSON200() *GatewayAwsIamRoleBinding {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCreateAwsIamRoleBindingResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCreateAwsIamRoleBindingResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateAwsIamRoleBindingResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateAwsIamRoleBindingResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteAwsIamRoleBindingResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteAwsIamRoleBindingResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteAwsIamRoleBindingResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteAwsIamRoleBindingResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteAwsIamRoleBindingResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteAwsIamRoleBindingResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
 type GatewayListBatchInferenceJobsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -25011,334 +25487,6 @@ func (r GatewayGetBatchInferenceJobResponse) ContentType() string {
 	return ""
 }
 
-type GatewayListBatchJobsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListBatchJobsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListBatchJobsResponse2) GetJSON200() *GatewayListBatchJobsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListBatchJobsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListBatchJobsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListBatchJobsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListBatchJobsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCreateBatchJobResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayBatchJob
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateBatchJobResponse) GetJSON200() *GatewayBatchJob {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCreateBatchJobResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCreateBatchJobResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateBatchJobResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateBatchJobResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteBatchJobResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteBatchJobResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteBatchJobResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteBatchJobResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteBatchJobResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteBatchJobResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetBatchJobResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayBatchJob
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetBatchJobResponse) GetJSON200() *GatewayBatchJob {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetBatchJobResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetBatchJobResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetBatchJobResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetBatchJobResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayUpdateBatchJobResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayBatchJob
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayUpdateBatchJobResponse) GetJSON200() *GatewayBatchJob {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayUpdateBatchJobResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayUpdateBatchJobResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayUpdateBatchJobResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayUpdateBatchJobResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCancelBatchJobResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCancelBatchJobResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCancelBatchJobResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCancelBatchJobResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCancelBatchJobResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCancelBatchJobResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetBatchJobLogsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGetBatchJobLogsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetBatchJobLogsResponse2) GetJSON200() *GatewayGetBatchJobLogsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetBatchJobLogsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetBatchJobLogsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetBatchJobLogsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetBatchJobLogsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayBatchDeleteBatchJobsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayBatchDeleteBatchJobsResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayBatchDeleteBatchJobsResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayBatchDeleteBatchJobsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayBatchDeleteBatchJobsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayBatchDeleteBatchJobsResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
 type GatewayGetBillingSummaryResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -25380,6 +25528,88 @@ func (r GatewayGetBillingSummaryResponse2) ContentType() string {
 	return ""
 }
 
+type GatewayGetBillingSettingsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayBillingSettings
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetBillingSettingsResponse) GetJSON200() *GatewayBillingSettings {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetBillingSettingsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetBillingSettingsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetBillingSettingsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetBillingSettingsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayUpdateBillingSettingsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayBillingSettings
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateBillingSettingsResponse) GetJSON200() *GatewayBillingSettings {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateBillingSettingsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateBillingSettingsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateBillingSettingsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateBillingSettingsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayGetAccountUsageResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -25415,6 +25645,47 @@ func (r GatewayGetAccountUsageResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GatewayGetAccountUsageResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayPromoteCheckpointResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayPromoteCheckpointResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayPromoteCheckpointResponse2) GetJSON200() *GatewayPromoteCheckpointResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayPromoteCheckpointResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayPromoteCheckpointResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayPromoteCheckpointResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayPromoteCheckpointResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -26323,6 +26594,47 @@ func (r GatewayUpdateDeployedModelResponse) ContentType() string {
 	return ""
 }
 
+type GatewayMatchDeploymentShapeVersionsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListDeploymentShapeVersionsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayMatchDeploymentShapeVersionsResponse) GetJSON200() *GatewayListDeploymentShapeVersionsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayMatchDeploymentShapeVersionsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayMatchDeploymentShapeVersionsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayMatchDeploymentShapeVersionsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayMatchDeploymentShapeVersionsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayListDeploymentShapesResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -27143,6 +27455,170 @@ func (r GatewayUndeleteDeploymentResponse) ContentType() string {
 	return ""
 }
 
+type GatewayListDeveloperPassesResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListDeveloperPassesResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListDeveloperPassesResponse2) GetJSON200() *GatewayListDeveloperPassesResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListDeveloperPassesResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListDeveloperPassesResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListDeveloperPassesResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListDeveloperPassesResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayCreateDeveloperPassResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayDeveloperPass
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayCreateDeveloperPassResponse) GetJSON200() *GatewayDeveloperPass {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayCreateDeveloperPassResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayCreateDeveloperPassResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayCreateDeveloperPassResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayCreateDeveloperPassResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetDeveloperPassResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayDeveloperPass
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetDeveloperPassResponse) GetJSON200() *GatewayDeveloperPass {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetDeveloperPassResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetDeveloperPassResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetDeveloperPassResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetDeveloperPassResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayUpdateDeveloperPassResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayDeveloperPass
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateDeveloperPassResponse) GetJSON200() *GatewayDeveloperPass {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateDeveloperPassResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateDeveloperPassResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateDeveloperPassResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateDeveloperPassResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayListDpoJobsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -27424,334 +27900,6 @@ func (r GatewayResumeDpoJobResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GatewayResumeDpoJobResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayListEnvironmentsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListEnvironmentsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListEnvironmentsResponse2) GetJSON200() *GatewayListEnvironmentsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListEnvironmentsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListEnvironmentsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListEnvironmentsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListEnvironmentsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCreateEnvironmentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayEnvironment
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateEnvironmentResponse) GetJSON200() *GatewayEnvironment {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCreateEnvironmentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCreateEnvironmentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateEnvironmentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateEnvironmentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteEnvironmentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteEnvironmentResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteEnvironmentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteEnvironmentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteEnvironmentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteEnvironmentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetEnvironmentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayEnvironment
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetEnvironmentResponse) GetJSON200() *GatewayEnvironment {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetEnvironmentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetEnvironmentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetEnvironmentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetEnvironmentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayUpdateEnvironmentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayEnvironment
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayUpdateEnvironmentResponse) GetJSON200() *GatewayEnvironment {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayUpdateEnvironmentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayUpdateEnvironmentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayUpdateEnvironmentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayUpdateEnvironmentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayConnectEnvironmentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayConnectEnvironmentResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayConnectEnvironmentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayConnectEnvironmentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayConnectEnvironmentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayConnectEnvironmentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDisconnectEnvironmentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDisconnectEnvironmentResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDisconnectEnvironmentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDisconnectEnvironmentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDisconnectEnvironmentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDisconnectEnvironmentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayBatchDeleteEnvironmentsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayBatchDeleteEnvironmentsResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayBatchDeleteEnvironmentsResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayBatchDeleteEnvironmentsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayBatchDeleteEnvironmentsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayBatchDeleteEnvironmentsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -28865,25 +29013,25 @@ func (r GatewayCreateEvaluatorV2Response) ContentType() string {
 	return ""
 }
 
-type GatewayListGenericDeploymentTypesResponse2 struct {
+type GatewayListExternalKeysResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListGenericDeploymentTypesResponse
+	JSON200 *GatewayListExternalKeysResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListGenericDeploymentTypesResponse2) GetJSON200() *GatewayListGenericDeploymentTypesResponse {
+func (r GatewayListExternalKeysResponse2) GetJSON200() *GatewayListExternalKeysResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayListGenericDeploymentTypesResponse2) GetBody() []byte {
+func (r GatewayListExternalKeysResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayListGenericDeploymentTypesResponse2) Status() string {
+func (r GatewayListExternalKeysResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -28891,7 +29039,7 @@ func (r GatewayListGenericDeploymentTypesResponse2) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListGenericDeploymentTypesResponse2) StatusCode() int {
+func (r GatewayListExternalKeysResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -28899,32 +29047,32 @@ func (r GatewayListGenericDeploymentTypesResponse2) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListGenericDeploymentTypesResponse2) ContentType() string {
+func (r GatewayListExternalKeysResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type GatewayCreateGenericDeploymentTypeResponse struct {
+type GatewayCreateExternalKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGenericDeploymentTypeVersion
+	JSON200 *GatewayExternalKey
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateGenericDeploymentTypeResponse) GetJSON200() *GatewayGenericDeploymentTypeVersion {
+func (r GatewayCreateExternalKeyResponse) GetJSON200() *GatewayExternalKey {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayCreateGenericDeploymentTypeResponse) GetBody() []byte {
+func (r GatewayCreateExternalKeyResponse) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayCreateGenericDeploymentTypeResponse) Status() string {
+func (r GatewayCreateExternalKeyResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -28932,7 +29080,7 @@ func (r GatewayCreateGenericDeploymentTypeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateGenericDeploymentTypeResponse) StatusCode() int {
+func (r GatewayCreateExternalKeyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -28940,14 +29088,14 @@ func (r GatewayCreateGenericDeploymentTypeResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateGenericDeploymentTypeResponse) ContentType() string {
+func (r GatewayCreateExternalKeyResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type GatewayDeleteGenericDeploymentTypeResponse struct {
+type GatewayDeleteExternalKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
@@ -28955,17 +29103,17 @@ type GatewayDeleteGenericDeploymentTypeResponse struct {
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteGenericDeploymentTypeResponse) GetJSON200() *map[string]interface{} {
+func (r GatewayDeleteExternalKeyResponse) GetJSON200() *map[string]interface{} {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayDeleteGenericDeploymentTypeResponse) GetBody() []byte {
+func (r GatewayDeleteExternalKeyResponse) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayDeleteGenericDeploymentTypeResponse) Status() string {
+func (r GatewayDeleteExternalKeyResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -28973,7 +29121,7 @@ func (r GatewayDeleteGenericDeploymentTypeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteGenericDeploymentTypeResponse) StatusCode() int {
+func (r GatewayDeleteExternalKeyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -28981,32 +29129,32 @@ func (r GatewayDeleteGenericDeploymentTypeResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteGenericDeploymentTypeResponse) ContentType() string {
+func (r GatewayDeleteExternalKeyResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type GatewayListGenericDeploymentTypeVersionsResponse2 struct {
+type GatewayGetExternalKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListGenericDeploymentTypeVersionsResponse
+	JSON200 *GatewayExternalKey
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListGenericDeploymentTypeVersionsResponse2) GetJSON200() *GatewayListGenericDeploymentTypeVersionsResponse {
+func (r GatewayGetExternalKeyResponse) GetJSON200() *GatewayExternalKey {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayListGenericDeploymentTypeVersionsResponse2) GetBody() []byte {
+func (r GatewayGetExternalKeyResponse) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayListGenericDeploymentTypeVersionsResponse2) Status() string {
+func (r GatewayGetExternalKeyResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -29014,7 +29162,7 @@ func (r GatewayListGenericDeploymentTypeVersionsResponse2) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListGenericDeploymentTypeVersionsResponse2) StatusCode() int {
+func (r GatewayGetExternalKeyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -29022,32 +29170,32 @@ func (r GatewayListGenericDeploymentTypeVersionsResponse2) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListGenericDeploymentTypeVersionsResponse2) ContentType() string {
+func (r GatewayGetExternalKeyResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type GatewayUpdateGenericDeploymentTypeResponse struct {
+type GatewayUpdateExternalKeyResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGenericDeploymentTypeVersion
+	JSON200 *GatewayExternalKey
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayUpdateGenericDeploymentTypeResponse) GetJSON200() *GatewayGenericDeploymentTypeVersion {
+func (r GatewayUpdateExternalKeyResponse) GetJSON200() *GatewayExternalKey {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayUpdateGenericDeploymentTypeResponse) GetBody() []byte {
+func (r GatewayUpdateExternalKeyResponse) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayUpdateGenericDeploymentTypeResponse) Status() string {
+func (r GatewayUpdateExternalKeyResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -29055,7 +29203,7 @@ func (r GatewayUpdateGenericDeploymentTypeResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayUpdateGenericDeploymentTypeResponse) StatusCode() int {
+func (r GatewayUpdateExternalKeyResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -29063,294 +29211,7 @@ func (r GatewayUpdateGenericDeploymentTypeResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayUpdateGenericDeploymentTypeResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteGenericDeploymentTypeVersionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteGenericDeploymentTypeVersionResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteGenericDeploymentTypeVersionResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteGenericDeploymentTypeVersionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteGenericDeploymentTypeVersionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteGenericDeploymentTypeVersionResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetGenericDeploymentTypeVersionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGenericDeploymentTypeVersion
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetGenericDeploymentTypeVersionResponse) GetJSON200() *GatewayGenericDeploymentTypeVersion {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetGenericDeploymentTypeVersionResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetGenericDeploymentTypeVersionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetGenericDeploymentTypeVersionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetGenericDeploymentTypeVersionResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayListGenericDeploymentsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListGenericDeploymentsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListGenericDeploymentsResponse2) GetJSON200() *GatewayListGenericDeploymentsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListGenericDeploymentsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListGenericDeploymentsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListGenericDeploymentsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListGenericDeploymentsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCreateGenericDeploymentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGenericDeployment
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateGenericDeploymentResponse) GetJSON200() *GatewayGenericDeployment {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCreateGenericDeploymentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCreateGenericDeploymentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateGenericDeploymentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateGenericDeploymentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteGenericDeploymentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteGenericDeploymentResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteGenericDeploymentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteGenericDeploymentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteGenericDeploymentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteGenericDeploymentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetGenericDeploymentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGenericDeployment
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetGenericDeploymentResponse) GetJSON200() *GatewayGenericDeployment {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetGenericDeploymentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetGenericDeploymentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetGenericDeploymentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetGenericDeploymentResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayUpdateGenericDeploymentResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGenericDeployment
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayUpdateGenericDeploymentResponse) GetJSON200() *GatewayGenericDeployment {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayUpdateGenericDeploymentResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayUpdateGenericDeploymentResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayUpdateGenericDeploymentResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayUpdateGenericDeploymentResponse) ContentType() string {
+func (r GatewayUpdateExternalKeyResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -29556,416 +29417,6 @@ func (r GatewayUpdateIdentityProviderResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GatewayUpdateIdentityProviderResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayListLeaderboardsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListLeaderboardsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListLeaderboardsResponse2) GetJSON200() *GatewayListLeaderboardsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListLeaderboardsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListLeaderboardsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListLeaderboardsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListLeaderboardsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCreateLeaderboardResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayLeaderboard
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateLeaderboardResponse) GetJSON200() *GatewayLeaderboard {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCreateLeaderboardResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCreateLeaderboardResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateLeaderboardResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateLeaderboardResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteLeaderboardResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteLeaderboardResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteLeaderboardResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteLeaderboardResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteLeaderboardResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteLeaderboardResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetLeaderboardResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayGetLeaderboardResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetLeaderboardResponse2) GetJSON200() *GatewayGetLeaderboardResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetLeaderboardResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetLeaderboardResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetLeaderboardResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetLeaderboardResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayListLeaderboardEvaluationJobsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListLeaderboardEvaluationJobsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListLeaderboardEvaluationJobsResponse2) GetJSON200() *GatewayListLeaderboardEvaluationJobsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListLeaderboardEvaluationJobsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListLeaderboardEvaluationJobsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListLeaderboardEvaluationJobsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListLeaderboardEvaluationJobsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayListMcpServersResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListMcpServersResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListMcpServersResponse2) GetJSON200() *GatewayListMcpServersResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListMcpServersResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListMcpServersResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListMcpServersResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListMcpServersResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCreateMcpServerResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayMcpServer
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateMcpServerResponse) GetJSON200() *GatewayMcpServer {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCreateMcpServerResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCreateMcpServerResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateMcpServerResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateMcpServerResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteMcpServerResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteMcpServerResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteMcpServerResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteMcpServerResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteMcpServerResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteMcpServerResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetMcpServerResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayMcpServer
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetMcpServerResponse) GetJSON200() *GatewayMcpServer {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetMcpServerResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetMcpServerResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetMcpServerResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetMcpServerResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayUpdateMcpServerResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayMcpServer
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayUpdateMcpServerResponse) GetJSON200() *GatewayMcpServer {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayUpdateMcpServerResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayUpdateMcpServerResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayUpdateMcpServerResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayUpdateMcpServerResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -30505,25 +29956,25 @@ func (r GatewayValidateModelUploadResponse2) ContentType() string {
 	return ""
 }
 
-type GatewayListNodePoolBindingsResponse2 struct {
+type GatewayGetPolicySettingsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListNodePoolBindingsResponse
+	JSON200 *GatewayPolicySettings
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListNodePoolBindingsResponse2) GetJSON200() *GatewayListNodePoolBindingsResponse {
+func (r GatewayGetPolicySettingsResponse) GetJSON200() *GatewayPolicySettings {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayListNodePoolBindingsResponse2) GetBody() []byte {
+func (r GatewayGetPolicySettingsResponse) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayListNodePoolBindingsResponse2) Status() string {
+func (r GatewayGetPolicySettingsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -30531,7 +29982,7 @@ func (r GatewayListNodePoolBindingsResponse2) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListNodePoolBindingsResponse2) StatusCode() int {
+func (r GatewayGetPolicySettingsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -30539,32 +29990,32 @@ func (r GatewayListNodePoolBindingsResponse2) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListNodePoolBindingsResponse2) ContentType() string {
+func (r GatewayGetPolicySettingsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type GatewayCreateNodePoolBindingResponse struct {
+type GatewayUpdatePolicySettingsResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayNodePoolBinding
+	JSON200 *GatewayPolicySettings
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateNodePoolBindingResponse) GetJSON200() *GatewayNodePoolBinding {
+func (r GatewayUpdatePolicySettingsResponse) GetJSON200() *GatewayPolicySettings {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayCreateNodePoolBindingResponse) GetBody() []byte {
+func (r GatewayUpdatePolicySettingsResponse) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayCreateNodePoolBindingResponse) Status() string {
+func (r GatewayUpdatePolicySettingsResponse) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -30572,7 +30023,7 @@ func (r GatewayCreateNodePoolBindingResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateNodePoolBindingResponse) StatusCode() int {
+func (r GatewayUpdatePolicySettingsResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -30580,335 +30031,7 @@ func (r GatewayCreateNodePoolBindingResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateNodePoolBindingResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteNodePoolBindingResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteNodePoolBindingResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteNodePoolBindingResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteNodePoolBindingResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteNodePoolBindingResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteNodePoolBindingResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayListNodePoolsResponse2 struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListNodePoolsResponse
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListNodePoolsResponse2) GetJSON200() *GatewayListNodePoolsResponse {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayListNodePoolsResponse2) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayListNodePoolsResponse2) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListNodePoolsResponse2) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListNodePoolsResponse2) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayCreateNodePoolResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayNodePool
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateNodePoolResponse) GetJSON200() *GatewayNodePool {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayCreateNodePoolResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayCreateNodePoolResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateNodePoolResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateNodePoolResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayDeleteNodePoolResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteNodePoolResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayDeleteNodePoolResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayDeleteNodePoolResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteNodePoolResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteNodePoolResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetNodePoolResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayNodePool
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetNodePoolResponse) GetJSON200() *GatewayNodePool {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetNodePoolResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetNodePoolResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetNodePoolResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetNodePoolResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayUpdateNodePoolResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayNodePool
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayUpdateNodePoolResponse) GetJSON200() *GatewayNodePool {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayUpdateNodePoolResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayUpdateNodePoolResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayUpdateNodePoolResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayUpdateNodePoolResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetNodePoolStatsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayNodePoolStats
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetNodePoolStatsResponse) GetJSON200() *GatewayNodePoolStats {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetNodePoolStatsResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetNodePoolStatsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetNodePoolStatsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetNodePoolStatsResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayBatchDeleteNodePoolsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayBatchDeleteNodePoolsResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayBatchDeleteNodePoolsResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayBatchDeleteNodePoolsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayBatchDeleteNodePoolsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayBatchDeleteNodePoolsResponse) ContentType() string {
+func (r GatewayUpdatePolicySettingsResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -31284,6 +30407,47 @@ func (r GatewayGetReinforcementFineTuningJobResponse) ContentType() string {
 	return ""
 }
 
+type GatewayUpdateReinforcementFineTuningJobResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayReinforcementFineTuningJob
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateReinforcementFineTuningJobResponse) GetJSON200() *GatewayReinforcementFineTuningJob {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateReinforcementFineTuningJobResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateReinforcementFineTuningJobResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateReinforcementFineTuningJobResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateReinforcementFineTuningJobResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayCancelReinforcementFineTuningJobResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -31360,6 +30524,47 @@ func (r GatewayDebugReinforcementFineTuningJobResponse2) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GatewayDebugReinforcementFineTuningJobResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayGetReinforcementFineTuningJobMetricsFileResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse) GetJSON200() *GatewayGetReinforcementFineTuningJobMetricsFileResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -31571,6 +30776,129 @@ func (r GatewayGetRlorTrainerJobResponse) ContentType() string {
 	return ""
 }
 
+type GatewayListRlorTrainerJobCheckpointsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListRlorTrainerJobCheckpointsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListRlorTrainerJobCheckpointsResponse2) GetJSON200() *GatewayListRlorTrainerJobCheckpointsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListRlorTrainerJobCheckpointsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListRlorTrainerJobCheckpointsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListRlorTrainerJobCheckpointsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListRlorTrainerJobCheckpointsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewaySyncRlorTrainerJobCheckpointResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewaySyncRlorTrainerJobCheckpointResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewaySyncRlorTrainerJobCheckpointResponse2) GetJSON200() *GatewaySyncRlorTrainerJobCheckpointResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewaySyncRlorTrainerJobCheckpointResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewaySyncRlorTrainerJobCheckpointResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewaySyncRlorTrainerJobCheckpointResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewaySyncRlorTrainerJobCheckpointResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetRlorTrainerJobPublicLogsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayGetRlorTrainerJobPublicLogsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetRlorTrainerJobPublicLogsResponse2) GetJSON200() *GatewayGetRlorTrainerJobPublicLogsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetRlorTrainerJobPublicLogsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetRlorTrainerJobPublicLogsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetRlorTrainerJobPublicLogsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetRlorTrainerJobPublicLogsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayCancelRlorTrainerJobResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -31606,47 +30934,6 @@ func (r GatewayCancelRlorTrainerJobResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GatewayCancelRlorTrainerJobResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayExecuteRlorTrainStepResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayExecuteRlorTrainStepResponse) GetJSON200() *map[string]interface{} {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayExecuteRlorTrainStepResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayExecuteRlorTrainStepResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayExecuteRlorTrainStepResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayExecuteRlorTrainStepResponse) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -32104,25 +31391,25 @@ func (r GatewayUpdateSecretResponse) ContentType() string {
 	return ""
 }
 
-type GatewayListSnapshotsResponse2 struct {
+type GatewayListServerlessModelsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewayListSnapshotsResponse
+	JSON200 *GatewayListServerlessModelsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayListSnapshotsResponse2) GetJSON200() *GatewayListSnapshotsResponse {
+func (r GatewayListServerlessModelsResponse2) GetJSON200() *GatewayListServerlessModelsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayListSnapshotsResponse2) GetBody() []byte {
+func (r GatewayListServerlessModelsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayListSnapshotsResponse2) Status() string {
+func (r GatewayListServerlessModelsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -32130,7 +31417,7 @@ func (r GatewayListSnapshotsResponse2) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayListSnapshotsResponse2) StatusCode() int {
+func (r GatewayListServerlessModelsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -32138,32 +31425,32 @@ func (r GatewayListSnapshotsResponse2) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayListSnapshotsResponse2) ContentType() string {
+func (r GatewayListServerlessModelsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type GatewayCreateSnapshotResponse struct {
+type GatewayListAccountServerlessRateLimitsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewaySnapshot
+	JSON200 *GatewayListAccountServerlessRateLimitsResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayCreateSnapshotResponse) GetJSON200() *GatewaySnapshot {
+func (r GatewayListAccountServerlessRateLimitsResponse2) GetJSON200() *GatewayListAccountServerlessRateLimitsResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayCreateSnapshotResponse) GetBody() []byte {
+func (r GatewayListAccountServerlessRateLimitsResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayCreateSnapshotResponse) Status() string {
+func (r GatewayListAccountServerlessRateLimitsResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -32171,7 +31458,7 @@ func (r GatewayCreateSnapshotResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayCreateSnapshotResponse) StatusCode() int {
+func (r GatewayListAccountServerlessRateLimitsResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -32179,32 +31466,32 @@ func (r GatewayCreateSnapshotResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayCreateSnapshotResponse) ContentType() string {
+func (r GatewayListAccountServerlessRateLimitsResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
 	return ""
 }
 
-type GatewayDeleteSnapshotResponse struct {
+type GatewayGetAccountServerlessTokenUsageResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *map[string]interface{}
+	JSON200 *GatewayGetAccountServerlessTokenUsageResponse
 }
 
 // GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayDeleteSnapshotResponse) GetJSON200() *map[string]interface{} {
+func (r GatewayGetAccountServerlessTokenUsageResponse2) GetJSON200() *GatewayGetAccountServerlessTokenUsageResponse {
 	return r.JSON200
 }
 
 // GetBody returns the raw response body bytes
-func (r GatewayDeleteSnapshotResponse) GetBody() []byte {
+func (r GatewayGetAccountServerlessTokenUsageResponse2) GetBody() []byte {
 	return r.Body
 }
 
 // Status returns HTTPResponse.Status
-func (r GatewayDeleteSnapshotResponse) Status() string {
+func (r GatewayGetAccountServerlessTokenUsageResponse2) Status() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Status
 	}
@@ -32212,7 +31499,7 @@ func (r GatewayDeleteSnapshotResponse) Status() string {
 }
 
 // StatusCode returns HTTPResponse.StatusCode
-func (r GatewayDeleteSnapshotResponse) StatusCode() int {
+func (r GatewayGetAccountServerlessTokenUsageResponse2) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -32220,48 +31507,7 @@ func (r GatewayDeleteSnapshotResponse) StatusCode() int {
 }
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayDeleteSnapshotResponse) ContentType() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Header.Get("Content-Type")
-	}
-	return ""
-}
-
-type GatewayGetSnapshotResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	// JSON200 the response for an HTTP 200 `application/json` response
-	JSON200 *GatewaySnapshot
-}
-
-// GetJSON200 returns the response for an HTTP 200 `application/json` response
-func (r GatewayGetSnapshotResponse) GetJSON200() *GatewaySnapshot {
-	return r.JSON200
-}
-
-// GetBody returns the raw response body bytes
-func (r GatewayGetSnapshotResponse) GetBody() []byte {
-	return r.Body
-}
-
-// Status returns HTTPResponse.Status
-func (r GatewayGetSnapshotResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GatewayGetSnapshotResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
-func (r GatewayGetSnapshotResponse) ContentType() string {
+func (r GatewayGetAccountServerlessTokenUsageResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -32719,6 +31965,1400 @@ func (r GatewayGetTrailResponse) ContentType() string {
 	return ""
 }
 
+type GatewayUpdateTrailResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrail
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateTrailResponse) GetJSON200() *GatewayTrail {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateTrailResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateTrailResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateTrailResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateTrailResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetTrailMetricsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrailMetrics
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetTrailMetricsResponse) GetJSON200() *GatewayTrailMetrics {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetTrailMetricsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetTrailMetricsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetTrailMetricsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetTrailMetricsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListTrainingRunsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListTrainingRunsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListTrainingRunsResponse2) GetJSON200() *GatewayListTrainingRunsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListTrainingRunsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListTrainingRunsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListTrainingRunsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListTrainingRunsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayCreateTrainingRunResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingRun
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayCreateTrainingRunResponse) GetJSON200() *GatewayTrainingRun {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayCreateTrainingRunResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayCreateTrainingRunResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayCreateTrainingRunResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayCreateTrainingRunResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetTrainingRunResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingRun
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetTrainingRunResponse) GetJSON200() *GatewayTrainingRun {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetTrainingRunResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetTrainingRunResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetTrainingRunResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetTrainingRunResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayAbortTrainingRunMaterializationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingRun
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayAbortTrainingRunMaterializationResponse) GetJSON200() *GatewayTrainingRun {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayAbortTrainingRunMaterializationResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayAbortTrainingRunMaterializationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayAbortTrainingRunMaterializationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayAbortTrainingRunMaterializationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayFinalizeTrainingRunMaterializationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingRun
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayFinalizeTrainingRunMaterializationResponse) GetJSON200() *GatewayTrainingRun {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayFinalizeTrainingRunMaterializationResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayFinalizeTrainingRunMaterializationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayFinalizeTrainingRunMaterializationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayFinalizeTrainingRunMaterializationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListTrainingSessionsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListTrainingSessionsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListTrainingSessionsResponse2) GetJSON200() *GatewayListTrainingSessionsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListTrainingSessionsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListTrainingSessionsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListTrainingSessionsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListTrainingSessionsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayCreateTrainingSessionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingSession
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayCreateTrainingSessionResponse) GetJSON200() *GatewayTrainingSession {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayCreateTrainingSessionResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayCreateTrainingSessionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayCreateTrainingSessionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayCreateTrainingSessionResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayDeleteTrainingSessionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *map[string]interface{}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayDeleteTrainingSessionResponse) GetJSON200() *map[string]interface{} {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayDeleteTrainingSessionResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayDeleteTrainingSessionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayDeleteTrainingSessionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayDeleteTrainingSessionResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetTrainingSessionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingSession
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetTrainingSessionResponse) GetJSON200() *GatewayTrainingSession {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetTrainingSessionResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetTrainingSessionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetTrainingSessionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetTrainingSessionResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListTrainingSessionCheckpointsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListTrainingSessionCheckpointsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListTrainingSessionCheckpointsResponse2) GetJSON200() *GatewayListTrainingSessionCheckpointsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListTrainingSessionCheckpointsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListTrainingSessionCheckpointsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListTrainingSessionCheckpointsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListTrainingSessionCheckpointsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayPromoteTrainingSessionCheckpointResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayPromoteTrainingSessionCheckpointResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayPromoteTrainingSessionCheckpointResponse2) GetJSON200() *GatewayPromoteTrainingSessionCheckpointResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayPromoteTrainingSessionCheckpointResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayPromoteTrainingSessionCheckpointResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayPromoteTrainingSessionCheckpointResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayPromoteTrainingSessionCheckpointResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListTrainingSessionChunkOutputsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListTrainingSessionChunkOutputsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListTrainingSessionChunkOutputsResponse2) GetJSON200() *GatewayListTrainingSessionChunkOutputsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListTrainingSessionChunkOutputsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListTrainingSessionChunkOutputsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListTrainingSessionChunkOutputsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListTrainingSessionChunkOutputsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayCreateTrainingSessionChunkOutputResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingSessionChunkOutput
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayCreateTrainingSessionChunkOutputResponse) GetJSON200() *GatewayTrainingSessionChunkOutput {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayCreateTrainingSessionChunkOutputResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayCreateTrainingSessionChunkOutputResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayCreateTrainingSessionChunkOutputResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayCreateTrainingSessionChunkOutputResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListTrainingSessionTrainingCurvesResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListTrainingSessionTrainingCurvesResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListTrainingSessionTrainingCurvesResponse2) GetJSON200() *GatewayListTrainingSessionTrainingCurvesResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListTrainingSessionTrainingCurvesResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListTrainingSessionTrainingCurvesResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListTrainingSessionTrainingCurvesResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListTrainingSessionTrainingCurvesResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayLoadTrainingSessionStateResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingSession
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayLoadTrainingSessionStateResponse) GetJSON200() *GatewayTrainingSession {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayLoadTrainingSessionStateResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayLoadTrainingSessionStateResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayLoadTrainingSessionStateResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayLoadTrainingSessionStateResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayLogTrainingSessionMetricsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayLogTrainingSessionMetricsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayLogTrainingSessionMetricsResponse2) GetJSON200() *GatewayLogTrainingSessionMetricsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayLogTrainingSessionMetricsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayLogTrainingSessionMetricsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayLogTrainingSessionMetricsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayLogTrainingSessionMetricsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListTrainingShapesResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListTrainingShapesResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListTrainingShapesResponse2) GetJSON200() *GatewayListTrainingShapesResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListTrainingShapesResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListTrainingShapesResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListTrainingShapesResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListTrainingShapesResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayCreateTrainingShapeResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingShape
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayCreateTrainingShapeResponse) GetJSON200() *GatewayTrainingShape {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayCreateTrainingShapeResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayCreateTrainingShapeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayCreateTrainingShapeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayCreateTrainingShapeResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayDeleteTrainingShapeResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *map[string]interface{}
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayDeleteTrainingShapeResponse) GetJSON200() *map[string]interface{} {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayDeleteTrainingShapeResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayDeleteTrainingShapeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayDeleteTrainingShapeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayDeleteTrainingShapeResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetTrainingShapeResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingShape
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetTrainingShapeResponse) GetJSON200() *GatewayTrainingShape {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetTrainingShapeResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetTrainingShapeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetTrainingShapeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetTrainingShapeResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayUpdateTrainingShapeResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingShape
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateTrainingShapeResponse) GetJSON200() *GatewayTrainingShape {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateTrainingShapeResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateTrainingShapeResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateTrainingShapeResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateTrainingShapeResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListTrainingShapeVersionsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListTrainingShapeVersionsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListTrainingShapeVersionsResponse2) GetJSON200() *GatewayListTrainingShapeVersionsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListTrainingShapeVersionsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListTrainingShapeVersionsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListTrainingShapeVersionsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListTrainingShapeVersionsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetTrainingShapeVersionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingShapeVersion
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetTrainingShapeVersionResponse) GetJSON200() *GatewayTrainingShapeVersion {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetTrainingShapeVersionResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetTrainingShapeVersionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetTrainingShapeVersionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetTrainingShapeVersionResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayUpdateTrainingShapeVersionResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayTrainingShapeVersion
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateTrainingShapeVersionResponse) GetJSON200() *GatewayTrainingShapeVersion {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateTrainingShapeVersionResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateTrainingShapeVersionResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateTrainingShapeVersionResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateTrainingShapeVersionResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayQueryUsageCostsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayQueryUsageCostsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayQueryUsageCostsResponse2) GetJSON200() *GatewayQueryUsageCostsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayQueryUsageCostsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayQueryUsageCostsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayQueryUsageCostsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayQueryUsageCostsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListUserUsageLimitIncreaseRequestsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListUserUsageLimitIncreaseRequestsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListUserUsageLimitIncreaseRequestsResponse2) GetJSON200() *GatewayListUserUsageLimitIncreaseRequestsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListUserUsageLimitIncreaseRequestsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListUserUsageLimitIncreaseRequestsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListUserUsageLimitIncreaseRequestsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListUserUsageLimitIncreaseRequestsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayCreateUserUsageLimitIncreaseRequestResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayUserUsageLimitIncreaseRequest
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayCreateUserUsageLimitIncreaseRequestResponse) GetJSON200() *GatewayUserUsageLimitIncreaseRequest {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayCreateUserUsageLimitIncreaseRequestResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayCreateUserUsageLimitIncreaseRequestResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayCreateUserUsageLimitIncreaseRequestResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayCreateUserUsageLimitIncreaseRequestResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayApproveUserUsageLimitIncreaseRequestResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayUserUsageLimitIncreaseRequest
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayApproveUserUsageLimitIncreaseRequestResponse) GetJSON200() *GatewayUserUsageLimitIncreaseRequest {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayApproveUserUsageLimitIncreaseRequestResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayApproveUserUsageLimitIncreaseRequestResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayApproveUserUsageLimitIncreaseRequestResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayApproveUserUsageLimitIncreaseRequestResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayRejectUserUsageLimitIncreaseRequestResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayUserUsageLimitIncreaseRequest
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayRejectUserUsageLimitIncreaseRequestResponse) GetJSON200() *GatewayUserUsageLimitIncreaseRequest {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayRejectUserUsageLimitIncreaseRequestResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayRejectUserUsageLimitIncreaseRequestResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayRejectUserUsageLimitIncreaseRequestResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayRejectUserUsageLimitIncreaseRequestResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetAccountUsageLimitsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayAccountUsageLimits
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetAccountUsageLimitsResponse) GetJSON200() *GatewayAccountUsageLimits {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetAccountUsageLimitsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetAccountUsageLimitsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetAccountUsageLimitsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetAccountUsageLimitsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayUpdateAccountUsageLimitsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayAccountUsageLimits
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateAccountUsageLimitsResponse) GetJSON200() *GatewayAccountUsageLimits {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateAccountUsageLimitsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateAccountUsageLimitsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateAccountUsageLimitsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateAccountUsageLimitsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayListUserUsageLimitsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListUserUsageLimitsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListUserUsageLimitsResponse2) GetJSON200() *GatewayListUserUsageLimitsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListUserUsageLimitsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListUserUsageLimitsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListUserUsageLimitsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListUserUsageLimitsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayListUsersResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -33006,6 +33646,88 @@ func (r GatewayDeleteApiKeyResponse) ContentType() string {
 	return ""
 }
 
+type GatewayGetUserUsageLimitsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayUserUsageLimits
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetUserUsageLimitsResponse) GetJSON200() *GatewayUserUsageLimits {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetUserUsageLimitsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetUserUsageLimitsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetUserUsageLimitsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetUserUsageLimitsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayUpdateUserUsageLimitsResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayUserUsageLimits
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayUpdateUserUsageLimitsResponse) GetJSON200() *GatewayUserUsageLimits {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayUpdateUserUsageLimitsResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayUpdateUserUsageLimitsResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayUpdateUserUsageLimitsResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayUpdateUserUsageLimitsResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayTestEvaluationResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -33041,6 +33763,47 @@ func (r GatewayTestEvaluationResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GatewayTestEvaluationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayRefreshSessionTokenResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayRefreshSessionTokenResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayRefreshSessionTokenResponse2) GetJSON200() *GatewayRefreshSessionTokenResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayRefreshSessionTokenResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayRefreshSessionTokenResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayRefreshSessionTokenResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayRefreshSessionTokenResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -33517,71 +34280,6 @@ func (c *ClientWithResponses) GatewayListAuditLogsWithResponse(ctx context.Conte
 	return ParseGatewayListAuditLogsResponse2(rsp)
 }
 
-// GatewayListAwsIamRoleBindingsWithResponse List Aws Iam Role Bindings
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayListAwsIamRoleBindings` operationId).
-func (c *ClientWithResponses) GatewayListAwsIamRoleBindingsWithResponse(ctx context.Context, accountId string, params *GatewayListAwsIamRoleBindingsParams, reqEditors ...RequestEditorFn) (*GatewayListAwsIamRoleBindingsResponse2, error) {
-	rsp, err := c.GatewayListAwsIamRoleBindings(ctx, accountId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListAwsIamRoleBindingsResponse2(rsp)
-}
-
-// GatewayCreateAwsIamRoleBindingWithBodyWithResponse Create Aws Iam Role Binding
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-func (c *ClientWithResponses) GatewayCreateAwsIamRoleBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateAwsIamRoleBindingResponse, error) {
-	rsp, err := c.GatewayCreateAwsIamRoleBindingWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateAwsIamRoleBindingResponse(rsp)
-}
-
-// GatewayCreateAwsIamRoleBindingWithResponse Create Aws Iam Role Binding
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings (the `GatewayCreateAwsIamRoleBinding` operationId).
-func (c *ClientWithResponses) GatewayCreateAwsIamRoleBindingWithResponse(ctx context.Context, accountId string, body GatewayCreateAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateAwsIamRoleBindingResponse, error) {
-	rsp, err := c.GatewayCreateAwsIamRoleBinding(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateAwsIamRoleBindingResponse(rsp)
-}
-
-// GatewayDeleteAwsIamRoleBindingWithBodyWithResponse Delete Aws Iam Role Binding
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-func (c *ClientWithResponses) GatewayDeleteAwsIamRoleBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayDeleteAwsIamRoleBindingResponse, error) {
-	rsp, err := c.GatewayDeleteAwsIamRoleBindingWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteAwsIamRoleBindingResponse(rsp)
-}
-
-// GatewayDeleteAwsIamRoleBindingWithResponse Delete Aws Iam Role Binding
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/awsIamRoleBindings:delete (the `GatewayDeleteAwsIamRoleBinding` operationId).
-func (c *ClientWithResponses) GatewayDeleteAwsIamRoleBindingWithResponse(ctx context.Context, accountId string, body GatewayDeleteAwsIamRoleBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDeleteAwsIamRoleBindingResponse, error) {
-	rsp, err := c.GatewayDeleteAwsIamRoleBinding(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteAwsIamRoleBindingResponse(rsp)
-}
-
 // GatewayListBatchInferenceJobsWithResponse List Batch Inference Jobs
 //
 // Returns a wrapper object for the known response body format(s).
@@ -33647,166 +34345,6 @@ func (c *ClientWithResponses) GatewayGetBatchInferenceJobWithResponse(ctx contex
 	return ParseGatewayGetBatchInferenceJobResponse(rsp)
 }
 
-// GatewayListBatchJobsWithResponse List Batch Jobs
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/batchJobs (the `GatewayListBatchJobs` operationId).
-func (c *ClientWithResponses) GatewayListBatchJobsWithResponse(ctx context.Context, accountId string, params *GatewayListBatchJobsParams, reqEditors ...RequestEditorFn) (*GatewayListBatchJobsResponse2, error) {
-	rsp, err := c.GatewayListBatchJobs(ctx, accountId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListBatchJobsResponse2(rsp)
-}
-
-// GatewayCreateBatchJobWithBodyWithResponse Create Batch Job
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-func (c *ClientWithResponses) GatewayCreateBatchJobWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateBatchJobResponse, error) {
-	rsp, err := c.GatewayCreateBatchJobWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateBatchJobResponse(rsp)
-}
-
-// GatewayCreateBatchJobWithResponse Create Batch Job
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs (the `GatewayCreateBatchJob` operationId).
-func (c *ClientWithResponses) GatewayCreateBatchJobWithResponse(ctx context.Context, accountId string, body GatewayCreateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateBatchJobResponse, error) {
-	rsp, err := c.GatewayCreateBatchJob(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateBatchJobResponse(rsp)
-}
-
-// GatewayDeleteBatchJobWithResponse Delete Batch Job
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayDeleteBatchJob` operationId).
-func (c *ClientWithResponses) GatewayDeleteBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, reqEditors ...RequestEditorFn) (*GatewayDeleteBatchJobResponse, error) {
-	rsp, err := c.GatewayDeleteBatchJob(ctx, accountId, batchJobId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteBatchJobResponse(rsp)
-}
-
-// GatewayGetBatchJobWithResponse Get Batch Job
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayGetBatchJob` operationId).
-func (c *ClientWithResponses) GatewayGetBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobParams, reqEditors ...RequestEditorFn) (*GatewayGetBatchJobResponse, error) {
-	rsp, err := c.GatewayGetBatchJob(ctx, accountId, batchJobId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetBatchJobResponse(rsp)
-}
-
-// GatewayUpdateBatchJobWithBodyWithResponse Update Batch Job
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-func (c *ClientWithResponses) GatewayUpdateBatchJobWithBodyWithResponse(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateBatchJobResponse, error) {
-	rsp, err := c.GatewayUpdateBatchJobWithBody(ctx, accountId, batchJobId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateBatchJobResponse(rsp)
-}
-
-// GatewayUpdateBatchJobWithResponse Update Batch Job
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/batchJobs/{batch_job_id} (the `GatewayUpdateBatchJob` operationId).
-func (c *ClientWithResponses) GatewayUpdateBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, body GatewayUpdateBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateBatchJobResponse, error) {
-	rsp, err := c.GatewayUpdateBatchJob(ctx, accountId, batchJobId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateBatchJobResponse(rsp)
-}
-
-// GatewayCancelBatchJobWithBodyWithResponse Cancel Batch Job
-//
-// Cancels an existing batch job if it is queued, pending, or running.
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-func (c *ClientWithResponses) GatewayCancelBatchJobWithBodyWithResponse(ctx context.Context, accountId string, batchJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCancelBatchJobResponse, error) {
-	rsp, err := c.GatewayCancelBatchJobWithBody(ctx, accountId, batchJobId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCancelBatchJobResponse(rsp)
-}
-
-// GatewayCancelBatchJobWithResponse Cancel Batch Job
-//
-// Cancels an existing batch job if it is queued, pending, or running.
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs/{batch_job_id}:cancel (the `GatewayCancelBatchJob` operationId).
-func (c *ClientWithResponses) GatewayCancelBatchJobWithResponse(ctx context.Context, accountId string, batchJobId string, body GatewayCancelBatchJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCancelBatchJobResponse, error) {
-	rsp, err := c.GatewayCancelBatchJob(ctx, accountId, batchJobId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCancelBatchJobResponse(rsp)
-}
-
-// GatewayGetBatchJobLogsWithResponse Get Batch Job Logs
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/batchJobs/{batch_job_id}:getLogs (the `GatewayGetBatchJobLogs` operationId).
-func (c *ClientWithResponses) GatewayGetBatchJobLogsWithResponse(ctx context.Context, accountId string, batchJobId string, params *GatewayGetBatchJobLogsParams, reqEditors ...RequestEditorFn) (*GatewayGetBatchJobLogsResponse2, error) {
-	rsp, err := c.GatewayGetBatchJobLogs(ctx, accountId, batchJobId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetBatchJobLogsResponse2(rsp)
-}
-
-// GatewayBatchDeleteBatchJobsWithBodyWithResponse Batch Delete Batch Jobs
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-func (c *ClientWithResponses) GatewayBatchDeleteBatchJobsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteBatchJobsResponse, error) {
-	rsp, err := c.GatewayBatchDeleteBatchJobsWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayBatchDeleteBatchJobsResponse(rsp)
-}
-
-// GatewayBatchDeleteBatchJobsWithResponse Batch Delete Batch Jobs
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/batchJobs:batchDelete (the `GatewayBatchDeleteBatchJobs` operationId).
-func (c *ClientWithResponses) GatewayBatchDeleteBatchJobsWithResponse(ctx context.Context, accountId string, body GatewayBatchDeleteBatchJobsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteBatchJobsResponse, error) {
-	rsp, err := c.GatewayBatchDeleteBatchJobs(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayBatchDeleteBatchJobsResponse(rsp)
-}
-
 // GatewayGetBillingSummaryWithResponse Get billing summary information for an account
 //
 // Returns a wrapper object for the known response body format(s).
@@ -33820,8 +34358,46 @@ func (c *ClientWithResponses) GatewayGetBillingSummaryWithResponse(ctx context.C
 	return ParseGatewayGetBillingSummaryResponse2(rsp)
 }
 
-// GatewayGetAccountUsageWithResponse Get account usage (serverless and dedicated deployments).
-// Optionally filter by usage type via the usage_type field. If not specified, returns all usage types.
+// GatewayGetBillingSettingsWithResponse Returns the singleton BillingSettings for the given account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/billingSettings (the `GatewayGetBillingSettings` operationId).
+func (c *ClientWithResponses) GatewayGetBillingSettingsWithResponse(ctx context.Context, accountId string, params *GatewayGetBillingSettingsParams, reqEditors ...RequestEditorFn) (*GatewayGetBillingSettingsResponse, error) {
+	rsp, err := c.GatewayGetBillingSettings(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetBillingSettingsResponse(rsp)
+}
+
+// GatewayUpdateBillingSettingsWithBodyWithResponse Updates the singleton BillingSettings for the given account.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+func (c *ClientWithResponses) GatewayUpdateBillingSettingsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateBillingSettingsResponse, error) {
+	rsp, err := c.GatewayUpdateBillingSettingsWithBody(ctx, accountId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateBillingSettingsResponse(rsp)
+}
+
+// GatewayUpdateBillingSettingsWithResponse Updates the singleton BillingSettings for the given account.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/billingSettings (the `GatewayUpdateBillingSettings` operationId).
+func (c *ClientWithResponses) GatewayUpdateBillingSettingsWithResponse(ctx context.Context, accountId string, body GatewayUpdateBillingSettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateBillingSettingsResponse, error) {
+	rsp, err := c.GatewayUpdateBillingSettings(ctx, accountId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateBillingSettingsResponse(rsp)
+}
+
+// GatewayGetAccountUsageWithResponse Get Account Usage
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -33832,6 +34408,36 @@ func (c *ClientWithResponses) GatewayGetAccountUsageWithResponse(ctx context.Con
 		return nil, err
 	}
 	return ParseGatewayGetAccountUsageResponse(rsp)
+}
+
+// GatewayPromoteCheckpointWithBodyWithResponse Promote a checkpoint to a model.
+// The checkpoint is identified by account + snapshot ID; the trainer job ID
+// is passed in the request body to resolve the GCS bucket.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+func (c *ClientWithResponses) GatewayPromoteCheckpointWithBodyWithResponse(ctx context.Context, accountId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayPromoteCheckpointResponse2, error) {
+	rsp, err := c.GatewayPromoteCheckpointWithBody(ctx, accountId, checkpointId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayPromoteCheckpointResponse2(rsp)
+}
+
+// GatewayPromoteCheckpointWithResponse Promote a checkpoint to a model.
+// The checkpoint is identified by account + snapshot ID; the trainer job ID
+// is passed in the request body to resolve the GCS bucket.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteCheckpoint` operationId).
+func (c *ClientWithResponses) GatewayPromoteCheckpointWithResponse(ctx context.Context, accountId string, checkpointId string, body GatewayPromoteCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayPromoteCheckpointResponse2, error) {
+	rsp, err := c.GatewayPromoteCheckpoint(ctx, accountId, checkpointId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayPromoteCheckpointResponse2(rsp)
 }
 
 // GatewayListClustersWithResponse List Clusters
@@ -34237,6 +34843,36 @@ func (c *ClientWithResponses) GatewayUpdateDeployedModelWithResponse(ctx context
 	return ParseGatewayUpdateDeployedModelResponse(rsp)
 }
 
+// GatewayMatchDeploymentShapeVersionsWithBodyWithResponse Match Deployment Shape Versions
+//
+// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+func (c *ClientWithResponses) GatewayMatchDeploymentShapeVersionsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayMatchDeploymentShapeVersionsResponse, error) {
+	rsp, err := c.GatewayMatchDeploymentShapeVersionsWithBody(ctx, accountId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayMatchDeploymentShapeVersionsResponse(rsp)
+}
+
+// GatewayMatchDeploymentShapeVersionsWithResponse Match Deployment Shape Versions
+//
+// Returns the deployment shape versions compatible with the provided deployment create request. Use this to discover a validated shape before creating a deployment with `deployment_shape` set - shapeless deployments (raw accelerator type/count) skip validated-configuration checks and are far more likely to fail at creation.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/deploymentShapeVersions:match (the `GatewayMatchDeploymentShapeVersions` operationId).
+func (c *ClientWithResponses) GatewayMatchDeploymentShapeVersionsWithResponse(ctx context.Context, accountId string, body GatewayMatchDeploymentShapeVersionsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayMatchDeploymentShapeVersionsResponse, error) {
+	rsp, err := c.GatewayMatchDeploymentShapeVersions(ctx, accountId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayMatchDeploymentShapeVersionsResponse(rsp)
+}
+
 // GatewayListDeploymentShapesWithResponse List Deployment Shapes
 //
 // Returns a wrapper object for the known response body format(s).
@@ -34590,6 +35226,86 @@ func (c *ClientWithResponses) GatewayUndeleteDeploymentWithResponse(ctx context.
 	return ParseGatewayUndeleteDeploymentResponse(rsp)
 }
 
+// GatewayListDeveloperPassesWithResponse List Developer Passes
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/developerPasses (the `GatewayListDeveloperPasses` operationId).
+func (c *ClientWithResponses) GatewayListDeveloperPassesWithResponse(ctx context.Context, accountId string, params *GatewayListDeveloperPassesParams, reqEditors ...RequestEditorFn) (*GatewayListDeveloperPassesResponse2, error) {
+	rsp, err := c.GatewayListDeveloperPasses(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListDeveloperPassesResponse2(rsp)
+}
+
+// GatewayCreateDeveloperPassWithBodyWithResponse CRUD APIs for developer passes.
+// Create Developer Pass
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+func (c *ClientWithResponses) GatewayCreateDeveloperPassWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateDeveloperPassResponse, error) {
+	rsp, err := c.GatewayCreateDeveloperPassWithBody(ctx, accountId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateDeveloperPassResponse(rsp)
+}
+
+// GatewayCreateDeveloperPassWithResponse CRUD APIs for developer passes.
+// Create Developer Pass
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/developerPasses (the `GatewayCreateDeveloperPass` operationId).
+func (c *ClientWithResponses) GatewayCreateDeveloperPassWithResponse(ctx context.Context, accountId string, body GatewayCreateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateDeveloperPassResponse, error) {
+	rsp, err := c.GatewayCreateDeveloperPass(ctx, accountId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateDeveloperPassResponse(rsp)
+}
+
+// GatewayGetDeveloperPassWithResponse Get Developer Pass
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayGetDeveloperPass` operationId).
+func (c *ClientWithResponses) GatewayGetDeveloperPassWithResponse(ctx context.Context, accountId string, developerPasseId string, params *GatewayGetDeveloperPassParams, reqEditors ...RequestEditorFn) (*GatewayGetDeveloperPassResponse, error) {
+	rsp, err := c.GatewayGetDeveloperPass(ctx, accountId, developerPasseId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetDeveloperPassResponse(rsp)
+}
+
+// GatewayUpdateDeveloperPassWithBodyWithResponse Update Developer Pass
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+func (c *ClientWithResponses) GatewayUpdateDeveloperPassWithBodyWithResponse(ctx context.Context, accountId string, developerPasseId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateDeveloperPassResponse, error) {
+	rsp, err := c.GatewayUpdateDeveloperPassWithBody(ctx, accountId, developerPasseId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateDeveloperPassResponse(rsp)
+}
+
+// GatewayUpdateDeveloperPassWithResponse Update Developer Pass
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/developerPasses/{developer_passe_id} (the `GatewayUpdateDeveloperPass` operationId).
+func (c *ClientWithResponses) GatewayUpdateDeveloperPassWithResponse(ctx context.Context, accountId string, developerPasseId string, body GatewayUpdateDeveloperPassJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateDeveloperPassResponse, error) {
+	rsp, err := c.GatewayUpdateDeveloperPass(ctx, accountId, developerPasseId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateDeveloperPassResponse(rsp)
+}
+
 // GatewayListDpoJobsWithResponse performs a GET /v1/accounts/{account_id}/dpoJobs (the `GatewayListDpoJobs` operationId) request.
 //
 // Returns a wrapper object for the known response body format(s).
@@ -34706,187 +35422,6 @@ func (c *ClientWithResponses) GatewayResumeDpoJobWithResponse(ctx context.Contex
 		return nil, err
 	}
 	return ParseGatewayResumeDpoJobResponse(rsp)
-}
-
-// GatewayListEnvironmentsWithResponse List Environments
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/environments (the `GatewayListEnvironments` operationId).
-func (c *ClientWithResponses) GatewayListEnvironmentsWithResponse(ctx context.Context, accountId string, params *GatewayListEnvironmentsParams, reqEditors ...RequestEditorFn) (*GatewayListEnvironmentsResponse2, error) {
-	rsp, err := c.GatewayListEnvironments(ctx, accountId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListEnvironmentsResponse2(rsp)
-}
-
-// GatewayCreateEnvironmentWithBodyWithResponse Create Environment
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-func (c *ClientWithResponses) GatewayCreateEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateEnvironmentResponse, error) {
-	rsp, err := c.GatewayCreateEnvironmentWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateEnvironmentResponse(rsp)
-}
-
-// GatewayCreateEnvironmentWithResponse Create Environment
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments (the `GatewayCreateEnvironment` operationId).
-func (c *ClientWithResponses) GatewayCreateEnvironmentWithResponse(ctx context.Context, accountId string, body GatewayCreateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateEnvironmentResponse, error) {
-	rsp, err := c.GatewayCreateEnvironment(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateEnvironmentResponse(rsp)
-}
-
-// GatewayDeleteEnvironmentWithResponse Delete Environment
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayDeleteEnvironment` operationId).
-func (c *ClientWithResponses) GatewayDeleteEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, reqEditors ...RequestEditorFn) (*GatewayDeleteEnvironmentResponse, error) {
-	rsp, err := c.GatewayDeleteEnvironment(ctx, accountId, environmentId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteEnvironmentResponse(rsp)
-}
-
-// GatewayGetEnvironmentWithResponse Get Environment
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayGetEnvironment` operationId).
-func (c *ClientWithResponses) GatewayGetEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, params *GatewayGetEnvironmentParams, reqEditors ...RequestEditorFn) (*GatewayGetEnvironmentResponse, error) {
-	rsp, err := c.GatewayGetEnvironment(ctx, accountId, environmentId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetEnvironmentResponse(rsp)
-}
-
-// GatewayUpdateEnvironmentWithBodyWithResponse Update Environment
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-func (c *ClientWithResponses) GatewayUpdateEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateEnvironmentResponse, error) {
-	rsp, err := c.GatewayUpdateEnvironmentWithBody(ctx, accountId, environmentId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateEnvironmentResponse(rsp)
-}
-
-// GatewayUpdateEnvironmentWithResponse Update Environment
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/environments/{environment_id} (the `GatewayUpdateEnvironment` operationId).
-func (c *ClientWithResponses) GatewayUpdateEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, body GatewayUpdateEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateEnvironmentResponse, error) {
-	rsp, err := c.GatewayUpdateEnvironment(ctx, accountId, environmentId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateEnvironmentResponse(rsp)
-}
-
-// GatewayConnectEnvironmentWithBodyWithResponse Connect Environment
-//
-// Connects the environment to a node pool.
-// Returns an error if there is an existing pending connection.
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-func (c *ClientWithResponses) GatewayConnectEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayConnectEnvironmentResponse, error) {
-	rsp, err := c.GatewayConnectEnvironmentWithBody(ctx, accountId, environmentId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayConnectEnvironmentResponse(rsp)
-}
-
-// GatewayConnectEnvironmentWithResponse Connect Environment
-//
-// Connects the environment to a node pool.
-// Returns an error if there is an existing pending connection.
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:connect (the `GatewayConnectEnvironment` operationId).
-func (c *ClientWithResponses) GatewayConnectEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, body GatewayConnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayConnectEnvironmentResponse, error) {
-	rsp, err := c.GatewayConnectEnvironment(ctx, accountId, environmentId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayConnectEnvironmentResponse(rsp)
-}
-
-// GatewayDisconnectEnvironmentWithBodyWithResponse Disconnect Environment
-//
-// Disconnects the environment from the node pool. Returns an error
-// if the environment is not connected to a node pool.
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-func (c *ClientWithResponses) GatewayDisconnectEnvironmentWithBodyWithResponse(ctx context.Context, accountId string, environmentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayDisconnectEnvironmentResponse, error) {
-	rsp, err := c.GatewayDisconnectEnvironmentWithBody(ctx, accountId, environmentId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDisconnectEnvironmentResponse(rsp)
-}
-
-// GatewayDisconnectEnvironmentWithResponse Disconnect Environment
-//
-// Disconnects the environment from the node pool. Returns an error
-// if the environment is not connected to a node pool.
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments/{environment_id}:disconnect (the `GatewayDisconnectEnvironment` operationId).
-func (c *ClientWithResponses) GatewayDisconnectEnvironmentWithResponse(ctx context.Context, accountId string, environmentId string, body GatewayDisconnectEnvironmentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDisconnectEnvironmentResponse, error) {
-	rsp, err := c.GatewayDisconnectEnvironment(ctx, accountId, environmentId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDisconnectEnvironmentResponse(rsp)
-}
-
-// GatewayBatchDeleteEnvironmentsWithBodyWithResponse Batch Delete Environments
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-func (c *ClientWithResponses) GatewayBatchDeleteEnvironmentsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteEnvironmentsResponse, error) {
-	rsp, err := c.GatewayBatchDeleteEnvironmentsWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayBatchDeleteEnvironmentsResponse(rsp)
-}
-
-// GatewayBatchDeleteEnvironmentsWithResponse Batch Delete Environments
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/environments:batchDelete (the `GatewayBatchDeleteEnvironments` operationId).
-func (c *ClientWithResponses) GatewayBatchDeleteEnvironmentsWithResponse(ctx context.Context, accountId string, body GatewayBatchDeleteEnvironmentsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteEnvironmentsResponse, error) {
-	rsp, err := c.GatewayBatchDeleteEnvironments(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayBatchDeleteEnvironmentsResponse(rsp)
 }
 
 // GatewayListEvaluationJobsWithResponse List Evaluation Jobs
@@ -35514,212 +36049,95 @@ func (c *ClientWithResponses) GatewayCreateEvaluatorV2WithResponse(ctx context.C
 	return ParseGatewayCreateEvaluatorV2Response(rsp)
 }
 
-// GatewayListGenericDeploymentTypesWithResponse List the generic deployment types under an account
+// GatewayListExternalKeysWithResponse List External Keys
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayListGenericDeploymentTypes` operationId).
-func (c *ClientWithResponses) GatewayListGenericDeploymentTypesWithResponse(ctx context.Context, accountId string, params *GatewayListGenericDeploymentTypesParams, reqEditors ...RequestEditorFn) (*GatewayListGenericDeploymentTypesResponse2, error) {
-	rsp, err := c.GatewayListGenericDeploymentTypes(ctx, accountId, params, reqEditors...)
+// Corresponds with GET /v1/accounts/{account_id}/externalKeys (the `GatewayListExternalKeys` operationId).
+func (c *ClientWithResponses) GatewayListExternalKeysWithResponse(ctx context.Context, accountId string, params *GatewayListExternalKeysParams, reqEditors ...RequestEditorFn) (*GatewayListExternalKeysResponse2, error) {
+	rsp, err := c.GatewayListExternalKeys(ctx, accountId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayListGenericDeploymentTypesResponse2(rsp)
+	return ParseGatewayListExternalKeysResponse2(rsp)
 }
 
-// GatewayCreateGenericDeploymentTypeWithBodyWithResponse Create Generic Deployment Type
+// GatewayCreateExternalKeyWithBodyWithResponse Create External Key
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-func (c *ClientWithResponses) GatewayCreateGenericDeploymentTypeWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentTypeResponse, error) {
-	rsp, err := c.GatewayCreateGenericDeploymentTypeWithBody(ctx, accountId, params, contentType, body, reqEditors...)
+// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+func (c *ClientWithResponses) GatewayCreateExternalKeyWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateExternalKeyResponse, error) {
+	rsp, err := c.GatewayCreateExternalKeyWithBody(ctx, accountId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayCreateGenericDeploymentTypeResponse(rsp)
+	return ParseGatewayCreateExternalKeyResponse(rsp)
 }
 
-// GatewayCreateGenericDeploymentTypeWithResponse Create Generic Deployment Type
+// GatewayCreateExternalKeyWithResponse Create External Key
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /v1/accounts/{account_id}/genericDeploymentTypes (the `GatewayCreateGenericDeploymentType` operationId).
-func (c *ClientWithResponses) GatewayCreateGenericDeploymentTypeWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentTypeParams, body GatewayCreateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentTypeResponse, error) {
-	rsp, err := c.GatewayCreateGenericDeploymentType(ctx, accountId, params, body, reqEditors...)
+// Corresponds with POST /v1/accounts/{account_id}/externalKeys (the `GatewayCreateExternalKey` operationId).
+func (c *ClientWithResponses) GatewayCreateExternalKeyWithResponse(ctx context.Context, accountId string, body GatewayCreateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateExternalKeyResponse, error) {
+	rsp, err := c.GatewayCreateExternalKey(ctx, accountId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayCreateGenericDeploymentTypeResponse(rsp)
+	return ParseGatewayCreateExternalKeyResponse(rsp)
 }
 
-// GatewayDeleteGenericDeploymentTypeWithResponse Delete Generic Deployment Type
+// GatewayDeleteExternalKeyWithResponse Delete External Key
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayDeleteGenericDeploymentType` operationId).
-func (c *ClientWithResponses) GatewayDeleteGenericDeploymentTypeWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayDeleteGenericDeploymentTypeParams, reqEditors ...RequestEditorFn) (*GatewayDeleteGenericDeploymentTypeResponse, error) {
-	rsp, err := c.GatewayDeleteGenericDeploymentType(ctx, accountId, genericDeploymentTypeId, params, reqEditors...)
+// Corresponds with DELETE /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayDeleteExternalKey` operationId).
+func (c *ClientWithResponses) GatewayDeleteExternalKeyWithResponse(ctx context.Context, accountId string, externalKeyId string, params *GatewayDeleteExternalKeyParams, reqEditors ...RequestEditorFn) (*GatewayDeleteExternalKeyResponse, error) {
+	rsp, err := c.GatewayDeleteExternalKey(ctx, accountId, externalKeyId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayDeleteGenericDeploymentTypeResponse(rsp)
+	return ParseGatewayDeleteExternalKeyResponse(rsp)
 }
 
-// GatewayListGenericDeploymentTypeVersionsWithResponse List all generic deployment type version
+// GatewayGetExternalKeyWithResponse Get External Key
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayListGenericDeploymentTypeVersions` operationId).
-func (c *ClientWithResponses) GatewayListGenericDeploymentTypeVersionsWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, params *GatewayListGenericDeploymentTypeVersionsParams, reqEditors ...RequestEditorFn) (*GatewayListGenericDeploymentTypeVersionsResponse2, error) {
-	rsp, err := c.GatewayListGenericDeploymentTypeVersions(ctx, accountId, genericDeploymentTypeId, params, reqEditors...)
+// Corresponds with GET /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayGetExternalKey` operationId).
+func (c *ClientWithResponses) GatewayGetExternalKeyWithResponse(ctx context.Context, accountId string, externalKeyId string, params *GatewayGetExternalKeyParams, reqEditors ...RequestEditorFn) (*GatewayGetExternalKeyResponse, error) {
+	rsp, err := c.GatewayGetExternalKey(ctx, accountId, externalKeyId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayListGenericDeploymentTypeVersionsResponse2(rsp)
+	return ParseGatewayGetExternalKeyResponse(rsp)
 }
 
-// GatewayUpdateGenericDeploymentTypeWithBodyWithResponse Update Generic Deployment Type
+// GatewayUpdateExternalKeyWithBodyWithResponse Update External Key
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-func (c *ClientWithResponses) GatewayUpdateGenericDeploymentTypeWithBodyWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentTypeResponse, error) {
-	rsp, err := c.GatewayUpdateGenericDeploymentTypeWithBody(ctx, accountId, genericDeploymentTypeId, contentType, body, reqEditors...)
+// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+func (c *ClientWithResponses) GatewayUpdateExternalKeyWithBodyWithResponse(ctx context.Context, accountId string, externalKeyId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateExternalKeyResponse, error) {
+	rsp, err := c.GatewayUpdateExternalKeyWithBody(ctx, accountId, externalKeyId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayUpdateGenericDeploymentTypeResponse(rsp)
+	return ParseGatewayUpdateExternalKeyResponse(rsp)
 }
 
-// GatewayUpdateGenericDeploymentTypeWithResponse Update Generic Deployment Type
+// GatewayUpdateExternalKeyWithResponse Update External Key
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id} (the `GatewayUpdateGenericDeploymentType` operationId).
-func (c *ClientWithResponses) GatewayUpdateGenericDeploymentTypeWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, body GatewayUpdateGenericDeploymentTypeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentTypeResponse, error) {
-	rsp, err := c.GatewayUpdateGenericDeploymentType(ctx, accountId, genericDeploymentTypeId, body, reqEditors...)
+// Corresponds with PATCH /v1/accounts/{account_id}/externalKeys/{external_key_id} (the `GatewayUpdateExternalKey` operationId).
+func (c *ClientWithResponses) GatewayUpdateExternalKeyWithResponse(ctx context.Context, accountId string, externalKeyId string, body GatewayUpdateExternalKeyJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateExternalKeyResponse, error) {
+	rsp, err := c.GatewayUpdateExternalKey(ctx, accountId, externalKeyId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayUpdateGenericDeploymentTypeResponse(rsp)
-}
-
-// GatewayDeleteGenericDeploymentTypeVersionWithResponse Delete the generic deployment type version
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayDeleteGenericDeploymentTypeVersion` operationId).
-func (c *ClientWithResponses) GatewayDeleteGenericDeploymentTypeVersionWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayDeleteGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*GatewayDeleteGenericDeploymentTypeVersionResponse, error) {
-	rsp, err := c.GatewayDeleteGenericDeploymentTypeVersion(ctx, accountId, genericDeploymentTypeId, versionId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteGenericDeploymentTypeVersionResponse(rsp)
-}
-
-// GatewayGetGenericDeploymentTypeVersionWithResponse Get generic deployment type version
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/genericDeploymentTypes/{generic_deployment_type_id}/versions/{version_id} (the `GatewayGetGenericDeploymentTypeVersion` operationId).
-func (c *ClientWithResponses) GatewayGetGenericDeploymentTypeVersionWithResponse(ctx context.Context, accountId string, genericDeploymentTypeId string, versionId string, params *GatewayGetGenericDeploymentTypeVersionParams, reqEditors ...RequestEditorFn) (*GatewayGetGenericDeploymentTypeVersionResponse, error) {
-	rsp, err := c.GatewayGetGenericDeploymentTypeVersion(ctx, accountId, genericDeploymentTypeId, versionId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetGenericDeploymentTypeVersionResponse(rsp)
-}
-
-// GatewayListGenericDeploymentsWithResponse List all the generic deployments under an account
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/genericDeployments (the `GatewayListGenericDeployments` operationId).
-func (c *ClientWithResponses) GatewayListGenericDeploymentsWithResponse(ctx context.Context, accountId string, params *GatewayListGenericDeploymentsParams, reqEditors ...RequestEditorFn) (*GatewayListGenericDeploymentsResponse2, error) {
-	rsp, err := c.GatewayListGenericDeployments(ctx, accountId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListGenericDeploymentsResponse2(rsp)
-}
-
-// GatewayCreateGenericDeploymentWithBodyWithResponse Create Generic Deployment
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-func (c *ClientWithResponses) GatewayCreateGenericDeploymentWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentResponse, error) {
-	rsp, err := c.GatewayCreateGenericDeploymentWithBody(ctx, accountId, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateGenericDeploymentResponse(rsp)
-}
-
-// GatewayCreateGenericDeploymentWithResponse Create Generic Deployment
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/genericDeployments (the `GatewayCreateGenericDeployment` operationId).
-func (c *ClientWithResponses) GatewayCreateGenericDeploymentWithResponse(ctx context.Context, accountId string, params *GatewayCreateGenericDeploymentParams, body GatewayCreateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateGenericDeploymentResponse, error) {
-	rsp, err := c.GatewayCreateGenericDeployment(ctx, accountId, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateGenericDeploymentResponse(rsp)
-}
-
-// GatewayDeleteGenericDeploymentWithResponse Delete Generic Deployment
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayDeleteGenericDeployment` operationId).
-func (c *ClientWithResponses) GatewayDeleteGenericDeploymentWithResponse(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayDeleteGenericDeploymentParams, reqEditors ...RequestEditorFn) (*GatewayDeleteGenericDeploymentResponse, error) {
-	rsp, err := c.GatewayDeleteGenericDeployment(ctx, accountId, genericDeploymentId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteGenericDeploymentResponse(rsp)
-}
-
-// GatewayGetGenericDeploymentWithResponse Get Generic Deployment
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayGetGenericDeployment` operationId).
-func (c *ClientWithResponses) GatewayGetGenericDeploymentWithResponse(ctx context.Context, accountId string, genericDeploymentId string, params *GatewayGetGenericDeploymentParams, reqEditors ...RequestEditorFn) (*GatewayGetGenericDeploymentResponse, error) {
-	rsp, err := c.GatewayGetGenericDeployment(ctx, accountId, genericDeploymentId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetGenericDeploymentResponse(rsp)
-}
-
-// GatewayUpdateGenericDeploymentWithBodyWithResponse Create Generic Deployment
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-func (c *ClientWithResponses) GatewayUpdateGenericDeploymentWithBodyWithResponse(ctx context.Context, accountId string, genericDeploymentId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentResponse, error) {
-	rsp, err := c.GatewayUpdateGenericDeploymentWithBody(ctx, accountId, genericDeploymentId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateGenericDeploymentResponse(rsp)
-}
-
-// GatewayUpdateGenericDeploymentWithResponse Create Generic Deployment
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/genericDeployments/{generic_deployment_id} (the `GatewayUpdateGenericDeployment` operationId).
-func (c *ClientWithResponses) GatewayUpdateGenericDeploymentWithResponse(ctx context.Context, accountId string, genericDeploymentId string, body GatewayUpdateGenericDeploymentJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateGenericDeploymentResponse, error) {
-	rsp, err := c.GatewayUpdateGenericDeployment(ctx, accountId, genericDeploymentId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateGenericDeploymentResponse(rsp)
+	return ParseGatewayUpdateExternalKeyResponse(rsp)
 }
 
 // GatewayListIdentityProvidersWithResponse List Identity Providers
@@ -35811,169 +36229,6 @@ func (c *ClientWithResponses) GatewayUpdateIdentityProviderWithResponse(ctx cont
 		return nil, err
 	}
 	return ParseGatewayUpdateIdentityProviderResponse(rsp)
-}
-
-// GatewayListLeaderboardsWithResponse performs a GET /v1/accounts/{account_id}/leaderboards (the `GatewayListLeaderboards` operationId) request.
-//
-// Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) GatewayListLeaderboardsWithResponse(ctx context.Context, accountId string, params *GatewayListLeaderboardsParams, reqEditors ...RequestEditorFn) (*GatewayListLeaderboardsResponse2, error) {
-	rsp, err := c.GatewayListLeaderboards(ctx, accountId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListLeaderboardsResponse2(rsp)
-}
-
-// GatewayCreateLeaderboardWithBodyWithResponse CRUD APIs for leaderboards.
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-func (c *ClientWithResponses) GatewayCreateLeaderboardWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateLeaderboardResponse, error) {
-	rsp, err := c.GatewayCreateLeaderboardWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateLeaderboardResponse(rsp)
-}
-
-// GatewayCreateLeaderboardWithResponse CRUD APIs for leaderboards.
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/leaderboards (the `GatewayCreateLeaderboard` operationId).
-func (c *ClientWithResponses) GatewayCreateLeaderboardWithResponse(ctx context.Context, accountId string, body GatewayCreateLeaderboardJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateLeaderboardResponse, error) {
-	rsp, err := c.GatewayCreateLeaderboard(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateLeaderboardResponse(rsp)
-}
-
-// GatewayDeleteLeaderboardWithResponse performs a DELETE /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayDeleteLeaderboard` operationId) request.
-//
-// Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) GatewayDeleteLeaderboardWithResponse(ctx context.Context, accountId string, leaderboardId string, reqEditors ...RequestEditorFn) (*GatewayDeleteLeaderboardResponse, error) {
-	rsp, err := c.GatewayDeleteLeaderboard(ctx, accountId, leaderboardId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteLeaderboardResponse(rsp)
-}
-
-// GatewayGetLeaderboardWithResponse performs a GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id} (the `GatewayGetLeaderboard` operationId) request.
-//
-// Returns a wrapper object for the known response body format(s).
-func (c *ClientWithResponses) GatewayGetLeaderboardWithResponse(ctx context.Context, accountId string, leaderboardId string, params *GatewayGetLeaderboardParams, reqEditors ...RequestEditorFn) (*GatewayGetLeaderboardResponse2, error) {
-	rsp, err := c.GatewayGetLeaderboard(ctx, accountId, leaderboardId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetLeaderboardResponse2(rsp)
-}
-
-// GatewayListLeaderboardEvaluationJobsWithResponse List evaluation jobs for a leaderboard (custom method)
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/leaderboards/{leaderboard_id}:listEvaluationJobs (the `GatewayListLeaderboardEvaluationJobs` operationId).
-func (c *ClientWithResponses) GatewayListLeaderboardEvaluationJobsWithResponse(ctx context.Context, accountId string, leaderboardId string, params *GatewayListLeaderboardEvaluationJobsParams, reqEditors ...RequestEditorFn) (*GatewayListLeaderboardEvaluationJobsResponse2, error) {
-	rsp, err := c.GatewayListLeaderboardEvaluationJobs(ctx, accountId, leaderboardId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListLeaderboardEvaluationJobsResponse2(rsp)
-}
-
-// GatewayListMcpServersWithResponse List MCP Servers
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/mcpServers (the `GatewayListMcpServers` operationId).
-func (c *ClientWithResponses) GatewayListMcpServersWithResponse(ctx context.Context, accountId string, params *GatewayListMcpServersParams, reqEditors ...RequestEditorFn) (*GatewayListMcpServersResponse2, error) {
-	rsp, err := c.GatewayListMcpServers(ctx, accountId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListMcpServersResponse2(rsp)
-}
-
-// GatewayCreateMcpServerWithBodyWithResponse Create MCP Server
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-func (c *ClientWithResponses) GatewayCreateMcpServerWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateMcpServerResponse, error) {
-	rsp, err := c.GatewayCreateMcpServerWithBody(ctx, accountId, params, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateMcpServerResponse(rsp)
-}
-
-// GatewayCreateMcpServerWithResponse Create MCP Server
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/mcpServers (the `GatewayCreateMcpServer` operationId).
-func (c *ClientWithResponses) GatewayCreateMcpServerWithResponse(ctx context.Context, accountId string, params *GatewayCreateMcpServerParams, body GatewayCreateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateMcpServerResponse, error) {
-	rsp, err := c.GatewayCreateMcpServer(ctx, accountId, params, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateMcpServerResponse(rsp)
-}
-
-// GatewayDeleteMcpServerWithResponse Delete MCP Server
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayDeleteMcpServer` operationId).
-func (c *ClientWithResponses) GatewayDeleteMcpServerWithResponse(ctx context.Context, accountId string, mcpServerId string, reqEditors ...RequestEditorFn) (*GatewayDeleteMcpServerResponse, error) {
-	rsp, err := c.GatewayDeleteMcpServer(ctx, accountId, mcpServerId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteMcpServerResponse(rsp)
-}
-
-// GatewayGetMcpServerWithResponse Get MCP Server
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayGetMcpServer` operationId).
-func (c *ClientWithResponses) GatewayGetMcpServerWithResponse(ctx context.Context, accountId string, mcpServerId string, params *GatewayGetMcpServerParams, reqEditors ...RequestEditorFn) (*GatewayGetMcpServerResponse, error) {
-	rsp, err := c.GatewayGetMcpServer(ctx, accountId, mcpServerId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetMcpServerResponse(rsp)
-}
-
-// GatewayUpdateMcpServerWithBodyWithResponse Update MCP Server
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-func (c *ClientWithResponses) GatewayUpdateMcpServerWithBodyWithResponse(ctx context.Context, accountId string, mcpServerId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateMcpServerResponse, error) {
-	rsp, err := c.GatewayUpdateMcpServerWithBody(ctx, accountId, mcpServerId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateMcpServerResponse(rsp)
-}
-
-// GatewayUpdateMcpServerWithResponse Update MCP Server
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/mcpServers/{mcp_server_id} (the `GatewayUpdateMcpServer` operationId).
-func (c *ClientWithResponses) GatewayUpdateMcpServerWithResponse(ctx context.Context, accountId string, mcpServerId string, body GatewayUpdateMcpServerJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateMcpServerResponse, error) {
-	rsp, err := c.GatewayUpdateMcpServer(ctx, accountId, mcpServerId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateMcpServerResponse(rsp)
 }
 
 // GatewayListModelsWithResponse List Models
@@ -36238,199 +36493,43 @@ func (c *ClientWithResponses) GatewayValidateModelUploadWithResponse(ctx context
 	return ParseGatewayValidateModelUploadResponse2(rsp)
 }
 
-// GatewayListNodePoolBindingsWithResponse List Node Pool Bindings
+// GatewayGetPolicySettingsWithResponse Returns the singleton PolicySettings for the given account.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /v1/accounts/{account_id}/nodePoolBindings (the `GatewayListNodePoolBindings` operationId).
-func (c *ClientWithResponses) GatewayListNodePoolBindingsWithResponse(ctx context.Context, accountId string, params *GatewayListNodePoolBindingsParams, reqEditors ...RequestEditorFn) (*GatewayListNodePoolBindingsResponse2, error) {
-	rsp, err := c.GatewayListNodePoolBindings(ctx, accountId, params, reqEditors...)
+// Corresponds with GET /v1/accounts/{account_id}/policySettings (the `GatewayGetPolicySettings` operationId).
+func (c *ClientWithResponses) GatewayGetPolicySettingsWithResponse(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*GatewayGetPolicySettingsResponse, error) {
+	rsp, err := c.GatewayGetPolicySettings(ctx, accountId, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayListNodePoolBindingsResponse2(rsp)
+	return ParseGatewayGetPolicySettingsResponse(rsp)
 }
 
-// GatewayCreateNodePoolBindingWithBodyWithResponse Create Node Pool Binding
+// GatewayUpdatePolicySettingsWithBodyWithResponse Updates the per-account PolicySettings singleton.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-func (c *ClientWithResponses) GatewayCreateNodePoolBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolBindingResponse, error) {
-	rsp, err := c.GatewayCreateNodePoolBindingWithBody(ctx, accountId, contentType, body, reqEditors...)
+// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+func (c *ClientWithResponses) GatewayUpdatePolicySettingsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdatePolicySettingsResponse, error) {
+	rsp, err := c.GatewayUpdatePolicySettingsWithBody(ctx, accountId, contentType, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayCreateNodePoolBindingResponse(rsp)
+	return ParseGatewayUpdatePolicySettingsResponse(rsp)
 }
 
-// GatewayCreateNodePoolBindingWithResponse Create Node Pool Binding
+// GatewayUpdatePolicySettingsWithResponse Updates the per-account PolicySettings singleton.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings (the `GatewayCreateNodePoolBinding` operationId).
-func (c *ClientWithResponses) GatewayCreateNodePoolBindingWithResponse(ctx context.Context, accountId string, body GatewayCreateNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolBindingResponse, error) {
-	rsp, err := c.GatewayCreateNodePoolBinding(ctx, accountId, body, reqEditors...)
+// Corresponds with PATCH /v1/accounts/{account_id}/policySettings (the `GatewayUpdatePolicySettings` operationId).
+func (c *ClientWithResponses) GatewayUpdatePolicySettingsWithResponse(ctx context.Context, accountId string, body GatewayUpdatePolicySettingsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdatePolicySettingsResponse, error) {
+	rsp, err := c.GatewayUpdatePolicySettings(ctx, accountId, body, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayCreateNodePoolBindingResponse(rsp)
-}
-
-// GatewayDeleteNodePoolBindingWithBodyWithResponse Delete Node Pool Binding
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-func (c *ClientWithResponses) GatewayDeleteNodePoolBindingWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayDeleteNodePoolBindingResponse, error) {
-	rsp, err := c.GatewayDeleteNodePoolBindingWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteNodePoolBindingResponse(rsp)
-}
-
-// GatewayDeleteNodePoolBindingWithResponse Delete Node Pool Binding
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePoolBindings:delete (the `GatewayDeleteNodePoolBinding` operationId).
-func (c *ClientWithResponses) GatewayDeleteNodePoolBindingWithResponse(ctx context.Context, accountId string, body GatewayDeleteNodePoolBindingJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayDeleteNodePoolBindingResponse, error) {
-	rsp, err := c.GatewayDeleteNodePoolBinding(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteNodePoolBindingResponse(rsp)
-}
-
-// GatewayListNodePoolsWithResponse List Node Pools
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/nodePools (the `GatewayListNodePools` operationId).
-func (c *ClientWithResponses) GatewayListNodePoolsWithResponse(ctx context.Context, accountId string, params *GatewayListNodePoolsParams, reqEditors ...RequestEditorFn) (*GatewayListNodePoolsResponse2, error) {
-	rsp, err := c.GatewayListNodePools(ctx, accountId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayListNodePoolsResponse2(rsp)
-}
-
-// GatewayCreateNodePoolWithBodyWithResponse Create Node Pool
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-func (c *ClientWithResponses) GatewayCreateNodePoolWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolResponse, error) {
-	rsp, err := c.GatewayCreateNodePoolWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateNodePoolResponse(rsp)
-}
-
-// GatewayCreateNodePoolWithResponse Create Node Pool
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools (the `GatewayCreateNodePool` operationId).
-func (c *ClientWithResponses) GatewayCreateNodePoolWithResponse(ctx context.Context, accountId string, body GatewayCreateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateNodePoolResponse, error) {
-	rsp, err := c.GatewayCreateNodePool(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateNodePoolResponse(rsp)
-}
-
-// GatewayDeleteNodePoolWithResponse Delete Node Pool
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with DELETE /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayDeleteNodePool` operationId).
-func (c *ClientWithResponses) GatewayDeleteNodePoolWithResponse(ctx context.Context, accountId string, nodePoolId string, reqEditors ...RequestEditorFn) (*GatewayDeleteNodePoolResponse, error) {
-	rsp, err := c.GatewayDeleteNodePool(ctx, accountId, nodePoolId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayDeleteNodePoolResponse(rsp)
-}
-
-// GatewayGetNodePoolWithResponse Get Node Pool
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayGetNodePool` operationId).
-func (c *ClientWithResponses) GatewayGetNodePoolWithResponse(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolParams, reqEditors ...RequestEditorFn) (*GatewayGetNodePoolResponse, error) {
-	rsp, err := c.GatewayGetNodePool(ctx, accountId, nodePoolId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetNodePoolResponse(rsp)
-}
-
-// GatewayUpdateNodePoolWithBodyWithResponse Update Node Pool
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-func (c *ClientWithResponses) GatewayUpdateNodePoolWithBodyWithResponse(ctx context.Context, accountId string, nodePoolId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateNodePoolResponse, error) {
-	rsp, err := c.GatewayUpdateNodePoolWithBody(ctx, accountId, nodePoolId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateNodePoolResponse(rsp)
-}
-
-// GatewayUpdateNodePoolWithResponse Update Node Pool
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with PATCH /v1/accounts/{account_id}/nodePools/{node_pool_id} (the `GatewayUpdateNodePool` operationId).
-func (c *ClientWithResponses) GatewayUpdateNodePoolWithResponse(ctx context.Context, accountId string, nodePoolId string, body GatewayUpdateNodePoolJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateNodePoolResponse, error) {
-	rsp, err := c.GatewayUpdateNodePool(ctx, accountId, nodePoolId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayUpdateNodePoolResponse(rsp)
-}
-
-// GatewayGetNodePoolStatsWithResponse Get Node Pool Stats
-//
-// Returns a wrapper object for the known response body format(s).
-//
-// Corresponds with GET /v1/accounts/{account_id}/nodePools/{node_pool_id}:getStats (the `GatewayGetNodePoolStats` operationId).
-func (c *ClientWithResponses) GatewayGetNodePoolStatsWithResponse(ctx context.Context, accountId string, nodePoolId string, params *GatewayGetNodePoolStatsParams, reqEditors ...RequestEditorFn) (*GatewayGetNodePoolStatsResponse, error) {
-	rsp, err := c.GatewayGetNodePoolStats(ctx, accountId, nodePoolId, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayGetNodePoolStatsResponse(rsp)
-}
-
-// GatewayBatchDeleteNodePoolsWithBodyWithResponse Batch Delete Node Pools
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-func (c *ClientWithResponses) GatewayBatchDeleteNodePoolsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteNodePoolsResponse, error) {
-	rsp, err := c.GatewayBatchDeleteNodePoolsWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayBatchDeleteNodePoolsResponse(rsp)
-}
-
-// GatewayBatchDeleteNodePoolsWithResponse Batch Delete Node Pools
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/nodePools:batchDelete (the `GatewayBatchDeleteNodePools` operationId).
-func (c *ClientWithResponses) GatewayBatchDeleteNodePoolsWithResponse(ctx context.Context, accountId string, body GatewayBatchDeleteNodePoolsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayBatchDeleteNodePoolsResponse, error) {
-	rsp, err := c.GatewayBatchDeleteNodePools(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayBatchDeleteNodePoolsResponse(rsp)
+	return ParseGatewayUpdatePolicySettingsResponse(rsp)
 }
 
 // GatewayListPricingPlansWithResponse List Pricing Plans
@@ -36585,6 +36684,32 @@ func (c *ClientWithResponses) GatewayGetReinforcementFineTuningJobWithResponse(c
 	return ParseGatewayGetReinforcementFineTuningJobResponse(rsp)
 }
 
+// GatewayUpdateReinforcementFineTuningJobWithBodyWithResponse Update Reinforcement Fine-tuning Job
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+func (c *ClientWithResponses) GatewayUpdateReinforcementFineTuningJobWithBodyWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateReinforcementFineTuningJobResponse, error) {
+	rsp, err := c.GatewayUpdateReinforcementFineTuningJobWithBody(ctx, accountId, reinforcementFineTuningJobId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateReinforcementFineTuningJobResponse(rsp)
+}
+
+// GatewayUpdateReinforcementFineTuningJobWithResponse Update Reinforcement Fine-tuning Job
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id} (the `GatewayUpdateReinforcementFineTuningJob` operationId).
+func (c *ClientWithResponses) GatewayUpdateReinforcementFineTuningJobWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayUpdateReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateReinforcementFineTuningJobResponse, error) {
+	rsp, err := c.GatewayUpdateReinforcementFineTuningJob(ctx, accountId, reinforcementFineTuningJobId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateReinforcementFineTuningJobResponse(rsp)
+}
+
 // GatewayCancelReinforcementFineTuningJobWithBodyWithResponse Cancel Reinforcement Fine-tuning Job
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -36635,6 +36760,17 @@ func (c *ClientWithResponses) GatewayDebugReinforcementFineTuningJobWithResponse
 		return nil, err
 	}
 	return ParseGatewayDebugReinforcementFineTuningJobResponse2(rsp)
+}
+
+// GatewayGetReinforcementFineTuningJobMetricsFileEndpointWithResponse performs a GET /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:getMetricsFileEndpoint (the `GatewayGetReinforcementFineTuningJobMetricsFileEndpoint` operationId) request.
+//
+// Returns a wrapper object for the known response body format(s).
+func (c *ClientWithResponses) GatewayGetReinforcementFineTuningJobMetricsFileEndpointWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, reqEditors ...RequestEditorFn) (*GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse, error) {
+	rsp, err := c.GatewayGetReinforcementFineTuningJobMetricsFileEndpoint(ctx, accountId, reinforcementFineTuningJobId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse(rsp)
 }
 
 // GatewayResumeReinforcementFineTuningJobWithBodyWithResponse Resume Reinforcement Fine-tuning Job
@@ -36728,6 +36864,66 @@ func (c *ClientWithResponses) GatewayGetRlorTrainerJobWithResponse(ctx context.C
 	return ParseGatewayGetRlorTrainerJobResponse(rsp)
 }
 
+// GatewayListRlorTrainerJobCheckpointsWithResponse List checkpoints for an RLOR Trainer Job
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints (the `GatewayListRlorTrainerJobCheckpoints` operationId).
+func (c *ClientWithResponses) GatewayListRlorTrainerJobCheckpointsWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, params *GatewayListRlorTrainerJobCheckpointsParams, reqEditors ...RequestEditorFn) (*GatewayListRlorTrainerJobCheckpointsResponse2, error) {
+	rsp, err := c.GatewayListRlorTrainerJobCheckpoints(ctx, accountId, rlorTrainerJobId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListRlorTrainerJobCheckpointsResponse2(rsp)
+}
+
+// GatewaySyncRlorTrainerJobCheckpointWithBodyWithResponse Ensure an RLOR training checkpoint is present in the requested storage
+// availability class. By default this copies a single-region runtime
+// checkpoint into managed durable storage. Set
+// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+// into request.region before restoring there.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+func (c *ClientWithResponses) GatewaySyncRlorTrainerJobCheckpointWithBodyWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewaySyncRlorTrainerJobCheckpointResponse2, error) {
+	rsp, err := c.GatewaySyncRlorTrainerJobCheckpointWithBody(ctx, accountId, rlorTrainerJobId, checkpointId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewaySyncRlorTrainerJobCheckpointResponse2(rsp)
+}
+
+// GatewaySyncRlorTrainerJobCheckpointWithResponse Ensure an RLOR training checkpoint is present in the requested storage
+// availability class. By default this copies a single-region runtime
+// checkpoint into managed durable storage. Set
+// request.target_availability=SINGLE_REGION to stage a durable checkpoint
+// into request.region before restoring there.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/checkpoints/{checkpoint_id}:sync (the `GatewaySyncRlorTrainerJobCheckpoint` operationId).
+func (c *ClientWithResponses) GatewaySyncRlorTrainerJobCheckpointWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, checkpointId string, body GatewaySyncRlorTrainerJobCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewaySyncRlorTrainerJobCheckpointResponse2, error) {
+	rsp, err := c.GatewaySyncRlorTrainerJobCheckpoint(ctx, accountId, rlorTrainerJobId, checkpointId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewaySyncRlorTrainerJobCheckpointResponse2(rsp)
+}
+
+// GatewayGetRlorTrainerJobPublicLogsWithResponse Get a signed URL for the public trainer logs of an RLOR Trainer Job.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}/publicLogs (the `GatewayGetRlorTrainerJobPublicLogs` operationId).
+func (c *ClientWithResponses) GatewayGetRlorTrainerJobPublicLogsWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, reqEditors ...RequestEditorFn) (*GatewayGetRlorTrainerJobPublicLogsResponse2, error) {
+	rsp, err := c.GatewayGetRlorTrainerJobPublicLogs(ctx, accountId, rlorTrainerJobId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetRlorTrainerJobPublicLogsResponse2(rsp)
+}
+
 // GatewayCancelRlorTrainerJobWithBodyWithResponse Cancel Rlor Trainer Job
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -36752,32 +36948,6 @@ func (c *ClientWithResponses) GatewayCancelRlorTrainerJobWithResponse(ctx contex
 		return nil, err
 	}
 	return ParseGatewayCancelRlorTrainerJobResponse(rsp)
-}
-
-// GatewayExecuteRlorTrainStepWithBodyWithResponse Execute one training step for keep-alive Reinforcement Fine-tuning Step
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-func (c *ClientWithResponses) GatewayExecuteRlorTrainStepWithBodyWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayExecuteRlorTrainStepResponse, error) {
-	rsp, err := c.GatewayExecuteRlorTrainStepWithBody(ctx, accountId, rlorTrainerJobId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayExecuteRlorTrainStepResponse(rsp)
-}
-
-// GatewayExecuteRlorTrainStepWithResponse Execute one training step for keep-alive Reinforcement Fine-tuning Step
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/rlorTrainerJobs/{rlor_trainer_job_id}:executeTrainStep (the `GatewayExecuteRlorTrainStep` operationId).
-func (c *ClientWithResponses) GatewayExecuteRlorTrainStepWithResponse(ctx context.Context, accountId string, rlorTrainerJobId string, body GatewayExecuteRlorTrainStepJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayExecuteRlorTrainStepResponse, error) {
-	rsp, err := c.GatewayExecuteRlorTrainStep(ctx, accountId, rlorTrainerJobId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayExecuteRlorTrainStepResponse(rsp)
 }
 
 // GatewayResumeRlorTrainerJobWithBodyWithResponse Resume Rlor Trainer Job
@@ -36983,69 +37153,45 @@ func (c *ClientWithResponses) GatewayUpdateSecretWithResponse(ctx context.Contex
 	return ParseGatewayUpdateSecretResponse(rsp)
 }
 
-// GatewayListSnapshotsWithResponse List Snapshots
+// GatewayListServerlessModelsWithResponse List serverless models available to the account (public catalog).
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /v1/accounts/{account_id}/snapshots (the `GatewayListSnapshots` operationId).
-func (c *ClientWithResponses) GatewayListSnapshotsWithResponse(ctx context.Context, accountId string, params *GatewayListSnapshotsParams, reqEditors ...RequestEditorFn) (*GatewayListSnapshotsResponse2, error) {
-	rsp, err := c.GatewayListSnapshots(ctx, accountId, params, reqEditors...)
+// Corresponds with GET /v1/accounts/{account_id}/serverlessModels (the `GatewayListServerlessModels` operationId).
+func (c *ClientWithResponses) GatewayListServerlessModelsWithResponse(ctx context.Context, accountId string, params *GatewayListServerlessModelsParams, reqEditors ...RequestEditorFn) (*GatewayListServerlessModelsResponse2, error) {
+	rsp, err := c.GatewayListServerlessModels(ctx, accountId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayListSnapshotsResponse2(rsp)
+	return ParseGatewayListServerlessModelsResponse2(rsp)
 }
 
-// GatewayCreateSnapshotWithBodyWithResponse Create Snapshot
-//
-// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-func (c *ClientWithResponses) GatewayCreateSnapshotWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateSnapshotResponse, error) {
-	rsp, err := c.GatewayCreateSnapshotWithBody(ctx, accountId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateSnapshotResponse(rsp)
-}
-
-// GatewayCreateSnapshotWithResponse Create Snapshot
-//
-// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
-//
-// Corresponds with POST /v1/accounts/{account_id}/snapshots (the `GatewayCreateSnapshot` operationId).
-func (c *ClientWithResponses) GatewayCreateSnapshotWithResponse(ctx context.Context, accountId string, body GatewayCreateSnapshotJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateSnapshotResponse, error) {
-	rsp, err := c.GatewayCreateSnapshot(ctx, accountId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGatewayCreateSnapshotResponse(rsp)
-}
-
-// GatewayDeleteSnapshotWithResponse Delete Snapshot
+// GatewayListAccountServerlessRateLimitsWithResponse Lists effective global rate limits for shared serverless pool deployments (fireworks-owned).
+// Values reflect configured limits as observed in production monitoring.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with DELETE /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayDeleteSnapshot` operationId).
-func (c *ClientWithResponses) GatewayDeleteSnapshotWithResponse(ctx context.Context, accountId string, snapshotId string, reqEditors ...RequestEditorFn) (*GatewayDeleteSnapshotResponse, error) {
-	rsp, err := c.GatewayDeleteSnapshot(ctx, accountId, snapshotId, reqEditors...)
+// Corresponds with GET /v1/accounts/{account_id}/serverlessRateLimits (the `GatewayListAccountServerlessRateLimits` operationId).
+func (c *ClientWithResponses) GatewayListAccountServerlessRateLimitsWithResponse(ctx context.Context, accountId string, params *GatewayListAccountServerlessRateLimitsParams, reqEditors ...RequestEditorFn) (*GatewayListAccountServerlessRateLimitsResponse2, error) {
+	rsp, err := c.GatewayListAccountServerlessRateLimits(ctx, accountId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayDeleteSnapshotResponse(rsp)
+	return ParseGatewayListAccountServerlessRateLimitsResponse2(rsp)
 }
 
-// GatewayGetSnapshotWithResponse Get Snapshot
+// GatewayGetAccountServerlessTokenUsageWithResponse Serverless pool token throughput (tokens per minute) by time bucket and base model, from
+// production usage metrics.
 //
 // Returns a wrapper object for the known response body format(s).
 //
-// Corresponds with GET /v1/accounts/{account_id}/snapshots/{snapshot_id} (the `GatewayGetSnapshot` operationId).
-func (c *ClientWithResponses) GatewayGetSnapshotWithResponse(ctx context.Context, accountId string, snapshotId string, params *GatewayGetSnapshotParams, reqEditors ...RequestEditorFn) (*GatewayGetSnapshotResponse, error) {
-	rsp, err := c.GatewayGetSnapshot(ctx, accountId, snapshotId, params, reqEditors...)
+// Corresponds with GET /v1/accounts/{account_id}/serverlessTokenUsage (the `GatewayGetAccountServerlessTokenUsage` operationId).
+func (c *ClientWithResponses) GatewayGetAccountServerlessTokenUsageWithResponse(ctx context.Context, accountId string, params *GatewayGetAccountServerlessTokenUsageParams, reqEditors ...RequestEditorFn) (*GatewayGetAccountServerlessTokenUsageResponse2, error) {
+	rsp, err := c.GatewayGetAccountServerlessTokenUsage(ctx, accountId, params, reqEditors...)
 	if err != nil {
 		return nil, err
 	}
-	return ParseGatewayGetSnapshotResponse(rsp)
+	return ParseGatewayGetAccountServerlessTokenUsageResponse2(rsp)
 }
 
 // GatewayListSupervisedFineTuningJobsWithResponse List Supervised Fine-tuning Jobs
@@ -37257,6 +37403,701 @@ func (c *ClientWithResponses) GatewayGetTrailWithResponse(ctx context.Context, a
 	return ParseGatewayGetTrailResponse(rsp)
 }
 
+// GatewayUpdateTrailWithBodyWithResponse Update Trail
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+func (c *ClientWithResponses) GatewayUpdateTrailWithBodyWithResponse(ctx context.Context, accountId string, trailId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateTrailResponse, error) {
+	rsp, err := c.GatewayUpdateTrailWithBody(ctx, accountId, trailId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateTrailResponse(rsp)
+}
+
+// GatewayUpdateTrailWithResponse Update Trail
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trails/{trail_id} (the `GatewayUpdateTrail` operationId).
+func (c *ClientWithResponses) GatewayUpdateTrailWithResponse(ctx context.Context, accountId string, trailId string, body GatewayUpdateTrailJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateTrailResponse, error) {
+	rsp, err := c.GatewayUpdateTrail(ctx, accountId, trailId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateTrailResponse(rsp)
+}
+
+// GatewayGetTrailMetricsWithResponse Get Trail Metrics (trace counts, token usage from tracing service)
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trails/{trail_id}:getMetrics (the `GatewayGetTrailMetrics` operationId).
+func (c *ClientWithResponses) GatewayGetTrailMetricsWithResponse(ctx context.Context, accountId string, trailId string, reqEditors ...RequestEditorFn) (*GatewayGetTrailMetricsResponse, error) {
+	rsp, err := c.GatewayGetTrailMetrics(ctx, accountId, trailId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetTrailMetricsResponse(rsp)
+}
+
+// GatewayListTrainingRunsWithResponse List training runs under an account (Tinker RestClient list_training_runs).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingRuns (the `GatewayListTrainingRuns` operationId).
+func (c *ClientWithResponses) GatewayListTrainingRunsWithResponse(ctx context.Context, accountId string, params *GatewayListTrainingRunsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingRunsResponse2, error) {
+	rsp, err := c.GatewayListTrainingRuns(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListTrainingRunsResponse2(rsp)
+}
+
+// GatewayCreateTrainingRunWithBodyWithResponse Create a training run: the durable, account-owned model lineage for a
+// Tinker create_lora_training_client. A session may host many runs, and a run
+// may span sessions across resume.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingRunWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingRunResponse, error) {
+	rsp, err := c.GatewayCreateTrainingRunWithBody(ctx, accountId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingRunResponse(rsp)
+}
+
+// GatewayCreateTrainingRunWithResponse Create a training run: the durable, account-owned model lineage for a
+// Tinker create_lora_training_client. A session may host many runs, and a run
+// may span sessions across resume.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns (the `GatewayCreateTrainingRun` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingRunWithResponse(ctx context.Context, accountId string, body GatewayCreateTrainingRunJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingRunResponse, error) {
+	rsp, err := c.GatewayCreateTrainingRun(ctx, accountId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingRunResponse(rsp)
+}
+
+// GatewayGetTrainingRunWithResponse Get a training run (Tinker RestClient get_training_run parity).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingRuns/{training_run_id} (the `GatewayGetTrainingRun` operationId).
+func (c *ClientWithResponses) GatewayGetTrainingRunWithResponse(ctx context.Context, accountId string, trainingRunId string, params *GatewayGetTrainingRunParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingRunResponse, error) {
+	rsp, err := c.GatewayGetTrainingRun(ctx, accountId, trainingRunId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetTrainingRunResponse(rsp)
+}
+
+// GatewayAbortTrainingRunMaterializationWithBodyWithResponse Abort a pending training run when trainer materialization failed or timed
+// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+func (c *ClientWithResponses) GatewayAbortTrainingRunMaterializationWithBodyWithResponse(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayAbortTrainingRunMaterializationResponse, error) {
+	rsp, err := c.GatewayAbortTrainingRunMaterializationWithBody(ctx, accountId, trainingRunId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayAbortTrainingRunMaterializationResponse(rsp)
+}
+
+// GatewayAbortTrainingRunMaterializationWithResponse Abort a pending training run when trainer materialization failed or timed
+// out. INTERNAL: api_gateway calls this on failed Tinker create_model.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:abortMaterialization (the `GatewayAbortTrainingRunMaterialization` operationId).
+func (c *ClientWithResponses) GatewayAbortTrainingRunMaterializationWithResponse(ctx context.Context, accountId string, trainingRunId string, body GatewayAbortTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayAbortTrainingRunMaterializationResponse, error) {
+	rsp, err := c.GatewayAbortTrainingRunMaterialization(ctx, accountId, trainingRunId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayAbortTrainingRunMaterializationResponse(rsp)
+}
+
+// GatewayFinalizeTrainingRunMaterializationWithBodyWithResponse Finalize a training run after the trainer has successfully materialized
+// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+// Tinker create_model to the trainer.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+func (c *ClientWithResponses) GatewayFinalizeTrainingRunMaterializationWithBodyWithResponse(ctx context.Context, accountId string, trainingRunId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayFinalizeTrainingRunMaterializationResponse, error) {
+	rsp, err := c.GatewayFinalizeTrainingRunMaterializationWithBody(ctx, accountId, trainingRunId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayFinalizeTrainingRunMaterializationResponse(rsp)
+}
+
+// GatewayFinalizeTrainingRunMaterializationWithResponse Finalize a training run after the trainer has successfully materialized
+// its run-scoped model id. INTERNAL: api_gateway calls this after proxying
+// Tinker create_model to the trainer.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingRuns/{training_run_id}:finalizeMaterialization (the `GatewayFinalizeTrainingRunMaterialization` operationId).
+func (c *ClientWithResponses) GatewayFinalizeTrainingRunMaterializationWithResponse(ctx context.Context, accountId string, trainingRunId string, body GatewayFinalizeTrainingRunMaterializationJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayFinalizeTrainingRunMaterializationResponse, error) {
+	rsp, err := c.GatewayFinalizeTrainingRunMaterialization(ctx, accountId, trainingRunId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayFinalizeTrainingRunMaterializationResponse(rsp)
+}
+
+// GatewayListTrainingSessionsWithResponse List training sessions under an account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions (the `GatewayListTrainingSessions` operationId).
+func (c *ClientWithResponses) GatewayListTrainingSessionsWithResponse(ctx context.Context, accountId string, params *GatewayListTrainingSessionsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionsResponse2, error) {
+	rsp, err := c.GatewayListTrainingSessions(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListTrainingSessionsResponse2(rsp)
+}
+
+// GatewayCreateTrainingSessionWithBodyWithResponse Create a training session under an account.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingSessionWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionResponse, error) {
+	rsp, err := c.GatewayCreateTrainingSessionWithBody(ctx, accountId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingSessionResponse(rsp)
+}
+
+// GatewayCreateTrainingSessionWithResponse Create a training session under an account.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions (the `GatewayCreateTrainingSession` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingSessionWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingSessionParams, body GatewayCreateTrainingSessionJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionResponse, error) {
+	rsp, err := c.GatewayCreateTrainingSession(ctx, accountId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingSessionResponse(rsp)
+}
+
+// GatewayDeleteTrainingSessionWithResponse Delete a training session. Releases the shared-trainer binding before
+// removing the row; the session transitions DELETING → gone.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayDeleteTrainingSession` operationId).
+func (c *ClientWithResponses) GatewayDeleteTrainingSessionWithResponse(ctx context.Context, accountId string, trainingSessionId string, reqEditors ...RequestEditorFn) (*GatewayDeleteTrainingSessionResponse, error) {
+	rsp, err := c.GatewayDeleteTrainingSession(ctx, accountId, trainingSessionId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayDeleteTrainingSessionResponse(rsp)
+}
+
+// GatewayGetTrainingSessionWithResponse Get a training session.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id} (the `GatewayGetTrainingSession` operationId).
+func (c *ClientWithResponses) GatewayGetTrainingSessionWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayGetTrainingSessionParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingSessionResponse, error) {
+	rsp, err := c.GatewayGetTrainingSession(ctx, accountId, trainingSessionId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetTrainingSessionResponse(rsp)
+}
+
+// GatewayListTrainingSessionCheckpointsWithResponse List the checkpoints saved during a TrainingSession. Access is scoped
+// to the session's account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints (the `GatewayListTrainingSessionCheckpoints` operationId).
+func (c *ClientWithResponses) GatewayListTrainingSessionCheckpointsWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionCheckpointsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionCheckpointsResponse2, error) {
+	rsp, err := c.GatewayListTrainingSessionCheckpoints(ctx, accountId, trainingSessionId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListTrainingSessionCheckpointsResponse2(rsp)
+}
+
+// GatewayPromoteTrainingSessionCheckpointWithBodyWithResponse Promote a checkpoint saved during a TrainingSession into a
+// customer-owned Model, identified by checkpoint_name. Only promotable
+// (inference) checkpoints can be promoted.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+func (c *ClientWithResponses) GatewayPromoteTrainingSessionCheckpointWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayPromoteTrainingSessionCheckpointResponse2, error) {
+	rsp, err := c.GatewayPromoteTrainingSessionCheckpointWithBody(ctx, accountId, trainingSessionId, checkpointId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayPromoteTrainingSessionCheckpointResponse2(rsp)
+}
+
+// GatewayPromoteTrainingSessionCheckpointWithResponse Promote a checkpoint saved during a TrainingSession into a
+// customer-owned Model, identified by checkpoint_name. Only promotable
+// (inference) checkpoints can be promoted.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/checkpoints/{checkpoint_id}:promote (the `GatewayPromoteTrainingSessionCheckpoint` operationId).
+func (c *ClientWithResponses) GatewayPromoteTrainingSessionCheckpointWithResponse(ctx context.Context, accountId string, trainingSessionId string, checkpointId string, body GatewayPromoteTrainingSessionCheckpointJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayPromoteTrainingSessionCheckpointResponse2, error) {
+	rsp, err := c.GatewayPromoteTrainingSessionCheckpoint(ctx, accountId, trainingSessionId, checkpointId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayPromoteTrainingSessionCheckpointResponse2(rsp)
+}
+
+// GatewayListTrainingSessionChunkOutputsWithResponse List chunk completion events on a TrainingSession.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayListTrainingSessionChunkOutputs` operationId).
+func (c *ClientWithResponses) GatewayListTrainingSessionChunkOutputsWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionChunkOutputsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionChunkOutputsResponse2, error) {
+	rsp, err := c.GatewayListTrainingSessionChunkOutputs(ctx, accountId, trainingSessionId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListTrainingSessionChunkOutputsResponse2(rsp)
+}
+
+// GatewayCreateTrainingSessionChunkOutputWithBodyWithResponse Create a chunk-completion row on a TrainingSession (per-chunk
+// distributions, dataset refs, checkpoints). Trainer-driven write; the
+// server validates the parent session and materializes the row.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingSessionChunkOutputWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionChunkOutputResponse, error) {
+	rsp, err := c.GatewayCreateTrainingSessionChunkOutputWithBody(ctx, accountId, trainingSessionId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingSessionChunkOutputResponse(rsp)
+}
+
+// GatewayCreateTrainingSessionChunkOutputWithResponse Create a chunk-completion row on a TrainingSession (per-chunk
+// distributions, dataset refs, checkpoints). Trainer-driven write; the
+// server validates the parent session and materializes the row.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}/chunkOutputs (the `GatewayCreateTrainingSessionChunkOutput` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingSessionChunkOutputWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayCreateTrainingSessionChunkOutputParams, body GatewayCreateTrainingSessionChunkOutputJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingSessionChunkOutputResponse, error) {
+	rsp, err := c.GatewayCreateTrainingSessionChunkOutput(ctx, accountId, trainingSessionId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingSessionChunkOutputResponse(rsp)
+}
+
+// GatewayListTrainingSessionTrainingCurvesWithResponse List scalar training curves for line charts on a TrainingSession.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingSessions/{training_session_id}/trainingCurves (the `GatewayListTrainingSessionTrainingCurves` operationId).
+func (c *ClientWithResponses) GatewayListTrainingSessionTrainingCurvesWithResponse(ctx context.Context, accountId string, trainingSessionId string, params *GatewayListTrainingSessionTrainingCurvesParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingSessionTrainingCurvesResponse2, error) {
+	rsp, err := c.GatewayListTrainingSessionTrainingCurves(ctx, accountId, trainingSessionId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListTrainingSessionTrainingCurvesResponse2(rsp)
+}
+
+// GatewayLoadTrainingSessionStateWithBodyWithResponse Load or switch the LoRA adapter state for a training session.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+func (c *ClientWithResponses) GatewayLoadTrainingSessionStateWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayLoadTrainingSessionStateResponse, error) {
+	rsp, err := c.GatewayLoadTrainingSessionStateWithBody(ctx, accountId, trainingSessionId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayLoadTrainingSessionStateResponse(rsp)
+}
+
+// GatewayLoadTrainingSessionStateWithResponse Load or switch the LoRA adapter state for a training session.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:loadState (the `GatewayLoadTrainingSessionState` operationId).
+func (c *ClientWithResponses) GatewayLoadTrainingSessionStateWithResponse(ctx context.Context, accountId string, trainingSessionId string, body GatewayLoadTrainingSessionStateJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayLoadTrainingSessionStateResponse, error) {
+	rsp, err := c.GatewayLoadTrainingSessionState(ctx, accountId, trainingSessionId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayLoadTrainingSessionStateResponse(rsp)
+}
+
+// GatewayLogTrainingSessionMetricsWithBodyWithResponse Log scalar training metrics on a TrainingSession (append-only time-series,
+// upserts on (session, key, step) so retries are idempotent).
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+func (c *ClientWithResponses) GatewayLogTrainingSessionMetricsWithBodyWithResponse(ctx context.Context, accountId string, trainingSessionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayLogTrainingSessionMetricsResponse2, error) {
+	rsp, err := c.GatewayLogTrainingSessionMetricsWithBody(ctx, accountId, trainingSessionId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayLogTrainingSessionMetricsResponse2(rsp)
+}
+
+// GatewayLogTrainingSessionMetricsWithResponse Log scalar training metrics on a TrainingSession (append-only time-series,
+// upserts on (session, key, step) so retries are idempotent).
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingSessions/{training_session_id}:logMetrics (the `GatewayLogTrainingSessionMetrics` operationId).
+func (c *ClientWithResponses) GatewayLogTrainingSessionMetricsWithResponse(ctx context.Context, accountId string, trainingSessionId string, body GatewayLogTrainingSessionMetricsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayLogTrainingSessionMetricsResponse2, error) {
+	rsp, err := c.GatewayLogTrainingSessionMetrics(ctx, accountId, trainingSessionId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayLogTrainingSessionMetricsResponse2(rsp)
+}
+
+// GatewayListTrainingShapesWithResponse List Training Shapes
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes (the `GatewayListTrainingShapes` operationId).
+func (c *ClientWithResponses) GatewayListTrainingShapesWithResponse(ctx context.Context, accountId string, params *GatewayListTrainingShapesParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingShapesResponse2, error) {
+	rsp, err := c.GatewayListTrainingShapes(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListTrainingShapesResponse2(rsp)
+}
+
+// GatewayCreateTrainingShapeWithBodyWithResponse CRUD APIs for training shape.
+// Create Training Shape
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingShapeWithBodyWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingShapeResponse, error) {
+	rsp, err := c.GatewayCreateTrainingShapeWithBody(ctx, accountId, params, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingShapeResponse(rsp)
+}
+
+// GatewayCreateTrainingShapeWithResponse CRUD APIs for training shape.
+// Create Training Shape
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/trainingShapes (the `GatewayCreateTrainingShape` operationId).
+func (c *ClientWithResponses) GatewayCreateTrainingShapeWithResponse(ctx context.Context, accountId string, params *GatewayCreateTrainingShapeParams, body GatewayCreateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateTrainingShapeResponse, error) {
+	rsp, err := c.GatewayCreateTrainingShape(ctx, accountId, params, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateTrainingShapeResponse(rsp)
+}
+
+// GatewayDeleteTrainingShapeWithResponse Delete Training Shape
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with DELETE /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayDeleteTrainingShape` operationId).
+func (c *ClientWithResponses) GatewayDeleteTrainingShapeWithResponse(ctx context.Context, accountId string, trainingShapeId string, reqEditors ...RequestEditorFn) (*GatewayDeleteTrainingShapeResponse, error) {
+	rsp, err := c.GatewayDeleteTrainingShape(ctx, accountId, trainingShapeId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayDeleteTrainingShapeResponse(rsp)
+}
+
+// GatewayGetTrainingShapeWithResponse Get Training Shape
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayGetTrainingShape` operationId).
+func (c *ClientWithResponses) GatewayGetTrainingShapeWithResponse(ctx context.Context, accountId string, trainingShapeId string, params *GatewayGetTrainingShapeParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingShapeResponse, error) {
+	rsp, err := c.GatewayGetTrainingShape(ctx, accountId, trainingShapeId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetTrainingShapeResponse(rsp)
+}
+
+// GatewayUpdateTrainingShapeWithBodyWithResponse Update Training Shape
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+func (c *ClientWithResponses) GatewayUpdateTrainingShapeWithBodyWithResponse(ctx context.Context, accountId string, trainingShapeId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeResponse, error) {
+	rsp, err := c.GatewayUpdateTrainingShapeWithBody(ctx, accountId, trainingShapeId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateTrainingShapeResponse(rsp)
+}
+
+// GatewayUpdateTrainingShapeWithResponse Update Training Shape
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id} (the `GatewayUpdateTrainingShape` operationId).
+func (c *ClientWithResponses) GatewayUpdateTrainingShapeWithResponse(ctx context.Context, accountId string, trainingShapeId string, body GatewayUpdateTrainingShapeJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeResponse, error) {
+	rsp, err := c.GatewayUpdateTrainingShape(ctx, accountId, trainingShapeId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateTrainingShapeResponse(rsp)
+}
+
+// GatewayListTrainingShapeVersionsWithResponse List Training Shapes Versions
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions (the `GatewayListTrainingShapeVersions` operationId).
+func (c *ClientWithResponses) GatewayListTrainingShapeVersionsWithResponse(ctx context.Context, accountId string, trainingShapeId string, params *GatewayListTrainingShapeVersionsParams, reqEditors ...RequestEditorFn) (*GatewayListTrainingShapeVersionsResponse2, error) {
+	rsp, err := c.GatewayListTrainingShapeVersions(ctx, accountId, trainingShapeId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListTrainingShapeVersionsResponse2(rsp)
+}
+
+// GatewayGetTrainingShapeVersionWithResponse Get Training Shape Version
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayGetTrainingShapeVersion` operationId).
+func (c *ClientWithResponses) GatewayGetTrainingShapeVersionWithResponse(ctx context.Context, accountId string, trainingShapeId string, versionId string, params *GatewayGetTrainingShapeVersionParams, reqEditors ...RequestEditorFn) (*GatewayGetTrainingShapeVersionResponse, error) {
+	rsp, err := c.GatewayGetTrainingShapeVersion(ctx, accountId, trainingShapeId, versionId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetTrainingShapeVersionResponse(rsp)
+}
+
+// GatewayUpdateTrainingShapeVersionWithBodyWithResponse Update Training Shape Version
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+func (c *ClientWithResponses) GatewayUpdateTrainingShapeVersionWithBodyWithResponse(ctx context.Context, accountId string, trainingShapeId string, versionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeVersionResponse, error) {
+	rsp, err := c.GatewayUpdateTrainingShapeVersionWithBody(ctx, accountId, trainingShapeId, versionId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateTrainingShapeVersionResponse(rsp)
+}
+
+// GatewayUpdateTrainingShapeVersionWithResponse Update Training Shape Version
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/trainingShapes/{training_shape_id}/versions/{version_id} (the `GatewayUpdateTrainingShapeVersion` operationId).
+func (c *ClientWithResponses) GatewayUpdateTrainingShapeVersionWithResponse(ctx context.Context, accountId string, trainingShapeId string, versionId string, body GatewayUpdateTrainingShapeVersionJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateTrainingShapeVersionResponse, error) {
+	rsp, err := c.GatewayUpdateTrainingShapeVersion(ctx, accountId, trainingShapeId, versionId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateTrainingShapeVersionResponse(rsp)
+}
+
+// GatewayQueryUsageCostsWithBodyWithResponse Query grouped usage cost subtotals for an account.
+//
+// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+func (c *ClientWithResponses) GatewayQueryUsageCostsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayQueryUsageCostsResponse2, error) {
+	rsp, err := c.GatewayQueryUsageCostsWithBody(ctx, accountId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayQueryUsageCostsResponse2(rsp)
+}
+
+// GatewayQueryUsageCostsWithResponse Query grouped usage cost subtotals for an account.
+//
+// Returns rated dollar subtotals for usage over a time range, grouped by up to two of: HOUR, DAY, MODEL, USER, or API_KEY. Unlike `GET /billingUsage` (metered quantities) and `GET /billing/summary` (line items by billing category), this endpoint returns *rated costs* broken down by caller-supplied dimensions, with pagination and an account-wide `subtotal`. Requires account administrator access for `ACCOUNT` scope; `SELF` scope returns costs for the authenticated principal only.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageCosts:query (the `GatewayQueryUsageCosts` operationId).
+func (c *ClientWithResponses) GatewayQueryUsageCostsWithResponse(ctx context.Context, accountId string, body GatewayQueryUsageCostsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayQueryUsageCostsResponse2, error) {
+	rsp, err := c.GatewayQueryUsageCosts(ctx, accountId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayQueryUsageCostsResponse2(rsp)
+}
+
+// GatewayListUserUsageLimitIncreaseRequestsWithResponse Lists the account's limit-increase requests (admin), filterable by state.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayListUserUsageLimitIncreaseRequests` operationId).
+func (c *ClientWithResponses) GatewayListUserUsageLimitIncreaseRequestsWithResponse(ctx context.Context, accountId string, params *GatewayListUserUsageLimitIncreaseRequestsParams, reqEditors ...RequestEditorFn) (*GatewayListUserUsageLimitIncreaseRequestsResponse2, error) {
+	rsp, err := c.GatewayListUserUsageLimitIncreaseRequests(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListUserUsageLimitIncreaseRequestsResponse2(rsp)
+}
+
+// GatewayCreateUserUsageLimitIncreaseRequestWithBodyWithResponse Files a member's request to raise their own per-user serverless cap.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+func (c *ClientWithResponses) GatewayCreateUserUsageLimitIncreaseRequestWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayCreateUserUsageLimitIncreaseRequestResponse, error) {
+	rsp, err := c.GatewayCreateUserUsageLimitIncreaseRequestWithBody(ctx, accountId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateUserUsageLimitIncreaseRequestResponse(rsp)
+}
+
+// GatewayCreateUserUsageLimitIncreaseRequestWithResponse Files a member's request to raise their own per-user serverless cap.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests (the `GatewayCreateUserUsageLimitIncreaseRequest` operationId).
+func (c *ClientWithResponses) GatewayCreateUserUsageLimitIncreaseRequestWithResponse(ctx context.Context, accountId string, body GatewayCreateUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayCreateUserUsageLimitIncreaseRequestResponse, error) {
+	rsp, err := c.GatewayCreateUserUsageLimitIncreaseRequest(ctx, accountId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayCreateUserUsageLimitIncreaseRequestResponse(rsp)
+}
+
+// GatewayApproveUserUsageLimitIncreaseRequestWithBodyWithResponse Approves a pending limit-increase request (admin).
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+func (c *ClientWithResponses) GatewayApproveUserUsageLimitIncreaseRequestWithBodyWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayApproveUserUsageLimitIncreaseRequestResponse, error) {
+	rsp, err := c.GatewayApproveUserUsageLimitIncreaseRequestWithBody(ctx, accountId, usageLimitIncreaseRequestId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayApproveUserUsageLimitIncreaseRequestResponse(rsp)
+}
+
+// GatewayApproveUserUsageLimitIncreaseRequestWithResponse Approves a pending limit-increase request (admin).
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:approve (the `GatewayApproveUserUsageLimitIncreaseRequest` operationId).
+func (c *ClientWithResponses) GatewayApproveUserUsageLimitIncreaseRequestWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayApproveUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayApproveUserUsageLimitIncreaseRequestResponse, error) {
+	rsp, err := c.GatewayApproveUserUsageLimitIncreaseRequest(ctx, accountId, usageLimitIncreaseRequestId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayApproveUserUsageLimitIncreaseRequestResponse(rsp)
+}
+
+// GatewayRejectUserUsageLimitIncreaseRequestWithBodyWithResponse Rejects a pending limit-increase request (admin).
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+func (c *ClientWithResponses) GatewayRejectUserUsageLimitIncreaseRequestWithBodyWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayRejectUserUsageLimitIncreaseRequestResponse, error) {
+	rsp, err := c.GatewayRejectUserUsageLimitIncreaseRequestWithBody(ctx, accountId, usageLimitIncreaseRequestId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayRejectUserUsageLimitIncreaseRequestResponse(rsp)
+}
+
+// GatewayRejectUserUsageLimitIncreaseRequestWithResponse Rejects a pending limit-increase request (admin).
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/accounts/{account_id}/usageLimitIncreaseRequests/{usage_limit_increase_request_id}:reject (the `GatewayRejectUserUsageLimitIncreaseRequest` operationId).
+func (c *ClientWithResponses) GatewayRejectUserUsageLimitIncreaseRequestWithResponse(ctx context.Context, accountId string, usageLimitIncreaseRequestId string, body GatewayRejectUserUsageLimitIncreaseRequestJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayRejectUserUsageLimitIncreaseRequestResponse, error) {
+	rsp, err := c.GatewayRejectUserUsageLimitIncreaseRequest(ctx, accountId, usageLimitIncreaseRequestId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayRejectUserUsageLimitIncreaseRequestResponse(rsp)
+}
+
+// GatewayGetAccountUsageLimitsWithResponse Returns the account-level usage-limits singleton (default per-user cap,
+// enforcement, account-wide usage rollup).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/usageLimits (the `GatewayGetAccountUsageLimits` operationId).
+func (c *ClientWithResponses) GatewayGetAccountUsageLimitsWithResponse(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*GatewayGetAccountUsageLimitsResponse, error) {
+	rsp, err := c.GatewayGetAccountUsageLimits(ctx, accountId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetAccountUsageLimitsResponse(rsp)
+}
+
+// GatewayUpdateAccountUsageLimitsWithBodyWithResponse Updates the account-level usage-limits singleton (default per-user cap,
+// enforcement).
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+func (c *ClientWithResponses) GatewayUpdateAccountUsageLimitsWithBodyWithResponse(ctx context.Context, accountId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateAccountUsageLimitsResponse, error) {
+	rsp, err := c.GatewayUpdateAccountUsageLimitsWithBody(ctx, accountId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateAccountUsageLimitsResponse(rsp)
+}
+
+// GatewayUpdateAccountUsageLimitsWithResponse Updates the account-level usage-limits singleton (default per-user cap,
+// enforcement).
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/usageLimits (the `GatewayUpdateAccountUsageLimits` operationId).
+func (c *ClientWithResponses) GatewayUpdateAccountUsageLimitsWithResponse(ctx context.Context, accountId string, body GatewayUpdateAccountUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateAccountUsageLimitsResponse, error) {
+	rsp, err := c.GatewayUpdateAccountUsageLimits(ctx, accountId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateAccountUsageLimitsResponse(rsp)
+}
+
+// GatewayListUserUsageLimitsWithResponse Lists every user's usage limits in the account (the roster: usage vs.
+// effective cap and over-limit status per user).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/userUsageLimits (the `GatewayListUserUsageLimits` operationId).
+func (c *ClientWithResponses) GatewayListUserUsageLimitsWithResponse(ctx context.Context, accountId string, params *GatewayListUserUsageLimitsParams, reqEditors ...RequestEditorFn) (*GatewayListUserUsageLimitsResponse2, error) {
+	rsp, err := c.GatewayListUserUsageLimits(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListUserUsageLimitsResponse2(rsp)
+}
+
 // GatewayListUsersWithResponse List Users
 //
 // Returns a wrapper object for the known response body format(s).
@@ -37400,6 +38241,48 @@ func (c *ClientWithResponses) GatewayDeleteApiKeyWithResponse(ctx context.Contex
 	return ParseGatewayDeleteApiKeyResponse(rsp)
 }
 
+// GatewayGetUserUsageLimitsWithResponse Returns a single user's usage-limits singleton (override, effective cap,
+// usage, and whether they are over limit).
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayGetUserUsageLimits` operationId).
+func (c *ClientWithResponses) GatewayGetUserUsageLimitsWithResponse(ctx context.Context, accountId string, userId string, reqEditors ...RequestEditorFn) (*GatewayGetUserUsageLimitsResponse, error) {
+	rsp, err := c.GatewayGetUserUsageLimits(ctx, accountId, userId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetUserUsageLimitsResponse(rsp)
+}
+
+// GatewayUpdateUserUsageLimitsWithBodyWithResponse Updates a single user's usage-limits singleton (limit_override). Clearing
+// the override reverts the user to the account default.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+func (c *ClientWithResponses) GatewayUpdateUserUsageLimitsWithBodyWithResponse(ctx context.Context, accountId string, userId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayUpdateUserUsageLimitsResponse, error) {
+	rsp, err := c.GatewayUpdateUserUsageLimitsWithBody(ctx, accountId, userId, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateUserUsageLimitsResponse(rsp)
+}
+
+// GatewayUpdateUserUsageLimitsWithResponse Updates a single user's usage-limits singleton (limit_override). Clearing
+// the override reverts the user to the account default.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with PATCH /v1/accounts/{account_id}/users/{user_id}/usageLimits (the `GatewayUpdateUserUsageLimits` operationId).
+func (c *ClientWithResponses) GatewayUpdateUserUsageLimitsWithResponse(ctx context.Context, accountId string, userId string, body GatewayUpdateUserUsageLimitsJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayUpdateUserUsageLimitsResponse, error) {
+	rsp, err := c.GatewayUpdateUserUsageLimits(ctx, accountId, userId, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayUpdateUserUsageLimitsResponse(rsp)
+}
+
 // GatewayTestEvaluationWithBodyWithResponse Similar to preview evaluation, but no need to create the evaluation entry first.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
@@ -37424,6 +38307,32 @@ func (c *ClientWithResponses) GatewayTestEvaluationWithResponse(ctx context.Cont
 		return nil, err
 	}
 	return ParseGatewayTestEvaluationResponse(rsp)
+}
+
+// GatewayRefreshSessionTokenWithBodyWithResponse Refresh a session JWT before expiry with a fresh TTL.
+//
+// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+func (c *ClientWithResponses) GatewayRefreshSessionTokenWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*GatewayRefreshSessionTokenResponse2, error) {
+	rsp, err := c.GatewayRefreshSessionTokenWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayRefreshSessionTokenResponse2(rsp)
+}
+
+// GatewayRefreshSessionTokenWithResponse Refresh a session JWT before expiry with a fresh TTL.
+//
+// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
+//
+// Corresponds with POST /v1/auth/refresh (the `GatewayRefreshSessionToken` operationId).
+func (c *ClientWithResponses) GatewayRefreshSessionTokenWithResponse(ctx context.Context, body GatewayRefreshSessionTokenJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayRefreshSessionTokenResponse2, error) {
+	rsp, err := c.GatewayRefreshSessionToken(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayRefreshSessionTokenResponse2(rsp)
 }
 
 // CreateChatCompletionV1ChatCompletionsPostWithBodyWithResponse Create Chat Completion
@@ -37615,11 +38524,11 @@ func (c *ClientWithResponses) ListResponsesV1ResponsesGetWithResponse(ctx contex
 //
 // Explore our cookbooks for detailed examples:
 //
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -37638,11 +38547,11 @@ func (c *ClientWithResponses) CreateResponseV1ResponsesPostWithBodyWithResponse(
 //
 // Explore our cookbooks for detailed examples:
 //
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb)
+// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
+// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
+// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
+// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
+// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -37815,84 +38724,6 @@ func ParseGatewayListAuditLogsResponse2(rsp *http.Response) (*GatewayListAuditLo
 	return response, nil
 }
 
-// ParseGatewayListAwsIamRoleBindingsResponse2 parses an HTTP response from a GatewayListAwsIamRoleBindingsWithResponse call
-func ParseGatewayListAwsIamRoleBindingsResponse2(rsp *http.Response) (*GatewayListAwsIamRoleBindingsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListAwsIamRoleBindingsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListAwsIamRoleBindingsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCreateAwsIamRoleBindingResponse parses an HTTP response from a GatewayCreateAwsIamRoleBindingWithResponse call
-func ParseGatewayCreateAwsIamRoleBindingResponse(rsp *http.Response) (*GatewayCreateAwsIamRoleBindingResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCreateAwsIamRoleBindingResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayAwsIamRoleBinding
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteAwsIamRoleBindingResponse parses an HTTP response from a GatewayDeleteAwsIamRoleBindingWithResponse call
-func ParseGatewayDeleteAwsIamRoleBindingResponse(rsp *http.Response) (*GatewayDeleteAwsIamRoleBindingResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteAwsIamRoleBindingResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
 // ParseGatewayListBatchInferenceJobsResponse2 parses an HTTP response from a GatewayListBatchInferenceJobsWithResponse call
 func ParseGatewayListBatchInferenceJobsResponse2(rsp *http.Response) (*GatewayListBatchInferenceJobsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -37997,214 +38828,6 @@ func ParseGatewayGetBatchInferenceJobResponse(rsp *http.Response) (*GatewayGetBa
 	return response, nil
 }
 
-// ParseGatewayListBatchJobsResponse2 parses an HTTP response from a GatewayListBatchJobsWithResponse call
-func ParseGatewayListBatchJobsResponse2(rsp *http.Response) (*GatewayListBatchJobsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListBatchJobsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListBatchJobsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCreateBatchJobResponse parses an HTTP response from a GatewayCreateBatchJobWithResponse call
-func ParseGatewayCreateBatchJobResponse(rsp *http.Response) (*GatewayCreateBatchJobResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCreateBatchJobResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayBatchJob
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteBatchJobResponse parses an HTTP response from a GatewayDeleteBatchJobWithResponse call
-func ParseGatewayDeleteBatchJobResponse(rsp *http.Response) (*GatewayDeleteBatchJobResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteBatchJobResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetBatchJobResponse parses an HTTP response from a GatewayGetBatchJobWithResponse call
-func ParseGatewayGetBatchJobResponse(rsp *http.Response) (*GatewayGetBatchJobResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetBatchJobResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayBatchJob
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayUpdateBatchJobResponse parses an HTTP response from a GatewayUpdateBatchJobWithResponse call
-func ParseGatewayUpdateBatchJobResponse(rsp *http.Response) (*GatewayUpdateBatchJobResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayUpdateBatchJobResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayBatchJob
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCancelBatchJobResponse parses an HTTP response from a GatewayCancelBatchJobWithResponse call
-func ParseGatewayCancelBatchJobResponse(rsp *http.Response) (*GatewayCancelBatchJobResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCancelBatchJobResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetBatchJobLogsResponse2 parses an HTTP response from a GatewayGetBatchJobLogsWithResponse call
-func ParseGatewayGetBatchJobLogsResponse2(rsp *http.Response) (*GatewayGetBatchJobLogsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetBatchJobLogsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGetBatchJobLogsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayBatchDeleteBatchJobsResponse parses an HTTP response from a GatewayBatchDeleteBatchJobsWithResponse call
-func ParseGatewayBatchDeleteBatchJobsResponse(rsp *http.Response) (*GatewayBatchDeleteBatchJobsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayBatchDeleteBatchJobsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
 // ParseGatewayGetBillingSummaryResponse2 parses an HTTP response from a GatewayGetBillingSummaryWithResponse call
 func ParseGatewayGetBillingSummaryResponse2(rsp *http.Response) (*GatewayGetBillingSummaryResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -38231,6 +38854,58 @@ func ParseGatewayGetBillingSummaryResponse2(rsp *http.Response) (*GatewayGetBill
 	return response, nil
 }
 
+// ParseGatewayGetBillingSettingsResponse parses an HTTP response from a GatewayGetBillingSettingsWithResponse call
+func ParseGatewayGetBillingSettingsResponse(rsp *http.Response) (*GatewayGetBillingSettingsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetBillingSettingsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayBillingSettings
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayUpdateBillingSettingsResponse parses an HTTP response from a GatewayUpdateBillingSettingsWithResponse call
+func ParseGatewayUpdateBillingSettingsResponse(rsp *http.Response) (*GatewayUpdateBillingSettingsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateBillingSettingsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayBillingSettings
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGatewayGetAccountUsageResponse parses an HTTP response from a GatewayGetAccountUsageWithResponse call
 func ParseGatewayGetAccountUsageResponse(rsp *http.Response) (*GatewayGetAccountUsageResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -38247,6 +38922,32 @@ func ParseGatewayGetAccountUsageResponse(rsp *http.Response) (*GatewayGetAccount
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GatewayAccountUsage
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayPromoteCheckpointResponse2 parses an HTTP response from a GatewayPromoteCheckpointWithResponse call
+func ParseGatewayPromoteCheckpointResponse2(rsp *http.Response) (*GatewayPromoteCheckpointResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayPromoteCheckpointResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayPromoteCheckpointResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -38841,6 +39542,32 @@ func ParseGatewayUpdateDeployedModelResponse(rsp *http.Response) (*GatewayUpdate
 	return response, nil
 }
 
+// ParseGatewayMatchDeploymentShapeVersionsResponse parses an HTTP response from a GatewayMatchDeploymentShapeVersionsWithResponse call
+func ParseGatewayMatchDeploymentShapeVersionsResponse(rsp *http.Response) (*GatewayMatchDeploymentShapeVersionsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayMatchDeploymentShapeVersionsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListDeploymentShapeVersionsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGatewayListDeploymentShapesResponse2 parses an HTTP response from a GatewayListDeploymentShapesWithResponse call
 func ParseGatewayListDeploymentShapesResponse2(rsp *http.Response) (*GatewayListDeploymentShapesResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -39361,6 +40088,110 @@ func ParseGatewayUndeleteDeploymentResponse(rsp *http.Response) (*GatewayUndelet
 	return response, nil
 }
 
+// ParseGatewayListDeveloperPassesResponse2 parses an HTTP response from a GatewayListDeveloperPassesWithResponse call
+func ParseGatewayListDeveloperPassesResponse2(rsp *http.Response) (*GatewayListDeveloperPassesResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListDeveloperPassesResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListDeveloperPassesResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayCreateDeveloperPassResponse parses an HTTP response from a GatewayCreateDeveloperPassWithResponse call
+func ParseGatewayCreateDeveloperPassResponse(rsp *http.Response) (*GatewayCreateDeveloperPassResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayCreateDeveloperPassResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayDeveloperPass
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetDeveloperPassResponse parses an HTTP response from a GatewayGetDeveloperPassWithResponse call
+func ParseGatewayGetDeveloperPassResponse(rsp *http.Response) (*GatewayGetDeveloperPassResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetDeveloperPassResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayDeveloperPass
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayUpdateDeveloperPassResponse parses an HTTP response from a GatewayUpdateDeveloperPassWithResponse call
+func ParseGatewayUpdateDeveloperPassResponse(rsp *http.Response) (*GatewayUpdateDeveloperPassResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateDeveloperPassResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayDeveloperPass
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGatewayListDpoJobsResponse2 parses an HTTP response from a GatewayListDpoJobsWithResponse call
 func ParseGatewayListDpoJobsResponse2(rsp *http.Response) (*GatewayListDpoJobsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -39533,214 +40364,6 @@ func ParseGatewayResumeDpoJobResponse(rsp *http.Response) (*GatewayResumeDpoJobR
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GatewayDpoJob
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayListEnvironmentsResponse2 parses an HTTP response from a GatewayListEnvironmentsWithResponse call
-func ParseGatewayListEnvironmentsResponse2(rsp *http.Response) (*GatewayListEnvironmentsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListEnvironmentsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListEnvironmentsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCreateEnvironmentResponse parses an HTTP response from a GatewayCreateEnvironmentWithResponse call
-func ParseGatewayCreateEnvironmentResponse(rsp *http.Response) (*GatewayCreateEnvironmentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCreateEnvironmentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayEnvironment
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteEnvironmentResponse parses an HTTP response from a GatewayDeleteEnvironmentWithResponse call
-func ParseGatewayDeleteEnvironmentResponse(rsp *http.Response) (*GatewayDeleteEnvironmentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteEnvironmentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetEnvironmentResponse parses an HTTP response from a GatewayGetEnvironmentWithResponse call
-func ParseGatewayGetEnvironmentResponse(rsp *http.Response) (*GatewayGetEnvironmentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetEnvironmentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayEnvironment
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayUpdateEnvironmentResponse parses an HTTP response from a GatewayUpdateEnvironmentWithResponse call
-func ParseGatewayUpdateEnvironmentResponse(rsp *http.Response) (*GatewayUpdateEnvironmentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayUpdateEnvironmentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayEnvironment
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayConnectEnvironmentResponse parses an HTTP response from a GatewayConnectEnvironmentWithResponse call
-func ParseGatewayConnectEnvironmentResponse(rsp *http.Response) (*GatewayConnectEnvironmentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayConnectEnvironmentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDisconnectEnvironmentResponse parses an HTTP response from a GatewayDisconnectEnvironmentWithResponse call
-func ParseGatewayDisconnectEnvironmentResponse(rsp *http.Response) (*GatewayDisconnectEnvironmentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDisconnectEnvironmentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayBatchDeleteEnvironmentsResponse parses an HTTP response from a GatewayBatchDeleteEnvironmentsWithResponse call
-func ParseGatewayBatchDeleteEnvironmentsResponse(rsp *http.Response) (*GatewayBatchDeleteEnvironmentsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayBatchDeleteEnvironmentsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -40453,22 +41076,22 @@ func ParseGatewayCreateEvaluatorV2Response(rsp *http.Response) (*GatewayCreateEv
 	return response, nil
 }
 
-// ParseGatewayListGenericDeploymentTypesResponse2 parses an HTTP response from a GatewayListGenericDeploymentTypesWithResponse call
-func ParseGatewayListGenericDeploymentTypesResponse2(rsp *http.Response) (*GatewayListGenericDeploymentTypesResponse2, error) {
+// ParseGatewayListExternalKeysResponse2 parses an HTTP response from a GatewayListExternalKeysWithResponse call
+func ParseGatewayListExternalKeysResponse2(rsp *http.Response) (*GatewayListExternalKeysResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayListGenericDeploymentTypesResponse2{
+	response := &GatewayListExternalKeysResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListGenericDeploymentTypesResponse
+		var dest GatewayListExternalKeysResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -40479,22 +41102,22 @@ func ParseGatewayListGenericDeploymentTypesResponse2(rsp *http.Response) (*Gatew
 	return response, nil
 }
 
-// ParseGatewayCreateGenericDeploymentTypeResponse parses an HTTP response from a GatewayCreateGenericDeploymentTypeWithResponse call
-func ParseGatewayCreateGenericDeploymentTypeResponse(rsp *http.Response) (*GatewayCreateGenericDeploymentTypeResponse, error) {
+// ParseGatewayCreateExternalKeyResponse parses an HTTP response from a GatewayCreateExternalKeyWithResponse call
+func ParseGatewayCreateExternalKeyResponse(rsp *http.Response) (*GatewayCreateExternalKeyResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayCreateGenericDeploymentTypeResponse{
+	response := &GatewayCreateExternalKeyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGenericDeploymentTypeVersion
+		var dest GatewayExternalKey
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -40505,15 +41128,15 @@ func ParseGatewayCreateGenericDeploymentTypeResponse(rsp *http.Response) (*Gatew
 	return response, nil
 }
 
-// ParseGatewayDeleteGenericDeploymentTypeResponse parses an HTTP response from a GatewayDeleteGenericDeploymentTypeWithResponse call
-func ParseGatewayDeleteGenericDeploymentTypeResponse(rsp *http.Response) (*GatewayDeleteGenericDeploymentTypeResponse, error) {
+// ParseGatewayDeleteExternalKeyResponse parses an HTTP response from a GatewayDeleteExternalKeyWithResponse call
+func ParseGatewayDeleteExternalKeyResponse(rsp *http.Response) (*GatewayDeleteExternalKeyResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayDeleteGenericDeploymentTypeResponse{
+	response := &GatewayDeleteExternalKeyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -40531,22 +41154,22 @@ func ParseGatewayDeleteGenericDeploymentTypeResponse(rsp *http.Response) (*Gatew
 	return response, nil
 }
 
-// ParseGatewayListGenericDeploymentTypeVersionsResponse2 parses an HTTP response from a GatewayListGenericDeploymentTypeVersionsWithResponse call
-func ParseGatewayListGenericDeploymentTypeVersionsResponse2(rsp *http.Response) (*GatewayListGenericDeploymentTypeVersionsResponse2, error) {
+// ParseGatewayGetExternalKeyResponse parses an HTTP response from a GatewayGetExternalKeyWithResponse call
+func ParseGatewayGetExternalKeyResponse(rsp *http.Response) (*GatewayGetExternalKeyResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayListGenericDeploymentTypeVersionsResponse2{
+	response := &GatewayGetExternalKeyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListGenericDeploymentTypeVersionsResponse
+		var dest GatewayExternalKey
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -40557,204 +41180,22 @@ func ParseGatewayListGenericDeploymentTypeVersionsResponse2(rsp *http.Response) 
 	return response, nil
 }
 
-// ParseGatewayUpdateGenericDeploymentTypeResponse parses an HTTP response from a GatewayUpdateGenericDeploymentTypeWithResponse call
-func ParseGatewayUpdateGenericDeploymentTypeResponse(rsp *http.Response) (*GatewayUpdateGenericDeploymentTypeResponse, error) {
+// ParseGatewayUpdateExternalKeyResponse parses an HTTP response from a GatewayUpdateExternalKeyWithResponse call
+func ParseGatewayUpdateExternalKeyResponse(rsp *http.Response) (*GatewayUpdateExternalKeyResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayUpdateGenericDeploymentTypeResponse{
+	response := &GatewayUpdateExternalKeyResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGenericDeploymentTypeVersion
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteGenericDeploymentTypeVersionResponse parses an HTTP response from a GatewayDeleteGenericDeploymentTypeVersionWithResponse call
-func ParseGatewayDeleteGenericDeploymentTypeVersionResponse(rsp *http.Response) (*GatewayDeleteGenericDeploymentTypeVersionResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteGenericDeploymentTypeVersionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetGenericDeploymentTypeVersionResponse parses an HTTP response from a GatewayGetGenericDeploymentTypeVersionWithResponse call
-func ParseGatewayGetGenericDeploymentTypeVersionResponse(rsp *http.Response) (*GatewayGetGenericDeploymentTypeVersionResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetGenericDeploymentTypeVersionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGenericDeploymentTypeVersion
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayListGenericDeploymentsResponse2 parses an HTTP response from a GatewayListGenericDeploymentsWithResponse call
-func ParseGatewayListGenericDeploymentsResponse2(rsp *http.Response) (*GatewayListGenericDeploymentsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListGenericDeploymentsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListGenericDeploymentsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCreateGenericDeploymentResponse parses an HTTP response from a GatewayCreateGenericDeploymentWithResponse call
-func ParseGatewayCreateGenericDeploymentResponse(rsp *http.Response) (*GatewayCreateGenericDeploymentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCreateGenericDeploymentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGenericDeployment
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteGenericDeploymentResponse parses an HTTP response from a GatewayDeleteGenericDeploymentWithResponse call
-func ParseGatewayDeleteGenericDeploymentResponse(rsp *http.Response) (*GatewayDeleteGenericDeploymentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteGenericDeploymentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetGenericDeploymentResponse parses an HTTP response from a GatewayGetGenericDeploymentWithResponse call
-func ParseGatewayGetGenericDeploymentResponse(rsp *http.Response) (*GatewayGetGenericDeploymentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetGenericDeploymentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGenericDeployment
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayUpdateGenericDeploymentResponse parses an HTTP response from a GatewayUpdateGenericDeploymentWithResponse call
-func ParseGatewayUpdateGenericDeploymentResponse(rsp *http.Response) (*GatewayUpdateGenericDeploymentResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayUpdateGenericDeploymentResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGenericDeployment
+		var dest GatewayExternalKey
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -40885,266 +41326,6 @@ func ParseGatewayUpdateIdentityProviderResponse(rsp *http.Response) (*GatewayUpd
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GatewayIdentityProvider
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayListLeaderboardsResponse2 parses an HTTP response from a GatewayListLeaderboardsWithResponse call
-func ParseGatewayListLeaderboardsResponse2(rsp *http.Response) (*GatewayListLeaderboardsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListLeaderboardsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListLeaderboardsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCreateLeaderboardResponse parses an HTTP response from a GatewayCreateLeaderboardWithResponse call
-func ParseGatewayCreateLeaderboardResponse(rsp *http.Response) (*GatewayCreateLeaderboardResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCreateLeaderboardResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayLeaderboard
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteLeaderboardResponse parses an HTTP response from a GatewayDeleteLeaderboardWithResponse call
-func ParseGatewayDeleteLeaderboardResponse(rsp *http.Response) (*GatewayDeleteLeaderboardResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteLeaderboardResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetLeaderboardResponse2 parses an HTTP response from a GatewayGetLeaderboardWithResponse call
-func ParseGatewayGetLeaderboardResponse2(rsp *http.Response) (*GatewayGetLeaderboardResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetLeaderboardResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayGetLeaderboardResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayListLeaderboardEvaluationJobsResponse2 parses an HTTP response from a GatewayListLeaderboardEvaluationJobsWithResponse call
-func ParseGatewayListLeaderboardEvaluationJobsResponse2(rsp *http.Response) (*GatewayListLeaderboardEvaluationJobsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListLeaderboardEvaluationJobsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListLeaderboardEvaluationJobsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayListMcpServersResponse2 parses an HTTP response from a GatewayListMcpServersWithResponse call
-func ParseGatewayListMcpServersResponse2(rsp *http.Response) (*GatewayListMcpServersResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListMcpServersResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListMcpServersResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCreateMcpServerResponse parses an HTTP response from a GatewayCreateMcpServerWithResponse call
-func ParseGatewayCreateMcpServerResponse(rsp *http.Response) (*GatewayCreateMcpServerResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCreateMcpServerResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayMcpServer
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteMcpServerResponse parses an HTTP response from a GatewayDeleteMcpServerWithResponse call
-func ParseGatewayDeleteMcpServerResponse(rsp *http.Response) (*GatewayDeleteMcpServerResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteMcpServerResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetMcpServerResponse parses an HTTP response from a GatewayGetMcpServerWithResponse call
-func ParseGatewayGetMcpServerResponse(rsp *http.Response) (*GatewayGetMcpServerResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetMcpServerResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayMcpServer
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayUpdateMcpServerResponse parses an HTTP response from a GatewayUpdateMcpServerWithResponse call
-func ParseGatewayUpdateMcpServerResponse(rsp *http.Response) (*GatewayUpdateMcpServerResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayUpdateMcpServerResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayMcpServer
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -41493,22 +41674,22 @@ func ParseGatewayValidateModelUploadResponse2(rsp *http.Response) (*GatewayValid
 	return response, nil
 }
 
-// ParseGatewayListNodePoolBindingsResponse2 parses an HTTP response from a GatewayListNodePoolBindingsWithResponse call
-func ParseGatewayListNodePoolBindingsResponse2(rsp *http.Response) (*GatewayListNodePoolBindingsResponse2, error) {
+// ParseGatewayGetPolicySettingsResponse parses an HTTP response from a GatewayGetPolicySettingsWithResponse call
+func ParseGatewayGetPolicySettingsResponse(rsp *http.Response) (*GatewayGetPolicySettingsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayListNodePoolBindingsResponse2{
+	response := &GatewayGetPolicySettingsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListNodePoolBindingsResponse
+		var dest GatewayPolicySettings
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -41519,230 +41700,22 @@ func ParseGatewayListNodePoolBindingsResponse2(rsp *http.Response) (*GatewayList
 	return response, nil
 }
 
-// ParseGatewayCreateNodePoolBindingResponse parses an HTTP response from a GatewayCreateNodePoolBindingWithResponse call
-func ParseGatewayCreateNodePoolBindingResponse(rsp *http.Response) (*GatewayCreateNodePoolBindingResponse, error) {
+// ParseGatewayUpdatePolicySettingsResponse parses an HTTP response from a GatewayUpdatePolicySettingsWithResponse call
+func ParseGatewayUpdatePolicySettingsResponse(rsp *http.Response) (*GatewayUpdatePolicySettingsResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayCreateNodePoolBindingResponse{
+	response := &GatewayUpdatePolicySettingsResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayNodePoolBinding
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteNodePoolBindingResponse parses an HTTP response from a GatewayDeleteNodePoolBindingWithResponse call
-func ParseGatewayDeleteNodePoolBindingResponse(rsp *http.Response) (*GatewayDeleteNodePoolBindingResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteNodePoolBindingResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayListNodePoolsResponse2 parses an HTTP response from a GatewayListNodePoolsWithResponse call
-func ParseGatewayListNodePoolsResponse2(rsp *http.Response) (*GatewayListNodePoolsResponse2, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayListNodePoolsResponse2{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListNodePoolsResponse
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayCreateNodePoolResponse parses an HTTP response from a GatewayCreateNodePoolWithResponse call
-func ParseGatewayCreateNodePoolResponse(rsp *http.Response) (*GatewayCreateNodePoolResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayCreateNodePoolResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayNodePool
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayDeleteNodePoolResponse parses an HTTP response from a GatewayDeleteNodePoolWithResponse call
-func ParseGatewayDeleteNodePoolResponse(rsp *http.Response) (*GatewayDeleteNodePoolResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayDeleteNodePoolResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetNodePoolResponse parses an HTTP response from a GatewayGetNodePoolWithResponse call
-func ParseGatewayGetNodePoolResponse(rsp *http.Response) (*GatewayGetNodePoolResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetNodePoolResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayNodePool
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayUpdateNodePoolResponse parses an HTTP response from a GatewayUpdateNodePoolWithResponse call
-func ParseGatewayUpdateNodePoolResponse(rsp *http.Response) (*GatewayUpdateNodePoolResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayUpdateNodePoolResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayNodePool
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetNodePoolStatsResponse parses an HTTP response from a GatewayGetNodePoolStatsWithResponse call
-func ParseGatewayGetNodePoolStatsResponse(rsp *http.Response) (*GatewayGetNodePoolStatsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetNodePoolStatsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayNodePoolStats
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayBatchDeleteNodePoolsResponse parses an HTTP response from a GatewayBatchDeleteNodePoolsWithResponse call
-func ParseGatewayBatchDeleteNodePoolsResponse(rsp *http.Response) (*GatewayBatchDeleteNodePoolsResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayBatchDeleteNodePoolsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest GatewayPolicySettings
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -41987,6 +41960,32 @@ func ParseGatewayGetReinforcementFineTuningJobResponse(rsp *http.Response) (*Gat
 	return response, nil
 }
 
+// ParseGatewayUpdateReinforcementFineTuningJobResponse parses an HTTP response from a GatewayUpdateReinforcementFineTuningJobWithResponse call
+func ParseGatewayUpdateReinforcementFineTuningJobResponse(rsp *http.Response) (*GatewayUpdateReinforcementFineTuningJobResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateReinforcementFineTuningJobResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayReinforcementFineTuningJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGatewayCancelReinforcementFineTuningJobResponse parses an HTTP response from a GatewayCancelReinforcementFineTuningJobWithResponse call
 func ParseGatewayCancelReinforcementFineTuningJobResponse(rsp *http.Response) (*GatewayCancelReinforcementFineTuningJobResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -42029,6 +42028,32 @@ func ParseGatewayDebugReinforcementFineTuningJobResponse2(rsp *http.Response) (*
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GatewayDebugReinforcementFineTuningJobResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse parses an HTTP response from a GatewayGetReinforcementFineTuningJobMetricsFileEndpointWithResponse call
+func ParseGatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse(rsp *http.Response) (*GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetReinforcementFineTuningJobMetricsFileEndpointResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayGetReinforcementFineTuningJobMetricsFileResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -42169,22 +42194,22 @@ func ParseGatewayGetRlorTrainerJobResponse(rsp *http.Response) (*GatewayGetRlorT
 	return response, nil
 }
 
-// ParseGatewayCancelRlorTrainerJobResponse parses an HTTP response from a GatewayCancelRlorTrainerJobWithResponse call
-func ParseGatewayCancelRlorTrainerJobResponse(rsp *http.Response) (*GatewayCancelRlorTrainerJobResponse, error) {
+// ParseGatewayListRlorTrainerJobCheckpointsResponse2 parses an HTTP response from a GatewayListRlorTrainerJobCheckpointsWithResponse call
+func ParseGatewayListRlorTrainerJobCheckpointsResponse2(rsp *http.Response) (*GatewayListRlorTrainerJobCheckpointsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayCancelRlorTrainerJobResponse{
+	response := &GatewayListRlorTrainerJobCheckpointsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
+		var dest GatewayListRlorTrainerJobCheckpointsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -42195,15 +42220,67 @@ func ParseGatewayCancelRlorTrainerJobResponse(rsp *http.Response) (*GatewayCance
 	return response, nil
 }
 
-// ParseGatewayExecuteRlorTrainStepResponse parses an HTTP response from a GatewayExecuteRlorTrainStepWithResponse call
-func ParseGatewayExecuteRlorTrainStepResponse(rsp *http.Response) (*GatewayExecuteRlorTrainStepResponse, error) {
+// ParseGatewaySyncRlorTrainerJobCheckpointResponse2 parses an HTTP response from a GatewaySyncRlorTrainerJobCheckpointWithResponse call
+func ParseGatewaySyncRlorTrainerJobCheckpointResponse2(rsp *http.Response) (*GatewaySyncRlorTrainerJobCheckpointResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayExecuteRlorTrainStepResponse{
+	response := &GatewaySyncRlorTrainerJobCheckpointResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewaySyncRlorTrainerJobCheckpointResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetRlorTrainerJobPublicLogsResponse2 parses an HTTP response from a GatewayGetRlorTrainerJobPublicLogsWithResponse call
+func ParseGatewayGetRlorTrainerJobPublicLogsResponse2(rsp *http.Response) (*GatewayGetRlorTrainerJobPublicLogsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetRlorTrainerJobPublicLogsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayGetRlorTrainerJobPublicLogsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayCancelRlorTrainerJobResponse parses an HTTP response from a GatewayCancelRlorTrainerJobWithResponse call
+func ParseGatewayCancelRlorTrainerJobResponse(rsp *http.Response) (*GatewayCancelRlorTrainerJobResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayCancelRlorTrainerJobResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
@@ -42507,22 +42584,22 @@ func ParseGatewayUpdateSecretResponse(rsp *http.Response) (*GatewayUpdateSecretR
 	return response, nil
 }
 
-// ParseGatewayListSnapshotsResponse2 parses an HTTP response from a GatewayListSnapshotsWithResponse call
-func ParseGatewayListSnapshotsResponse2(rsp *http.Response) (*GatewayListSnapshotsResponse2, error) {
+// ParseGatewayListServerlessModelsResponse2 parses an HTTP response from a GatewayListServerlessModelsWithResponse call
+func ParseGatewayListServerlessModelsResponse2(rsp *http.Response) (*GatewayListServerlessModelsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayListSnapshotsResponse2{
+	response := &GatewayListServerlessModelsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewayListSnapshotsResponse
+		var dest GatewayListServerlessModelsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -42533,22 +42610,22 @@ func ParseGatewayListSnapshotsResponse2(rsp *http.Response) (*GatewayListSnapsho
 	return response, nil
 }
 
-// ParseGatewayCreateSnapshotResponse parses an HTTP response from a GatewayCreateSnapshotWithResponse call
-func ParseGatewayCreateSnapshotResponse(rsp *http.Response) (*GatewayCreateSnapshotResponse, error) {
+// ParseGatewayListAccountServerlessRateLimitsResponse2 parses an HTTP response from a GatewayListAccountServerlessRateLimitsWithResponse call
+func ParseGatewayListAccountServerlessRateLimitsResponse2(rsp *http.Response) (*GatewayListAccountServerlessRateLimitsResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayCreateSnapshotResponse{
+	response := &GatewayListAccountServerlessRateLimitsResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewaySnapshot
+		var dest GatewayListAccountServerlessRateLimitsResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -42559,48 +42636,22 @@ func ParseGatewayCreateSnapshotResponse(rsp *http.Response) (*GatewayCreateSnaps
 	return response, nil
 }
 
-// ParseGatewayDeleteSnapshotResponse parses an HTTP response from a GatewayDeleteSnapshotWithResponse call
-func ParseGatewayDeleteSnapshotResponse(rsp *http.Response) (*GatewayDeleteSnapshotResponse, error) {
+// ParseGatewayGetAccountServerlessTokenUsageResponse2 parses an HTTP response from a GatewayGetAccountServerlessTokenUsageWithResponse call
+func ParseGatewayGetAccountServerlessTokenUsageResponse2(rsp *http.Response) (*GatewayGetAccountServerlessTokenUsageResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
 	defer func() { _ = rsp.Body.Close() }()
 	if err != nil {
 		return nil, err
 	}
 
-	response := &GatewayDeleteSnapshotResponse{
+	response := &GatewayGetAccountServerlessTokenUsageResponse2{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
 	}
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest map[string]interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGatewayGetSnapshotResponse parses an HTTP response from a GatewayGetSnapshotWithResponse call
-func ParseGatewayGetSnapshotResponse(rsp *http.Response) (*GatewayGetSnapshotResponse, error) {
-	bodyBytes, err := io.ReadAll(rsp.Body)
-	defer func() { _ = rsp.Body.Close() }()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GatewayGetSnapshotResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest GatewaySnapshot
+		var dest GatewayGetAccountServerlessTokenUsageResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -42897,6 +42948,890 @@ func ParseGatewayGetTrailResponse(rsp *http.Response) (*GatewayGetTrailResponse,
 	return response, nil
 }
 
+// ParseGatewayUpdateTrailResponse parses an HTTP response from a GatewayUpdateTrailWithResponse call
+func ParseGatewayUpdateTrailResponse(rsp *http.Response) (*GatewayUpdateTrailResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateTrailResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrail
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetTrailMetricsResponse parses an HTTP response from a GatewayGetTrailMetricsWithResponse call
+func ParseGatewayGetTrailMetricsResponse(rsp *http.Response) (*GatewayGetTrailMetricsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetTrailMetricsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrailMetrics
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListTrainingRunsResponse2 parses an HTTP response from a GatewayListTrainingRunsWithResponse call
+func ParseGatewayListTrainingRunsResponse2(rsp *http.Response) (*GatewayListTrainingRunsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListTrainingRunsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListTrainingRunsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayCreateTrainingRunResponse parses an HTTP response from a GatewayCreateTrainingRunWithResponse call
+func ParseGatewayCreateTrainingRunResponse(rsp *http.Response) (*GatewayCreateTrainingRunResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayCreateTrainingRunResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingRun
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetTrainingRunResponse parses an HTTP response from a GatewayGetTrainingRunWithResponse call
+func ParseGatewayGetTrainingRunResponse(rsp *http.Response) (*GatewayGetTrainingRunResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetTrainingRunResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingRun
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayAbortTrainingRunMaterializationResponse parses an HTTP response from a GatewayAbortTrainingRunMaterializationWithResponse call
+func ParseGatewayAbortTrainingRunMaterializationResponse(rsp *http.Response) (*GatewayAbortTrainingRunMaterializationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayAbortTrainingRunMaterializationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingRun
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayFinalizeTrainingRunMaterializationResponse parses an HTTP response from a GatewayFinalizeTrainingRunMaterializationWithResponse call
+func ParseGatewayFinalizeTrainingRunMaterializationResponse(rsp *http.Response) (*GatewayFinalizeTrainingRunMaterializationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayFinalizeTrainingRunMaterializationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingRun
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListTrainingSessionsResponse2 parses an HTTP response from a GatewayListTrainingSessionsWithResponse call
+func ParseGatewayListTrainingSessionsResponse2(rsp *http.Response) (*GatewayListTrainingSessionsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListTrainingSessionsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListTrainingSessionsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayCreateTrainingSessionResponse parses an HTTP response from a GatewayCreateTrainingSessionWithResponse call
+func ParseGatewayCreateTrainingSessionResponse(rsp *http.Response) (*GatewayCreateTrainingSessionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayCreateTrainingSessionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingSession
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayDeleteTrainingSessionResponse parses an HTTP response from a GatewayDeleteTrainingSessionWithResponse call
+func ParseGatewayDeleteTrainingSessionResponse(rsp *http.Response) (*GatewayDeleteTrainingSessionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayDeleteTrainingSessionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest map[string]interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetTrainingSessionResponse parses an HTTP response from a GatewayGetTrainingSessionWithResponse call
+func ParseGatewayGetTrainingSessionResponse(rsp *http.Response) (*GatewayGetTrainingSessionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetTrainingSessionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingSession
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListTrainingSessionCheckpointsResponse2 parses an HTTP response from a GatewayListTrainingSessionCheckpointsWithResponse call
+func ParseGatewayListTrainingSessionCheckpointsResponse2(rsp *http.Response) (*GatewayListTrainingSessionCheckpointsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListTrainingSessionCheckpointsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListTrainingSessionCheckpointsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayPromoteTrainingSessionCheckpointResponse2 parses an HTTP response from a GatewayPromoteTrainingSessionCheckpointWithResponse call
+func ParseGatewayPromoteTrainingSessionCheckpointResponse2(rsp *http.Response) (*GatewayPromoteTrainingSessionCheckpointResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayPromoteTrainingSessionCheckpointResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayPromoteTrainingSessionCheckpointResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListTrainingSessionChunkOutputsResponse2 parses an HTTP response from a GatewayListTrainingSessionChunkOutputsWithResponse call
+func ParseGatewayListTrainingSessionChunkOutputsResponse2(rsp *http.Response) (*GatewayListTrainingSessionChunkOutputsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListTrainingSessionChunkOutputsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListTrainingSessionChunkOutputsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayCreateTrainingSessionChunkOutputResponse parses an HTTP response from a GatewayCreateTrainingSessionChunkOutputWithResponse call
+func ParseGatewayCreateTrainingSessionChunkOutputResponse(rsp *http.Response) (*GatewayCreateTrainingSessionChunkOutputResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayCreateTrainingSessionChunkOutputResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingSessionChunkOutput
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListTrainingSessionTrainingCurvesResponse2 parses an HTTP response from a GatewayListTrainingSessionTrainingCurvesWithResponse call
+func ParseGatewayListTrainingSessionTrainingCurvesResponse2(rsp *http.Response) (*GatewayListTrainingSessionTrainingCurvesResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListTrainingSessionTrainingCurvesResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListTrainingSessionTrainingCurvesResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayLoadTrainingSessionStateResponse parses an HTTP response from a GatewayLoadTrainingSessionStateWithResponse call
+func ParseGatewayLoadTrainingSessionStateResponse(rsp *http.Response) (*GatewayLoadTrainingSessionStateResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayLoadTrainingSessionStateResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingSession
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayLogTrainingSessionMetricsResponse2 parses an HTTP response from a GatewayLogTrainingSessionMetricsWithResponse call
+func ParseGatewayLogTrainingSessionMetricsResponse2(rsp *http.Response) (*GatewayLogTrainingSessionMetricsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayLogTrainingSessionMetricsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayLogTrainingSessionMetricsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListTrainingShapesResponse2 parses an HTTP response from a GatewayListTrainingShapesWithResponse call
+func ParseGatewayListTrainingShapesResponse2(rsp *http.Response) (*GatewayListTrainingShapesResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListTrainingShapesResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListTrainingShapesResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayCreateTrainingShapeResponse parses an HTTP response from a GatewayCreateTrainingShapeWithResponse call
+func ParseGatewayCreateTrainingShapeResponse(rsp *http.Response) (*GatewayCreateTrainingShapeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayCreateTrainingShapeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingShape
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayDeleteTrainingShapeResponse parses an HTTP response from a GatewayDeleteTrainingShapeWithResponse call
+func ParseGatewayDeleteTrainingShapeResponse(rsp *http.Response) (*GatewayDeleteTrainingShapeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayDeleteTrainingShapeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest map[string]interface{}
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetTrainingShapeResponse parses an HTTP response from a GatewayGetTrainingShapeWithResponse call
+func ParseGatewayGetTrainingShapeResponse(rsp *http.Response) (*GatewayGetTrainingShapeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetTrainingShapeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingShape
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayUpdateTrainingShapeResponse parses an HTTP response from a GatewayUpdateTrainingShapeWithResponse call
+func ParseGatewayUpdateTrainingShapeResponse(rsp *http.Response) (*GatewayUpdateTrainingShapeResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateTrainingShapeResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingShape
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListTrainingShapeVersionsResponse2 parses an HTTP response from a GatewayListTrainingShapeVersionsWithResponse call
+func ParseGatewayListTrainingShapeVersionsResponse2(rsp *http.Response) (*GatewayListTrainingShapeVersionsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListTrainingShapeVersionsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListTrainingShapeVersionsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetTrainingShapeVersionResponse parses an HTTP response from a GatewayGetTrainingShapeVersionWithResponse call
+func ParseGatewayGetTrainingShapeVersionResponse(rsp *http.Response) (*GatewayGetTrainingShapeVersionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetTrainingShapeVersionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingShapeVersion
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayUpdateTrainingShapeVersionResponse parses an HTTP response from a GatewayUpdateTrainingShapeVersionWithResponse call
+func ParseGatewayUpdateTrainingShapeVersionResponse(rsp *http.Response) (*GatewayUpdateTrainingShapeVersionResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateTrainingShapeVersionResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayTrainingShapeVersion
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayQueryUsageCostsResponse2 parses an HTTP response from a GatewayQueryUsageCostsWithResponse call
+func ParseGatewayQueryUsageCostsResponse2(rsp *http.Response) (*GatewayQueryUsageCostsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayQueryUsageCostsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayQueryUsageCostsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListUserUsageLimitIncreaseRequestsResponse2 parses an HTTP response from a GatewayListUserUsageLimitIncreaseRequestsWithResponse call
+func ParseGatewayListUserUsageLimitIncreaseRequestsResponse2(rsp *http.Response) (*GatewayListUserUsageLimitIncreaseRequestsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListUserUsageLimitIncreaseRequestsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListUserUsageLimitIncreaseRequestsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayCreateUserUsageLimitIncreaseRequestResponse parses an HTTP response from a GatewayCreateUserUsageLimitIncreaseRequestWithResponse call
+func ParseGatewayCreateUserUsageLimitIncreaseRequestResponse(rsp *http.Response) (*GatewayCreateUserUsageLimitIncreaseRequestResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayCreateUserUsageLimitIncreaseRequestResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayUserUsageLimitIncreaseRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayApproveUserUsageLimitIncreaseRequestResponse parses an HTTP response from a GatewayApproveUserUsageLimitIncreaseRequestWithResponse call
+func ParseGatewayApproveUserUsageLimitIncreaseRequestResponse(rsp *http.Response) (*GatewayApproveUserUsageLimitIncreaseRequestResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayApproveUserUsageLimitIncreaseRequestResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayUserUsageLimitIncreaseRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayRejectUserUsageLimitIncreaseRequestResponse parses an HTTP response from a GatewayRejectUserUsageLimitIncreaseRequestWithResponse call
+func ParseGatewayRejectUserUsageLimitIncreaseRequestResponse(rsp *http.Response) (*GatewayRejectUserUsageLimitIncreaseRequestResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayRejectUserUsageLimitIncreaseRequestResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayUserUsageLimitIncreaseRequest
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetAccountUsageLimitsResponse parses an HTTP response from a GatewayGetAccountUsageLimitsWithResponse call
+func ParseGatewayGetAccountUsageLimitsResponse(rsp *http.Response) (*GatewayGetAccountUsageLimitsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetAccountUsageLimitsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayAccountUsageLimits
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayUpdateAccountUsageLimitsResponse parses an HTTP response from a GatewayUpdateAccountUsageLimitsWithResponse call
+func ParseGatewayUpdateAccountUsageLimitsResponse(rsp *http.Response) (*GatewayUpdateAccountUsageLimitsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateAccountUsageLimitsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayAccountUsageLimits
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListUserUsageLimitsResponse2 parses an HTTP response from a GatewayListUserUsageLimitsWithResponse call
+func ParseGatewayListUserUsageLimitsResponse2(rsp *http.Response) (*GatewayListUserUsageLimitsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListUserUsageLimitsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListUserUsageLimitsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGatewayListUsersResponse2 parses an HTTP response from a GatewayListUsersWithResponse call
 func ParseGatewayListUsersResponse2(rsp *http.Response) (*GatewayListUsersResponse2, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -43079,6 +44014,58 @@ func ParseGatewayDeleteApiKeyResponse(rsp *http.Response) (*GatewayDeleteApiKeyR
 	return response, nil
 }
 
+// ParseGatewayGetUserUsageLimitsResponse parses an HTTP response from a GatewayGetUserUsageLimitsWithResponse call
+func ParseGatewayGetUserUsageLimitsResponse(rsp *http.Response) (*GatewayGetUserUsageLimitsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetUserUsageLimitsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayUserUsageLimits
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayUpdateUserUsageLimitsResponse parses an HTTP response from a GatewayUpdateUserUsageLimitsWithResponse call
+func ParseGatewayUpdateUserUsageLimitsResponse(rsp *http.Response) (*GatewayUpdateUserUsageLimitsResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayUpdateUserUsageLimitsResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayUserUsageLimits
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
 // ParseGatewayTestEvaluationResponse parses an HTTP response from a GatewayTestEvaluationWithResponse call
 func ParseGatewayTestEvaluationResponse(rsp *http.Response) (*GatewayTestEvaluationResponse, error) {
 	bodyBytes, err := io.ReadAll(rsp.Body)
@@ -43095,6 +44082,32 @@ func ParseGatewayTestEvaluationResponse(rsp *http.Response) (*GatewayTestEvaluat
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GatewayPreviewEvaluationResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayRefreshSessionTokenResponse2 parses an HTTP response from a GatewayRefreshSessionTokenWithResponse call
+func ParseGatewayRefreshSessionTokenResponse2(rsp *http.Response) (*GatewayRefreshSessionTokenResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayRefreshSessionTokenResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayRefreshSessionTokenResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}

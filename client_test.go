@@ -119,7 +119,10 @@ func TestCreateChatCompletion(t *testing.T) {
 
 			assert.NoError(t, json.NewDecoder(r.Body).Decode(&body))
 			assert.Equal(t, "model-x", body.Model)
-			assert.Len(t, body.Messages, 1)
+
+			if assert.NotNil(t, body.Messages) {
+				assert.Len(t, *body.Messages, 1)
+			}
 
 			w.Header().Set("Content-Type", "application/json")
 			_, _ = w.Write([]byte(
@@ -138,7 +141,7 @@ func TestCreateChatCompletion(t *testing.T) {
 		context.Background(),
 		fireworks.ChatCompletionRequest{
 			Model: "model-x",
-			Messages: []fireworks.ChatMessage{
+			Messages: &[]fireworks.ChatMessage{
 				{Role: "user", Content: &content},
 			},
 		},

@@ -31,6 +31,36 @@ func (e AccountAccountType) Valid() bool {
 	}
 }
 
+// Defines values for AccountRateLimitMetric.
+const (
+	AccountRateLimitMetricMETRICUNSPECIFIED         AccountRateLimitMetric = "METRIC_UNSPECIFIED"
+	AccountRateLimitMetricTOKENSCACHEADJUSTEDPROMPT AccountRateLimitMetric = "TOKENS_CACHE_ADJUSTED_PROMPT"
+	AccountRateLimitMetricTOKENSCACHEDPROMPT        AccountRateLimitMetric = "TOKENS_CACHED_PROMPT"
+	AccountRateLimitMetricTOKENSGENERATED           AccountRateLimitMetric = "TOKENS_GENERATED"
+	AccountRateLimitMetricTOKENSPROMPT              AccountRateLimitMetric = "TOKENS_PROMPT"
+	AccountRateLimitMetricTOKENSUNCACHEDPROMPT      AccountRateLimitMetric = "TOKENS_UNCACHED_PROMPT"
+)
+
+// Valid indicates whether the value is a known member of the AccountRateLimitMetric enum.
+func (e AccountRateLimitMetric) Valid() bool {
+	switch e {
+	case AccountRateLimitMetricMETRICUNSPECIFIED:
+		return true
+	case AccountRateLimitMetricTOKENSCACHEADJUSTEDPROMPT:
+		return true
+	case AccountRateLimitMetricTOKENSCACHEDPROMPT:
+		return true
+	case AccountRateLimitMetricTOKENSGENERATED:
+		return true
+	case AccountRateLimitMetricTOKENSPROMPT:
+		return true
+	case AccountRateLimitMetricTOKENSUNCACHEDPROMPT:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AccountSuspendState.
 const (
 	AccountSuspendStateBLOCKEDBYABUSERULE        AccountSuspendState = "BLOCKED_BY_ABUSE_RULE"
@@ -52,6 +82,39 @@ func (e AccountSuspendState) Valid() bool {
 	case AccountSuspendStateMONTHLYSPENDLIMITEXCEEDED:
 		return true
 	case AccountSuspendStateUNSUSPENDED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AllowedToolsConfigMode.
+const (
+	AllowedToolsConfigModeAuto     AllowedToolsConfigMode = "auto"
+	AllowedToolsConfigModeRequired AllowedToolsConfigMode = "required"
+)
+
+// Valid indicates whether the value is a known member of the AllowedToolsConfigMode enum.
+func (e AllowedToolsConfigMode) Valid() bool {
+	switch e {
+	case AllowedToolsConfigModeAuto:
+		return true
+	case AllowedToolsConfigModeRequired:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for AllowedToolsSelectionType.
+const (
+	AllowedToolsSelectionTypeAllowedTools AllowedToolsSelectionType = "allowed_tools"
+)
+
+// Valid indicates whether the value is a known member of the AllowedToolsSelectionType enum.
+func (e AllowedToolsSelectionType) Valid() bool {
+	switch e {
+	case AllowedToolsSelectionTypeAllowedTools:
 		return true
 	default:
 		return false
@@ -1035,22 +1098,31 @@ func (e ChatCompletionRequestFunctionCall0) Valid() bool {
 
 // Defines values for ChatCompletionRequestReasoningEffort0.
 const (
-	ChatCompletionRequestReasoningEffort0High   ChatCompletionRequestReasoningEffort0 = "high"
-	ChatCompletionRequestReasoningEffort0Low    ChatCompletionRequestReasoningEffort0 = "low"
-	ChatCompletionRequestReasoningEffort0Medium ChatCompletionRequestReasoningEffort0 = "medium"
-	ChatCompletionRequestReasoningEffort0None   ChatCompletionRequestReasoningEffort0 = "none"
+	ChatCompletionRequestReasoningEffort0Adaptive ChatCompletionRequestReasoningEffort0 = "adaptive"
+	ChatCompletionRequestReasoningEffort0High     ChatCompletionRequestReasoningEffort0 = "high"
+	ChatCompletionRequestReasoningEffort0Low      ChatCompletionRequestReasoningEffort0 = "low"
+	ChatCompletionRequestReasoningEffort0Max      ChatCompletionRequestReasoningEffort0 = "max"
+	ChatCompletionRequestReasoningEffort0Medium   ChatCompletionRequestReasoningEffort0 = "medium"
+	ChatCompletionRequestReasoningEffort0None     ChatCompletionRequestReasoningEffort0 = "none"
+	ChatCompletionRequestReasoningEffort0Xhigh    ChatCompletionRequestReasoningEffort0 = "xhigh"
 )
 
 // Valid indicates whether the value is a known member of the ChatCompletionRequestReasoningEffort0 enum.
 func (e ChatCompletionRequestReasoningEffort0) Valid() bool {
 	switch e {
+	case ChatCompletionRequestReasoningEffort0Adaptive:
+		return true
 	case ChatCompletionRequestReasoningEffort0High:
 		return true
 	case ChatCompletionRequestReasoningEffort0Low:
 		return true
+	case ChatCompletionRequestReasoningEffort0Max:
+		return true
 	case ChatCompletionRequestReasoningEffort0Medium:
 		return true
 	case ChatCompletionRequestReasoningEffort0None:
+		return true
+	case ChatCompletionRequestReasoningEffort0Xhigh:
 		return true
 	default:
 		return false
@@ -1072,6 +1144,27 @@ func (e ChatCompletionRequestReasoningHistory) Valid() bool {
 	case ChatCompletionRequestReasoningHistoryInterleaved:
 		return true
 	case ChatCompletionRequestReasoningHistoryPreserved:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ChatCompletionRequestSamplingMask.
+const (
+	ChatCompletionRequestSamplingMaskCount         ChatCompletionRequestSamplingMask = "count"
+	ChatCompletionRequestSamplingMaskNonZeroBuffer ChatCompletionRequestSamplingMask = "non_zero_buffer"
+	ChatCompletionRequestSamplingMaskNonZeroList   ChatCompletionRequestSamplingMask = "non_zero_list"
+)
+
+// Valid indicates whether the value is a known member of the ChatCompletionRequestSamplingMask enum.
+func (e ChatCompletionRequestSamplingMask) Valid() bool {
+	switch e {
+	case ChatCompletionRequestSamplingMaskCount:
+		return true
+	case ChatCompletionRequestSamplingMaskNonZeroBuffer:
+		return true
+	case ChatCompletionRequestSamplingMaskNonZeroList:
 		return true
 	default:
 		return false
@@ -1165,6 +1258,27 @@ func (e ChatCompletionToolType) Valid() bool {
 	}
 }
 
+// Defines values for CheckpointAvailabilityAvailabilityClass.
+const (
+	CheckpointAvailabilityAvailabilityClassAVAILABILITYCLASSUNSPECIFIED CheckpointAvailabilityAvailabilityClass = "AVAILABILITY_CLASS_UNSPECIFIED"
+	CheckpointAvailabilityAvailabilityClassMANAGEDDURABLE               CheckpointAvailabilityAvailabilityClass = "MANAGED_DURABLE"
+	CheckpointAvailabilityAvailabilityClassSINGLEREGION                 CheckpointAvailabilityAvailabilityClass = "SINGLE_REGION"
+)
+
+// Valid indicates whether the value is a known member of the CheckpointAvailabilityAvailabilityClass enum.
+func (e CheckpointAvailabilityAvailabilityClass) Valid() bool {
+	switch e {
+	case CheckpointAvailabilityAvailabilityClassAVAILABILITYCLASSUNSPECIFIED:
+		return true
+	case CheckpointAvailabilityAvailabilityClassMANAGEDDURABLE:
+		return true
+	case CheckpointAvailabilityAvailabilityClassSINGLEREGION:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ChoiceFinishReason.
 const (
 	ChoiceFinishReasonError  ChoiceFinishReason = "error"
@@ -1206,22 +1320,31 @@ func (e CompletionRequestContextLengthExceededBehavior) Valid() bool {
 
 // Defines values for CompletionRequestReasoningEffort0.
 const (
-	CompletionRequestReasoningEffort0High   CompletionRequestReasoningEffort0 = "high"
-	CompletionRequestReasoningEffort0Low    CompletionRequestReasoningEffort0 = "low"
-	CompletionRequestReasoningEffort0Medium CompletionRequestReasoningEffort0 = "medium"
-	CompletionRequestReasoningEffort0None   CompletionRequestReasoningEffort0 = "none"
+	CompletionRequestReasoningEffort0Adaptive CompletionRequestReasoningEffort0 = "adaptive"
+	CompletionRequestReasoningEffort0High     CompletionRequestReasoningEffort0 = "high"
+	CompletionRequestReasoningEffort0Low      CompletionRequestReasoningEffort0 = "low"
+	CompletionRequestReasoningEffort0Max      CompletionRequestReasoningEffort0 = "max"
+	CompletionRequestReasoningEffort0Medium   CompletionRequestReasoningEffort0 = "medium"
+	CompletionRequestReasoningEffort0None     CompletionRequestReasoningEffort0 = "none"
+	CompletionRequestReasoningEffort0Xhigh    CompletionRequestReasoningEffort0 = "xhigh"
 )
 
 // Valid indicates whether the value is a known member of the CompletionRequestReasoningEffort0 enum.
 func (e CompletionRequestReasoningEffort0) Valid() bool {
 	switch e {
+	case CompletionRequestReasoningEffort0Adaptive:
+		return true
 	case CompletionRequestReasoningEffort0High:
 		return true
 	case CompletionRequestReasoningEffort0Low:
 		return true
+	case CompletionRequestReasoningEffort0Max:
+		return true
 	case CompletionRequestReasoningEffort0Medium:
 		return true
 	case CompletionRequestReasoningEffort0None:
+		return true
+	case CompletionRequestReasoningEffort0Xhigh:
 		return true
 	default:
 		return false
@@ -1243,6 +1366,27 @@ func (e CompletionRequestReasoningHistory) Valid() bool {
 	case CompletionRequestReasoningHistoryInterleaved:
 		return true
 	case CompletionRequestReasoningHistoryPreserved:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for CompletionRequestSamplingMask.
+const (
+	CompletionRequestSamplingMaskCount         CompletionRequestSamplingMask = "count"
+	CompletionRequestSamplingMaskNonZeroBuffer CompletionRequestSamplingMask = "non_zero_buffer"
+	CompletionRequestSamplingMaskNonZeroList   CompletionRequestSamplingMask = "non_zero_list"
+)
+
+// Valid indicates whether the value is a known member of the CompletionRequestSamplingMask enum.
+func (e CompletionRequestSamplingMask) Valid() bool {
+	switch e {
+	case CompletionRequestSamplingMaskCount:
+		return true
+	case CompletionRequestSamplingMaskNonZeroBuffer:
+		return true
+	case CompletionRequestSamplingMaskNonZeroList:
 		return true
 	default:
 		return false
@@ -1345,6 +1489,27 @@ func (e DeploymentHotLoadBucketType) Valid() bool {
 	}
 }
 
+// Defines values for DeploymentHotLoadTransitionType.
+const (
+	DeploymentHotLoadTransitionTypeASYNC                            DeploymentHotLoadTransitionType = "ASYNC"
+	DeploymentHotLoadTransitionTypeHOTLOADTRANSITIONTYPEUNSPECIFIED DeploymentHotLoadTransitionType = "HOT_LOAD_TRANSITION_TYPE_UNSPECIFIED"
+	DeploymentHotLoadTransitionTypeSYNC                             DeploymentHotLoadTransitionType = "SYNC"
+)
+
+// Valid indicates whether the value is a known member of the DeploymentHotLoadTransitionType enum.
+func (e DeploymentHotLoadTransitionType) Valid() bool {
+	switch e {
+	case DeploymentHotLoadTransitionTypeASYNC:
+		return true
+	case DeploymentHotLoadTransitionTypeHOTLOADTRANSITIONTYPEUNSPECIFIED:
+		return true
+	case DeploymentHotLoadTransitionTypeSYNC:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for DeploymentPrecision.
 const (
 	DeploymentPrecisionBF16                 DeploymentPrecision = "BF16"
@@ -1409,6 +1574,7 @@ const (
 	DeploymentShapePresetTypeFAST                  DeploymentShapePresetType = "FAST"
 	DeploymentShapePresetTypeFULLPRECISION         DeploymentShapePresetType = "FULL_PRECISION"
 	DeploymentShapePresetTypeMINIMAL               DeploymentShapePresetType = "MINIMAL"
+	DeploymentShapePresetTypeMULTILORA             DeploymentShapePresetType = "MULTI_LORA"
 	DeploymentShapePresetTypePRESETTYPEUNSPECIFIED DeploymentShapePresetType = "PRESET_TYPE_UNSPECIFIED"
 	DeploymentShapePresetTypeSUMMARIZATION         DeploymentShapePresetType = "SUMMARIZATION"
 	DeploymentShapePresetTypeTHROUGHPUT            DeploymentShapePresetType = "THROUGHPUT"
@@ -1427,11 +1593,52 @@ func (e DeploymentShapePresetType) Valid() bool {
 		return true
 	case DeploymentShapePresetTypeMINIMAL:
 		return true
+	case DeploymentShapePresetTypeMULTILORA:
+		return true
 	case DeploymentShapePresetTypePRESETTYPEUNSPECIFIED:
 		return true
 	case DeploymentShapePresetTypeSUMMARIZATION:
 		return true
 	case DeploymentShapePresetTypeTHROUGHPUT:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for DeploymentShapeVersionCapability.
+const (
+	DeploymentShapeVersionCapabilityCAPABILITYUNSPECIFIED DeploymentShapeVersionCapability = "CAPABILITY_UNSPECIFIED"
+	DeploymentShapeVersionCapabilityMULTILORA             DeploymentShapeVersionCapability = "MULTI_LORA"
+)
+
+// Valid indicates whether the value is a known member of the DeploymentShapeVersionCapability enum.
+func (e DeploymentShapeVersionCapability) Valid() bool {
+	switch e {
+	case DeploymentShapeVersionCapabilityCAPABILITYUNSPECIFIED:
+		return true
+	case DeploymentShapeVersionCapabilityMULTILORA:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for DeveloperPassVersion.
+const (
+	DeveloperPassVersionVERSIONUNSPECIFIED DeveloperPassVersion = "VERSION_UNSPECIFIED"
+	DeveloperPassVersionVERSIONV1          DeveloperPassVersion = "VERSION_V1"
+	DeveloperPassVersionVERSIONV2          DeveloperPassVersion = "VERSION_V2"
+)
+
+// Valid indicates whether the value is a known member of the DeveloperPassVersion enum.
+func (e DeveloperPassVersion) Valid() bool {
+	switch e {
+	case DeveloperPassVersionVERSIONUNSPECIFIED:
+		return true
+	case DeveloperPassVersionVERSIONV1:
+		return true
+	case DeveloperPassVersionVERSIONV2:
 		return true
 	default:
 		return false
@@ -1477,27 +1684,45 @@ func (e FunctionSelectionType) Valid() bool {
 	}
 }
 
-// Defines values for McpServerAuthenticationType.
+// Defines values for ModelKind.
 const (
-	McpServerAuthenticationTypeAPIKEY                        McpServerAuthenticationType = "API_KEY"
-	McpServerAuthenticationTypeAUTHENTICATIONTYPEUNSPECIFIED McpServerAuthenticationType = "AUTHENTICATION_TYPE_UNSPECIFIED"
-	McpServerAuthenticationTypeBEARERTOKEN                   McpServerAuthenticationType = "BEARER_TOKEN"
-	McpServerAuthenticationTypeOAUTH2                        McpServerAuthenticationType = "OAUTH2"
-	McpServerAuthenticationTypeOPEN                          McpServerAuthenticationType = "OPEN"
+	ModelKindCUSTOMMODEL      ModelKind = "CUSTOM_MODEL"
+	ModelKindDRAFTADDON       ModelKind = "DRAFT_ADDON"
+	ModelKindEMBEDDINGMODEL   ModelKind = "EMBEDDING_MODEL"
+	ModelKindFLUMINAADDON     ModelKind = "FLUMINA_ADDON"
+	ModelKindFLUMINABASEMODEL ModelKind = "FLUMINA_BASE_MODEL"
+	ModelKindHFBASEMODEL      ModelKind = "HF_BASE_MODEL"
+	ModelKindHFPEFTADDON      ModelKind = "HF_PEFT_ADDON"
+	ModelKindHFTEFTADDON      ModelKind = "HF_TEFT_ADDON"
+	ModelKindKINDUNSPECIFIED  ModelKind = "KIND_UNSPECIFIED"
+	ModelKindLIVEMERGE        ModelKind = "LIVE_MERGE"
+	ModelKindSNAPSHOTMODEL    ModelKind = "SNAPSHOT_MODEL"
 )
 
-// Valid indicates whether the value is a known member of the McpServerAuthenticationType enum.
-func (e McpServerAuthenticationType) Valid() bool {
+// Valid indicates whether the value is a known member of the ModelKind enum.
+func (e ModelKind) Valid() bool {
 	switch e {
-	case McpServerAuthenticationTypeAPIKEY:
+	case ModelKindCUSTOMMODEL:
 		return true
-	case McpServerAuthenticationTypeAUTHENTICATIONTYPEUNSPECIFIED:
+	case ModelKindDRAFTADDON:
 		return true
-	case McpServerAuthenticationTypeBEARERTOKEN:
+	case ModelKindEMBEDDINGMODEL:
 		return true
-	case McpServerAuthenticationTypeOAUTH2:
+	case ModelKindFLUMINAADDON:
 		return true
-	case McpServerAuthenticationTypeOPEN:
+	case ModelKindFLUMINABASEMODEL:
+		return true
+	case ModelKindHFBASEMODEL:
+		return true
+	case ModelKindHFPEFTADDON:
+		return true
+	case ModelKindHFTEFTADDON:
+		return true
+	case ModelKindKINDUNSPECIFIED:
+		return true
+	case ModelKindLIVEMERGE:
+		return true
+	case ModelKindSNAPSHOTMODEL:
 		return true
 	default:
 		return false
@@ -1558,21 +1783,54 @@ func (e PricingPlanBillingType) Valid() bool {
 	}
 }
 
-// Defines values for PythonExecutorTargetType.
+// Defines values for QueryUsageCostsRequestDimension.
 const (
-	PythonExecutorTargetTypeFILENAME              PythonExecutorTargetType = "FILENAME"
-	PythonExecutorTargetTypeMODULE                PythonExecutorTargetType = "MODULE"
-	PythonExecutorTargetTypeTARGETTYPEUNSPECIFIED PythonExecutorTargetType = "TARGET_TYPE_UNSPECIFIED"
+	QueryUsageCostsRequestDimensionAPIKEY               QueryUsageCostsRequestDimension = "API_KEY"
+	QueryUsageCostsRequestDimensionDAY                  QueryUsageCostsRequestDimension = "DAY"
+	QueryUsageCostsRequestDimensionDIMENSIONUNSPECIFIED QueryUsageCostsRequestDimension = "DIMENSION_UNSPECIFIED"
+	QueryUsageCostsRequestDimensionHOUR                 QueryUsageCostsRequestDimension = "HOUR"
+	QueryUsageCostsRequestDimensionMODEL                QueryUsageCostsRequestDimension = "MODEL"
+	QueryUsageCostsRequestDimensionUSER                 QueryUsageCostsRequestDimension = "USER"
 )
 
-// Valid indicates whether the value is a known member of the PythonExecutorTargetType enum.
-func (e PythonExecutorTargetType) Valid() bool {
+// Valid indicates whether the value is a known member of the QueryUsageCostsRequestDimension enum.
+func (e QueryUsageCostsRequestDimension) Valid() bool {
 	switch e {
-	case PythonExecutorTargetTypeFILENAME:
+	case QueryUsageCostsRequestDimensionAPIKEY:
 		return true
-	case PythonExecutorTargetTypeMODULE:
+	case QueryUsageCostsRequestDimensionDAY:
 		return true
-	case PythonExecutorTargetTypeTARGETTYPEUNSPECIFIED:
+	case QueryUsageCostsRequestDimensionDIMENSIONUNSPECIFIED:
+		return true
+	case QueryUsageCostsRequestDimensionHOUR:
+		return true
+	case QueryUsageCostsRequestDimensionMODEL:
+		return true
+	case QueryUsageCostsRequestDimensionUSER:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for QueryUsageCostsResponseAttributionCompleteness.
+const (
+	QueryUsageCostsResponseAttributionCompletenessATTRIBUTIONCOMPLETENESSUNSPECIFIED QueryUsageCostsResponseAttributionCompleteness = "ATTRIBUTION_COMPLETENESS_UNSPECIFIED"
+	QueryUsageCostsResponseAttributionCompletenessCOMPLETE                           QueryUsageCostsResponseAttributionCompleteness = "COMPLETE"
+	QueryUsageCostsResponseAttributionCompletenessINCOMPLETE                         QueryUsageCostsResponseAttributionCompleteness = "INCOMPLETE"
+	QueryUsageCostsResponseAttributionCompletenessUNKNOWN                            QueryUsageCostsResponseAttributionCompleteness = "UNKNOWN"
+)
+
+// Valid indicates whether the value is a known member of the QueryUsageCostsResponseAttributionCompleteness enum.
+func (e QueryUsageCostsResponseAttributionCompleteness) Valid() bool {
+	switch e {
+	case QueryUsageCostsResponseAttributionCompletenessATTRIBUTIONCOMPLETENESSUNSPECIFIED:
+		return true
+	case QueryUsageCostsResponseAttributionCompletenessCOMPLETE:
+		return true
+	case QueryUsageCostsResponseAttributionCompletenessINCOMPLETE:
+		return true
+	case QueryUsageCostsResponseAttributionCompletenessUNKNOWN:
 		return true
 	default:
 		return false
@@ -1633,6 +1891,39 @@ func (e ResponseFormatType) Valid() bool {
 	}
 }
 
+// Defines values for StreamOptionsBufferMode.
+const (
+	StreamOptionsBufferModeAll StreamOptionsBufferMode = "all"
+	StreamOptionsBufferModeAny StreamOptionsBufferMode = "any"
+)
+
+// Valid indicates whether the value is a known member of the StreamOptionsBufferMode enum.
+func (e StreamOptionsBufferMode) Valid() bool {
+	switch e {
+	case StreamOptionsBufferModeAll:
+		return true
+	case StreamOptionsBufferModeAny:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ThinkingConfigAdaptiveType.
+const (
+	ThinkingConfigAdaptiveTypeAdaptive ThinkingConfigAdaptiveType = "adaptive"
+)
+
+// Valid indicates whether the value is a known member of the ThinkingConfigAdaptiveType enum.
+func (e ThinkingConfigAdaptiveType) Valid() bool {
+	switch e {
+	case ThinkingConfigAdaptiveTypeAdaptive:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for ThinkingConfigDisabledType.
 const (
 	ThinkingConfigDisabledTypeDisabled ThinkingConfigDisabledType = "disabled"
@@ -1642,6 +1933,54 @@ const (
 func (e ThinkingConfigDisabledType) Valid() bool {
 	switch e {
 	case ThinkingConfigDisabledTypeDisabled:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ThinkingConfigEnabledEffort0.
+const (
+	ThinkingConfigEnabledEffort0Adaptive ThinkingConfigEnabledEffort0 = "adaptive"
+	ThinkingConfigEnabledEffort0High     ThinkingConfigEnabledEffort0 = "high"
+	ThinkingConfigEnabledEffort0Low      ThinkingConfigEnabledEffort0 = "low"
+	ThinkingConfigEnabledEffort0Max      ThinkingConfigEnabledEffort0 = "max"
+	ThinkingConfigEnabledEffort0Medium   ThinkingConfigEnabledEffort0 = "medium"
+	ThinkingConfigEnabledEffort0None     ThinkingConfigEnabledEffort0 = "none"
+	ThinkingConfigEnabledEffort0Xhigh    ThinkingConfigEnabledEffort0 = "xhigh"
+)
+
+// Valid indicates whether the value is a known member of the ThinkingConfigEnabledEffort0 enum.
+func (e ThinkingConfigEnabledEffort0) Valid() bool {
+	switch e {
+	case ThinkingConfigEnabledEffort0Adaptive:
+		return true
+	case ThinkingConfigEnabledEffort0High:
+		return true
+	case ThinkingConfigEnabledEffort0Low:
+		return true
+	case ThinkingConfigEnabledEffort0Max:
+		return true
+	case ThinkingConfigEnabledEffort0Medium:
+		return true
+	case ThinkingConfigEnabledEffort0None:
+		return true
+	case ThinkingConfigEnabledEffort0Xhigh:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ThinkingConfigEnabledKeep.
+const (
+	ThinkingConfigEnabledKeepAll ThinkingConfigEnabledKeep = "all"
+)
+
+// Valid indicates whether the value is a known member of the ThinkingConfigEnabledKeep enum.
+func (e ThinkingConfigEnabledKeep) Valid() bool {
+	switch e {
+	case ThinkingConfigEnabledKeepAll:
 		return true
 	default:
 		return false
@@ -1663,6 +2002,117 @@ func (e ThinkingConfigEnabledType) Valid() bool {
 	}
 }
 
+// Defines values for TrainingSessionReferenceState.
+const (
+	TrainingSessionReferenceStateADAPTER                                  TrainingSessionReferenceState = "ADAPTER"
+	TrainingSessionReferenceStateBASE                                     TrainingSessionReferenceState = "BASE"
+	TrainingSessionReferenceStateTRAININGSESSIONREFERENCESTATEUNSPECIFIED TrainingSessionReferenceState = "TRAINING_SESSION_REFERENCE_STATE_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the TrainingSessionReferenceState enum.
+func (e TrainingSessionReferenceState) Valid() bool {
+	switch e {
+	case TrainingSessionReferenceStateADAPTER:
+		return true
+	case TrainingSessionReferenceStateBASE:
+		return true
+	case TrainingSessionReferenceStateTRAININGSESSIONREFERENCESTATEUNSPECIFIED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for TrainingShapeTrainerMode.
+const (
+	TrainingShapeTrainerModeFORWARDONLY            TrainingShapeTrainerMode = "FORWARD_ONLY"
+	TrainingShapeTrainerModeLORATRAINER            TrainingShapeTrainerMode = "LORA_TRAINER"
+	TrainingShapeTrainerModePOLICYTRAINER          TrainingShapeTrainerMode = "POLICY_TRAINER"
+	TrainingShapeTrainerModeTRAINERMODEUNSPECIFIED TrainingShapeTrainerMode = "TRAINER_MODE_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the TrainingShapeTrainerMode enum.
+func (e TrainingShapeTrainerMode) Valid() bool {
+	switch e {
+	case TrainingShapeTrainerModeFORWARDONLY:
+		return true
+	case TrainingShapeTrainerModeLORATRAINER:
+		return true
+	case TrainingShapeTrainerModePOLICYTRAINER:
+		return true
+	case TrainingShapeTrainerModeTRAINERMODEUNSPECIFIED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for UserUsageLimitIncreaseRequestRequestState.
+const (
+	UserUsageLimitIncreaseRequestRequestStateAPPROVED                UserUsageLimitIncreaseRequestRequestState = "APPROVED"
+	UserUsageLimitIncreaseRequestRequestStatePENDING                 UserUsageLimitIncreaseRequestRequestState = "PENDING"
+	UserUsageLimitIncreaseRequestRequestStateREJECTED                UserUsageLimitIncreaseRequestRequestState = "REJECTED"
+	UserUsageLimitIncreaseRequestRequestStateREQUESTSTATEUNSPECIFIED UserUsageLimitIncreaseRequestRequestState = "REQUEST_STATE_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the UserUsageLimitIncreaseRequestRequestState enum.
+func (e UserUsageLimitIncreaseRequestRequestState) Valid() bool {
+	switch e {
+	case UserUsageLimitIncreaseRequestRequestStateAPPROVED:
+		return true
+	case UserUsageLimitIncreaseRequestRequestStatePENDING:
+		return true
+	case UserUsageLimitIncreaseRequestRequestStateREJECTED:
+		return true
+	case UserUsageLimitIncreaseRequestRequestStateREQUESTSTATEUNSPECIFIED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ZeroDataRetentionPolicyInferencePolicyEnforcement.
+const (
+	ZeroDataRetentionPolicyInferencePolicyEnforcementENFORCED               ZeroDataRetentionPolicyInferencePolicyEnforcement = "ENFORCED"
+	ZeroDataRetentionPolicyInferencePolicyEnforcementENFORCEMENTUNSPECIFIED ZeroDataRetentionPolicyInferencePolicyEnforcement = "ENFORCEMENT_UNSPECIFIED"
+	ZeroDataRetentionPolicyInferencePolicyEnforcementNOTENFORCED            ZeroDataRetentionPolicyInferencePolicyEnforcement = "NOT_ENFORCED"
+)
+
+// Valid indicates whether the value is a known member of the ZeroDataRetentionPolicyInferencePolicyEnforcement enum.
+func (e ZeroDataRetentionPolicyInferencePolicyEnforcement) Valid() bool {
+	switch e {
+	case ZeroDataRetentionPolicyInferencePolicyEnforcementENFORCED:
+		return true
+	case ZeroDataRetentionPolicyInferencePolicyEnforcementENFORCEMENTUNSPECIFIED:
+		return true
+	case ZeroDataRetentionPolicyInferencePolicyEnforcementNOTENFORCED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for ZeroDataRetentionPolicyTrainingPolicyEnforcement.
+const (
+	ZeroDataRetentionPolicyTrainingPolicyEnforcementENFORCED               ZeroDataRetentionPolicyTrainingPolicyEnforcement = "ENFORCED"
+	ZeroDataRetentionPolicyTrainingPolicyEnforcementENFORCEMENTUNSPECIFIED ZeroDataRetentionPolicyTrainingPolicyEnforcement = "ENFORCEMENT_UNSPECIFIED"
+	ZeroDataRetentionPolicyTrainingPolicyEnforcementNOTENFORCED            ZeroDataRetentionPolicyTrainingPolicyEnforcement = "NOT_ENFORCED"
+)
+
+// Valid indicates whether the value is a known member of the ZeroDataRetentionPolicyTrainingPolicyEnforcement enum.
+func (e ZeroDataRetentionPolicyTrainingPolicyEnforcement) Valid() bool {
+	switch e {
+	case ZeroDataRetentionPolicyTrainingPolicyEnforcementENFORCED:
+		return true
+	case ZeroDataRetentionPolicyTrainingPolicyEnforcementENFORCEMENTUNSPECIFIED:
+		return true
+	case ZeroDataRetentionPolicyTrainingPolicyEnforcementNOTENFORCED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GatewayAcceleratorType.
 const (
 	GatewayAcceleratorTypeACCELERATORTYPEUNSPECIFIED GatewayAcceleratorType = "ACCELERATOR_TYPE_UNSPECIFIED"
@@ -1673,6 +2123,9 @@ const (
 	GatewayAcceleratorTypeNVIDIAA10080GB             GatewayAcceleratorType = "NVIDIA_A100_80GB"
 	GatewayAcceleratorTypeNVIDIAA10G24GB             GatewayAcceleratorType = "NVIDIA_A10G_24GB"
 	GatewayAcceleratorTypeNVIDIAB200180GB            GatewayAcceleratorType = "NVIDIA_B200_180GB"
+	GatewayAcceleratorTypeNVIDIAB300288GB            GatewayAcceleratorType = "NVIDIA_B300_288GB"
+	GatewayAcceleratorTypeNVIDIAGB200                GatewayAcceleratorType = "NVIDIA_GB200"
+	GatewayAcceleratorTypeNVIDIAGB300                GatewayAcceleratorType = "NVIDIA_GB300"
 	GatewayAcceleratorTypeNVIDIAH10080GB             GatewayAcceleratorType = "NVIDIA_H100_80GB"
 	GatewayAcceleratorTypeNVIDIAH200141GB            GatewayAcceleratorType = "NVIDIA_H200_141GB"
 	GatewayAcceleratorTypeNVIDIAL424GB               GatewayAcceleratorType = "NVIDIA_L4_24GB"
@@ -1696,6 +2149,12 @@ func (e GatewayAcceleratorType) Valid() bool {
 	case GatewayAcceleratorTypeNVIDIAA10G24GB:
 		return true
 	case GatewayAcceleratorTypeNVIDIAB200180GB:
+		return true
+	case GatewayAcceleratorTypeNVIDIAB300288GB:
+		return true
+	case GatewayAcceleratorTypeNVIDIAGB200:
+		return true
+	case GatewayAcceleratorTypeNVIDIAGB300:
 		return true
 	case GatewayAcceleratorTypeNVIDIAH10080GB:
 		return true
@@ -1735,42 +2194,54 @@ func (e GatewayAccountState) Valid() bool {
 	}
 }
 
-// Defines values for GatewayBatchJobState.
+// Defines values for GatewayAccountUsageLimitsEnforcementMode.
 const (
-	GatewayBatchJobStateCANCELLED        GatewayBatchJobState = "CANCELLED"
-	GatewayBatchJobStateCANCELLING       GatewayBatchJobState = "CANCELLING"
-	GatewayBatchJobStateCOMPLETED        GatewayBatchJobState = "COMPLETED"
-	GatewayBatchJobStateCREATING         GatewayBatchJobState = "CREATING"
-	GatewayBatchJobStateDELETING         GatewayBatchJobState = "DELETING"
-	GatewayBatchJobStateFAILED           GatewayBatchJobState = "FAILED"
-	GatewayBatchJobStatePENDING          GatewayBatchJobState = "PENDING"
-	GatewayBatchJobStateQUEUED           GatewayBatchJobState = "QUEUED"
-	GatewayBatchJobStateRUNNING          GatewayBatchJobState = "RUNNING"
-	GatewayBatchJobStateSTATEUNSPECIFIED GatewayBatchJobState = "STATE_UNSPECIFIED"
+	GatewayAccountUsageLimitsEnforcementModeBLOCK                      GatewayAccountUsageLimitsEnforcementMode = "BLOCK"
+	GatewayAccountUsageLimitsEnforcementModeDISABLED                   GatewayAccountUsageLimitsEnforcementMode = "DISABLED"
+	GatewayAccountUsageLimitsEnforcementModeENFORCEMENTMODEUNSPECIFIED GatewayAccountUsageLimitsEnforcementMode = "ENFORCEMENT_MODE_UNSPECIFIED"
+	GatewayAccountUsageLimitsEnforcementModeWARN                       GatewayAccountUsageLimitsEnforcementMode = "WARN"
 )
 
-// Valid indicates whether the value is a known member of the GatewayBatchJobState enum.
-func (e GatewayBatchJobState) Valid() bool {
+// Valid indicates whether the value is a known member of the GatewayAccountUsageLimitsEnforcementMode enum.
+func (e GatewayAccountUsageLimitsEnforcementMode) Valid() bool {
 	switch e {
-	case GatewayBatchJobStateCANCELLED:
+	case GatewayAccountUsageLimitsEnforcementModeBLOCK:
 		return true
-	case GatewayBatchJobStateCANCELLING:
+	case GatewayAccountUsageLimitsEnforcementModeDISABLED:
 		return true
-	case GatewayBatchJobStateCOMPLETED:
+	case GatewayAccountUsageLimitsEnforcementModeENFORCEMENTMODEUNSPECIFIED:
 		return true
-	case GatewayBatchJobStateCREATING:
+	case GatewayAccountUsageLimitsEnforcementModeWARN:
 		return true
-	case GatewayBatchJobStateDELETING:
+	default:
+		return false
+	}
+}
+
+// Defines values for GatewayCheckpointType.
+const (
+	GatewayCheckpointTypeCHECKPOINTTYPEINFERENCEARCV2 GatewayCheckpointType = "CHECKPOINT_TYPE_INFERENCE_ARC_V2"
+	GatewayCheckpointTypeCHECKPOINTTYPEINFERENCEBASE  GatewayCheckpointType = "CHECKPOINT_TYPE_INFERENCE_BASE"
+	GatewayCheckpointTypeCHECKPOINTTYPEINFERENCELORA  GatewayCheckpointType = "CHECKPOINT_TYPE_INFERENCE_LORA"
+	GatewayCheckpointTypeCHECKPOINTTYPETRAINING       GatewayCheckpointType = "CHECKPOINT_TYPE_TRAINING"
+	GatewayCheckpointTypeCHECKPOINTTYPETRAININGLORA   GatewayCheckpointType = "CHECKPOINT_TYPE_TRAINING_LORA"
+	GatewayCheckpointTypeCHECKPOINTTYPEUNSPECIFIED    GatewayCheckpointType = "CHECKPOINT_TYPE_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the GatewayCheckpointType enum.
+func (e GatewayCheckpointType) Valid() bool {
+	switch e {
+	case GatewayCheckpointTypeCHECKPOINTTYPEINFERENCEARCV2:
 		return true
-	case GatewayBatchJobStateFAILED:
+	case GatewayCheckpointTypeCHECKPOINTTYPEINFERENCEBASE:
 		return true
-	case GatewayBatchJobStatePENDING:
+	case GatewayCheckpointTypeCHECKPOINTTYPEINFERENCELORA:
 		return true
-	case GatewayBatchJobStateQUEUED:
+	case GatewayCheckpointTypeCHECKPOINTTYPETRAINING:
 		return true
-	case GatewayBatchJobStateRUNNING:
+	case GatewayCheckpointTypeCHECKPOINTTYPETRAININGLORA:
 		return true
-	case GatewayBatchJobStateSTATEUNSPECIFIED:
+	case GatewayCheckpointTypeCHECKPOINTTYPEUNSPECIFIED:
 		return true
 	default:
 		return false
@@ -1996,6 +2467,45 @@ func (e GatewayDeploymentState) Valid() bool {
 	}
 }
 
+// Defines values for GatewayDeveloperPassState.
+const (
+	GatewayDeveloperPassStateACTIVE             GatewayDeveloperPassState = "ACTIVE"
+	GatewayDeveloperPassStateCREATING           GatewayDeveloperPassState = "CREATING"
+	GatewayDeveloperPassStateDISABLINGAUTORENEW GatewayDeveloperPassState = "DISABLING_AUTO_RENEW"
+	GatewayDeveloperPassStateENABLINGAUTORENEW  GatewayDeveloperPassState = "ENABLING_AUTO_RENEW"
+	GatewayDeveloperPassStateEXPIRED            GatewayDeveloperPassState = "EXPIRED"
+	GatewayDeveloperPassStateFAILED             GatewayDeveloperPassState = "FAILED"
+	GatewayDeveloperPassStatePAYMENTFAILED      GatewayDeveloperPassState = "PAYMENT_FAILED"
+	GatewayDeveloperPassStateSTATEUNSPECIFIED   GatewayDeveloperPassState = "STATE_UNSPECIFIED"
+	GatewayDeveloperPassStateUPDATING           GatewayDeveloperPassState = "UPDATING"
+)
+
+// Valid indicates whether the value is a known member of the GatewayDeveloperPassState enum.
+func (e GatewayDeveloperPassState) Valid() bool {
+	switch e {
+	case GatewayDeveloperPassStateACTIVE:
+		return true
+	case GatewayDeveloperPassStateCREATING:
+		return true
+	case GatewayDeveloperPassStateDISABLINGAUTORENEW:
+		return true
+	case GatewayDeveloperPassStateENABLINGAUTORENEW:
+		return true
+	case GatewayDeveloperPassStateEXPIRED:
+		return true
+	case GatewayDeveloperPassStateFAILED:
+		return true
+	case GatewayDeveloperPassStatePAYMENTFAILED:
+		return true
+	case GatewayDeveloperPassStateSTATEUNSPECIFIED:
+		return true
+	case GatewayDeveloperPassStateUPDATING:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GatewayDirectRouteType.
 const (
 	GatewayDirectRouteTypeAWSPRIVATELINK             GatewayDirectRouteType = "AWS_PRIVATELINK"
@@ -2020,36 +2530,21 @@ func (e GatewayDirectRouteType) Valid() bool {
 	}
 }
 
-// Defines values for GatewayEnvironmentState.
+// Defines values for GatewayEncryptionState.
 const (
-	GatewayEnvironmentStateCONNECTED        GatewayEnvironmentState = "CONNECTED"
-	GatewayEnvironmentStateCONNECTING       GatewayEnvironmentState = "CONNECTING"
-	GatewayEnvironmentStateCREATING         GatewayEnvironmentState = "CREATING"
-	GatewayEnvironmentStateDELETING         GatewayEnvironmentState = "DELETING"
-	GatewayEnvironmentStateDISCONNECTED     GatewayEnvironmentState = "DISCONNECTED"
-	GatewayEnvironmentStateDISCONNECTING    GatewayEnvironmentState = "DISCONNECTING"
-	GatewayEnvironmentStateRECONNECTING     GatewayEnvironmentState = "RECONNECTING"
-	GatewayEnvironmentStateSTATEUNSPECIFIED GatewayEnvironmentState = "STATE_UNSPECIFIED"
+	GatewayEncryptionStateENCRYPTIONSTATECMEK        GatewayEncryptionState = "ENCRYPTION_STATE_CMEK"
+	GatewayEncryptionStateENCRYPTIONSTATEPLAINTEXT   GatewayEncryptionState = "ENCRYPTION_STATE_PLAINTEXT"
+	GatewayEncryptionStateENCRYPTIONSTATEUNSPECIFIED GatewayEncryptionState = "ENCRYPTION_STATE_UNSPECIFIED"
 )
 
-// Valid indicates whether the value is a known member of the GatewayEnvironmentState enum.
-func (e GatewayEnvironmentState) Valid() bool {
+// Valid indicates whether the value is a known member of the GatewayEncryptionState enum.
+func (e GatewayEncryptionState) Valid() bool {
 	switch e {
-	case GatewayEnvironmentStateCONNECTED:
+	case GatewayEncryptionStateENCRYPTIONSTATECMEK:
 		return true
-	case GatewayEnvironmentStateCONNECTING:
+	case GatewayEncryptionStateENCRYPTIONSTATEPLAINTEXT:
 		return true
-	case GatewayEnvironmentStateCREATING:
-		return true
-	case GatewayEnvironmentStateDELETING:
-		return true
-	case GatewayEnvironmentStateDISCONNECTED:
-		return true
-	case GatewayEnvironmentStateDISCONNECTING:
-		return true
-	case GatewayEnvironmentStateRECONNECTING:
-		return true
-	case GatewayEnvironmentStateSTATEUNSPECIFIED:
+	case GatewayEncryptionStateENCRYPTIONSTATEUNSPECIFIED:
 		return true
 	default:
 		return false
@@ -2080,33 +2575,51 @@ func (e GatewayEvaluatorState) Valid() bool {
 	}
 }
 
-// Defines values for GatewayGenericDeploymentState.
+// Defines values for GatewayExternalKeyState.
 const (
-	GatewayGenericDeploymentStateCREATING         GatewayGenericDeploymentState = "CREATING"
-	GatewayGenericDeploymentStateDELETED          GatewayGenericDeploymentState = "DELETED"
-	GatewayGenericDeploymentStateDELETING         GatewayGenericDeploymentState = "DELETING"
-	GatewayGenericDeploymentStateFAILED           GatewayGenericDeploymentState = "FAILED"
-	GatewayGenericDeploymentStateREADY            GatewayGenericDeploymentState = "READY"
-	GatewayGenericDeploymentStateSTATEUNSPECIFIED GatewayGenericDeploymentState = "STATE_UNSPECIFIED"
-	GatewayGenericDeploymentStateUPDATING         GatewayGenericDeploymentState = "UPDATING"
+	GatewayExternalKeyStateCREATING         GatewayExternalKeyState = "CREATING"
+	GatewayExternalKeyStateDELETING         GatewayExternalKeyState = "DELETING"
+	GatewayExternalKeyStateREADY            GatewayExternalKeyState = "READY"
+	GatewayExternalKeyStateSTATEUNSPECIFIED GatewayExternalKeyState = "STATE_UNSPECIFIED"
+	GatewayExternalKeyStateUPDATING         GatewayExternalKeyState = "UPDATING"
 )
 
-// Valid indicates whether the value is a known member of the GatewayGenericDeploymentState enum.
-func (e GatewayGenericDeploymentState) Valid() bool {
+// Valid indicates whether the value is a known member of the GatewayExternalKeyState enum.
+func (e GatewayExternalKeyState) Valid() bool {
 	switch e {
-	case GatewayGenericDeploymentStateCREATING:
+	case GatewayExternalKeyStateCREATING:
 		return true
-	case GatewayGenericDeploymentStateDELETED:
+	case GatewayExternalKeyStateDELETING:
 		return true
-	case GatewayGenericDeploymentStateDELETING:
+	case GatewayExternalKeyStateREADY:
 		return true
-	case GatewayGenericDeploymentStateFAILED:
+	case GatewayExternalKeyStateSTATEUNSPECIFIED:
 		return true
-	case GatewayGenericDeploymentStateREADY:
+	case GatewayExternalKeyStateUPDATING:
 		return true
-	case GatewayGenericDeploymentStateSTATEUNSPECIFIED:
+	default:
+		return false
+	}
+}
+
+// Defines values for GatewayGetAccountUsageRequestUsageType.
+const (
+	GatewayGetAccountUsageRequestUsageTypeDEDICATEDDEPLOYMENT  GatewayGetAccountUsageRequestUsageType = "DEDICATED_DEPLOYMENT"
+	GatewayGetAccountUsageRequestUsageTypeSERVERLESS           GatewayGetAccountUsageRequestUsageType = "SERVERLESS"
+	GatewayGetAccountUsageRequestUsageTypeTRAINING             GatewayGetAccountUsageRequestUsageType = "TRAINING"
+	GatewayGetAccountUsageRequestUsageTypeUSAGETYPEUNSPECIFIED GatewayGetAccountUsageRequestUsageType = "USAGE_TYPE_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the GatewayGetAccountUsageRequestUsageType enum.
+func (e GatewayGetAccountUsageRequestUsageType) Valid() bool {
+	switch e {
+	case GatewayGetAccountUsageRequestUsageTypeDEDICATEDDEPLOYMENT:
 		return true
-	case GatewayGenericDeploymentStateUPDATING:
+	case GatewayGetAccountUsageRequestUsageTypeSERVERLESS:
+		return true
+	case GatewayGetAccountUsageRequestUsageTypeTRAINING:
+		return true
+	case GatewayGetAccountUsageRequestUsageTypeUSAGETYPEUNSPECIFIED:
 		return true
 	default:
 		return false
@@ -2142,11 +2655,13 @@ func (e GatewayIdentityProviderState) Valid() bool {
 
 // Defines values for GatewayJobState.
 const (
+	GatewayJobStateJOBSTATEARCHIVED             GatewayJobState = "JOB_STATE_ARCHIVED"
 	GatewayJobStateJOBSTATECANCELLED            GatewayJobState = "JOB_STATE_CANCELLED"
 	GatewayJobStateJOBSTATECANCELLING           GatewayJobState = "JOB_STATE_CANCELLING"
 	GatewayJobStateJOBSTATECOMPLETED            GatewayJobState = "JOB_STATE_COMPLETED"
 	GatewayJobStateJOBSTATECREATING             GatewayJobState = "JOB_STATE_CREATING"
 	GatewayJobStateJOBSTATECREATINGINPUTDATASET GatewayJobState = "JOB_STATE_CREATING_INPUT_DATASET"
+	GatewayJobStateJOBSTATEDELETED              GatewayJobState = "JOB_STATE_DELETED"
 	GatewayJobStateJOBSTATEDELETING             GatewayJobState = "JOB_STATE_DELETING"
 	GatewayJobStateJOBSTATEDELETINGCLEANINGUP   GatewayJobState = "JOB_STATE_DELETING_CLEANING_UP"
 	GatewayJobStateJOBSTATEEARLYSTOPPED         GatewayJobState = "JOB_STATE_EARLY_STOPPED"
@@ -2165,6 +2680,8 @@ const (
 // Valid indicates whether the value is a known member of the GatewayJobState enum.
 func (e GatewayJobState) Valid() bool {
 	switch e {
+	case GatewayJobStateJOBSTATEARCHIVED:
+		return true
 	case GatewayJobStateJOBSTATECANCELLED:
 		return true
 	case GatewayJobStateJOBSTATECANCELLING:
@@ -2174,6 +2691,8 @@ func (e GatewayJobState) Valid() bool {
 	case GatewayJobStateJOBSTATECREATING:
 		return true
 	case GatewayJobStateJOBSTATECREATINGINPUTDATASET:
+		return true
+	case GatewayJobStateJOBSTATEDELETED:
 		return true
 	case GatewayJobStateJOBSTATEDELETING:
 		return true
@@ -2206,81 +2725,6 @@ func (e GatewayJobState) Valid() bool {
 	}
 }
 
-// Defines values for GatewayMcpServerState.
-const (
-	GatewayMcpServerStateACTIVE           GatewayMcpServerState = "ACTIVE"
-	GatewayMcpServerStateCREATING         GatewayMcpServerState = "CREATING"
-	GatewayMcpServerStateDELETING         GatewayMcpServerState = "DELETING"
-	GatewayMcpServerStateFAILED           GatewayMcpServerState = "FAILED"
-	GatewayMcpServerStateSTATEUNSPECIFIED GatewayMcpServerState = "STATE_UNSPECIFIED"
-)
-
-// Valid indicates whether the value is a known member of the GatewayMcpServerState enum.
-func (e GatewayMcpServerState) Valid() bool {
-	switch e {
-	case GatewayMcpServerStateACTIVE:
-		return true
-	case GatewayMcpServerStateCREATING:
-		return true
-	case GatewayMcpServerStateDELETING:
-		return true
-	case GatewayMcpServerStateFAILED:
-		return true
-	case GatewayMcpServerStateSTATEUNSPECIFIED:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for GatewayModelKind.
-const (
-	GatewayModelKindCUSTOMMODEL      GatewayModelKind = "CUSTOM_MODEL"
-	GatewayModelKindDRAFTADDON       GatewayModelKind = "DRAFT_ADDON"
-	GatewayModelKindEMBEDDINGMODEL   GatewayModelKind = "EMBEDDING_MODEL"
-	GatewayModelKindFIREAGENT        GatewayModelKind = "FIRE_AGENT"
-	GatewayModelKindFLUMINAADDON     GatewayModelKind = "FLUMINA_ADDON"
-	GatewayModelKindFLUMINABASEMODEL GatewayModelKind = "FLUMINA_BASE_MODEL"
-	GatewayModelKindHFBASEMODEL      GatewayModelKind = "HF_BASE_MODEL"
-	GatewayModelKindHFPEFTADDON      GatewayModelKind = "HF_PEFT_ADDON"
-	GatewayModelKindHFTEFTADDON      GatewayModelKind = "HF_TEFT_ADDON"
-	GatewayModelKindKINDUNSPECIFIED  GatewayModelKind = "KIND_UNSPECIFIED"
-	GatewayModelKindLIVEMERGE        GatewayModelKind = "LIVE_MERGE"
-	GatewayModelKindSNAPSHOTMODEL    GatewayModelKind = "SNAPSHOT_MODEL"
-)
-
-// Valid indicates whether the value is a known member of the GatewayModelKind enum.
-func (e GatewayModelKind) Valid() bool {
-	switch e {
-	case GatewayModelKindCUSTOMMODEL:
-		return true
-	case GatewayModelKindDRAFTADDON:
-		return true
-	case GatewayModelKindEMBEDDINGMODEL:
-		return true
-	case GatewayModelKindFIREAGENT:
-		return true
-	case GatewayModelKindFLUMINAADDON:
-		return true
-	case GatewayModelKindFLUMINABASEMODEL:
-		return true
-	case GatewayModelKindHFBASEMODEL:
-		return true
-	case GatewayModelKindHFPEFTADDON:
-		return true
-	case GatewayModelKindHFTEFTADDON:
-		return true
-	case GatewayModelKindKINDUNSPECIFIED:
-		return true
-	case GatewayModelKindLIVEMERGE:
-		return true
-	case GatewayModelKindSNAPSHOTMODEL:
-		return true
-	default:
-		return false
-	}
-}
-
 // Defines values for GatewayModelState.
 const (
 	GatewayModelStateREADY            GatewayModelState = "READY"
@@ -2305,6 +2749,7 @@ func (e GatewayModelState) Valid() bool {
 // Defines values for GatewayMultiRegion.
 const (
 	GatewayMultiRegionAPAC                   GatewayMultiRegion = "APAC"
+	GatewayMultiRegionCANADA                 GatewayMultiRegion = "CANADA"
 	GatewayMultiRegionEUROPE                 GatewayMultiRegion = "EUROPE"
 	GatewayMultiRegionGLOBAL                 GatewayMultiRegion = "GLOBAL"
 	GatewayMultiRegionMULTIREGIONUNSPECIFIED GatewayMultiRegion = "MULTI_REGION_UNSPECIFIED"
@@ -2316,6 +2761,8 @@ func (e GatewayMultiRegion) Valid() bool {
 	switch e {
 	case GatewayMultiRegionAPAC:
 		return true
+	case GatewayMultiRegionCANADA:
+		return true
 	case GatewayMultiRegionEUROPE:
 		return true
 	case GatewayMultiRegionGLOBAL:
@@ -2323,33 +2770,6 @@ func (e GatewayMultiRegion) Valid() bool {
 	case GatewayMultiRegionMULTIREGIONUNSPECIFIED:
 		return true
 	case GatewayMultiRegionUS:
-		return true
-	default:
-		return false
-	}
-}
-
-// Defines values for GatewayNodePoolState.
-const (
-	GatewayNodePoolStateCREATING         GatewayNodePoolState = "CREATING"
-	GatewayNodePoolStateDELETING         GatewayNodePoolState = "DELETING"
-	GatewayNodePoolStateFAILED           GatewayNodePoolState = "FAILED"
-	GatewayNodePoolStateREADY            GatewayNodePoolState = "READY"
-	GatewayNodePoolStateSTATEUNSPECIFIED GatewayNodePoolState = "STATE_UNSPECIFIED"
-)
-
-// Valid indicates whether the value is a known member of the GatewayNodePoolState enum.
-func (e GatewayNodePoolState) Valid() bool {
-	switch e {
-	case GatewayNodePoolStateCREATING:
-		return true
-	case GatewayNodePoolStateDELETING:
-		return true
-	case GatewayNodePoolStateFAILED:
-		return true
-	case GatewayNodePoolStateREADY:
-		return true
-	case GatewayNodePoolStateSTATEUNSPECIFIED:
 		return true
 	default:
 		return false
@@ -2377,24 +2797,64 @@ func (e GatewayPricingPlanState) Valid() bool {
 	}
 }
 
+// Defines values for GatewayPurpose.
+const (
+	GatewayPurposePURPOSEPILOT       GatewayPurpose = "PURPOSE_PILOT"
+	GatewayPurposePURPOSEUNSPECIFIED GatewayPurpose = "PURPOSE_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the GatewayPurpose enum.
+func (e GatewayPurpose) Valid() bool {
+	switch e {
+	case GatewayPurposePURPOSEPILOT:
+		return true
+	case GatewayPurposePURPOSEUNSPECIFIED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GatewayQueryUsageCostsRequestScope.
+const (
+	GatewayQueryUsageCostsRequestScopeACCOUNT          GatewayQueryUsageCostsRequestScope = "ACCOUNT"
+	GatewayQueryUsageCostsRequestScopeSCOPEUNSPECIFIED GatewayQueryUsageCostsRequestScope = "SCOPE_UNSPECIFIED"
+	GatewayQueryUsageCostsRequestScopeSELF             GatewayQueryUsageCostsRequestScope = "SELF"
+)
+
+// Valid indicates whether the value is a known member of the GatewayQueryUsageCostsRequestScope enum.
+func (e GatewayQueryUsageCostsRequestScope) Valid() bool {
+	switch e {
+	case GatewayQueryUsageCostsRequestScopeACCOUNT:
+		return true
+	case GatewayQueryUsageCostsRequestScopeSCOPEUNSPECIFIED:
+		return true
+	case GatewayQueryUsageCostsRequestScopeSELF:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GatewayRegion.
 const (
+	GatewayRegionAPMALAYSIA2        GatewayRegion = "AP_MALAYSIA_2"
+	GatewayRegionAPNEWSOUTHWALES1   GatewayRegion = "AP_NEWSOUTHWALES_1"
+	GatewayRegionAPTAIWAN1          GatewayRegion = "AP_TAIWAN_1"
 	GatewayRegionAPTOKYO1           GatewayRegion = "AP_TOKYO_1"
 	GatewayRegionAPTOKYO2           GatewayRegion = "AP_TOKYO_2"
 	GatewayRegionEUFRANKFURT1       GatewayRegion = "EU_FRANKFURT_1"
-	GatewayRegionEUHELSINKI1        GatewayRegion = "EU_HELSINKI_1"
 	GatewayRegionEUICELAND1         GatewayRegion = "EU_ICELAND_1"
 	GatewayRegionEUICELAND2         GatewayRegion = "EU_ICELAND_2"
-	GatewayRegionEUICELAND3         GatewayRegion = "EU_ICELAND_3"
-	GatewayRegionEUICELANDDEV1      GatewayRegion = "EU_ICELAND_DEV_1"
-	GatewayRegionEULONDON1          GatewayRegion = "EU_LONDON_1"
-	GatewayRegionEUPARIS1           GatewayRegion = "EU_PARIS_1"
+	GatewayRegionEUNETHERLANDS1     GatewayRegion = "EU_NETHERLANDS_1"
 	GatewayRegionNABRITISHCOLUMBIA1 GatewayRegion = "NA_BRITISHCOLUMBIA_1"
+	GatewayRegionNABRITISHCOLUMBIA2 GatewayRegion = "NA_BRITISHCOLUMBIA_2"
+	GatewayRegionNABRITISHCOLUMBIA3 GatewayRegion = "NA_BRITISHCOLUMBIA_3"
 	GatewayRegionREGIONUNSPECIFIED  GatewayRegion = "REGION_UNSPECIFIED"
 	GatewayRegionUSARIZONA1         GatewayRegion = "US_ARIZONA_1"
-	GatewayRegionUSARIZONA2         GatewayRegion = "US_ARIZONA_2"
 	GatewayRegionUSARIZONA3         GatewayRegion = "US_ARIZONA_3"
 	GatewayRegionUSCALIFORNIA1      GatewayRegion = "US_CALIFORNIA_1"
+	GatewayRegionUSCALIFORNIA2      GatewayRegion = "US_CALIFORNIA_2"
 	GatewayRegionUSGEORGIA1         GatewayRegion = "US_GEORGIA_1"
 	GatewayRegionUSGEORGIA2         GatewayRegion = "US_GEORGIA_2"
 	GatewayRegionUSGEORGIA3         GatewayRegion = "US_GEORGIA_3"
@@ -2402,13 +2862,12 @@ const (
 	GatewayRegionUSILLINOIS1        GatewayRegion = "US_ILLINOIS_1"
 	GatewayRegionUSILLINOIS2        GatewayRegion = "US_ILLINOIS_2"
 	GatewayRegionUSIOWA1            GatewayRegion = "US_IOWA_1"
-	GatewayRegionUSMISSOURI1        GatewayRegion = "US_MISSOURI_1"
-	GatewayRegionUSNEVADA1          GatewayRegion = "US_NEVADA_1"
+	GatewayRegionUSMINNESOTA1       GatewayRegion = "US_MINNESOTA_1"
 	GatewayRegionUSNEWYORK1         GatewayRegion = "US_NEWYORK_1"
 	GatewayRegionUSOHIO1            GatewayRegion = "US_OHIO_1"
+	GatewayRegionUSOREGON1          GatewayRegion = "US_OREGON_1"
 	GatewayRegionUSTEXAS1           GatewayRegion = "US_TEXAS_1"
 	GatewayRegionUSTEXAS2           GatewayRegion = "US_TEXAS_2"
-	GatewayRegionUSTEXAS3           GatewayRegion = "US_TEXAS_3"
 	GatewayRegionUSUTAH1            GatewayRegion = "US_UTAH_1"
 	GatewayRegionUSVIRGINIA1        GatewayRegion = "US_VIRGINIA_1"
 	GatewayRegionUSVIRGINIA2        GatewayRegion = "US_VIRGINIA_2"
@@ -2416,42 +2875,45 @@ const (
 	GatewayRegionUSWASHINGTON2      GatewayRegion = "US_WASHINGTON_2"
 	GatewayRegionUSWASHINGTON3      GatewayRegion = "US_WASHINGTON_3"
 	GatewayRegionUSWASHINGTON4      GatewayRegion = "US_WASHINGTON_4"
+	GatewayRegionUSWASHINGTON5      GatewayRegion = "US_WASHINGTON_5"
 )
 
 // Valid indicates whether the value is a known member of the GatewayRegion enum.
 func (e GatewayRegion) Valid() bool {
 	switch e {
+	case GatewayRegionAPMALAYSIA2:
+		return true
+	case GatewayRegionAPNEWSOUTHWALES1:
+		return true
+	case GatewayRegionAPTAIWAN1:
+		return true
 	case GatewayRegionAPTOKYO1:
 		return true
 	case GatewayRegionAPTOKYO2:
 		return true
 	case GatewayRegionEUFRANKFURT1:
 		return true
-	case GatewayRegionEUHELSINKI1:
-		return true
 	case GatewayRegionEUICELAND1:
 		return true
 	case GatewayRegionEUICELAND2:
 		return true
-	case GatewayRegionEUICELAND3:
-		return true
-	case GatewayRegionEUICELANDDEV1:
-		return true
-	case GatewayRegionEULONDON1:
-		return true
-	case GatewayRegionEUPARIS1:
+	case GatewayRegionEUNETHERLANDS1:
 		return true
 	case GatewayRegionNABRITISHCOLUMBIA1:
+		return true
+	case GatewayRegionNABRITISHCOLUMBIA2:
+		return true
+	case GatewayRegionNABRITISHCOLUMBIA3:
 		return true
 	case GatewayRegionREGIONUNSPECIFIED:
 		return true
 	case GatewayRegionUSARIZONA1:
 		return true
-	case GatewayRegionUSARIZONA2:
-		return true
 	case GatewayRegionUSARIZONA3:
 		return true
 	case GatewayRegionUSCALIFORNIA1:
+		return true
+	case GatewayRegionUSCALIFORNIA2:
 		return true
 	case GatewayRegionUSGEORGIA1:
 		return true
@@ -2467,19 +2929,17 @@ func (e GatewayRegion) Valid() bool {
 		return true
 	case GatewayRegionUSIOWA1:
 		return true
-	case GatewayRegionUSMISSOURI1:
-		return true
-	case GatewayRegionUSNEVADA1:
+	case GatewayRegionUSMINNESOTA1:
 		return true
 	case GatewayRegionUSNEWYORK1:
 		return true
 	case GatewayRegionUSOHIO1:
 		return true
+	case GatewayRegionUSOREGON1:
+		return true
 	case GatewayRegionUSTEXAS1:
 		return true
 	case GatewayRegionUSTEXAS2:
-		return true
-	case GatewayRegionUSTEXAS3:
 		return true
 	case GatewayRegionUSUTAH1:
 		return true
@@ -2494,6 +2954,8 @@ func (e GatewayRegion) Valid() bool {
 	case GatewayRegionUSWASHINGTON3:
 		return true
 	case GatewayRegionUSWASHINGTON4:
+		return true
+	case GatewayRegionUSWASHINGTON5:
 		return true
 	default:
 		return false
@@ -2548,27 +3010,54 @@ func (e GatewayRouterState) Valid() bool {
 	}
 }
 
-// Defines values for GatewaySnapshotState.
+// Defines values for GatewayTrainingRunState.
 const (
-	GatewaySnapshotStateCREATING         GatewaySnapshotState = "CREATING"
-	GatewaySnapshotStateDELETING         GatewaySnapshotState = "DELETING"
-	GatewaySnapshotStateFAILED           GatewaySnapshotState = "FAILED"
-	GatewaySnapshotStateREADY            GatewaySnapshotState = "READY"
-	GatewaySnapshotStateSTATEUNSPECIFIED GatewaySnapshotState = "STATE_UNSPECIFIED"
+	GatewayTrainingRunStateEXPIRED                GatewayTrainingRunState = "EXPIRED"
+	GatewayTrainingRunStateFAILED                 GatewayTrainingRunState = "FAILED"
+	GatewayTrainingRunStatePENDINGMATERIALIZATION GatewayTrainingRunState = "PENDING_MATERIALIZATION"
+	GatewayTrainingRunStateREADY                  GatewayTrainingRunState = "READY"
+	GatewayTrainingRunStateSTATEUNSPECIFIED       GatewayTrainingRunState = "STATE_UNSPECIFIED"
 )
 
-// Valid indicates whether the value is a known member of the GatewaySnapshotState enum.
-func (e GatewaySnapshotState) Valid() bool {
+// Valid indicates whether the value is a known member of the GatewayTrainingRunState enum.
+func (e GatewayTrainingRunState) Valid() bool {
 	switch e {
-	case GatewaySnapshotStateCREATING:
+	case GatewayTrainingRunStateEXPIRED:
 		return true
-	case GatewaySnapshotStateDELETING:
+	case GatewayTrainingRunStateFAILED:
 		return true
-	case GatewaySnapshotStateFAILED:
+	case GatewayTrainingRunStatePENDINGMATERIALIZATION:
 		return true
-	case GatewaySnapshotStateREADY:
+	case GatewayTrainingRunStateREADY:
 		return true
-	case GatewaySnapshotStateSTATEUNSPECIFIED:
+	case GatewayTrainingRunStateSTATEUNSPECIFIED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GatewayTrainingSessionState.
+const (
+	GatewayTrainingSessionStateDELETING                        GatewayTrainingSessionState = "DELETING"
+	GatewayTrainingSessionStateEXPIRED                         GatewayTrainingSessionState = "EXPIRED"
+	GatewayTrainingSessionStateFAILED                          GatewayTrainingSessionState = "FAILED"
+	GatewayTrainingSessionStateREADY                           GatewayTrainingSessionState = "READY"
+	GatewayTrainingSessionStateTRAININGSESSIONSTATEUNSPECIFIED GatewayTrainingSessionState = "TRAINING_SESSION_STATE_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the GatewayTrainingSessionState enum.
+func (e GatewayTrainingSessionState) Valid() bool {
+	switch e {
+	case GatewayTrainingSessionStateDELETING:
+		return true
+	case GatewayTrainingSessionStateEXPIRED:
+		return true
+	case GatewayTrainingSessionStateFAILED:
+		return true
+	case GatewayTrainingSessionStateREADY:
+		return true
+	case GatewayTrainingSessionStateTRAININGSESSIONSTATEUNSPECIFIED:
 		return true
 	default:
 		return false
@@ -2602,10 +3091,41 @@ func (e GatewayUserState) Valid() bool {
 	}
 }
 
+// Defines values for GatewayWeightPrecision.
+const (
+	GatewayWeightPrecisionBFLOAT16                   GatewayWeightPrecision = "BFLOAT16"
+	GatewayWeightPrecisionFP4FP8                     GatewayWeightPrecision = "FP4_FP8"
+	GatewayWeightPrecisionFP8                        GatewayWeightPrecision = "FP8"
+	GatewayWeightPrecisionINT8                       GatewayWeightPrecision = "INT8"
+	GatewayWeightPrecisionNF4                        GatewayWeightPrecision = "NF4"
+	GatewayWeightPrecisionWEIGHTPRECISIONUNSPECIFIED GatewayWeightPrecision = "WEIGHT_PRECISION_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the GatewayWeightPrecision enum.
+func (e GatewayWeightPrecision) Valid() bool {
+	switch e {
+	case GatewayWeightPrecisionBFLOAT16:
+		return true
+	case GatewayWeightPrecisionFP4FP8:
+		return true
+	case GatewayWeightPrecisionFP8:
+		return true
+	case GatewayWeightPrecisionINT8:
+		return true
+	case GatewayWeightPrecisionNF4:
+		return true
+	case GatewayWeightPrecisionWEIGHTPRECISIONUNSPECIFIED:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GatewayGetAccountUsageFilterOptionsParamsUsageType.
 const (
 	GatewayGetAccountUsageFilterOptionsParamsUsageTypeDEDICATEDDEPLOYMENT  GatewayGetAccountUsageFilterOptionsParamsUsageType = "DEDICATED_DEPLOYMENT"
 	GatewayGetAccountUsageFilterOptionsParamsUsageTypeSERVERLESS           GatewayGetAccountUsageFilterOptionsParamsUsageType = "SERVERLESS"
+	GatewayGetAccountUsageFilterOptionsParamsUsageTypeTRAINING             GatewayGetAccountUsageFilterOptionsParamsUsageType = "TRAINING"
 	GatewayGetAccountUsageFilterOptionsParamsUsageTypeUSAGETYPEUNSPECIFIED GatewayGetAccountUsageFilterOptionsParamsUsageType = "USAGE_TYPE_UNSPECIFIED"
 )
 
@@ -2616,7 +3136,27 @@ func (e GatewayGetAccountUsageFilterOptionsParamsUsageType) Valid() bool {
 		return true
 	case GatewayGetAccountUsageFilterOptionsParamsUsageTypeSERVERLESS:
 		return true
+	case GatewayGetAccountUsageFilterOptionsParamsUsageTypeTRAINING:
+		return true
 	case GatewayGetAccountUsageFilterOptionsParamsUsageTypeUSAGETYPEUNSPECIFIED:
+		return true
+	default:
+		return false
+	}
+}
+
+// Defines values for GatewayGetBillingSummaryParamsGranularity.
+const (
+	GatewayGetBillingSummaryParamsGranularityDAILY                  GatewayGetBillingSummaryParamsGranularity = "DAILY"
+	GatewayGetBillingSummaryParamsGranularityGRANULARITYUNSPECIFIED GatewayGetBillingSummaryParamsGranularity = "GRANULARITY_UNSPECIFIED"
+)
+
+// Valid indicates whether the value is a known member of the GatewayGetBillingSummaryParamsGranularity enum.
+func (e GatewayGetBillingSummaryParamsGranularity) Valid() bool {
+	switch e {
+	case GatewayGetBillingSummaryParamsGranularityDAILY:
+		return true
+	case GatewayGetBillingSummaryParamsGranularityGRANULARITYUNSPECIFIED:
 		return true
 	default:
 		return false
@@ -2627,6 +3167,7 @@ func (e GatewayGetAccountUsageFilterOptionsParamsUsageType) Valid() bool {
 const (
 	GatewayGetAccountUsageParamsUsageTypeDEDICATEDDEPLOYMENT  GatewayGetAccountUsageParamsUsageType = "DEDICATED_DEPLOYMENT"
 	GatewayGetAccountUsageParamsUsageTypeSERVERLESS           GatewayGetAccountUsageParamsUsageType = "SERVERLESS"
+	GatewayGetAccountUsageParamsUsageTypeTRAINING             GatewayGetAccountUsageParamsUsageType = "TRAINING"
 	GatewayGetAccountUsageParamsUsageTypeUSAGETYPEUNSPECIFIED GatewayGetAccountUsageParamsUsageType = "USAGE_TYPE_UNSPECIFIED"
 )
 
@@ -2636,6 +3177,8 @@ func (e GatewayGetAccountUsageParamsUsageType) Valid() bool {
 	case GatewayGetAccountUsageParamsUsageTypeDEDICATEDDEPLOYMENT:
 		return true
 	case GatewayGetAccountUsageParamsUsageTypeSERVERLESS:
+		return true
+	case GatewayGetAccountUsageParamsUsageTypeTRAINING:
 		return true
 	case GatewayGetAccountUsageParamsUsageTypeUSAGETYPEUNSPECIFIED:
 		return true
@@ -2647,10 +3190,13 @@ func (e GatewayGetAccountUsageParamsUsageType) Valid() bool {
 // AccountAccountType defines model for AccountAccountType.
 type AccountAccountType string
 
+// AccountRateLimitMetric Which rate-limit metric this row describes.
+type AccountRateLimitMetric string
+
 // AccountSuspendState defines model for AccountSuspendState.
 type AccountSuspendState string
 
-// AccountUsageDedicatedDeploymentUsage defines model for AccountUsageDedicatedDeploymentUsage.
+// AccountUsageDedicatedDeploymentUsage One dedicated deployment usage aggregation bucket.
 type AccountUsageDedicatedDeploymentUsage struct {
 	AcceleratorSeconds *string `json:"acceleratorSeconds,omitempty"`
 	AcceleratorType    *string `json:"acceleratorType,omitempty"`
@@ -2662,6 +3208,13 @@ type AccountUsageDedicatedDeploymentUsage struct {
 	// the time portion is ignored.
 	EndTime *time.Time `json:"endTime,omitempty"`
 
+	// Group Group-by dimension key-values (deployment_name, accelerator_type, team, project, environment).
+	Group *map[string]string `json:"group,omitempty"`
+
+	// Placement Deployment placement as a string (e.g. US_IOWA_1, GLOBAL, US, EUROPE).
+	// Set to REGION_UNSPECIFIED when unknown.
+	Placement *string `json:"placement,omitempty"`
+
 	// StartTime Start timestamp of the usage.
 	// Note: Dedicated deployment usage events are aggregated daily. Only the date portion (YYYY-MM-DD) is used;
 	// the time portion is ignored.
@@ -2669,17 +3222,149 @@ type AccountUsageDedicatedDeploymentUsage struct {
 	UsageType *string    `json:"usageType,omitempty"`
 }
 
-// AccountUsageServerlessUsage defines model for AccountUsageServerlessUsage.
+// AccountUsageServerlessUsage One serverless usage aggregation bucket.
 type AccountUsageServerlessUsage struct {
-	ApiKeyId          *string    `json:"apiKeyId,omitempty"`
-	AudioInputSeconds *float64   `json:"audioInputSeconds,omitempty"`
-	CompletionTokens  *string    `json:"completionTokens,omitempty"`
-	EndTime           *time.Time `json:"endTime,omitempty"`
-	ModelName         *string    `json:"modelName,omitempty"`
-	PromptTokens      *string    `json:"promptTokens,omitempty"`
-	StartTime         *time.Time `json:"startTime,omitempty"`
-	UsageType         *string    `json:"usageType,omitempty"`
+	// ApiKeyId Deprecated: use group["api_key_id"] instead.
+	ApiKeyId          *string  `json:"apiKeyId,omitempty"`
+	AudioInputSeconds *float64 `json:"audioInputSeconds,omitempty"`
+
+	// CachedPromptTokens Number of prompt tokens served from cache (for text inference). Subset of prompt_tokens.
+	CachedPromptTokens *string `json:"cachedPromptTokens,omitempty"`
+	CompletionTokens   *string `json:"completionTokens,omitempty"`
+
+	// CostNanoUsd Cost in nano-USD (1e-9 USD), summed from properties.cost. 0 when absent
+	// (not "free"). Only huggingface currently stamps authoritative cost.
+	CostNanoUsd *float64   `json:"costNanoUsd,omitempty"`
+	EndTime     *time.Time `json:"endTime,omitempty"`
+
+	// Group Group-by dimension key-values (model_name, api_key_id, api_key_name, user_id, session_id, team, project, environment).
+	// session_id is present only for buckets that had an opaque client session; no-session usage
+	// omits the key (all such usage collapses into a single "no session" bucket).
+	Group *map[string]string `json:"group,omitempty"`
+
+	// ModelName Deprecated: use group["model_name"] instead.
+	ModelName    *string    `json:"modelName,omitempty"`
+	PromptTokens *string    `json:"promptTokens,omitempty"`
+	StartTime    *time.Time `json:"startTime,omitempty"`
+
+	// UncachedPromptTokens Number of prompt tokens not served from cache (for text inference). prompt_tokens - cached_prompt_tokens.
+	UncachedPromptTokens *string `json:"uncachedPromptTokens,omitempty"`
+	UsageType            *string `json:"usageType,omitempty"`
 }
+
+// AccountUsageTrainingUsage One training usage aggregation bucket.
+//
+// Training usage is emitted by the trainer-side billing pipeline. SFT / DPO
+// usage is metered in tokens; RFT and full-param (service-mode) trainer
+// usage is metered in accelerator-seconds. Both metrics are returned on the
+// same message; consumers should use `usage_type` to disambiguate which
+// metric is meaningful for a given row.
+//
+// Some legacy training billing events did not populate every metadata
+// field. Missing values are returned as the proto default (empty string /
+// 0) rather than as an error.
+type AccountUsageTrainingUsage struct {
+	// AcceleratorSeconds Total accelerator seconds billed for this bucket. Frontends typically
+	// display this as GPU hours (seconds / 3600). 0 for token-based usage.
+	AcceleratorSeconds *string `json:"acceleratorSeconds,omitempty"`
+
+	// AcceleratorType Accelerator type for accelerator-second usage (e.g. "NVIDIA_H100_80GB").
+	// Empty for token-based usage.
+	AcceleratorType *string `json:"acceleratorType,omitempty"`
+
+	// Annotations Annotation key-values associated with this bucket (team, project,
+	// environment). Mirrors the annotation entries in `group` for API
+	// symmetry with future per-stream consumers. Typically empty for
+	// training usage today until trainer-side billing emitters populate
+	// properties.annotation_* on every record.
+	Annotations *map[string]string `json:"annotations,omitempty"`
+
+	// BaseModel Base model for the training job, when known.
+	BaseModel *string `json:"baseModel,omitempty"`
+
+	// EndTime End timestamp of the usage bucket.
+	// Note: Training usage events are aggregated daily. Only the date portion
+	// (YYYY-MM-DD) is used; the time portion is ignored.
+	EndTime *time.Time `json:"endTime,omitempty"`
+
+	// Group Group-by dimension key-values for the requested group_by. May include any
+	// of: job_id, training_session_id, job_type, usage_type, accelerator_type,
+	// base_model, annotations.team, annotations.project, annotations.environment.
+	// Empty values are omitted. Annotation values will typically be empty for
+	// training usage until billing emitters propagate annotations.
+	Group *map[string]string `json:"group,omitempty"`
+
+	// JobId The managed training job id (e.g. supervised_fine_tuning_job id,
+	// rlor_trainer_job id). Empty for serverless training token rows; use
+	// `training_session_id` for those.
+	// Best-effort: extracted from billing event_id for legacy records that did
+	// not emit it as an explicit property.
+	JobId *string `json:"jobId,omitempty"`
+
+	// JobType High-level training job kind: "sft", "dpo", "rft", "trainer", etc.
+	// Best-effort for legacy records.
+	JobType *string `json:"jobType,omitempty"`
+
+	// StartTime Start timestamp of the usage bucket.
+	// Note: Training usage events are aggregated daily. Only the date portion
+	// (YYYY-MM-DD) is used; the time portion is ignored.
+	StartTime *time.Time `json:"startTime,omitempty"`
+
+	// Tokens Total tokens billed for this bucket. Populated for SFT / DPO usage;
+	// 0 for accelerator-second usage types.
+	Tokens *string `json:"tokens,omitempty"`
+
+	// TrainingSessionId The serverless training session id. Populated for SERVERLESS_TRAINING_TOKENS
+	// rows and empty for managed training jobs.
+	TrainingSessionId *string `json:"trainingSessionId,omitempty"`
+
+	// UsageType The underlying billing usage_type as emitted to the billing pipeline,
+	// e.g. "SUPERVISED_FINE_TUNING_USAGE", "REINFORCEMENT_FINE_TUNING_GPU_SECONDS",
+	// "FULL_PARAM_FINE_TUNING_GPU_HOURS". Frontends can use this to pick the
+	// right metric to display (tokens vs. accelerator_seconds).
+	UsageType *string `json:"usageType,omitempty"`
+}
+
+// AllowedToolsConfig OpenAI-compatible allowed_tools sub-object.
+//
+// See https://platform.openai.com/docs/guides/function-calling#tool-choice
+//
+// The “tools“ list mirrors the “tools“ list passed at the top level: each
+// entry must be “{"type": "function", "function": {"name": "<fn>"}}“.
+// Fireworks only supports function tools today, so other “type“ values are
+// rejected.
+type AllowedToolsConfig struct {
+	// Mode `auto` lets the model pick between generating a message and calling one of the allowed tools. `required` forces the model to call one of them.
+	Mode AllowedToolsConfigMode `json:"mode"`
+
+	// Tools A list of tool references the model is allowed to invoke. Each entry must be of the form `{"type": "function", "function": {"name": "..."}}`. The referenced tools must also appear in the top-level `tools` list.
+	Tools []map[string]interface{} `json:"tools"`
+}
+
+// AllowedToolsConfigMode `auto` lets the model pick between generating a message and calling one of the allowed tools. `required` forces the model to call one of them.
+type AllowedToolsConfigMode string
+
+// AllowedToolsSelection OpenAI-compatible “tool_choice.type = "allowed_tools"“ selection.
+//
+// Restricts the model's tool calls to a subset of the top-level “tools“ list
+// *without modifying the prompt*, preserving prompt cache hits. The full set
+// of tool definitions is still rendered into the prompt for the model; only
+// the grammar (and downstream parsing) is constrained to the allowed subset.
+type AllowedToolsSelection struct {
+	// AllowedTools OpenAI-compatible allowed_tools sub-object.
+	//
+	// See https://platform.openai.com/docs/guides/function-calling#tool-choice
+	//
+	// The ``tools`` list mirrors the ``tools`` list passed at the top level: each
+	// entry must be ``{"type": "function", "function": {"name": "<fn>"}}``.
+	// Fireworks only supports function tools today, so other ``type`` values are
+	// rejected.
+	AllowedTools AllowedToolsConfig        `json:"allowed_tools"`
+	Type         AllowedToolsSelectionType `json:"type"`
+}
+
+// AllowedToolsSelectionType defines model for AllowedToolsSelection.Type.
+type AllowedToolsSelectionType string
 
 // AnthropicAPIError defines model for AnthropicAPIError.
 type AnthropicAPIError struct {
@@ -3732,12 +4417,28 @@ type AssertionAssertionType string
 // BaseModelDetailsCheckpointFormat defines model for BaseModelDetailsCheckpointFormat.
 type BaseModelDetailsCheckpointFormat string
 
+// BatchInferenceJobLifecycleTimestamps Observed execution milestone timestamps for the job, grouped into one
+// sub-message so the job's lifecycle reads as a single cohesive unit rather
+// than a scatter of top-level time fields. All OUTPUT_ONLY.
+type BatchInferenceJobLifecycleTimestamps struct {
+	// EndTime The terminal time of the job (when it reached COMPLETED, FAILED, EXPIRED,
+	// or CANCELLED).
+	EndTime *time.Time `json:"endTime,omitempty"`
+
+	// RunStartTime When the runner first started processing (the job first became RUNNING).
+	RunStartTime *time.Time `json:"runStartTime,omitempty"`
+
+	// ValidatedTime When dataset validation completed and the job left VALIDATING. Unset for
+	// jobs that skip validation or that fail before validating.
+	ValidatedTime *time.Time `json:"validatedTime,omitempty"`
+}
+
 // ChatCompletionFunction defines model for ChatCompletionFunction.
 type ChatCompletionFunction struct {
 	// Description A description of what the function does, used by the model to choose when and how to call the function.
 	Description *string `json:"description,omitempty"`
 
-	// Name The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 64.
+	// Name The name of the function to be called. Must be a-z, A-Z, 0-9, or contain underscores and dashes, with a maximum length of 128.
 	Name string `json:"name"`
 
 	// Parameters The parameters the function accepts, described as a JSON Schema object.
@@ -3862,9 +4563,9 @@ type ChatCompletionRequest struct {
 	//
 	// If set to `true`, log probabilities are included and the number of alternatives can be controlled via `top_logprobs` (OpenAI-compatible behavior).
 	//
-	// If set to an integer N (0-5), include log probabilities for up to N most likely tokens per position in the legacy format.
+	// If set to an integer N, include log probabilities for up to N most likely tokens per position in the legacy format. N must be between 0 and the deployment's `--max-logprobs` limit (5 by default).
 	//
-	// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used. The maximum value for the integer form is 5.
+	// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used.
 	Logprobs *ChatCompletionRequest_Logprobs `json:"logprobs,omitempty"`
 
 	// MaxCompletionTokens Alias for max_tokens. Cannot be specified together with max_tokens.
@@ -3873,8 +4574,8 @@ type ChatCompletionRequest struct {
 	// MaxTokens The maximum number of tokens to generate in the completion. If the token count of your prompt plus max_tokens exceeds the model's context length, the behavior depends on context_length_exceeded_behavior. By default, max_tokens will be lowered to fit in the context window instead of returning an error.
 	MaxTokens *int `json:"max_tokens,omitempty"`
 
-	// Messages A list of messages comprising the conversation so far.
-	Messages []ChatMessage `json:"messages"`
+	// Messages A list of messages comprising the conversation so far. When ``prompt_token_ids`` is supplied this field is ignored (the caller is taking responsibility for chat-template rendering and tokenization upstream).
+	Messages *[]ChatMessage `json:"messages,omitempty"`
 
 	// Metadata Additional metadata to store with the request for tracing/distillation.
 	Metadata *map[string]string `json:"metadata,omitempty"`
@@ -3964,6 +4665,11 @@ type ChatCompletionRequest struct {
 	// PromptCacheKey A key used for prompt caching session affinity. Requests with the same prompt_cache_key are routed to the same backend to maximize KV cache hit rates. This is the preferred field for session affinity (takes priority over the 'user' field).
 	PromptCacheKey *string `json:"prompt_cache_key,omitempty"`
 
+	// PromptTokenIds Pre-tokenized prompt. When set, the server skips chat-template rendering and tokenization for the input — the supplied token IDs are fed directly to generation. Generation, the response formatter (incl. ``--formatter-backend vllm`` parsers), and tool-call routing all run as usual on the model's output.
+	//
+	// Intended for upstream gateways (e.g. dynamo) that own the tokenizer and chat template, and want this server only to generate and format. Mutually exclusive with ``messages``: passing both is a 400.
+	PromptTokenIds *[]int `json:"prompt_token_ids,omitempty"`
+
 	// PromptTruncateLen The size (in tokens) to which to truncate chat prompts. This includes the system prompt (if any), previous user/assistant messages, and the current user message. Earlier user/assistant messages will be evicted first to fit the prompt into this length. The system prompt is preserved whenever possible and only truncated as a last resort.
 	//
 	// This should usually be set to a number much smaller << than the model's maximum context size, to allow enough remaining tokens for generating a response.
@@ -3978,19 +4684,24 @@ type ChatCompletionRequest struct {
 	//
 	// **Accepted values:**
 	//
-	// - **String** (OpenAI-compatible): `'low'`, `'medium'`, or `'high'` to enable reasoning with varying effort levels; `'none'` to disable reasoning.
+	// - **String** (OpenAI-compatible): `'low'`, `'medium'`, `'high'`, `'xhigh'`, or `'max'` to enable reasoning with varying effort levels; `'none'` to disable reasoning. `'adaptive'` is supported only by MiniMax M3.
 	// - **Boolean** (Fireworks extension): `true` to enable reasoning, `false` to disable it.
-	// - **Integer** (Fireworks extension): A positive integer to set a hard token limit on reasoning output (only effective for grammar-based reasoning models).
+	// - **Integer** (Fireworks extension): A positive integer to set a hard token limit on reasoning output. Integer values enable the model's normal medium-style thinking behavior and force the model to end its thinking phase after at most that many generated thinking tokens. DeepSeek V4.1 is the exception; see below.
 	//
 	// **Important:** Boolean values are normalized internally: `true` becomes `'medium'`, and `false` becomes `'none'`. This normalization happens before model-specific validation, so if a model doesn't support `'none'`, passing `false` will produce an error referencing `'none'`.
 	//
 	// **Model-specific behavior:**
 	//
-	// - **Qwen3 (e.g., Qwen3-8B)**: Grammar-based reasoning. Default reasoning on. Use `'none'` or `false` to disable. Supports integer token limits to cap reasoning output. `'low'` maps to a default token limit (~3000 tokens).
+	// - **Qwen3.8 / Qwen3.8 Max**: Hybrid thinking for deployments using the `qwen3p8` or `qwen3p8-max` conversation styles. Use `'none'` or `false` to disable thinking. Omitted or boolean-true effort uses the model-default `'xhigh'` prompt with a 131072-token budget. Named levels condition the prompt and map to hard budgets: `'low'` to 4096, `'medium'` to 16384, and `'high'`/`'xhigh'`/`'max'` to 262144. A positive integer remains an explicit hard budget and selects the corresponding low/medium/xhigh prompt tier.
+	// - **Other Qwen3 models**: Grammar-based reasoning on the reasoning-enabled `qwen3`/`qwen3p5` conversation styles. Older chat-mode deployments may opt into `qwen3-no-thinking`, which disables reasoning support. For reasoning-enabled styles, use `'none'` or `false` to disable. Supports integer token limits to cap reasoning output. `'low'`, `'medium'`, and `'high'` keep their model-specific behavior and are not hard budgets.
 	// - **MiniMax M2**: Reasoning is required (always on). Defaults to `'medium'` when omitted. Accepts only string `reasoning_effort`: `'low'`, `'medium'`, or `'high'`. `'none'` and boolean values are rejected.
 	// - **DeepSeek V3.1**: Binary on/off reasoning. Default reasoning off (matches chat template). Use `true`, `'low'`, `'medium'`, or `'high'` to enable; `'none'` or `false` to disable.
 	// - **DeepSeek V3.2**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
-	// - **GLM 4.5, GLM 4.5 Air, GLM 4.6, GLM 4.7**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
+	// - **DeepSeek V4**: Three thinking tiers: `Low`, `High`, and `Max`. Default reasoning on at the vendor default tier (`'low'`). `'low'` selects Low (no reasoning-effort preamble); `'medium'` is silently promoted to `'high'`; `'high'` selects High; `'xhigh'` is silently promoted to `'max'`; `'max'` selects Max (the most thorough preamble). Boolean `true` defers to the vendor default tier. `'none'` or `false` disables thinking.
+	// - **DeepSeek V4.1**: Follows the official thinking-mode map. `'low'` stays `'low'`; `'medium'`, `'high'`, and `'xhigh'` select `'high'` (default); `'max'` stays `'max'`. Omitted or boolean `true` also select `'high'`. `'none'` or `false` disables thinking. The staged encoder (`encoding/encoding.py`) turns those names into the vendor 1-100 prompt scale (official Flash map: `'low'`=50, `'high'`=75, `'max'`=100). An integer from 1 to 100 is sent as that number and does not set a thinking-token cap. Integers from 101 to 1023 are sent as `'low'` and do not set a cap. An integer >= 1024 is sent as `'high'` and is also a hard thinking-token budget. `minimal` and `ultra` are outside the shared effort enum and are rejected before this map. DeepSeek V4 (not V4.1) does not use this numeric scale.
+	// - **GLM 4.5, GLM 4.5 Air, GLM 4.6, GLM 4.7, GLM 5.1**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
+	// - **GLM 5.2**: Two thinking tiers, `High` and `Max` (rendered as a `Reasoning Effort:` system line). `'high'` selects High; `'low'` and `'medium'` are collapsed to `'high'`; `'max'` and `'xhigh'` select Max; when omitted, the model default (`Max`) applies. `'none'` or `false` disables thinking.
+	// - **Kimi K3**: Three thinking tiers: `Low`, `High`, and `Max`. Default reasoning on when omitted (vendor default effort `Max`). Boolean `true` defers to that vendor default (K3 clears it before the global `true` → `'medium'` normalization). `'none'` or `false` disables thinking. `'low'` selects Low; `'medium'` is silently promoted to `'high'`; `'high'` selects High; `'xhigh'` is silently promoted to `'max'`; `'max'` selects Max.
 	// - **Harmony (OpenAI GPT-OSS 120B, GPT-OSS 20B)**: Accepts only `'low'`, `'medium'`, or `'high'`. Does not support `'none'`, `false`, or integer values — using these will return an error (e.g., "Invalid reasoning effort: none"). When omitted, defaults to `'medium'`. Lower effort produces faster responses with shorter reasoning.
 	ReasoningEffort *ChatCompletionRequest_ReasoningEffort `json:"reasoning_effort,omitempty"`
 
@@ -4007,11 +4718,15 @@ type ChatCompletionRequest struct {
 	//
 	// | Model | Default | Supported values |
 	// | --- | --- | --- |
+	// | Kimi K2.7 | `'preserved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
+	// | Kimi K2.6 | `'interleaved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | Kimi K2 Instruct | `'preserved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | MiniMax M2 | `'interleaved'` | `'disabled'`, `'interleaved'` |
+	// | GLM-5.2 | `'interleaved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | GLM-4.7 | `'interleaved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | GLM-4.6 | `'interleaved'` | `'disabled'`, `'interleaved'` |
 	// | Qwen 3.6 | `'preserved'` | `'disabled'`, `'preserved'` |
+	// | DeepSeek V4 | `'interleaved'` | `'interleaved'` |
 	//
 	// For other models, refer to the model provider's documentation.
 	//
@@ -4037,8 +4752,11 @@ type ChatCompletionRequest struct {
 	// ReturnTokenIds Return token IDs alongside text to avoid retokenization drift.
 	ReturnTokenIds *bool `json:"return_token_ids,omitempty"`
 
-	// SafeTokenization When true, special tokens in user-provided content are never interpreted as actual special tokens during tokenization. This prevents prompt injection via special token strings (e.g. <|im_start|>, <｜User｜>). Supported for models using Jinja or HuggingFace chat templates with HuggingFace tokenizers. Returns an error if the model does not support it, or if combined with custom_chat_template on HuggingFace-backed models. Note: prompt_truncate_len is not applied when safe_tokenization is enabled.
+	// SafeTokenization When true, special tokens in user-provided content are never interpreted as actual special tokens during tokenization. This prevents prompt injection via special token strings (e.g. <|im_start|>, <｜User｜>). Supported for models using Jinja or HuggingFace chat templates with HuggingFace tokenizers. Explicit true returns an error if the model does not support it, or if combined with custom_chat_template on HuggingFace-backed models. Note: prompt_truncate_len is not applied when safe_tokenization is enabled. When omitted, safe tokenization is enabled by default on a best-effort basis: it is applied only where the model supports it and the request is text-only with no custom_chat_template and no prompt_truncate_len, and otherwise falls back to normal tokenization.
 	SafeTokenization *bool `json:"safe_tokenization,omitempty"`
+
+	// SamplingMask Opt-in sampling mask metadata for generated tokens. When set to `"count"`, each generated token in the new logprobs format includes the number of token logits still eligible for sampling after filters such as top_p and top_k are applied. `"non_zero_list"` additionally returns active token IDs in `sampling_mask`; `"non_zero_buffer"` additionally returns a base64-encoded little-endian uint32 buffer of active token IDs. Non-zero payloads are omitted for positions with more active tokens than 1000.
+	SamplingMask *ChatCompletionRequestSamplingMask `json:"sampling_mask,omitempty"`
 
 	// Seed Random seed for deterministic sampling.
 	Seed *int `json:"seed,omitempty"`
@@ -4055,6 +4773,9 @@ type ChatCompletionRequest struct {
 	// Stream Whether to stream back partial progress. If set, tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message.
 	Stream *bool `json:"stream,omitempty"`
 
+	// StreamOptions Options for streaming responses. Only valid with ``stream=true``. Fireworks includes a final SSE chunk carrying usage totals by default; set ``include_usage=false`` to opt out. The ``buffer_tokens`` / ``buffer_ms`` / ``buffer_mode`` fields coalesce SSE chunks by token count and/or time (vLLM backend; override the deployment default).
+	StreamOptions *StreamOptions `json:"stream_options,omitempty"`
+
 	// Temperature What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
 	//
 	// We generally recommend altering this or top_p but not both.
@@ -4070,9 +4791,10 @@ type ChatCompletionRequest struct {
 	//
 	// - `{"type": "enabled"}` - Enable thinking (equivalent to `reasoning_effort: true`)
 	// - `{"type": "enabled", "budget_tokens": <int>}` - Enable thinking with a token budget (equivalent to `reasoning_effort: <int>`). Must be >= 1024.
-	// - `{"type": "disabled"}` - Disable thinking (equivalent to `reasoning_effort: "none"`)
+	// - `{"type": "enabled", "keep": "all"}` - Enable thinking and preserve all historical reasoning content in the prompt (equivalent to `reasoning_history: "preserved"`).
+	// - `{"type": "disabled"}` - Disable thinking (equivalent to `reasoning_effort: "none"`). Thinking-only models reject this value.
 	//
-	// **Note:** Cannot be specified together with `reasoning_effort`. If both are provided, a validation error will be raised.
+	// **Precedence with `reasoning_effort`:** `thinking.effort` (when set) overrides `reasoning_effort`; otherwise, for `type=enabled`, `reasoning_effort` is used as the effort level. When both `thinking.effort` and `thinking.budget_tokens` are set, the effort selects the model prompt tier and the budget remains a hard token cap. `type=disabled` disables thinking when the selected model supports it.
 	Thinking *ChatCompletionRequest_Thinking `json:"thinking,omitempty"`
 
 	// ToolChoice Controls which (if any) tool is called by the model.
@@ -4081,6 +4803,10 @@ type ChatCompletionRequest struct {
 	// - `auto`: the model can pick between generating a message or calling one or more tools.
 	// - `required` (alias: `any`): the model must call one or more tools.
 	//   To force a specific function, pass an object of the form `{ "type": "function", "name": "my_function" }` or `{ "type": "function", "function": { "name": "my_function" } }` for OpenAI compatibility.
+	// - To restrict tool calls to a subset of the provided tools while keeping the
+	//   full tool list in the prompt (preserving prompt cache hits), pass
+	//   `{ "type": "allowed_tools", "allowed_tools": { "mode": "auto"|"required", "tools": [{ "type": "function", "function": { "name": "..." } }] } }`.
+	//   Equivalent OpenAI Responses-style flat form is also accepted: `{ "type": "allowed_tools", "mode": "...", "tools": [...] }`.
 	ToolChoice *ChatCompletionRequest_ToolChoice `json:"tool_choice,omitempty"`
 
 	// Tools A list of tools the model may call. Currently, only functions are supported as a tool.
@@ -4097,11 +4823,9 @@ type ChatCompletionRequest struct {
 	// Example: `50`
 	TopK *int `json:"top_k,omitempty"`
 
-	// TopLogprobs An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. The minimum value is 0 and the maximum value is 5.
+	// TopLogprobs An integer specifying the number of most likely tokens to return at each token position, each with an associated log probability. Must be between 0 and the deployment's `--max-logprobs` limit (5 by default).
 	//
 	// When `logprobs` is set, `top_logprobs` can be used to modify how many top log probabilities are returned. If `top_logprobs` is not set, the API will return up to `logprobs` tokens per position.
-	//
-	// Required range: `0 <= x <= 5`
 	TopLogprobs *int `json:"top_logprobs,omitempty"`
 
 	// TopP An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
@@ -4153,9 +4877,9 @@ type ChatCompletionRequestLogprobs1 = bool
 //
 // If set to `true`, log probabilities are included and the number of alternatives can be controlled via `top_logprobs` (OpenAI-compatible behavior).
 //
-// If set to an integer N (0-5), include log probabilities for up to N most likely tokens per position in the legacy format.
+// If set to an integer N, include log probabilities for up to N most likely tokens per position in the legacy format. N must be between 0 and the deployment's `--max-logprobs` limit (5 by default).
 //
-// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used. The maximum value for the integer form is 5.
+// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used.
 type ChatCompletionRequest_Logprobs struct {
 	union json.RawMessage
 }
@@ -4181,19 +4905,24 @@ type ChatCompletionRequestReasoningEffort2 = bool
 //
 // **Accepted values:**
 //
-// - **String** (OpenAI-compatible): `'low'`, `'medium'`, or `'high'` to enable reasoning with varying effort levels; `'none'` to disable reasoning.
+// - **String** (OpenAI-compatible): `'low'`, `'medium'`, `'high'`, `'xhigh'`, or `'max'` to enable reasoning with varying effort levels; `'none'` to disable reasoning. `'adaptive'` is supported only by MiniMax M3.
 // - **Boolean** (Fireworks extension): `true` to enable reasoning, `false` to disable it.
-// - **Integer** (Fireworks extension): A positive integer to set a hard token limit on reasoning output (only effective for grammar-based reasoning models).
+// - **Integer** (Fireworks extension): A positive integer to set a hard token limit on reasoning output. Integer values enable the model's normal medium-style thinking behavior and force the model to end its thinking phase after at most that many generated thinking tokens. DeepSeek V4.1 is the exception; see below.
 //
 // **Important:** Boolean values are normalized internally: `true` becomes `'medium'`, and `false` becomes `'none'`. This normalization happens before model-specific validation, so if a model doesn't support `'none'`, passing `false` will produce an error referencing `'none'`.
 //
 // **Model-specific behavior:**
 //
-// - **Qwen3 (e.g., Qwen3-8B)**: Grammar-based reasoning. Default reasoning on. Use `'none'` or `false` to disable. Supports integer token limits to cap reasoning output. `'low'` maps to a default token limit (~3000 tokens).
+// - **Qwen3.8 / Qwen3.8 Max**: Hybrid thinking for deployments using the `qwen3p8` or `qwen3p8-max` conversation styles. Use `'none'` or `false` to disable thinking. Omitted or boolean-true effort uses the model-default `'xhigh'` prompt with a 131072-token budget. Named levels condition the prompt and map to hard budgets: `'low'` to 4096, `'medium'` to 16384, and `'high'`/`'xhigh'`/`'max'` to 262144. A positive integer remains an explicit hard budget and selects the corresponding low/medium/xhigh prompt tier.
+// - **Other Qwen3 models**: Grammar-based reasoning on the reasoning-enabled `qwen3`/`qwen3p5` conversation styles. Older chat-mode deployments may opt into `qwen3-no-thinking`, which disables reasoning support. For reasoning-enabled styles, use `'none'` or `false` to disable. Supports integer token limits to cap reasoning output. `'low'`, `'medium'`, and `'high'` keep their model-specific behavior and are not hard budgets.
 // - **MiniMax M2**: Reasoning is required (always on). Defaults to `'medium'` when omitted. Accepts only string `reasoning_effort`: `'low'`, `'medium'`, or `'high'`. `'none'` and boolean values are rejected.
 // - **DeepSeek V3.1**: Binary on/off reasoning. Default reasoning off (matches chat template). Use `true`, `'low'`, `'medium'`, or `'high'` to enable; `'none'` or `false` to disable.
 // - **DeepSeek V3.2**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
-// - **GLM 4.5, GLM 4.5 Air, GLM 4.6, GLM 4.7**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
+// - **DeepSeek V4**: Three thinking tiers: `Low`, `High`, and `Max`. Default reasoning on at the vendor default tier (`'low'`). `'low'` selects Low (no reasoning-effort preamble); `'medium'` is silently promoted to `'high'`; `'high'` selects High; `'xhigh'` is silently promoted to `'max'`; `'max'` selects Max (the most thorough preamble). Boolean `true` defers to the vendor default tier. `'none'` or `false` disables thinking.
+// - **DeepSeek V4.1**: Follows the official thinking-mode map. `'low'` stays `'low'`; `'medium'`, `'high'`, and `'xhigh'` select `'high'` (default); `'max'` stays `'max'`. Omitted or boolean `true` also select `'high'`. `'none'` or `false` disables thinking. The staged encoder (`encoding/encoding.py`) turns those names into the vendor 1-100 prompt scale (official Flash map: `'low'`=50, `'high'`=75, `'max'`=100). An integer from 1 to 100 is sent as that number and does not set a thinking-token cap. Integers from 101 to 1023 are sent as `'low'` and do not set a cap. An integer >= 1024 is sent as `'high'` and is also a hard thinking-token budget. `minimal` and `ultra` are outside the shared effort enum and are rejected before this map. DeepSeek V4 (not V4.1) does not use this numeric scale.
+// - **GLM 4.5, GLM 4.5 Air, GLM 4.6, GLM 4.7, GLM 5.1**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
+// - **GLM 5.2**: Two thinking tiers, `High` and `Max` (rendered as a `Reasoning Effort:` system line). `'high'` selects High; `'low'` and `'medium'` are collapsed to `'high'`; `'max'` and `'xhigh'` select Max; when omitted, the model default (`Max`) applies. `'none'` or `false` disables thinking.
+// - **Kimi K3**: Three thinking tiers: `Low`, `High`, and `Max`. Default reasoning on when omitted (vendor default effort `Max`). Boolean `true` defers to that vendor default (K3 clears it before the global `true` → `'medium'` normalization). `'none'` or `false` disables thinking. `'low'` selects Low; `'medium'` is silently promoted to `'high'`; `'high'` selects High; `'xhigh'` is silently promoted to `'max'`; `'max'` selects Max.
 // - **Harmony (OpenAI GPT-OSS 120B, GPT-OSS 20B)**: Accepts only `'low'`, `'medium'`, or `'high'`. Does not support `'none'`, `false`, or integer values — using these will return an error (e.g., "Invalid reasoning effort: none"). When omitted, defaults to `'medium'`. Lower effort produces faster responses with shorter reasoning.
 type ChatCompletionRequest_ReasoningEffort struct {
 	union json.RawMessage
@@ -4201,6 +4930,9 @@ type ChatCompletionRequest_ReasoningEffort struct {
 
 // ChatCompletionRequestReasoningHistory defines model for ChatCompletionRequest.ReasoningHistory.
 type ChatCompletionRequestReasoningHistory string
+
+// ChatCompletionRequestSamplingMask defines model for ChatCompletionRequest.SamplingMask.
+type ChatCompletionRequestSamplingMask string
 
 // ChatCompletionRequestServiceTier The service tier to use for the request. Specifies the processing type used for serving the request. Only "priority" is supported, while all other values will be treated as "default" tier.
 type ChatCompletionRequestServiceTier string
@@ -4233,9 +4965,10 @@ type ChatCompletionRequest_Stop struct {
 //
 // - `{"type": "enabled"}` - Enable thinking (equivalent to `reasoning_effort: true`)
 // - `{"type": "enabled", "budget_tokens": <int>}` - Enable thinking with a token budget (equivalent to `reasoning_effort: <int>`). Must be >= 1024.
-// - `{"type": "disabled"}` - Disable thinking (equivalent to `reasoning_effort: "none"`)
+// - `{"type": "enabled", "keep": "all"}` - Enable thinking and preserve all historical reasoning content in the prompt (equivalent to `reasoning_history: "preserved"`).
+// - `{"type": "disabled"}` - Disable thinking (equivalent to `reasoning_effort: "none"`). Thinking-only models reject this value.
 //
-// **Note:** Cannot be specified together with `reasoning_effort`. If both are provided, a validation error will be raised.
+// **Precedence with `reasoning_effort`:** `thinking.effort` (when set) overrides `reasoning_effort`; otherwise, for `type=enabled`, `reasoning_effort` is used as the effort level. When both `thinking.effort` and `thinking.budget_tokens` are set, the effort selects the model prompt tier and the budget remains a hard token cap. `type=disabled` disables thinking when the selected model supports it.
 type ChatCompletionRequest_Thinking struct {
 	union json.RawMessage
 }
@@ -4249,6 +4982,10 @@ type ChatCompletionRequestToolChoice0 string
 //   - `auto`: the model can pick between generating a message or calling one or more tools.
 //   - `required` (alias: `any`): the model must call one or more tools.
 //     To force a specific function, pass an object of the form `{ "type": "function", "name": "my_function" }` or `{ "type": "function", "function": { "name": "my_function" } }` for OpenAI compatibility.
+//   - To restrict tool calls to a subset of the provided tools while keeping the
+//     full tool list in the prompt (preserving prompt cache hits), pass
+//     `{ "type": "allowed_tools", "allowed_tools": { "mode": "auto"|"required", "tools": [{ "type": "function", "function": { "name": "..." } }] } }`.
+//     Equivalent OpenAI Responses-style flat form is also accepted: `{ "type": "allowed_tools", "mode": "...", "tools": [...] }`.
 type ChatCompletionRequest_ToolChoice struct {
 	union json.RawMessage
 }
@@ -4323,6 +5060,9 @@ type ChatCompletionResponseStreamChoice struct {
 
 	// TokenIds Token IDs for this chunk (when return_token_ids=true)
 	TokenIds *[]int `json:"token_ids,omitempty"`
+
+	// Usage Usage for this choice, emitted on its final (finish) chunk (deployment-gated extension).
+	Usage *UsageInfo `json:"usage,omitempty"`
 }
 
 // ChatCompletionResponseStreamChoiceFinishReason defines model for ChatCompletionResponseStreamChoice.FinishReason.
@@ -4407,18 +5147,40 @@ type ChatMessageContent struct {
 
 // ChatMessageContentImageURL defines model for ChatMessageContentImageURL.
 type ChatMessageContentImageURL struct {
+	// Detail Detail level for image understanding. One of ``low`` / ``default`` / ``high`` (model-specific defaults table). Used to pick a default ``max_long_side_pixel`` when that field is absent.
 	Detail *string `json:"detail,omitempty"`
-	Url    string  `json:"url"`
+
+	// MaxLongSidePixel Per-image cap on the long side after resizing. When omitted, the model derives a default from ``detail``. Currently honored by MiniMax M3 VL preprocessing; other VL models ignore this field. See the M3 VL preprocessing spec (2026-05-29) for the full 3-step resize semantics (long-side cap → short-side floor at 112 px → hard total-pixel cap).
+	MaxLongSidePixel *int `json:"max_long_side_pixel,omitempty"`
+
+	// Url Image link or base64 data URI. ``mm_file://{file_id}`` is also accepted for assets uploaded via the Files API.
+	Url string `json:"url"`
 }
 
 // ChatMessageContentVideoURL defines model for ChatMessageContentVideoURL.
 type ChatMessageContentVideoURL struct {
-	Detail       *string  `json:"detail,omitempty"`
-	MaxFrames    *int     `json:"max_frames,omitempty"`
+	// Detail Detail level for video understanding. One of ``low`` / ``default`` / ``high``.
+	Detail *string `json:"detail,omitempty"`
+
+	// Fps Frame sampling rate, in [0.2, 5] Hz for MiniMax M3 VL (was [0.5, 2] in the pre-2026-05-29 spec). Higher values are more sensitive to motion at the cost of more tokens; lower values are cheaper but less responsive to fast scene changes. Equivalent to ``sample_fps`` on non-M3 video models.
+	Fps       *float64 `json:"fps,omitempty"`
+	MaxFrames *int     `json:"max_frames,omitempty"`
+
+	// MaxLongSidePixel Per-frame cap on the long side after resizing. When omitted, the model derives a default from ``detail``. Currently honored by MiniMax M3 VL preprocessing; other VL models ignore this field.
+	MaxLongSidePixel *int `json:"max_long_side_pixel,omitempty"`
+
+	// SampleFps Frame sampling rate (Kimi K2.5 VL legacy name). For MiniMax M3 VL prefer the canonical ``fps`` field.
 	SampleFps    *float64 `json:"sample_fps,omitempty"`
 	SpatialLimit *int     `json:"spatial_limit,omitempty"`
-	Url          string   `json:"url"`
+
+	// Url Video link or base64 data URI. ``mm_file://{file_id}`` is accepted for assets uploaded via the Files API (recommended for files > 50 MB).
+	Url string `json:"url"`
 }
+
+// CheckpointAvailabilityAvailabilityClass - SINGLE_REGION: Stored in one Fireworks runtime region. Optimized for low-latency
+// hotload and reattach, but not highly available across regions.
+//   - MANAGED_DURABLE: Stored in Fireworks-managed durable storage for restore/export workflows.
+type CheckpointAvailabilityAvailabilityClass string
 
 // Choice A completion choice.
 type Choice struct {
@@ -4496,7 +5258,7 @@ type CompletionRequest struct {
 	//
 	// eg. data:image/jpeg;base64,<base64 encoded str>
 	//
-	// Additionally, the number of images provided should match the number of '<image>' special token in the prompt
+	// Additionally, the number of images provided should match the number of image placeholder tokens in the prompt (string prompts: '<image>' or model-specific pads such as '<|image_pad|>'; tokenized prompts: one image pad token ID per image, unexpanded).
 	Images *CompletionRequest_Images `json:"images,omitempty"`
 
 	// LogitBias Modify the likelihood of specified tokens appearing in the completion. Accepts a json object that maps tokens (specified by their token ID in the tokenizer) to an associated bias value from -100 to 100. Mathematically, the bias is added to the logits generated by the model prior to sampling.
@@ -4506,9 +5268,9 @@ type CompletionRequest struct {
 	//
 	// If set to `true`, log probabilities are included and the number of alternatives can be controlled via `top_logprobs` (OpenAI-compatible behavior).
 	//
-	// If set to an integer N (0-5), include log probabilities for up to N most likely tokens per position in the legacy format.
+	// If set to an integer N, include log probabilities for up to N most likely tokens per position in the legacy format. N must be between 0 and the deployment's `--max-logprobs` limit (5 by default).
 	//
-	// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used. The maximum value for the integer form is 5.
+	// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used.
 	Logprobs *CompletionRequest_Logprobs `json:"logprobs,omitempty"`
 
 	// MaxCompletionTokens Alias for max_tokens. Cannot be specified together with max_tokens.
@@ -4614,24 +5376,7 @@ type CompletionRequest struct {
 	// RawOutput Return raw output from the model.
 	RawOutput *bool `json:"raw_output,omitempty"`
 
-	// ReasoningEffort Controls reasoning behavior for supported models. When enabled, the model's reasoning appears in the `reasoning_content` field of the response, separate from the final answer in `content`.
-	//
-	// **Accepted values:**
-	//
-	// - **String** (OpenAI-compatible): `'low'`, `'medium'`, or `'high'` to enable reasoning with varying effort levels; `'none'` to disable reasoning.
-	// - **Boolean** (Fireworks extension): `true` to enable reasoning, `false` to disable it.
-	// - **Integer** (Fireworks extension): A positive integer to set a hard token limit on reasoning output (only effective for grammar-based reasoning models).
-	//
-	// **Important:** Boolean values are normalized internally: `true` becomes `'medium'`, and `false` becomes `'none'`. This normalization happens before model-specific validation, so if a model doesn't support `'none'`, passing `false` will produce an error referencing `'none'`.
-	//
-	// **Model-specific behavior:**
-	//
-	// - **Qwen3 (e.g., Qwen3-8B)**: Grammar-based reasoning. Default reasoning on. Use `'none'` or `false` to disable. Supports integer token limits to cap reasoning output. `'low'` maps to a default token limit (~3000 tokens).
-	// - **MiniMax M2**: Reasoning is required (always on). Defaults to `'medium'` when omitted. Accepts only string `reasoning_effort`: `'low'`, `'medium'`, or `'high'`. `'none'` and boolean values are rejected.
-	// - **DeepSeek V3.1**: Binary on/off reasoning. Default reasoning off (matches chat template). Use `true`, `'low'`, `'medium'`, or `'high'` to enable; `'none'` or `false` to disable.
-	// - **DeepSeek V3.2**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
-	// - **GLM 4.5, GLM 4.5 Air, GLM 4.6, GLM 4.7**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
-	// - **Harmony (OpenAI GPT-OSS 120B, GPT-OSS 20B)**: Accepts only `'low'`, `'medium'`, or `'high'`. Does not support `'none'`, `false`, or integer values — using these will return an error (e.g., "Invalid reasoning effort: none"). When omitted, defaults to `'medium'`. Lower effort produces faster responses with shorter reasoning.
+	// ReasoningEffort Controls reasoning generation for raw completions. A positive integer sets a hard thinking-token cap and forces the model''s end-thinking delimiter. On DeepSeek V4.1, integers below 1024 are not a token cap (1-100 is the prompt scale and 101-1023 maps to `''low''`); 1024 or more is sent as `''high''` and remains the hard cap. Raw completions do not apply a conversation template, so the prompt must already establish the intended reasoning state.
 	ReasoningEffort *CompletionRequest_ReasoningEffort `json:"reasoning_effort,omitempty"`
 
 	// ReasoningHistory Controls how historical assistant reasoning content is included in the prompt for multi-turn conversations.
@@ -4647,11 +5392,15 @@ type CompletionRequest struct {
 	//
 	// | Model | Default | Supported values |
 	// | --- | --- | --- |
+	// | Kimi K2.7 | `'preserved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
+	// | Kimi K2.6 | `'interleaved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | Kimi K2 Instruct | `'preserved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | MiniMax M2 | `'interleaved'` | `'disabled'`, `'interleaved'` |
+	// | GLM-5.2 | `'interleaved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | GLM-4.7 | `'interleaved'` | `'disabled'`, `'interleaved'`, `'preserved'` |
 	// | GLM-4.6 | `'interleaved'` | `'disabled'`, `'interleaved'` |
 	// | Qwen 3.6 | `'preserved'` | `'disabled'`, `'preserved'` |
+	// | DeepSeek V4 | `'interleaved'` | `'interleaved'` |
 	//
 	// For other models, refer to the model provider's documentation.
 	//
@@ -4677,6 +5426,9 @@ type CompletionRequest struct {
 	// ReturnTokenIds Return token IDs alongside text to avoid retokenization drift.
 	ReturnTokenIds *bool `json:"return_token_ids,omitempty"`
 
+	// SamplingMask Opt-in sampling mask metadata for generated tokens. When set to `"count"`, each generated token in the new logprobs format includes the number of token logits still eligible for sampling after filters such as top_p and top_k are applied. `"non_zero_list"` additionally returns active token IDs in `sampling_mask`; `"non_zero_buffer"` additionally returns a base64-encoded little-endian uint32 buffer of active token IDs. Non-zero payloads are omitted for positions with more active tokens than 1000.
+	SamplingMask *CompletionRequestSamplingMask `json:"sampling_mask,omitempty"`
+
 	// Seed Random seed for deterministic sampling.
 	Seed *int `json:"seed,omitempty"`
 
@@ -4692,6 +5444,9 @@ type CompletionRequest struct {
 	// Stream Whether to stream back partial progress. If set, tokens will be sent as data-only [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events#Event_stream_format) as they become available, with the stream terminated by a `data: [DONE]` message.
 	Stream *bool `json:"stream,omitempty"`
 
+	// StreamOptions Options for streaming responses. Only valid with ``stream=true``. Fireworks includes a final SSE chunk carrying usage totals by default; set ``include_usage=false`` to opt out. The ``buffer_tokens`` / ``buffer_ms`` / ``buffer_mode`` fields coalesce SSE chunks by token count and/or time (vLLM backend; override the deployment default).
+	StreamOptions *StreamOptions `json:"stream_options,omitempty"`
+
 	// Temperature What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
 	//
 	// We generally recommend altering this or top_p but not both.
@@ -4701,15 +5456,7 @@ type CompletionRequest struct {
 	// Example: `1`
 	Temperature *float64 `json:"temperature,omitempty"`
 
-	// Thinking Configuration for enabling extended thinking (Anthropic-compatible format). This is an alternative to `reasoning_effort` for controlling reasoning behavior.
-	//
-	// **Format:**
-	//
-	// - `{"type": "enabled"}` - Enable thinking (equivalent to `reasoning_effort: true`)
-	// - `{"type": "enabled", "budget_tokens": <int>}` - Enable thinking with a token budget (equivalent to `reasoning_effort: <int>`). Must be >= 1024.
-	// - `{"type": "disabled"}` - Disable thinking (equivalent to `reasoning_effort: "none"`)
-	//
-	// **Note:** Cannot be specified together with `reasoning_effort`. If both are provided, a validation error will be raised.
+	// Thinking Alternative reasoning configuration for raw completions. `budget_tokens` sets a hard thinking-token cap. Raw completions do not apply a conversation template, so the prompt must establish the intended reasoning state.
 	Thinking *CompletionRequest_Thinking `json:"thinking,omitempty"`
 
 	// TopK Top-k sampling is another sampling method where the k most probable next tokens are filtered and the probability mass is redistributed among only those k next tokens. The value of k controls the number of candidates for the next token at each step during text generation. Must be between 0 and 100.
@@ -4719,11 +5466,9 @@ type CompletionRequest struct {
 	// Example: `50`
 	TopK *int `json:"top_k,omitempty"`
 
-	// TopLogprobs An integer between 0 and 5 specifying the number of most likely tokens to return at each token position, each with an associated log probability. The minimum value is 0 and the maximum value is 5.
+	// TopLogprobs An integer specifying the number of most likely tokens to return at each token position, each with an associated log probability. Must be between 0 and the deployment's `--max-logprobs` limit (5 by default).
 	//
 	// When `logprobs` is set, `top_logprobs` can be used to modify how many top log probabilities are returned. If `top_logprobs` is not set, the API will return up to `logprobs` tokens per position.
-	//
-	// Required range: `0 <= x <= 5`
 	TopLogprobs *int `json:"top_logprobs,omitempty"`
 
 	// TopP An alternative to sampling with temperature, called nucleus sampling, where the model considers the results of the tokens with top_p probability mass. So 0.1 means only the tokens comprising the top 10% probability mass are considered.
@@ -4767,7 +5512,7 @@ type CompletionRequestImages1 = [][]string
 //
 // eg. data:image/jpeg;base64,<base64 encoded str>
 //
-// Additionally, the number of images provided should match the number of '<image>' special token in the prompt
+// Additionally, the number of images provided should match the number of image placeholder tokens in the prompt (string prompts: '<image>' or model-specific pads such as '<|image_pad|>'; tokenized prompts: one image pad token ID per image, unexpanded).
 type CompletionRequest_Images struct {
 	union json.RawMessage
 }
@@ -4782,9 +5527,9 @@ type CompletionRequestLogprobs1 = bool
 //
 // If set to `true`, log probabilities are included and the number of alternatives can be controlled via `top_logprobs` (OpenAI-compatible behavior).
 //
-// If set to an integer N (0-5), include log probabilities for up to N most likely tokens per position in the legacy format.
+// If set to an integer N, include log probabilities for up to N most likely tokens per position in the legacy format. N must be between 0 and the deployment's `--max-logprobs` limit (5 by default).
 //
-// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used. The maximum value for the integer form is 5.
+// The API will always return the logprob of the sampled token, so there may be up to `logprobs+1` elements in the response when an integer is used.
 type CompletionRequest_Logprobs struct {
 	union json.RawMessage
 }
@@ -4829,30 +5574,16 @@ type CompletionRequestReasoningEffort1 = int
 // CompletionRequestReasoningEffort2 defines model for CompletionRequest.ReasoningEffort.2.
 type CompletionRequestReasoningEffort2 = bool
 
-// CompletionRequest_ReasoningEffort Controls reasoning behavior for supported models. When enabled, the model's reasoning appears in the `reasoning_content` field of the response, separate from the final answer in `content`.
-//
-// **Accepted values:**
-//
-// - **String** (OpenAI-compatible): `'low'`, `'medium'`, or `'high'` to enable reasoning with varying effort levels; `'none'` to disable reasoning.
-// - **Boolean** (Fireworks extension): `true` to enable reasoning, `false` to disable it.
-// - **Integer** (Fireworks extension): A positive integer to set a hard token limit on reasoning output (only effective for grammar-based reasoning models).
-//
-// **Important:** Boolean values are normalized internally: `true` becomes `'medium'`, and `false` becomes `'none'`. This normalization happens before model-specific validation, so if a model doesn't support `'none'`, passing `false` will produce an error referencing `'none'`.
-//
-// **Model-specific behavior:**
-//
-// - **Qwen3 (e.g., Qwen3-8B)**: Grammar-based reasoning. Default reasoning on. Use `'none'` or `false` to disable. Supports integer token limits to cap reasoning output. `'low'` maps to a default token limit (~3000 tokens).
-// - **MiniMax M2**: Reasoning is required (always on). Defaults to `'medium'` when omitted. Accepts only string `reasoning_effort`: `'low'`, `'medium'`, or `'high'`. `'none'` and boolean values are rejected.
-// - **DeepSeek V3.1**: Binary on/off reasoning. Default reasoning off (matches chat template). Use `true`, `'low'`, `'medium'`, or `'high'` to enable; `'none'` or `false` to disable.
-// - **DeepSeek V3.2**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
-// - **GLM 4.5, GLM 4.5 Air, GLM 4.6, GLM 4.7**: Binary on/off reasoning. Default reasoning on. Use `'none'` or `false` to disable; effort levels and integers have no additional effect.
-// - **Harmony (OpenAI GPT-OSS 120B, GPT-OSS 20B)**: Accepts only `'low'`, `'medium'`, or `'high'`. Does not support `'none'`, `false`, or integer values — using these will return an error (e.g., "Invalid reasoning effort: none"). When omitted, defaults to `'medium'`. Lower effort produces faster responses with shorter reasoning.
+// CompletionRequest_ReasoningEffort Controls reasoning generation for raw completions. A positive integer sets a hard thinking-token cap and forces the model”s end-thinking delimiter. On DeepSeek V4.1, integers below 1024 are not a token cap (1-100 is the prompt scale and 101-1023 maps to `”low”`); 1024 or more is sent as `”high”` and remains the hard cap. Raw completions do not apply a conversation template, so the prompt must already establish the intended reasoning state.
 type CompletionRequest_ReasoningEffort struct {
 	union json.RawMessage
 }
 
 // CompletionRequestReasoningHistory defines model for CompletionRequest.ReasoningHistory.
 type CompletionRequestReasoningHistory string
+
+// CompletionRequestSamplingMask defines model for CompletionRequest.SamplingMask.
+type CompletionRequestSamplingMask string
 
 // CompletionRequestServiceTier The service tier to use for the request. Specifies the processing type used for serving the request. Only "priority" is supported, while all other values will be treated as "default" tier.
 type CompletionRequestServiceTier string
@@ -4879,15 +5610,7 @@ type CompletionRequest_Stop struct {
 	union json.RawMessage
 }
 
-// CompletionRequest_Thinking Configuration for enabling extended thinking (Anthropic-compatible format). This is an alternative to `reasoning_effort` for controlling reasoning behavior.
-//
-// **Format:**
-//
-// - `{"type": "enabled"}` - Enable thinking (equivalent to `reasoning_effort: true`)
-// - `{"type": "enabled", "budget_tokens": <int>}` - Enable thinking with a token budget (equivalent to `reasoning_effort: <int>`). Must be >= 1024.
-// - `{"type": "disabled"}` - Disable thinking (equivalent to `reasoning_effort: "none"`)
-//
-// **Note:** Cannot be specified together with `reasoning_effort`. If both are provided, a validation error will be raised.
+// CompletionRequest_Thinking Alternative reasoning configuration for raw completions. `budget_tokens` sets a hard thinking-token cap. Raw completions do not apply a conversation template, so the prompt must establish the intended reasoning state.
 type CompletionRequest_Thinking struct {
 	union json.RawMessage
 }
@@ -4969,6 +5692,11 @@ type CompletionStreamResponse struct {
 	Usage       *UsageInfo              `json:"usage,omitempty"`
 }
 
+// CompletionTokensDetails defines model for CompletionTokensDetails.
+type CompletionTokensDetails struct {
+	ReasoningTokens *int `json:"reasoning_tokens,omitempty"`
+}
+
 // CreateResponse Request model for creating a new response.
 //
 // This model defines all the parameters needed to create a new model response,
@@ -5001,7 +5729,7 @@ type CreateResponse struct {
 	// Reasoning Configuration for reasoning output. When enabled, the model will return its reasoning process along with the response.
 	Reasoning *map[string]interface{} `json:"reasoning,omitempty"`
 
-	// Store Whether to store the response. When set to false, the response will not be stored and will not be retrievable via the API. This is useful for ephemeral or sensitive data. See an example in our [Controlling Response Storage cookbook](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/mcp_server_with_store_false_argument.ipynb). Default is True.
+	// Store Whether to store the response. When set to false, the response will not be stored and will not be retrievable via the API. This is useful for ephemeral or sensitive data. See an example in our [Controlling Response Storage cookbook](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb). Default is True.
 	Store *bool `json:"store,omitempty"`
 
 	// Stream Whether to stream the response back as Server-Sent Events (SSE). When true, tokens are sent incrementally as they are generated. Default is False.
@@ -5016,7 +5744,7 @@ type CreateResponse struct {
 	// ToolChoice Controls which (if any) tool the model should use. Can be 'none' (never call tools), 'auto' (model decides), 'required' (must call at least one tool), or an object specifying a particular tool to call. Default is 'auto'.
 	ToolChoice *CreateResponse_ToolChoice `json:"tool_choice,omitempty"`
 
-	// Tools A list of MCP tools the model may call. See our cookbooks for examples on [basic MCP usage](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_examples.ipynb) and [streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/learn/response-api/fireworks_mcp_with_streaming.ipynb).
+	// Tools A list of MCP tools the model may call. See our cookbooks for examples on [basic MCP usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb) and [streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb).
 	Tools *[]map[string]interface{} `json:"tools,omitempty"`
 
 	// TopP An alternative to temperature sampling, called nucleus sampling, where the model considers the results of tokens with top_p probability mass. So 0.1 means only tokens comprising the top 10% probability mass are considered. Default is 1.0. We generally recommend altering this or temperature but not both.
@@ -5065,6 +5793,9 @@ type DeltaMessage struct {
 	// Content The contents of the chunk message
 	Content *string `json:"content,omitempty"`
 
+	// InternalContent Internal model content (`token_ids`) when include_internal_content=true.
+	InternalContent *InternalContent `json:"internal_content,omitempty"`
+
 	// ReasoningContent The reasoning or thinking process generated by the model. This field is only available for certain reasoning models (GLM 4.5, GLM 4.5 Air, GPT OSS 120B, GPT OSS 20B) and contains the model's internal reasoning that would otherwise appear in `<think></think>` tags within the content field.
 	ReasoningContent *string `json:"reasoning_content,omitempty"`
 
@@ -5076,11 +5807,29 @@ type DeltaMessage struct {
 // DeploymentHotLoadBucketType defines model for DeploymentHotLoadBucketType.
 type DeploymentHotLoadBucketType string
 
+// DeploymentHotLoadTransitionType defines model for DeploymentHotLoadTransitionType.
+type DeploymentHotLoadTransitionType string
+
 // DeploymentPrecision defines model for DeploymentPrecision.
 type DeploymentPrecision string
 
 // DeploymentShapePresetType defines model for DeploymentShapePresetType.
 type DeploymentShapePresetType string
+
+// DeploymentShapeVersionCapability A capability that a deployment shape version supports.
+type DeploymentShapeVersionCapability string
+
+// DeveloperPassVersion defines model for DeveloperPassVersion.
+type DeveloperPassVersion string
+
+// EvaluatorSource defines model for EvaluatorSource.
+type EvaluatorSource struct {
+	// GithubRepositoryName Normalized GitHub repository name (e.g. owner/repository) when the source is GitHub.
+	GithubRepositoryName *string `json:"githubRepositoryName,omitempty"`
+
+	// Type Identifies how the evaluator source code is provided.
+	Type *EvaluatorSourceType `json:"type,omitempty"`
+}
 
 // EvaluatorSourceType defines model for EvaluatorSourceType.
 type EvaluatorSourceType string
@@ -5120,301 +5869,16 @@ type FunctionSelection struct {
 // FunctionSelectionType defines model for FunctionSelection.Type.
 type FunctionSelectionType string
 
-// GatewayAliasEvaluatorVersionBody Assigns or updates a user-specified alias for a given revision.
-type GatewayAliasEvaluatorVersionBody struct {
-	// AliasId The alias ID (e.g., "current", a semver tag, etc.).
-	AliasId string `json:"aliasId"`
-}
-
-// GatewayBatchDeleteBatchJobsBody defines model for GatewayBatchDeleteBatchJobsBody.
-type GatewayBatchDeleteBatchJobsBody struct {
-	// Names The resource names of the batch jobs to delete.
-	Names []string `json:"names"`
-}
-
-// GatewayBatchDeleteEnvironmentsBody defines model for GatewayBatchDeleteEnvironmentsBody.
-type GatewayBatchDeleteEnvironmentsBody struct {
-	// Names The resource names of the environments to delete.
-	Names []string `json:"names"`
-}
-
-// GatewayBatchDeleteNodePoolsBody defines model for GatewayBatchDeleteNodePoolsBody.
-type GatewayBatchDeleteNodePoolsBody struct {
-	// Names The resource names of the node pools to delete.
-	Names []string `json:"names"`
-}
-
-// GatewayCancelBatchJobBody defines model for GatewayCancelBatchJobBody.
-type GatewayCancelBatchJobBody = map[string]interface{}
-
-// GatewayCancelDpoJobBody defines model for GatewayCancelDpoJobBody.
-type GatewayCancelDpoJobBody = map[string]interface{}
-
-// GatewayCancelReinforcementFineTuningJobBody defines model for GatewayCancelReinforcementFineTuningJobBody.
-type GatewayCancelReinforcementFineTuningJobBody = map[string]interface{}
-
-// GatewayCancelRlorTrainerJobBody defines model for GatewayCancelRlorTrainerJobBody.
-type GatewayCancelRlorTrainerJobBody = map[string]interface{}
-
-// GatewayCancelSupervisedFineTuningJobBody defines model for GatewayCancelSupervisedFineTuningJobBody.
-type GatewayCancelSupervisedFineTuningJobBody = map[string]interface{}
-
-// GatewayConnectEnvironmentBody defines model for GatewayConnectEnvironmentBody.
-type GatewayConnectEnvironmentBody struct {
-	Connection    GatewayEnvironmentConnection `json:"connection"`
-	VscodeVersion *string                      `json:"vscodeVersion,omitempty"`
-}
-
-// GatewayCreateApiKeyBody defines model for GatewayCreateApiKeyBody.
-type GatewayCreateApiKeyBody struct {
-	// ApiKey The API key to be created.
-	ApiKey GatewayApiKey `json:"apiKey"`
-}
-
-// GatewayCreateClusterBody defines model for GatewayCreateClusterBody.
-type GatewayCreateClusterBody struct {
-	// Cluster The properties of the cluster being created.
-	Cluster   GatewayCluster `json:"cluster"`
-	ClusterId string         `json:"clusterId"`
-}
-
-// GatewayCreateDatasetBody defines model for GatewayCreateDatasetBody.
-type GatewayCreateDatasetBody struct {
-	Dataset         GatewayDataset `json:"dataset"`
-	DatasetId       string         `json:"datasetId"`
-	Filter          *string        `json:"filter,omitempty"`
-	SourceDatasetId *string        `json:"sourceDatasetId,omitempty"`
-}
-
-// GatewayCreateEnvironmentBody defines model for GatewayCreateEnvironmentBody.
-type GatewayCreateEnvironmentBody struct {
-	// Environment The properties of the Environment being created.
-	Environment   GatewayEnvironment `json:"environment"`
-	EnvironmentId string             `json:"environmentId"`
-}
-
-// GatewayCreateEvaluationBody defines model for GatewayCreateEvaluationBody.
-type GatewayCreateEvaluationBody struct {
-	Evaluation   GatewayEvaluation `json:"evaluation"`
-	EvaluationId *string           `json:"evaluationId,omitempty"`
-}
-
-// GatewayCreateEvaluationJobBody defines model for GatewayCreateEvaluationJobBody.
-type GatewayCreateEvaluationJobBody struct {
-	EvaluationJob   GatewayEvaluationJob `json:"evaluationJob"`
-	EvaluationJobId *string              `json:"evaluationJobId,omitempty"`
-
-	// LeaderboardIds Optional leaderboards to attach this job to upon creation.
-	LeaderboardIds *[]string `json:"leaderboardIds,omitempty"`
-}
-
-// GatewayCreateEvaluatorBody defines model for GatewayCreateEvaluatorBody.
-type GatewayCreateEvaluatorBody struct {
-	Evaluator   GatewayEvaluator `json:"evaluator"`
-	EvaluatorId *string          `json:"evaluatorId,omitempty"`
-}
-
-// GatewayCreateEvaluatorV2Body defines model for GatewayCreateEvaluatorV2Body.
-type GatewayCreateEvaluatorV2Body struct {
-	Evaluator   GatewayEvaluator `json:"evaluator"`
-	EvaluatorId *string          `json:"evaluatorId,omitempty"`
-}
-
-// GatewayCreateLeaderboardBody defines model for GatewayCreateLeaderboardBody.
-type GatewayCreateLeaderboardBody struct {
-	// Leaderboard Leaderboard to create.
-	Leaderboard GatewayLeaderboard `json:"leaderboard"`
-
-	// LeaderboardId Optional explicit leaderboard ID (defaults to server-generated).
-	LeaderboardId *string `json:"leaderboardId,omitempty"`
-}
-
-// GatewayCreateModelBody defines model for GatewayCreateModelBody.
-type GatewayCreateModelBody struct {
-	// Cluster The resource name of the BYOC cluster to which this model belongs.
-	// e.g. accounts/my-account/clusters/my-cluster. Empty if it belongs to
-	// a Fireworks cluster.
-	Cluster *string `json:"cluster,omitempty"`
-
-	// Model The properties of the Model being created.
-	Model *GatewayModel `json:"model,omitempty"`
-
-	// ModelId ID of the model.
-	ModelId string `json:"modelId"`
-}
-
-// GatewayCreateNodePoolBody defines model for GatewayCreateNodePoolBody.
-type GatewayCreateNodePoolBody struct {
-	// NodePool The properties of the NodePool being created.
-	NodePool   GatewayNodePool `json:"nodePool"`
-	NodePoolId string          `json:"nodePoolId"`
-}
-
-// GatewayDebugReinforcementFineTuningJobBody defines model for GatewayDebugReinforcementFineTuningJobBody.
-type GatewayDebugReinforcementFineTuningJobBody = map[string]interface{}
-
-// GatewayDeleteApiKeyBody defines model for GatewayDeleteApiKeyBody.
-type GatewayDeleteApiKeyBody struct {
-	// KeyId The key ID for the API key.
-	KeyId string `json:"keyId"`
-}
-
-// GatewayDeployModelVersionBody defines model for GatewayDeployModelVersionBody.
-type GatewayDeployModelVersionBody struct {
-	Deployment string `json:"deployment"`
-
-	// RolloutStrategy The rollout strategy to use when deploying the model version.
-	//
-	//  - ROLLOUT_STRATEGY_STANDARD: Standard rollout strategy updates the deployment using a normal k8s rolling restart
-	//  - ROLLOUT_STRATEGY_HOT_RELOAD: Hot reload rollout strategy updates the deployment by hot reloading the model version on the existing replicas of the deployment
-	RolloutStrategy GatewayRolloutStrategy `json:"rolloutStrategy"`
-}
-
-// GatewayDisconnectEnvironmentBody defines model for GatewayDisconnectEnvironmentBody.
-type GatewayDisconnectEnvironmentBody struct {
-	// Force Disconnect the environment even if snapshotting fails (e.g. due to pod
-	// failure). This flag should only be used if you are certain that the pod
-	// is gone.
-	Force *bool `json:"force,omitempty"`
-
-	// ResetSnapshots Forces snapshots to be rebuilt.
-	// This can be used when there are too many snapshot layers
-	// or when an unforeseen snapshotting logic error has occurred.
-	ResetSnapshots *bool `json:"resetSnapshots,omitempty"`
-}
-
-// GatewayExecuteRlorTrainStepBody defines model for GatewayExecuteRlorTrainStepBody.
-type GatewayExecuteRlorTrainStepBody struct {
-	// Dataset Dataset to process for this iteration.
-	Dataset string `json:"dataset"`
-
-	// OutputModel Output model to materialize when training completes.
-	OutputModel string `json:"outputModel"`
-}
-
-// GatewayGetDatasetUploadEndpointBody defines model for GatewayGetDatasetUploadEndpointBody.
-type GatewayGetDatasetUploadEndpointBody struct {
-	// FilenameToSize A mapping from the file name to its size in bytes.
-	FilenameToSize map[string]string `json:"filenameToSize"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `json:"readMask,omitempty"`
-}
-
-// GatewayGetEvaluatorUploadEndpointBody defines model for GatewayGetEvaluatorUploadEndpointBody.
-type GatewayGetEvaluatorUploadEndpointBody struct {
-	FilenameToSize map[string]string `json:"filenameToSize"`
-	ReadMask       *string           `json:"readMask,omitempty"`
-}
-
-// GatewayGetModelUploadEndpointBody defines model for GatewayGetModelUploadEndpointBody.
-type GatewayGetModelUploadEndpointBody struct {
-	// EnableResumableUpload If true, enable resumable upload instead of PUT.
-	EnableResumableUpload *bool `json:"enableResumableUpload,omitempty"`
-
-	// FilenameToSize A mapping from the file name to its size in bytes.
-	FilenameToSize map[string]string `json:"filenameToSize"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `json:"readMask,omitempty"`
-}
-
-// GatewayImportModelBody defines model for GatewayImportModelBody.
-type GatewayImportModelBody struct {
-	// AwsS3Source AWS S3 source details.
-	// Must be set when importing from AWS S3.
-	AwsS3Source *GatewayAwsS3ModelSource `json:"awsS3Source,omitempty"`
-
-	// AzureBlobSource Azure Blob Storage source details.
-	// Must be set when importing from Azure Blob Storage.
-	AzureBlobSource *GatewayAzureBlobModelSource `json:"azureBlobSource,omitempty"`
-}
-
-// GatewayPrepareModelBody defines model for GatewayPrepareModelBody.
-type GatewayPrepareModelBody struct {
-	Precision *DeploymentPrecision `json:"precision,omitempty"`
-	ReadMask  *string              `json:"readMask,omitempty"`
-}
-
-// GatewayPreviewEvaluationBody defines model for GatewayPreviewEvaluationBody.
-type GatewayPreviewEvaluationBody struct {
-	MaxSamples *int32 `json:"maxSamples,omitempty"`
-	SampleData string `json:"sampleData"`
-}
-
-// GatewayPreviewEvaluatorBody defines model for GatewayPreviewEvaluatorBody.
-type GatewayPreviewEvaluatorBody struct {
-	Evaluator  GatewayEvaluator `json:"evaluator"`
-	MaxSamples *int32           `json:"maxSamples,omitempty"`
-	SampleData []string         `json:"sampleData"`
-}
-
-// GatewayResumeDpoJobBody defines model for GatewayResumeDpoJobBody.
-type GatewayResumeDpoJobBody = map[string]interface{}
-
-// GatewayResumeReinforcementFineTuningJobBody defines model for GatewayResumeReinforcementFineTuningJobBody.
-type GatewayResumeReinforcementFineTuningJobBody = map[string]interface{}
-
-// GatewayResumeRlorTrainerJobBody defines model for GatewayResumeRlorTrainerJobBody.
-type GatewayResumeRlorTrainerJobBody = map[string]interface{}
-
-// GatewayResumeSupervisedFineTuningJobBody defines model for GatewayResumeSupervisedFineTuningJobBody.
-type GatewayResumeSupervisedFineTuningJobBody = map[string]interface{}
-
-// GatewayRollbackEvaluatorBody Rolls an evaluator back to the configuration captured by a specific revision.
-type GatewayRollbackEvaluatorBody = map[string]interface{}
-
-// GatewayScaleDeploymentBody defines model for GatewayScaleDeploymentBody.
-type GatewayScaleDeploymentBody struct {
-	// ReplicaCount The desired number of replicas.
-	ReplicaCount *int32 `json:"replicaCount,omitempty"`
-}
-
-// GatewaySplitDatasetBody defines model for GatewaySplitDatasetBody.
-type GatewaySplitDatasetBody struct {
-	ChunkSize *int32 `json:"chunkSize,omitempty"`
-
-	// Parent The parent account ID of the requester.
-	Parent *string `json:"parent,omitempty"`
-}
-
-// GatewayTestEvaluationBody defines model for GatewayTestEvaluationBody.
-type GatewayTestEvaluationBody struct {
-	Evaluation GatewayEvaluation `json:"evaluation"`
-	SampleData string            `json:"sampleData"`
-}
-
-// GatewayUndeleteDeploymentBody defines model for GatewayUndeleteDeploymentBody.
-type GatewayUndeleteDeploymentBody = map[string]interface{}
-
-// GatewayValidateAssertionsBody Validate the code assertions. Recommended before creating the evaluation.
-type GatewayValidateAssertionsBody struct {
-	Assertions []GatewayAssertion `json:"assertions"`
-}
-
-// GatewayValidateDatasetUploadBody defines model for GatewayValidateDatasetUploadBody.
-type GatewayValidateDatasetUploadBody = map[string]interface{}
-
-// GatewayValidateEvaluatorUploadBody defines model for GatewayValidateEvaluatorUploadBody.
-type GatewayValidateEvaluatorUploadBody = map[string]interface{}
-
 // HTTPValidationError defines model for HTTPValidationError.
 type HTTPValidationError struct {
 	Detail *[]ValidationError `json:"detail,omitempty"`
 }
 
-// LeaderboardDatasetFilter Defines how jobs for this leaderboard are selected at read-time.
-type LeaderboardDatasetFilter struct {
-	Dataset *string `json:"dataset,omitempty"`
-}
-
-// LeaderboardTimeInterval Time window for selecting jobs.
-type LeaderboardTimeInterval struct {
-	// EndTime Exclusive end time.
-	EndTime *time.Time `json:"endTime,omitempty"`
-
-	// StartTime Inclusive start time.
-	StartTime *time.Time `json:"startTime,omitempty"`
+// InternalContent Fireworks extension: internal model content surfaced inside the streaming
+// delta when “stream_options.include_internal_content=true“.
+type InternalContent struct {
+	// TokenIds Token IDs for this chunk's delta (when include_internal_content=true)
+	TokenIds *[]int `json:"token_ids,omitempty"`
 }
 
 // LogProbs Legacy log probabilities format
@@ -5425,12 +5889,6 @@ type LogProbs struct {
 	Tokens        *[]string             `json:"tokens,omitempty"`
 	TopLogprobs   *[]map[string]float64 `json:"top_logprobs,omitempty"`
 }
-
-// McpServerAuthenticationType - OPEN: No authentication required (open access)
-//   - API_KEY: API key authentication via secrets
-//   - OAUTH2: OAuth 2.0 authentication
-//   - BEARER_TOKEN: Bearer token authentication
-type McpServerAuthenticationType string
 
 // Message Represents a message in a conversation.
 type Message struct {
@@ -5459,6 +5917,18 @@ type MessageContent struct {
 	Type string `json:"type"`
 }
 
+// ModelKind - HF_BASE_MODEL: An LLM base model.
+//   - HF_PEFT_ADDON: A parameter-efficent fine-tuned addon.
+//   - HF_TEFT_ADDON: A token-eficient fine-tuned addon.
+//   - FLUMINA_BASE_MODEL: A Flumina base model.
+//   - FLUMINA_ADDON: A Flumina addon.
+//   - DRAFT_ADDON: A draft model used for speculative decoding in a deployment.
+//   - LIVE_MERGE: A live-merge model.
+//   - CUSTOM_MODEL: A customized model
+//   - EMBEDDING_MODEL: An Embedding model.
+//   - SNAPSHOT_MODEL: A snapshot model.
+type ModelKind string
+
 // ModelSnapshotType defines model for ModelSnapshotType.
 type ModelSnapshotType string
 
@@ -5469,15 +5939,28 @@ type NewLogProbs struct {
 
 // NewLogProbsContent defines model for NewLogProbsContent.
 type NewLogProbsContent struct {
-	Bytes           []int                            `json:"bytes"`
-	LastActivation  *string                          `json:"last_activation,omitempty"`
-	Logprob         float64                          `json:"logprob"`
-	RoutingMatrix   *string                          `json:"routing_matrix,omitempty"`
-	SamplingLogprob *float64                         `json:"sampling_logprob"`
-	TextOffset      int                              `json:"text_offset"`
-	Token           string                           `json:"token"`
-	TokenId         int                              `json:"token_id"`
-	TopLogprobs     *[]NewLogProbsContentTopLogProbs `json:"top_logprobs,omitempty"`
+	Bytes             []int                            `json:"bytes"`
+	LastActivation    *string                          `json:"last_activation,omitempty"`
+	Logprob           float64                          `json:"logprob"`
+	RoutingMatrix     *string                          `json:"routing_matrix,omitempty"`
+	SamplingLogprob   *float64                         `json:"sampling_logprob"`
+	SamplingMask      *NewLogProbsContent_SamplingMask `json:"sampling_mask,omitempty"`
+	SamplingMaskCount *int                             `json:"sampling_mask_count,omitempty"`
+	TextOffset        int                              `json:"text_offset"`
+	Token             string                           `json:"token"`
+	TokenId           int                              `json:"token_id"`
+	TopLogprobs       *[]NewLogProbsContentTopLogProbs `json:"top_logprobs,omitempty"`
+}
+
+// NewLogProbsContentSamplingMask0 defines model for NewLogProbsContent.SamplingMask.0.
+type NewLogProbsContentSamplingMask0 = []int
+
+// NewLogProbsContentSamplingMask1 defines model for NewLogProbsContent.SamplingMask.1.
+type NewLogProbsContentSamplingMask1 = string
+
+// NewLogProbsContent_SamplingMask defines model for NewLogProbsContent.SamplingMask.
+type NewLogProbsContent_SamplingMask struct {
+	union json.RawMessage
 }
 
 // NewLogProbsContentTopLogProbs defines model for NewLogProbsContentTopLogProbs.
@@ -5486,6 +5969,58 @@ type NewLogProbsContentTopLogProbs struct {
 	Logprob float64 `json:"logprob"`
 	Token   string  `json:"token"`
 	TokenId int     `json:"token_id"`
+}
+
+// PolicySettingsModelAccessRule One per-model override. This is not a partial patch; it is a complete row
+// replacing defaults for this model.
+type PolicySettingsModelAccessRule struct {
+	Model string `json:"model"`
+
+	// Permissions Each boolean is required when ModelPermissions is sent. Using `optional`
+	// gives the field presence tracking, and `(buf.validate.field).required`
+	// makes server-side validation reject messages with any unset boolean. This
+	// forces callers (frontend, firectl, scripts) to always send all four
+	// permissions explicitly, instead of silently relying on bool's default of
+	// `false`. It also causes proto3 JSON to emit explicit `false` values on
+	// output, so a Get response always shows the full picture.
+	Permissions PolicySettingsModelPermissions `json:"permissions"`
+}
+
+// PolicySettingsModelPermissions Each boolean is required when ModelPermissions is sent. Using `optional`
+// gives the field presence tracking, and `(buf.validate.field).required`
+// makes server-side validation reject messages with any unset boolean. This
+// forces callers (frontend, firectl, scripts) to always send all four
+// permissions explicitly, instead of silently relying on bool's default of
+// `false`. It also causes proto3 JSON to emit explicit `false` values on
+// output, so a Get response always shows the full picture.
+type PolicySettingsModelPermissions struct {
+	AllowDedicatedDeployments bool `json:"allowDedicatedDeployments"`
+	AllowServerless           bool `json:"allowServerless"`
+
+	// AllowServerlessFast Serverless inference through the model's Fast serving mode, which is
+	// served by a separate router rather than the base model id. Independent
+	// of allow_serverless: an account can be allowed standard serverless on a
+	// model while being denied its Fast variant.
+	AllowServerlessFast bool `json:"allowServerlessFast"`
+	AllowTraining       bool `json:"allowTraining"`
+}
+
+// PolicySettingsZeroDataRetentionPolicy Zero Data Retention (ZDR) blocks new work that would retain customer inputs
+// or outputs, such as stored responses, batch jobs, uploads, and training.
+// Compatible stateless requests continue. Enabling ZDR does not delete existing
+// data. Caches, non-content metadata, and third-party retention are excluded.
+//
+// Each scope uses its own enforcement when set, otherwise default_enforced.
+type PolicySettingsZeroDataRetentionPolicy struct {
+	// DefaultEnforced Account default for Inference and Training. Required whenever this policy
+	// is supplied; false means ZDR is off unless a scope enforces it.
+	DefaultEnforced bool `json:"defaultEnforced"`
+
+	// Inference Inference enforcement. Omit to inherit default_enforced.
+	Inference *ZeroDataRetentionPolicyInferencePolicy `json:"inference,omitempty"`
+
+	// Training Training enforcement. Omit to inherit default_enforced.
+	Training *ZeroDataRetentionPolicyTrainingPolicy `json:"training,omitempty"`
 }
 
 // PredictedOutput OpenAI-compatible struct for the "speculation" field.
@@ -5540,9 +6075,11 @@ type PromptTokensDetails struct {
 	CachedTokens *int `json:"cached_tokens,omitempty"`
 }
 
-// PythonExecutorTargetType  - MODULE: Runs a python module, i.e. passed as -m argument.
-//   - FILENAME: Runs a python file.
-type PythonExecutorTargetType string
+// QueryUsageCostsRequestDimension defines model for QueryUsageCostsRequestDimension.
+type QueryUsageCostsRequestDimension string
+
+// QueryUsageCostsResponseAttributionCompleteness defines model for QueryUsageCostsResponseAttributionCompleteness.
+type QueryUsageCostsResponseAttributionCompleteness string
 
 // RawOutput Extension of OpenAI that returns low-level interaction of what the model
 // sees, including the formatted prompt and function calls
@@ -5689,10 +6226,10 @@ type ResponseFormat struct {
 }
 
 // ResponseFormatJsonSchema0 defines model for ResponseFormat.JsonSchema.0.
-type ResponseFormatJsonSchema0 = string
+type ResponseFormatJsonSchema0 map[string]interface{}
 
 // ResponseFormatJsonSchema1 defines model for ResponseFormat.JsonSchema.1.
-type ResponseFormatJsonSchema1 map[string]interface{}
+type ResponseFormatJsonSchema1 = string
 
 // ResponseFormat_JsonSchema defines model for ResponseFormat.JsonSchema.
 type ResponseFormat_JsonSchema struct {
@@ -5700,10 +6237,10 @@ type ResponseFormat_JsonSchema struct {
 }
 
 // ResponseFormatSchema0 defines model for ResponseFormat.Schema.0.
-type ResponseFormatSchema0 = string
+type ResponseFormatSchema0 map[string]interface{}
 
 // ResponseFormatSchema1 defines model for ResponseFormat.Schema.1.
-type ResponseFormatSchema1 map[string]interface{}
+type ResponseFormatSchema1 = string
 
 // ResponseFormat_Schema defines model for ResponseFormat.Schema.
 type ResponseFormat_Schema struct {
@@ -5734,6 +6271,39 @@ type ResponseList struct {
 	Object *string `json:"object,omitempty"`
 }
 
+// StreamOptions defines model for StreamOptions.
+type StreamOptions struct {
+	// BufferMode When both buffer_tokens and buffer_ms are set: 'any' flushes when either threshold is reached; 'all' flushes only when both are. Overrides the deployment default when set; defaults to 'any'.
+	BufferMode *StreamOptionsBufferMode `json:"buffer_mode,omitempty"`
+
+	// BufferMs Coalesce streaming SSE chunks for up to this many milliseconds before flushing a merged chunk. 0 disables the time threshold. Honored only on the vLLM backend; overrides the deployment default when set.
+	BufferMs *float64 `json:"buffer_ms,omitempty"`
+
+	// BufferTokens Coalesce streaming SSE chunks until this many text deltas (~tokens) accumulate before flushing a merged chunk. 0 disables the token threshold. Honored only on the vLLM backend; overrides the deployment default when set.
+	BufferTokens *int `json:"buffer_tokens,omitempty"`
+
+	// IncludeInternalContent When true, include an `internal_content` object (`token_ids`) inside each streaming delta — equivalent to `return_token_ids`, emitted under `choices[].delta.internal_content`. Omitted entirely from response chunks when false.
+	IncludeInternalContent *bool `json:"include_internal_content,omitempty"`
+
+	// IncludeUsage Whether to include a trailing SSE chunk with usage totals (with an empty `choices` array). Unlike the OpenAI spec, Fireworks includes usage by default for streaming responses; set this to `false` to opt out. When emitted, usage rides a separate final chunk (before `data: [DONE]`), not the chunk carrying `finish_reason`.
+	IncludeUsage *bool `json:"include_usage,omitempty"`
+}
+
+// StreamOptionsBufferMode defines model for StreamOptions.BufferMode.
+type StreamOptionsBufferMode string
+
+// ThinkingConfigAdaptive Configuration that lets the model decide whether to think (MiniMax M3).
+//
+// Per the M3 API spec (§1.4), `{"type": "adaptive"}` is M3's default — the model
+// decides whether to emit a thinking phase. No forced first token is applied.
+// Currently accepted only by MiniMax M3; other model families reject it.
+type ThinkingConfigAdaptive struct {
+	Type ThinkingConfigAdaptiveType `json:"type"`
+}
+
+// ThinkingConfigAdaptiveType defines model for ThinkingConfigAdaptive.Type.
+type ThinkingConfigAdaptiveType string
+
 // ThinkingConfigDisabled Configuration for disabling extended thinking (Anthropic-compatible format).
 type ThinkingConfigDisabled struct {
 	Type ThinkingConfigDisabledType `json:"type"`
@@ -5744,10 +6314,36 @@ type ThinkingConfigDisabledType string
 
 // ThinkingConfigEnabled Configuration for enabling extended thinking (Anthropic-compatible format).
 type ThinkingConfigEnabled struct {
+	// BudgetEndStr Natural-language transition phrase that the model is forced to emit just before the end-thinking token (`</think>`) when `budget_tokens` is exhausted. This produces a more natural conclusion than a hard token slam (matches vLLM's `reasoning_end_str` behavior). Defaults to a built-in phrase. Set to "" to disable the bridge and force `</think>` immediately. Only meaningful when `budget_tokens` is set.
+	BudgetEndStr *string `json:"budget_end_str,omitempty"`
+
 	// BudgetTokens Determines how many tokens the model can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality. Must be >= 1024 if specified.
-	BudgetTokens *int                      `json:"budget_tokens,omitempty"`
-	Type         ThinkingConfigEnabledType `json:"type"`
+	BudgetTokens *int `json:"budget_tokens,omitempty"`
+
+	// Effort Reasoning effort level (Kimi/Moonshot spec). Accepts the same values as top-level `reasoning_effort`; when set it takes precedence over (overwrites) `reasoning_effort`.
+	Effort *ThinkingConfigEnabled_Effort `json:"effort,omitempty"`
+
+	// Keep Controls whether historical reasoning content is preserved in the prompt. When set to `"all"`, all previous assistant turns' reasoning_content is included in the rendered prompt (equivalent to `reasoning_history: "preserved"`). When omitted (null), the model uses its default history behavior. Only valid when `type` is `"enabled"`.
+	Keep *ThinkingConfigEnabledKeep `json:"keep,omitempty"`
+	Type *ThinkingConfigEnabledType `json:"type,omitempty"`
 }
+
+// ThinkingConfigEnabledEffort0 defines model for ThinkingConfigEnabled.Effort.0.
+type ThinkingConfigEnabledEffort0 string
+
+// ThinkingConfigEnabledEffort1 defines model for ThinkingConfigEnabled.Effort.1.
+type ThinkingConfigEnabledEffort1 = int
+
+// ThinkingConfigEnabledEffort2 defines model for ThinkingConfigEnabled.Effort.2.
+type ThinkingConfigEnabledEffort2 = bool
+
+// ThinkingConfigEnabled_Effort Reasoning effort level (Kimi/Moonshot spec). Accepts the same values as top-level `reasoning_effort`; when set it takes precedence over (overwrites) `reasoning_effort`.
+type ThinkingConfigEnabled_Effort struct {
+	union json.RawMessage
+}
+
+// ThinkingConfigEnabledKeep defines model for ThinkingConfigEnabled.Keep.
+type ThinkingConfigEnabledKeep string
 
 // ThinkingConfigEnabledType defines model for ThinkingConfigEnabled.Type.
 type ThinkingConfigEnabledType string
@@ -5791,10 +6387,27 @@ type ToolOutput struct {
 	Type *string `json:"type,omitempty"`
 }
 
+// TrainingSessionReferenceState ReferenceState indicates whether the session currently references the
+// base model or a loaded LoRA adapter. Updated automatically when
+// LoadTrainingSessionState is called.
+//
+//   - BASE: Session is using the base model (no adapter loaded).
+//   - ADAPTER: Session has a LoRA adapter loaded.
+type TrainingSessionReferenceState string
+
+// TrainingShapeTrainerMode Trainer execution mode used for validated launch-profile matching.
+type TrainingShapeTrainerMode string
+
 // UsageInfo Usage statistics.
 type UsageInfo struct {
 	// CompletionTokens The number of tokens in the generated completion
 	CompletionTokens *int `json:"completion_tokens,omitempty"`
+
+	// CompletionTokensDetails Details about completion tokens, including reasoning tokens
+	CompletionTokensDetails *CompletionTokensDetails `json:"completion_tokens_details,omitempty"`
+
+	// OutputTokensDetails Details about output tokens, including reasoning tokens
+	OutputTokensDetails *CompletionTokensDetails `json:"output_tokens_details,omitempty"`
 
 	// PromptTokens The number of tokens in the prompt
 	PromptTokens int `json:"prompt_tokens"`
@@ -5805,6 +6418,9 @@ type UsageInfo struct {
 	// TotalTokens The total number of tokens used in the request (prompt + completion)
 	TotalTokens int `json:"total_tokens"`
 }
+
+// UserUsageLimitIncreaseRequestRequestState Lifecycle state of the request.
+type UserUsageLimitIncreaseRequestRequestState string
 
 // ValidateAssertionsResponseValidateAssertionError defines model for ValidateAssertionsResponseValidateAssertionError.
 type ValidateAssertionsResponseValidateAssertionError struct {
@@ -5831,6 +6447,35 @@ type ValidationError_Loc_Item struct {
 	union json.RawMessage
 }
 
+// ZeroDataRetentionPolicyInferencePolicy Enforcement for Inference, including chat and completion requests, stored
+// or background responses, and batch inference.
+type ZeroDataRetentionPolicyInferencePolicy struct {
+	// Enforcement - ENFORCEMENT_UNSPECIFIED: Inherits default_enforced.
+	//  - ENFORCED: Blocks new Inference work that retains customer content.
+	//  - NOT_ENFORCED: Allows Inference work that retains customer content.
+	Enforcement *ZeroDataRetentionPolicyInferencePolicyEnforcement `json:"enforcement,omitempty"`
+}
+
+// ZeroDataRetentionPolicyInferencePolicyEnforcement - ENFORCEMENT_UNSPECIFIED: Inherits default_enforced.
+//   - ENFORCED: Blocks new Inference work that retains customer content.
+//   - NOT_ENFORCED: Allows Inference work that retains customer content.
+type ZeroDataRetentionPolicyInferencePolicyEnforcement string
+
+// ZeroDataRetentionPolicyTrainingPolicy Enforcement for Training, including fine-tuning jobs, training sessions,
+// checkpoints, and evaluations. Enforced Training blocks all new Training
+// work because it retains datasets, checkpoints, and trained weights.
+type ZeroDataRetentionPolicyTrainingPolicy struct {
+	// Enforcement - ENFORCEMENT_UNSPECIFIED: Inherits default_enforced.
+	//  - ENFORCED: Blocks new Training work.
+	//  - NOT_ENFORCED: Allows new Training work.
+	Enforcement *ZeroDataRetentionPolicyTrainingPolicyEnforcement `json:"enforcement,omitempty"`
+}
+
+// ZeroDataRetentionPolicyTrainingPolicyEnforcement - ENFORCEMENT_UNSPECIFIED: Inherits default_enforced.
+//   - ENFORCED: Blocks new Training work.
+//   - NOT_ENFORCED: Allows new Training work.
+type ZeroDataRetentionPolicyTrainingPolicyEnforcement string
+
 // GatewayAcceleratorType defines model for gatewayAcceleratorType.
 type GatewayAcceleratorType string
 
@@ -5851,6 +6496,12 @@ type GatewayAccount struct {
 	Email string  `json:"email"`
 	Name  *string `json:"name,omitempty"`
 
+	// NotificationSettings Notification settings for this account.
+	NotificationSettings *GatewayNotificationSettings `json:"notificationSettings,omitempty"`
+
+	// ProductivityOnly Marks this account as productivity/coding-only. Set once at account creation.
+	ProductivityOnly *bool `json:"productivityOnly,omitempty"`
+
 	// State The state of the account.
 	State *GatewayAccountState `json:"state,omitempty"`
 
@@ -5862,6 +6513,17 @@ type GatewayAccount struct {
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
+// GatewayAccountRateLimit defines model for gatewayAccountRateLimit.
+type GatewayAccountRateLimit struct {
+	Deployment string `json:"deployment"`
+
+	// EffectiveLimit Enforced limit for this metric (per second; units depend on the metric).
+	EffectiveLimit float64 `json:"effectiveLimit"`
+
+	// Metric Which rate-limit metric this row describes.
+	Metric AccountRateLimitMetric `json:"metric"`
+}
+
 // GatewayAccountState defines model for gatewayAccountState.
 type GatewayAccountState string
 
@@ -5869,10 +6531,50 @@ type GatewayAccountState string
 type GatewayAccountUsage struct {
 	DedicatedCosts  *[]AccountUsageDedicatedDeploymentUsage `json:"dedicatedCosts,omitempty"`
 	ServerlessCosts *[]AccountUsageServerlessUsage          `json:"serverlessCosts,omitempty"`
+
+	// TrainingCosts List of training costs (SFT / DPO token usage and RFT / service-mode
+	// accelerator-second usage). Empty when training usage was not requested or
+	// when the account has training usage hidden.
+	TrainingCosts *[]AccountUsageTrainingUsage `json:"trainingCosts,omitempty"`
 }
+
+// GatewayAccountUsageLimits AccountUsageLimits is the account-level usage-limits singleton: the default
+// per-user cap and enforcement mode applied to every user in the account, plus
+// the account-wide current-period usage rollup. There is exactly one per
+// account. The default cap and enforcement mode are stored; the usage rollup is
+// computed at read time.
+type GatewayAccountUsageLimits struct {
+	// DefaultUserLimit The default per-user cap applied to every user without an override. Unset
+	// means no default cap (users are unlimited unless individually capped).
+	DefaultUserLimit *TypeMoney `json:"defaultUserLimit,omitempty"`
+
+	// EnforcementMode Enforcement mode applied to the per-user caps in this account.
+	EnforcementMode *GatewayAccountUsageLimitsEnforcementMode `json:"enforcementMode,omitempty"`
+	Name            *string                                   `json:"name,omitempty"`
+
+	// UpdateTime The time the account usage limits (default cap / enforcement mode) were
+	// last updated. Unset until the account row is first written.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Used Account-wide current-period usage (the sum across users). Computed at read
+	// time; not stored.
+	Used *TypeMoney `json:"used,omitempty"`
+}
+
+// GatewayAccountUsageLimitsEnforcementMode EnforcementMode controls what happens when a user reaches their limit.
+//
+//   - DISABLED: No tracking, no notifications, no enforcement.
+//   - WARN: Usage is tracked but never blocked. A safe stage before BLOCK.
+//   - BLOCK: Usage is tracked and the user is blocked at their limit until the period
+//
+// resets.
+type GatewayAccountUsageLimitsEnforcementMode string
 
 // GatewayApiKey defines model for gatewayApiKey.
 type GatewayApiKey struct {
+	// Annotations Optional key-value annotations for this API key.
+	Annotations *map[string]string `json:"annotations,omitempty"`
+
 	// CreateTime Timestamp indicating when the API key was created.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 
@@ -5885,12 +6587,18 @@ type GatewayApiKey struct {
 	// ExpireTime Timestamp indicating when the API key will expire. If not set, the key never expires.
 	ExpireTime *time.Time `json:"expireTime,omitempty"`
 
+	// IsFirepass True when this key is a FirePass inference key.
+	IsFirepass *bool `json:"isFirepass,omitempty"`
+
 	// Key The actual API key value, only available upon creation and not stored thereafter.
 	Key *string `json:"key,omitempty"`
 
 	// KeyId Unique identifier (Key ID) for the API key, used primarily for deletion.
-	KeyId  *string `json:"keyId,omitempty"`
-	Prefix *string `json:"prefix,omitempty"`
+	KeyId *string `json:"keyId,omitempty"`
+
+	// LastUsed Timestamp indicating when the API key was last used. Not set if the key has never been used.
+	LastUsed *time.Time `json:"lastUsed,omitempty"`
+	Prefix   *string    `json:"prefix,omitempty"`
 
 	// Secure Indicates whether the plaintext value of the API key is unknown to Fireworks.
 	// If true, Fireworks does not know this API key's plaintext value. If false, Fireworks does
@@ -5908,6 +6616,12 @@ type GatewayAssertion struct {
 
 // GatewayAuditLogEntry defines model for gatewayAuditLogEntry.
 type GatewayAuditLogEntry struct {
+	// ApiKeyId Unkey API key ID when the action was authenticated with an API key (empty for bearer/OIDC).
+	ApiKeyId *string `json:"apiKeyId,omitempty"`
+
+	// ClientIp The client IP when known.
+	ClientIp *string `json:"clientIp,omitempty"`
+
 	// Id Audit log entry id.
 	Id            *string `json:"id,omitempty"`
 	IsAdminAction *bool   `json:"isAdminAction,omitempty"`
@@ -5928,6 +6642,9 @@ type GatewayAuditLogEntry struct {
 
 	// Timestamp The timestamp when the request was received.
 	Timestamp *time.Time `json:"timestamp,omitempty"`
+
+	// UserAgent The user agent that made the request (e.g. "firectl/1.2.3 grpc-go/1.73.0").
+	UserAgent *string `json:"userAgent,omitempty"`
 }
 
 // GatewayAutoTune defines model for gatewayAutoTune.
@@ -5952,22 +6669,13 @@ type GatewayAutoscalingPolicy struct {
 	// ScaleUpWindow The duration the autoscaler will wait before scaling up a deployment after observing
 	// increased load. Default is 30s. Must be less than or equal to 1 hour.
 	ScaleUpWindow *string `json:"scaleUpWindow,omitempty"`
-}
 
-// GatewayAwsIamRoleBinding defines model for gatewayAwsIamRoleBinding.
-type GatewayAwsIamRoleBinding struct {
-	// AccountId The account ID that this binding is associated with.
-	AccountId *string `json:"accountId,omitempty"`
-
-	// CreateTime The creation time of the AWS IAM role binding.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// Principal The principal that is allowed to assume the AWS IAM role. This must be
-	// the email address of the user.
-	Principal string `json:"principal"`
-
-	// Role The AWS IAM role ARN that is allowed to be assumed by the principal.
-	Role string `json:"role"`
+	// ScalingSchedules Named scaling schedules that override min_replica_count on a time-based cron schedule.
+	// When multiple schedules are active simultaneously, the highest min_replica_count
+	// across all active schedules is used ("max wins"). When no schedule is active, the
+	// deployment's base min_replica_count applies.
+	// Maximum 5 schedules per deployment.
+	ScalingSchedules *map[string]GatewayScalingSchedule `json:"scalingSchedules,omitempty"`
 }
 
 // GatewayAwsS3Config AwsS3Config is the configuration for AWS S3 dataset access which
@@ -6039,6 +6747,10 @@ type GatewayBaseModelDetails struct {
 	// DefaultPrecision Default precision of the model.
 	DefaultPrecision *DeploymentPrecision `json:"defaultPrecision,omitempty"`
 
+	// HuggingfaceFiles A list of Hugging Face files associated with this model. Specified if and only if
+	// the checkpoint_format is HUGGINGFACE.
+	HuggingfaceFiles *[]string `json:"huggingfaceFiles,omitempty"`
+
 	// ModelType The type of the model.
 	ModelType *string `json:"modelType,omitempty"`
 
@@ -6056,7 +6768,7 @@ type GatewayBaseModelDetails struct {
 	// SupportsMtp If true, this model supports MTP.
 	SupportsMtp *bool `json:"supportsMtp,omitempty"`
 
-	// Tunable If true, this model is available for fine-tuning.
+	// Tunable Deprecated: V1 training stack only. Use per-category tunable flags on Model instead.
 	Tunable *bool `json:"tunable,omitempty"`
 
 	// WorldSize The default number of GPUs the model is served with.
@@ -6070,23 +6782,45 @@ type GatewayBaseTrainingConfig struct {
 	// Only one of 'base_model' or 'warm_start_from' should be specified.
 	BaseModel *string `json:"baseModel,omitempty"`
 
-	// BatchSize The maximum packed number of tokens per batch for training in sequence packing.
+	// BatchSize Deprecated: legacy V1 token budget. Training V2 batches by samples via
+	// batch_size_samples.
 	BatchSize *int32 `json:"batchSize,omitempty"`
 
 	// BatchSizeSamples The number of samples per gradient batch.
 	BatchSizeSamples *int32 `json:"batchSizeSamples,omitempty"`
 
 	// Epochs The number of epochs to train for.
-	Epochs                    *int32  `json:"epochs,omitempty"`
-	GradientAccumulationSteps *int32  `json:"gradientAccumulationSteps,omitempty"`
-	JinjaTemplate             *string `json:"jinjaTemplate,omitempty"`
+	Epochs *int32 `json:"epochs,omitempty"`
+
+	// GradientAccumulationSteps Deprecated: legacy V1 gradient accumulation. Training V2 batches by
+	// samples via batch_size_samples and rejects this field when set.
+	GradientAccumulationSteps *int32 `json:"gradientAccumulationSteps,omitempty"`
+
+	// JinjaTemplate Deprecated: literal Jinja templates are not supported by Training V2.
+	// Conversation rendering is selected from the base model's registered
+	// renderer configuration instead.
+	JinjaTemplate *string `json:"jinjaTemplate,omitempty"`
 
 	// LearningRate The learning rate used for training.
 	LearningRate            *float32 `json:"learningRate,omitempty"`
 	LearningRateWarmupSteps *int32   `json:"learningRateWarmupSteps,omitempty"`
 
-	// LoraRank The rank of the LoRA layers. For service-mode RLOR trainer jobs (`serviceMode=true`), this must be 0.
+	// LoraAlpha LoRA alpha scaling factor.
+	// If not specified (or 0), trainer defaults are used.
+	LoraAlpha *int32 `json:"loraAlpha,omitempty"`
+
+	// LoraDropout LoRA dropout probability.
+	LoraDropout *float32 `json:"loraDropout,omitempty"`
+
+	// LoraRank The rank of the LoRA layers.
 	LoraRank *int32 `json:"loraRank,omitempty"`
+
+	// LoraTargetModules Optional LoRA target module names (e.g. q_proj, k_proj, v_proj).
+	LoraTargetModules *[]string `json:"loraTargetModules,omitempty"`
+
+	// LrScheduler The learning-rate schedule (constant/linear/cosine + per-type knobs).
+	// When unset, the trainer uses the legacy constant schedule.
+	LrScheduler *GatewayLearningRateScheduler `json:"lrScheduler,omitempty"`
 
 	// MaxContextLength The maximum context length to use with the model.
 	MaxContextLength *int32 `json:"maxContextLength,omitempty"`
@@ -6097,8 +6831,8 @@ type GatewayBaseTrainingConfig struct {
 	// OutputModel The model ID to be assigned to the resulting fine-tuned model. If not specified, the job ID will be used.
 	OutputModel *string `json:"outputModel,omitempty"`
 
-	// Region The region where the fine-tuning job is located.
-	Region *GatewayRegion `json:"region,omitempty"`
+	// TrainerShardingScheme Structured trainer sharding/parallelism configuration.
+	TrainerShardingScheme *GatewayTrainerShardingScheme `json:"trainerShardingScheme,omitempty"`
 
 	// WarmStartFrom The PEFT addon model in Fireworks format to be fine-tuned from
 	// Only one of 'base_model' or 'warm_start_from' should be specified.
@@ -6118,6 +6852,18 @@ type GatewayBatchInferenceJob struct {
 	CreatedBy   *string `json:"createdBy,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`
 
+	// ExpireTime The time when the batch inference job will expire (stop running); any
+	// completed requests will have been written to the output dataset by then.
+	//
+	// This is the job's effective execution deadline, derived by the server as
+	// create_time + the bounded run window (see max_job_duration). It is exposed
+	// so customers can read back the concrete deadline without recomputing it
+	// client-side. OUTPUT_ONLY: it is always computed server-side and any
+	// client-supplied value is ignored (previously this was a SUPERUSER_ONLY
+	// input that overlapped with max_job_duration; the two are now unified as one
+	// public input (duration) + one public derived deadline (this timestamp)).
+	ExpireTime *time.Time `json:"expireTime,omitempty"`
+
 	// InferenceParameters Parameters controlling the inference process.
 	InferenceParameters *GatewayBatchInferenceJobInferenceParameters `json:"inferenceParameters,omitempty"`
 
@@ -6127,12 +6873,30 @@ type GatewayBatchInferenceJob struct {
 	// JobProgress Job progress.
 	JobProgress *GatewayJobProgress `json:"jobProgress,omitempty"`
 
+	// Lifecycle Lifecycle milestone timestamps (validated / run-start / end) for the job.
+	Lifecycle *BatchInferenceJobLifecycleTimestamps `json:"lifecycle,omitempty"`
+
+	// MaxJobDuration The customer-requested wall-clock run window for the job: how long it may
+	// run before it is expired. This is the single public input that controls the
+	// job's lifetime. The server bounds it to [12h, 72h]; if unset it defaults to
+	// 24h. The resulting concrete deadline is surfaced as expire_time
+	// (= create_time + the bounded window) and the job is expired once that
+	// deadline passes. A duration (relative) is used rather than an absolute
+	// timestamp because the client does not know create_time at submit time.
+	// Customer-visible input.
+	MaxJobDuration *string `json:"maxJobDuration,omitempty"`
+
 	// Model The name of the model to use for inference. This is required, except when continued_from_job_name is specified.
 	Model *string `json:"model,omitempty"`
 	Name  *string `json:"name,omitempty"`
 
 	// OutputDatasetId The name of the dataset used for storing the results. This will also contain the error file.
 	OutputDatasetId *string `json:"outputDatasetId,omitempty"`
+
+	// Placement The desired geographic region where the batch inference job runs.
+	// Set `multi_region` to limit the job to a region group (US, CANADA,
+	// EUROPE, APAC, or GLOBAL). If unspecified, the job runs in any supported region.
+	Placement *GatewayPlacement `json:"placement,omitempty"`
 
 	// Precision The precision with which the model should be served.
 	// If PRECISION_UNSPECIFIED, a default will be chosen based on the model.
@@ -6142,8 +6906,31 @@ type GatewayBatchInferenceJob struct {
 	State  *GatewayJobState `json:"state,omitempty"`
 	Status *GatewayStatus   `json:"status,omitempty"`
 
+	// SystemPrompt Optional job-level system prompt. When set, it is injected as a leading
+	// system message into every input row that does NOT already begin with a
+	// system message (a row's own leading system message takes precedence). This
+	// lets callers avoid repeating a large, static system prompt on every row of
+	// the input dataset, shrinking the upload. Because the injected prefix is
+	// byte-identical across rows, prompt caching still applies.
+	SystemPrompt *string `json:"systemPrompt,omitempty"`
+
 	// UpdateTime The update time for the batch inference job.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// WaitingOnCapacity True only while a job that has ALREADY started running is briefly
+	// re-acquiring capacity after a mid-run preemption/stockout (i.e. it
+	// regressed from RUNNING back to an internal PENDING/CREATING phase and is
+	// waiting to resume). This is intentionally a transient sub-status annotation
+	// on a job whose customer-facing `state` stays RUNNING — NOT a distinct
+	// `state` value: the job is still running (progress is saved, it auto-resumes)
+	// so introducing a new terminal-or-not enum value would force every state
+	// consumer (SDK/CLI/internal maps/billing) to special-case "still running."
+	// It drives the customer-facing "Briefly paused — waiting on capacity" card.
+	// It must NOT be set during first-time provisioning before the job has ever
+	// run, and is cleared once the job returns to RUNNING or reaches a terminal
+	// state. So "state=RUNNING, waiting_on_capacity=true" means: running, momentarily
+	// paused while it re-acquires capacity.
+	WaitingOnCapacity *bool `json:"waitingOnCapacity,omitempty"`
 }
 
 // GatewayBatchInferenceJobInferenceParameters defines model for gatewayBatchInferenceJobInferenceParameters.
@@ -6168,92 +6955,53 @@ type GatewayBatchInferenceJobInferenceParameters struct {
 	TopP *float32 `json:"topP,omitempty"`
 }
 
-// GatewayBatchJob defines model for gatewayBatchJob.
-type GatewayBatchJob struct {
-	// Annotations Arbitrary, user-specified metadata.
-	// Keys and values must adhere to Kubernetes constraints: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
-	// Additionally, the "fireworks.ai/" prefix is reserved.
-	Annotations *map[string]string `json:"annotations,omitempty"`
+// GatewayBillingSettings defines model for gatewayBillingSettings.
+type GatewayBillingSettings struct {
+	// CreditAutoReloadAmount The amount to auto-reload the account's credit balance.
+	// Must be less than $100,000.
+	CreditAutoReloadAmount *TypeMoney `json:"creditAutoReloadAmount,omitempty"`
 
-	// CreateTime The creation time of the batch job.
-	CreateTime *time.Time `json:"createTime,omitempty"`
+	// CreditAutoReloadThreshold The threshold at which to auto-reload the account's credit balance.
+	// Must be less than $100,000.
+	CreditAutoReloadThreshold *TypeMoney `json:"creditAutoReloadThreshold,omitempty"`
 
-	// CreatedBy The email address of the user who created this batch job.
-	CreatedBy *string `json:"createdBy,omitempty"`
+	// EnableCreditAutoReload If true, the account will auto-reload its credit balance.
+	EnableCreditAutoReload *bool   `json:"enableCreditAutoReload,omitempty"`
+	Name                   *string `json:"name,omitempty"`
 
-	// DisplayName Human-readable display name of the batch job. e.g. "My Batch Job"
-	// Must be fewer than 64 characters long.
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// EndTime The time when the batch job completed, failed, or was cancelled.
-	EndTime *time.Time `json:"endTime,omitempty"`
-
-	// EnvVars Environment variables to be passed during this job's execution.
-	EnvVars *map[string]string `json:"envVars,omitempty"`
-
-	// EnvironmentId The ID of the environment that this batch job should use. e.g. my-env
-	// If specified, image_ref must not be specified.
-	EnvironmentId *string `json:"environmentId,omitempty"`
-
-	// ImageRef The container image used by this job. If specified, environment_id and
-	// snapshot_id must not be specified.
-	ImageRef   *string `json:"imageRef,omitempty"`
-	Name       *string `json:"name,omitempty"`
-	NodePoolId string  `json:"nodePoolId"`
-
-	// NotebookExecutor Execute a notebook file.
-	NotebookExecutor *GatewayNotebookExecutor `json:"notebookExecutor,omitempty"`
-
-	// NumRanks For GPU node pools: one GPU per rank w/ host packing,
-	// for CPU node pools: one host per rank.
-	NumRanks *int32 `json:"numRanks,omitempty"`
-
-	// PythonExecutor Execute a Python process.
-	PythonExecutor *GatewayPythonExecutor `json:"pythonExecutor,omitempty"`
-
-	// Role The ARN of the AWS IAM role that the batch job should assume.
-	// If not specified, the connection will fall back to the node
-	// pool's node_role.
-	Role *string `json:"role,omitempty"`
-
-	// Shared Whether the batch job is shared with all users in the account.
-	// This allows all users to update, delete, clone, and create environments
-	// using the batch job.
-	Shared *bool `json:"shared,omitempty"`
-
-	// ShellExecutor Execute a shell script.
-	ShellExecutor *GatewayShellExecutor `json:"shellExecutor,omitempty"`
-
-	// SnapshotId The ID of the snapshot used by this batch job.
-	// If specified, environment_id must be specified and image_ref must not be
-	// specified.
-	SnapshotId *string `json:"snapshotId,omitempty"`
-
-	// StartTime The time when the batch job started running.
-	StartTime *time.Time `json:"startTime,omitempty"`
-
-	// State The current state of the batch job.
-	State *GatewayBatchJobState `json:"state,omitempty"`
-
-	// Status Detailed information about the current status of the batch job.
-	Status *string `json:"status,omitempty"`
-
-	// UpdateTime The update time for the batch job.
+	// UpdateTime The time the billing settings were last updated.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
-// GatewayBatchJobState - CREATING: The batch job is being created.
-//   - QUEUED: The batch job is in the queue and waiting to be scheduled.
+// GatewayCheckpointAvailability defines model for gatewayCheckpointAvailability.
+type GatewayCheckpointAvailability struct {
+	// AvailabilityClass - SINGLE_REGION: Stored in one Fireworks runtime region. Optimized for low-latency
+	// hotload and reattach, but not highly available across regions.
+	//  - MANAGED_DURABLE: Stored in Fireworks-managed durable storage for restore/export workflows.
+	AvailabilityClass *CheckpointAvailabilityAvailabilityClass `json:"availabilityClass,omitempty"`
+	CreateTime        *time.Time                               `json:"createTime,omitempty"`
+
+	// Region The region containing this checkpoint copy. Managed durable availability may
+	// leave this unset when the backing storage is not tied to one runtime region.
+	Region     *GatewayRegion `json:"region,omitempty"`
+	UpdateTime *time.Time     `json:"updateTime,omitempty"`
+}
+
+// GatewayCheckpointType - CHECKPOINT_TYPE_INFERENCE_BASE: Inference-ready checkpoint (full-parameter, HuggingFace format).
+// Promotable to a model for serving.
+//   - CHECKPOINT_TYPE_INFERENCE_ARC_V2: Inference-ready checkpoint (XOR delta compressed, ARC v2 format).
 //
-// Currently unused.
-//   - PENDING: The batch job scheduled and is waiting for resource allocation.
-//   - RUNNING: The batch job is running.
-//   - COMPLETED: The batch job has finished successfully.
-//   - FAILED: The batch job has failed.
-//   - CANCELLING: The batch job is being cancelled.
-//   - CANCELLED: The batch job was cancelled.
-//   - DELETING: The batch job is being deleted.
-type GatewayBatchJobState string
+// Not directly promotable.
+//   - CHECKPOINT_TYPE_INFERENCE_LORA: Inference-ready LoRA adapter checkpoint (HuggingFace PEFT format).
+//
+// Promotable to an addon model for serving.
+//   - CHECKPOINT_TYPE_TRAINING: Training checkpoint (full-parameter) with optimizer state.
+//
+// Not promotable to a model; used for training resume.
+//   - CHECKPOINT_TYPE_TRAINING_LORA: Training checkpoint from a LoRA run (adapter weights + optimizer state).
+//
+// Not promotable; used for training resume.
+type GatewayCheckpointType string
 
 // GatewayCluster defines model for gatewayCluster.
 type GatewayCluster struct {
@@ -6286,7 +7034,7 @@ type GatewayClusterConnectionInfo struct {
 	Endpoint *string `json:"endpoint,omitempty"`
 }
 
-// GatewayClusterState  - CREATING: The cluster is still being created.
+// GatewayClusterState - CREATING: The cluster is still being created.
 //   - READY: The cluster is ready to be used.
 //   - DELETING: The cluster is being deleted.
 //   - FAILED: Cluster is not operational.
@@ -6447,6 +7195,9 @@ type GatewayCodeSnippets struct {
 	Language     *string            `json:"language,omitempty"`
 }
 
+// GatewayConstantLRSchedule Constant learning rate held flat after warmup (legacy default). No decay knobs.
+type GatewayConstantLRSchedule = map[string]interface{}
+
 // GatewayConversationConfig defines model for gatewayConversationConfig.
 type GatewayConversationConfig struct {
 	// Style The chat template to use.
@@ -6457,6 +7208,29 @@ type GatewayConversationConfig struct {
 
 	// Template The Jinja template (if style is "jinja").
 	Template *string `json:"template,omitempty"`
+}
+
+// GatewayCorrelationMatrix CorrelationMatrix is a square matrix; rows[i].values[j] is the Pearson
+// correlation between labels[i] and labels[j].
+type GatewayCorrelationMatrix struct {
+	Labels *[]string                `json:"labels,omitempty"`
+	Rows   *[]GatewayCorrelationRow `json:"rows,omitempty"`
+}
+
+// GatewayCorrelationRow defines model for gatewayCorrelationRow.
+type GatewayCorrelationRow struct {
+	Values *[]float64 `json:"values,omitempty"`
+}
+
+// GatewayCosineLRSchedule Cosine annealing from the peak learning rate toward min_lr_ratio after warmup.
+type GatewayCosineLRSchedule struct {
+	// DecayRatio Fraction of total training steps over which to decay. 0 (unset) decays
+	// over the full run.
+	DecayRatio *float32 `json:"decayRatio,omitempty"`
+
+	// MinLrRatio Floor learning rate as a fraction of the peak learning rate (0.0 = decay to
+	// zero, 0.1 = decay to 10% of the peak learning rate).
+	MinLrRatio *float32 `json:"minLrRatio,omitempty"`
 }
 
 // GatewayCreditRedemption defines model for gatewayCreditRedemption.
@@ -6489,6 +7263,9 @@ type GatewayDataset struct {
 	// CreatedBy The email address of the user who initiated this fine-tuning job.
 	CreatedBy   *string `json:"createdBy,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`
+
+	// EncryptionState CMEK encryption state (authoritative, immutable, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
 
 	// EstimatedTokenCount The estimated number of tokens in the dataset.
 	EstimatedTokenCount *string                  `json:"estimatedTokenCount,omitempty"`
@@ -6543,9 +7320,7 @@ type GatewayDeployedModel struct {
 	Name        *string `json:"name,omitempty"`
 
 	// Public If true, the deployed model will be publicly reachable.
-	Public *bool `json:"public,omitempty"`
-
-	// Serverless This field is not applicable when deploying a LoRA addon and should be omitted or set to false. LoRA models require a dedicated deployment. True if the underlying deployment is managed by Fireworks.
+	Public     *bool `json:"public,omitempty"`
 	Serverless *bool `json:"serverless,omitempty"`
 
 	// State The state of the deployed model.
@@ -6595,6 +7370,12 @@ type GatewayDeployment struct {
 
 	// ActiveModelVersion The model version that is currently active and applied to running replicas of a deployment.
 	ActiveModelVersion *string `json:"activeModelVersion,omitempty"`
+
+	// Annotations Annotations to identify deployment properties.
+	// Key/value pairs may be used by external tools or other services.
+	// Customer-managed keys supplied during deployment creation must begin with "custom/"; bare keys return HTTP 403 (PERMISSION_DENIED). See [Deployment Tags](/deployments/deployment-tags) for tag management and migration guidance.
+	// Responses to regular account users include only customer-owned tags with keys under the "custom/" prefix.
+	Annotations *map[string]string `json:"annotations,omitempty"`
 
 	// AutoTune The performance profile to use for this deployment.
 	AutoTune          *GatewayAutoTune          `json:"autoTune,omitempty"`
@@ -6668,9 +7449,6 @@ type GatewayDeployment struct {
 	// EnableHotReloadLatestAddon Allows up to 1 addon at a time to be loaded, and will merge it into the base model.
 	EnableHotReloadLatestAddon *bool `json:"enableHotReloadLatestAddon,omitempty"`
 
-	// EnableMtp If true, MTP is enabled for this deployment.
-	EnableMtp *bool `json:"enableMtp,omitempty"`
-
 	// EnableSessionAffinity Whether to apply sticky routing based on `user` field.
 	// Serverless will be set to true when creating deployment.
 	EnableSessionAffinity *bool `json:"enableSessionAffinity,omitempty"`
@@ -6680,6 +7458,20 @@ type GatewayDeployment struct {
 	ExpireTime        *time.Time                   `json:"expireTime,omitempty"`
 	HotLoadBucketType *DeploymentHotLoadBucketType `json:"hotLoadBucketType,omitempty"`
 	HotLoadBucketUrl  *string                      `json:"hotLoadBucketUrl,omitempty"`
+	HotLoadTrainerJob *string                      `json:"hotLoadTrainerJob,omitempty"`
+
+	// HotLoadTransitionType Controls hot-load reload semantics for this deployment.
+	// ASYNC (default when enable_hot_load is set) pauses the generator/prefiller
+	// mid-flight and skips draining in-flight requests during hot load.
+	// SYNC drains in-flight requests before applying the new model.
+	HotLoadTransitionType *DeploymentHotLoadTransitionType `json:"hotLoadTransitionType,omitempty"`
+
+	// MaxConcurrencyPerReplica The maximum number of concurrent (in-flight) requests a single replica
+	// will accept before shedding load. Requests that arrive while a replica is
+	// already at this limit are rejected early with HTTP 429 instead of
+	// queueing — a per-replica admission gate for controlling tail latency.
+	// When unset (0), the platform default is used.
+	MaxConcurrencyPerReplica *int32 `json:"maxConcurrencyPerReplica,omitempty"`
 
 	// MaxContextLength The maximum context length supported by the model (context window).
 	// If set to 0 or not specified, the model's default maximum context length will be used.
@@ -6709,6 +7501,9 @@ type GatewayDeployment struct {
 
 	// Precision The precision with which the model should be served.
 	Precision *DeploymentPrecision `json:"precision,omitempty"`
+
+	// Preemptible When true, this deployment runs as preemptible.
+	Preemptible *bool `json:"preemptible,omitempty"`
 
 	// PricingPlanId Optional pricing plan ID for custom billing configuration.
 	// If set, this deployment will use the pricing plan's billing rules
@@ -6750,7 +7545,12 @@ type GatewayDeploymentShape struct {
 	// AcceleratorType The type of accelerator to use.
 	// If not specified, the default is NVIDIA_A100_80GB.
 	AcceleratorType *GatewayAcceleratorType `json:"acceleratorType,omitempty"`
-	BaseModel       string                  `json:"baseModel"`
+
+	// BaseModel Mutable, but only via UpdateDeploymentShape and only to a compatible model:
+	// one with the same model_type, parameter_count, and embedding status. The
+	// derived model_type / parameter_count fields (OUTPUT_ONLY, IMMUTABLE) are
+	// therefore preserved across a swap. Any incompatible change is rejected.
+	BaseModel string `json:"baseModel"`
 
 	// CreateTime The creation time of the deployment shape.
 	CreateTime *time.Time `json:"createTime,omitempty"`
@@ -6761,6 +7561,9 @@ type GatewayDeploymentShape struct {
 	// DisableDeploymentSizeValidation If true, the deployment size validation is disabled.
 	DisableDeploymentSizeValidation *bool `json:"disableDeploymentSizeValidation,omitempty"`
 
+	// DisableSpeculativeDecoding DEPRECATED: This field is a no-op. Speculative decoding is configured on deployment.
+	DisableSpeculativeDecoding *bool `json:"disableSpeculativeDecoding,omitempty"`
+
 	// DisplayName Human-readable display name of the deployment shape. e.g. "My Deployment Shape"
 	// Must be fewer than 64 characters long.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -6768,7 +7571,7 @@ type GatewayDeploymentShape struct {
 	// DraftModel The draft model name for speculative decoding. e.g. accounts/fireworks/models/my-draft-model
 	// If empty, speculative decoding using a draft model is disabled.
 	// Default is the base model's default_draft_model.
-	// this behavior.
+	// Deprecated: set default_draft_model on the base model instead.
 	DraftModel *string `json:"draftModel,omitempty"`
 
 	// DraftTokenCount The number of candidate tokens to generate per step for speculative
@@ -6777,6 +7580,7 @@ type GatewayDeploymentShape struct {
 	DraftTokenCount *int32 `json:"draftTokenCount,omitempty"`
 
 	// EnableAddons If true, LORA addons are enabled for deployments created from this shape.
+	// Deprecated: set enable_addons on the deployment instead.
 	EnableAddons *bool `json:"enableAddons,omitempty"`
 
 	// EnableSessionAffinity Whether to apply sticky routing based on `user` field.
@@ -6809,6 +7613,9 @@ type GatewayDeploymentShape struct {
 
 // GatewayDeploymentShapeVersion defines model for gatewayDeploymentShapeVersion.
 type GatewayDeploymentShapeVersion struct {
+	// Capabilities The capabilities supported by this deployment shape version.
+	Capabilities *[]DeploymentShapeVersionCapability `json:"capabilities,omitempty"`
+
 	// CreateTime The creation time of the deployment shape version. Lists will be ordered by this field.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 
@@ -6847,7 +7654,7 @@ type GatewayDeploymentShard struct {
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
-// GatewayDeploymentShardState  - CREATING: The deployment shard is still being created.
+// GatewayDeploymentShardState - CREATING: The deployment shard is still being created.
 //   - READY: The deployment shard is ready to be used.
 //   - DELETING: The deployment shard is being deleted.
 //   - FAILED: The deployment shard failed to be created. See the `status` field for
@@ -6856,7 +7663,7 @@ type GatewayDeploymentShard struct {
 //   - UPDATING: There are in-progress updates happening with the deployment shard.
 type GatewayDeploymentShardState string
 
-// GatewayDeploymentState  - CREATING: The deployment is still being created.
+// GatewayDeploymentState - CREATING: The deployment is still being created.
 //   - READY: The deployment is ready to be used.
 //   - DELETING: The deployment is being deleted.
 //   - FAILED: The deployment failed to be created. See the `status` field for
@@ -6866,8 +7673,87 @@ type GatewayDeploymentShardState string
 //   - DELETED: The deployment is soft-deleted.
 type GatewayDeploymentState string
 
+// GatewayDeveloperPass defines model for gatewayDeveloperPass.
+type GatewayDeveloperPass struct {
+	Annotations *GatewayDeveloperPassAnnotation `json:"annotations,omitempty"`
+
+	// AutoRenew Whether the developer pass will automatically renew upon expiry.
+	AutoRenew *bool `json:"autoRenew,omitempty"`
+
+	// CreateTime Creation timestamp.
+	CreateTime *time.Time `json:"createTime,omitempty"`
+
+	// EndTime The time at which the developer pass ends.
+	EndTime *time.Time `json:"endTime,omitempty"`
+
+	// LastRenewTime The time at which the developer pass was last renewed.
+	LastRenewTime *time.Time                 `json:"lastRenewTime,omitempty"`
+	Name          *string                    `json:"name,omitempty"`
+	State         *GatewayDeveloperPassState `json:"state,omitempty"`
+
+	// StatusMessage Additional context for the current state, such as a payment decline reason.
+	StatusMessage *string `json:"statusMessage,omitempty"`
+
+	// UpdateTime Last update timestamp.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Version The version of developer pass (V1 = weekly, V2 = monthly).
+	Version *DeveloperPassVersion `json:"version,omitempty"`
+}
+
+// GatewayDeveloperPassAnnotation defines model for gatewayDeveloperPassAnnotation.
+type GatewayDeveloperPassAnnotation struct {
+	// PromoCreditCode User-facing promo code that created this pass.
+	PromoCreditCode *string `json:"promoCreditCode,omitempty"`
+
+	// RequestedVersion Target version for a pending v1 -> v2 upgrade.
+	RequestedVersion *DeveloperPassVersion `json:"requestedVersion,omitempty"`
+}
+
+// GatewayDeveloperPassState defines model for gatewayDeveloperPassState.
+type GatewayDeveloperPassState string
+
 // GatewayDirectRouteType defines model for gatewayDirectRouteType.
 type GatewayDirectRouteType string
+
+// GatewayDistributionBucket DistributionBucket holds a per-metric histogram + summary stats over a
+// single chunk's worth of samples.
+type GatewayDistributionBucket struct {
+	Average *float64 `json:"average,omitempty"`
+
+	// DistributionBins Upper-edge values of the histogram bins.
+	DistributionBins *[]float64 `json:"distributionBins,omitempty"`
+
+	// DistributionCounts Per-bin sample counts; len == len(distribution_bins) - 1.
+	DistributionCounts *[]string `json:"distributionCounts,omitempty"`
+	FailureCount       *string   `json:"failureCount,omitempty"`
+	Median             *float64  `json:"median,omitempty"`
+
+	// SuccessCount Booleans like "format_valid" project into success/failure counts.
+	SuccessCount *string `json:"successCount,omitempty"`
+}
+
+// GatewayDistributionSnapshot defines model for gatewayDistributionSnapshot.
+type GatewayDistributionSnapshot struct {
+	// Correlation CorrelationMatrix is a square matrix; rows[i].values[j] is the Pearson
+	// correlation between labels[i] and labels[j].
+	Correlation *GatewayCorrelationMatrix `json:"correlation,omitempty"`
+
+	// Metrics Keyed by metric name (e.g. "reward", "format_valid").
+	Metrics *map[string]GatewayDistributionBucket `json:"metrics,omitempty"`
+}
+
+// GatewayDpoConfig Hyperparameters for Direct Preference Optimization (DPO) training.
+type GatewayDpoConfig struct {
+	// Beta DPO temperature parameter (beta in the paper). Must be > 0 and < 0.5.
+	Beta *float32 `json:"beta,omitempty"`
+
+	// RefCacheBatchSize Number of preference pairs per reference forward call during caching.
+	RefCacheBatchSize *int32 `json:"refCacheBatchSize,omitempty"`
+
+	// RefCacheConcurrency Max concurrent reference forward passes during cache warm-up.
+	RefCacheConcurrency *int32 `json:"refCacheConcurrency,omitempty"`
+}
 
 // GatewayDpoJob defines model for gatewayDpoJob.
 type GatewayDpoJob struct {
@@ -6892,9 +7778,17 @@ type GatewayDpoJob struct {
 	LossConfig *GatewayReinforcementLearningLossConfig `json:"lossConfig,omitempty"`
 	Name       *string                                 `json:"name,omitempty"`
 
+	// Purpose Scheduling purpose for this job.
+	Purpose *GatewayPurpose `json:"purpose,omitempty"`
+
 	// State JobState represents the state an asynchronous job can be in.
 	//
 	//  - JOB_STATE_PAUSED: Job is paused, typically due to account suspension or manual intervention.
+	//  - JOB_STATE_DELETED: Job has been deleted.
+	//  - JOB_STATE_ARCHIVED: User-facing state for jobs whose row is retained post-delete (e.g. RLOR
+	// trainers within the checkpoint retention window). The internal row is
+	// still in JOB_STATE_DELETED; the gateway translates it to ARCHIVED on
+	// public responses.
 	State  *GatewayJobState `json:"state,omitempty"`
 	Status *GatewayStatus   `json:"status,omitempty"`
 
@@ -6904,6 +7798,9 @@ type GatewayDpoJob struct {
 
 	// TrainingConfig Common training configurations.
 	TrainingConfig *GatewayBaseTrainingConfig `json:"trainingConfig,omitempty"`
+
+	// UseReservation Whether to try the account's reservation capacity before falling back to shared trainer capacity.
+	UseReservation *bool `json:"useReservation,omitempty"`
 
 	// WandbConfig The Weights & Biases team/user account for logging job progress.
 	WandbConfig *GatewayWandbConfig `json:"wandbConfig,omitempty"`
@@ -6941,114 +7838,18 @@ type GatewayEksCluster struct {
 	WorkloadIdentityPoolProviderId *string `json:"workloadIdentityPoolProviderId,omitempty"`
 }
 
-// GatewayEksNodePool defines model for gatewayEksNodePool.
-type GatewayEksNodePool struct {
-	// InstanceType The type of instance used in this node pool. See https://aws.amazon.com/ec2/instance-types/
-	// for a list of valid instance types.
-	InstanceType string `json:"instanceType"`
-
-	// LaunchTemplate Launch template to create for this node group.
-	LaunchTemplate *string `json:"launchTemplate,omitempty"`
-
-	// NodeGroupName The name of the node group.
-	// If not specified, the default is the node pool ID.
-	NodeGroupName *string `json:"nodeGroupName,omitempty"`
-
-	// NodeRole If not specified, the parent cluster's system_node_group_role
-	// will be used.
-	NodeRole *string `json:"nodeRole,omitempty"`
-
-	// PlacementGroup Cluster placement group to colocate hosts in this pool.
-	PlacementGroup *string `json:"placementGroup,omitempty"`
-	Spot           *bool   `json:"spot,omitempty"`
-
-	// SubnetIds A list of subnet IDs for nodes in this node pool.
-	// If not specified, the parent cluster's default subnet IDs that matches the zone
-	// will be used. Note that all the subnets will need to be in the same zone.
-	SubnetIds *[]string `json:"subnetIds,omitempty"`
-
-	// Zone Zone for the node pool.
-	// If not specified, a random zone in the cluster's region will be selected.
-	Zone *string `json:"zone,omitempty"`
-}
-
-// GatewayEnvironment defines model for gatewayEnvironment.
-type GatewayEnvironment struct {
-	// Annotations Arbitrary, user-specified metadata.
-	// Keys and values must adhere to Kubernetes constraints: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
-	// Additionally, the "fireworks.ai/" prefix is reserved.
-	Annotations *map[string]string `json:"annotations,omitempty"`
-
-	// BaseImageRef The URI of the base container image used for this environment.
-	BaseImageRef *string `json:"baseImageRef,omitempty"`
-
-	// Connection Information about the current environment connection.
-	Connection *GatewayEnvironmentConnection `json:"connection,omitempty"`
-
-	// CreateTime The creation time of the environment.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// CreatedBy The email address of the user who created this environment.
-	CreatedBy   *string `json:"createdBy,omitempty"`
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// ImageRef The URI of the container image used for this environment. This is a
-	// image is an immutable snapshot of the base_image_ref when the environment
-	// was created.
-	ImageRef *string `json:"imageRef,omitempty"`
-	Name     *string `json:"name,omitempty"`
-
-	// Shared Whether the environment is shared with all users in the account.
-	// This allows all users to connect, disconnect, update, delete, clone, and
-	// create batch jobs using the environment.
-	Shared *bool `json:"shared,omitempty"`
-
-	// SnapshotImageRef The URI of the latest container image snapshot for this environment.
-	SnapshotImageRef *string `json:"snapshotImageRef,omitempty"`
-
-	// State The current state of the environment.
-	State *GatewayEnvironmentState `json:"state,omitempty"`
-
-	// Status The current error status of the environment.
-	Status *GatewayStatus `json:"status,omitempty"`
-
-	// UpdateTime The update time for the environment.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-}
-
-// GatewayEnvironmentConnection defines model for gatewayEnvironmentConnection.
-type GatewayEnvironmentConnection struct {
-	// NodePoolId The resource id of the node pool the environment is connected to.
-	NodePoolId string `json:"nodePoolId"`
-
-	// NumRanks For GPU node pools: one GPU per rank w/ host packing,
-	// for CPU node pools: one host per rank.
-	// If not specified, the default is 1.
-	NumRanks *int32 `json:"numRanks,omitempty"`
-
-	// Role The ARN of the AWS IAM role that the connection should assume.
-	// If not specified, the connection will fall back to the node
-	// pool's node_role.
-	Role *string `json:"role,omitempty"`
-
-	// UseLocalStorage If true, the node's local storage will be mounted on /tmp. This flag has
-	// no effect if the node does not have local storage.
-	UseLocalStorage *bool `json:"useLocalStorage,omitempty"`
-
-	// Zone Current for the last zone that this environment is connected to. We
-	// want to warn the users about cross zone migration latency when they are
-	// connecting to node pool in a different zone as their persistent volume.
-	Zone *string `json:"zone,omitempty"`
-}
-
-// GatewayEnvironmentState - CREATING: The environment is being created.
-//   - DISCONNECTED: The environment is not connected.
-//   - CONNECTING: The environment is being connected to a node.
-//   - CONNECTED: The environment is connected to a node.
-//   - DISCONNECTING: The environment is being disconnected from a node.
-//   - RECONNECTING: The environment is reconnecting with new connection parameters.
-//   - DELETING: The environment is being deleted.
-type GatewayEnvironmentState string
+// GatewayEncryptionState EncryptionState is the authoritative, per-resource CMEK marker: the single
+// source of truth for whether a resource's customer-data artifacts are
+// encrypted. It is stamped at resource creation from the owning account's CMEK
+// config and is immutable for the resource's life, so a resource always reads
+// back with the state it was created under regardless of the account's current
+// flag. The encrypt-on-write / decrypt-on-read decision for the resource's
+// data keys off this field.
+//
+//   - ENCRYPTION_STATE_UNSPECIFIED: Unstamped/legacy rows that predate CMEK. Treated as PLAINTEXT.
+//   - ENCRYPTION_STATE_PLAINTEXT: Customer-data artifacts are stored as plaintext (Fireworks-owned, no CMEK).
+//   - ENCRYPTION_STATE_CMEK: Customer-data artifacts are CMEK-encrypted; reads MUST decrypt (fail-closed).
+type GatewayEncryptionState string
 
 // GatewayEstimateSupervisedFineTuningJobCostResponse defines model for gatewayEstimateSupervisedFineTuningJobCostResponse.
 type GatewayEstimateSupervisedFineTuningJobCostResponse struct {
@@ -7112,6 +7913,11 @@ type GatewayEvaluationJob struct {
 	// State JobState represents the state an asynchronous job can be in.
 	//
 	//  - JOB_STATE_PAUSED: Job is paused, typically due to account suspension or manual intervention.
+	//  - JOB_STATE_DELETED: Job has been deleted.
+	//  - JOB_STATE_ARCHIVED: User-facing state for jobs whose row is retained post-delete (e.g. RLOR
+	// trainers within the checkpoint retention window). The internal row is
+	// still in JOB_STATE_DELETED; the gateway translates it to ARCHIVED on
+	// public responses.
 	State  *GatewayJobState `json:"state,omitempty"`
 	Status *GatewayStatus   `json:"status,omitempty"`
 
@@ -7133,24 +7939,18 @@ type GatewayEvaluator struct {
 	DefaultDataset *string             `json:"defaultDataset,omitempty"`
 	Description    *string             `json:"description,omitempty"`
 	DisplayName    *string             `json:"displayName,omitempty"`
-	EntryPoint     *string             `json:"entryPoint,omitempty"`
-	Name           *string             `json:"name,omitempty"`
-	Requirements   *string             `json:"requirements,omitempty"`
+
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
+	EntryPoint      *string                 `json:"entryPoint,omitempty"`
+	Name            *string                 `json:"name,omitempty"`
+	Requirements    *string                 `json:"requirements,omitempty"`
 
 	// Source Source information for the evaluator codebase.
-	Source     *GatewayEvaluatorSource `json:"source,omitempty"`
-	State      *GatewayEvaluatorState  `json:"state,omitempty"`
-	Status     *GatewayStatus          `json:"status,omitempty"`
-	UpdateTime *time.Time              `json:"updateTime,omitempty"`
-}
-
-// GatewayEvaluatorSource defines model for gatewayEvaluatorSource.
-type GatewayEvaluatorSource struct {
-	// GithubRepositoryName Normalized GitHub repository name (e.g. owner/repository) when the source is GitHub.
-	GithubRepositoryName *string `json:"githubRepositoryName,omitempty"`
-
-	// Type Identifies how the evaluator source code is provided.
-	Type *EvaluatorSourceType `json:"type,omitempty"`
+	Source     *EvaluatorSource       `json:"source,omitempty"`
+	State      *GatewayEvaluatorState `json:"state,omitempty"`
+	Status     *GatewayStatus         `json:"status,omitempty"`
+	UpdateTime *time.Time             `json:"updateTime,omitempty"`
 }
 
 // GatewayEvaluatorState defines model for gatewayEvaluatorState.
@@ -7175,6 +7975,39 @@ type GatewayEvaluatorVersion struct {
 // the deployments as much as possible.
 type GatewayEvenLoadStrategy = map[string]interface{}
 
+// GatewayExternalKey ExternalKey is an account-level, customer-managed KMS key registration for
+// CMEK envelope encryption. It is a collection — an account may
+// hold several keys at once — with exactly one marked primary. The primary
+// wraps newly minted DEKs; older keys stay active so data wrapped under them
+// still decrypts (the rotation/migration story is inherently multi-key). The
+// whole resource is Fireworks-operator (superuser) managed.
+//
+// Fireworks reaches the customer KMS as a single shared Google OIDC identity
+// (a global per-env subject), scoped per account by minting tokens with
+// aud = account_id, pinned in the customer's own KMS trust. So these configs
+// carry identity *references* only — never long-lived secrets — and Fireworks
+// provisions nothing per account.
+type GatewayExternalKey struct {
+	// CreateTime Creation timestamp.
+	CreateTime *time.Time `json:"createTime,omitempty"`
+
+	// DisplayName Display name for the external key.
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+
+	// State Current state of the external key.
+	State *GatewayExternalKeyState `json:"state,omitempty"`
+
+	// Status Contains information about the external key status.
+	Status *GatewayStatus `json:"status,omitempty"`
+
+	// UpdateTime Last update timestamp.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayExternalKeyState State of the external key.
+type GatewayExternalKeyState string
+
 // GatewayFakeCluster defines model for gatewayFakeCluster.
 type GatewayFakeCluster struct {
 	ClusterName *string `json:"clusterName,omitempty"`
@@ -7182,83 +8015,389 @@ type GatewayFakeCluster struct {
 	ProjectId   *string `json:"projectId,omitempty"`
 }
 
-// GatewayFakeNodePool A fake node pool to be used with FakeCluster.
-type GatewayFakeNodePool struct {
-	MachineType    *string `json:"machineType,omitempty"`
-	NumNodes       *int32  `json:"numNodes,omitempty"`
-	ServiceAccount *string `json:"serviceAccount,omitempty"`
+// GatewayGatewayAbortTrainingRunMaterializationBody defines model for gatewayGatewayAbortTrainingRunMaterializationBody.
+type GatewayGatewayAbortTrainingRunMaterializationBody struct {
+	// Status Failure reason to persist on the run. If omitted, the server uses
+	// UNAVAILABLE with a generic materialization failure message.
+	Status *GatewayStatus `json:"status,omitempty"`
 }
 
-// GatewayGenericDeployment defines model for gatewayGenericDeployment.
-type GatewayGenericDeployment struct {
-	// CreateTime The creation time of the generic deployment.
-	CreateTime            *time.Time `json:"createTime,omitempty"`
-	GenericDeploymentType string     `json:"genericDeploymentType"`
-	Name                  *string    `json:"name,omitempty"`
-
-	// Placement The desired geographic region where the deployment must be placed. Exactly one field will be
-	// specified.
-	Placement     GatewayPlacement       `json:"placement"`
-	ReleaseValues map[string]interface{} `json:"releaseValues"`
-
-	// State  - CREATING: The deployment is still being created.
-	//  - READY: The deployment is ready to be used.
-	//  - FAILED: The deployment failed to be created.
-	//  - UPDATING: There are in-progress updates happening with the deployment.
-	//  - DELETING: The deployment is being deleted
-	//  - DELETED: The deployment has been deleted.
-	State *GatewayGenericDeploymentState `json:"state,omitempty"`
-
-	// UpdateTime The update time for the generic deployment.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
+// GatewayGatewayAliasEvaluatorVersionBody Assigns or updates a user-specified alias for a given revision.
+type GatewayGatewayAliasEvaluatorVersionBody struct {
+	// AliasId The alias ID (e.g., "current", a semver tag, etc.).
+	AliasId string `json:"aliasId"`
 }
 
-// GatewayGenericDeploymentState  - CREATING: The deployment is still being created.
-//   - READY: The deployment is ready to be used.
-//   - FAILED: The deployment failed to be created.
-//   - UPDATING: There are in-progress updates happening with the deployment.
-//   - DELETING: The deployment is being deleted
-//   - DELETED: The deployment has been deleted.
-type GatewayGenericDeploymentState string
+// GatewayGatewayApproveUserUsageLimitIncreaseRequestBody defines model for gatewayGatewayApproveUserUsageLimitIncreaseRequestBody.
+type GatewayGatewayApproveUserUsageLimitIncreaseRequestBody = map[string]interface{}
 
-// GatewayGenericDeploymentType defines model for gatewayGenericDeploymentType.
-type GatewayGenericDeploymentType struct {
-	// CreateTime The creation time of the generic deployment type.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-	ImageTag   *string    `json:"imageTag,omitempty"`
+// GatewayGatewayCancelDpoJobBody defines model for gatewayGatewayCancelDpoJobBody.
+type GatewayGatewayCancelDpoJobBody = map[string]interface{}
 
-	// Name The resource name of the generic deployment type.
-	Name *string `json:"name,omitempty"`
+// GatewayGatewayCancelReinforcementFineTuningJobBody defines model for gatewayGatewayCancelReinforcementFineTuningJobBody.
+type GatewayGatewayCancelReinforcementFineTuningJobBody = map[string]interface{}
 
-	// UpdateTime The update time for the generic deployment type.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
+// GatewayGatewayCancelRlorTrainerJobBody defines model for gatewayGatewayCancelRlorTrainerJobBody.
+type GatewayGatewayCancelRlorTrainerJobBody = map[string]interface{}
+
+// GatewayGatewayCancelSupervisedFineTuningJobBody defines model for gatewayGatewayCancelSupervisedFineTuningJobBody.
+type GatewayGatewayCancelSupervisedFineTuningJobBody = map[string]interface{}
+
+// GatewayGatewayCreateApiKeyBody defines model for gatewayGatewayCreateApiKeyBody.
+type GatewayGatewayCreateApiKeyBody struct {
+	// ApiKey The API key to be created.
+	ApiKey GatewayApiKey `json:"apiKey"`
 }
 
-// GatewayGenericDeploymentTypeVersion defines model for gatewayGenericDeploymentTypeVersion.
-type GatewayGenericDeploymentTypeVersion struct {
-	// CreateTime The creation time of the generic deployment type version. Lists will be ordered by this field.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-	Name       *string    `json:"name,omitempty"`
+// GatewayGatewayCreateClusterBody defines model for gatewayGatewayCreateClusterBody.
+type GatewayGatewayCreateClusterBody struct {
+	// Cluster The properties of the cluster being created.
+	Cluster   GatewayCluster `json:"cluster"`
+	ClusterId string         `json:"clusterId"`
+}
 
-	// Snapshot Full snapshot of the GenericDeploymentType at this version.
-	Snapshot *GatewayGenericDeploymentType `json:"snapshot,omitempty"`
+// GatewayGatewayCreateDatasetBody defines model for gatewayGatewayCreateDatasetBody.
+type GatewayGatewayCreateDatasetBody struct {
+	Dataset         GatewayDataset `json:"dataset"`
+	DatasetId       string         `json:"datasetId"`
+	Filter          *string        `json:"filter,omitempty"`
+	SourceDatasetId *string        `json:"sourceDatasetId,omitempty"`
+}
+
+// GatewayGatewayCreateEvaluationBody defines model for gatewayGatewayCreateEvaluationBody.
+type GatewayGatewayCreateEvaluationBody struct {
+	Evaluation   GatewayEvaluation `json:"evaluation"`
+	EvaluationId *string           `json:"evaluationId,omitempty"`
+}
+
+// GatewayGatewayCreateEvaluationJobBody defines model for gatewayGatewayCreateEvaluationJobBody.
+type GatewayGatewayCreateEvaluationJobBody struct {
+	EvaluationJob   GatewayEvaluationJob `json:"evaluationJob"`
+	EvaluationJobId *string              `json:"evaluationJobId,omitempty"`
+}
+
+// GatewayGatewayCreateEvaluatorBody defines model for gatewayGatewayCreateEvaluatorBody.
+type GatewayGatewayCreateEvaluatorBody struct {
+	Evaluator   GatewayEvaluator `json:"evaluator"`
+	EvaluatorId *string          `json:"evaluatorId,omitempty"`
+}
+
+// GatewayGatewayCreateEvaluatorV2Body defines model for gatewayGatewayCreateEvaluatorV2Body.
+type GatewayGatewayCreateEvaluatorV2Body struct {
+	Evaluator   GatewayEvaluator `json:"evaluator"`
+	EvaluatorId *string          `json:"evaluatorId,omitempty"`
+}
+
+// GatewayGatewayCreateModelBody defines model for gatewayGatewayCreateModelBody.
+type GatewayGatewayCreateModelBody struct {
+	// Cluster The resource name of the BYOC cluster to which this model belongs.
+	// e.g. accounts/my-account/clusters/my-cluster. Empty if it belongs to
+	// a Fireworks cluster.
+	Cluster *string `json:"cluster,omitempty"`
+
+	// Model The properties of the Model being created.
+	Model *GatewayModel `json:"model,omitempty"`
+
+	// ModelId ID of the model.
+	ModelId string `json:"modelId"`
+}
+
+// GatewayGatewayDebugReinforcementFineTuningJobBody defines model for gatewayGatewayDebugReinforcementFineTuningJobBody.
+type GatewayGatewayDebugReinforcementFineTuningJobBody = map[string]interface{}
+
+// GatewayGatewayDeleteApiKeyBody defines model for gatewayGatewayDeleteApiKeyBody.
+type GatewayGatewayDeleteApiKeyBody struct {
+	// KeyId The key ID for the API key.
+	KeyId string `json:"keyId"`
+}
+
+// GatewayGatewayDeployModelVersionBody defines model for gatewayGatewayDeployModelVersionBody.
+type GatewayGatewayDeployModelVersionBody struct {
+	Deployment string `json:"deployment"`
+
+	// RolloutStrategy The rollout strategy to use when deploying the model version.
+	//
+	//  - ROLLOUT_STRATEGY_STANDARD: Standard rollout strategy updates the deployment using a normal k8s rolling restart
+	//  - ROLLOUT_STRATEGY_HOT_RELOAD: Hot reload rollout strategy updates the deployment by hot reloading the model version on the existing replicas of the deployment
+	RolloutStrategy GatewayRolloutStrategy `json:"rolloutStrategy"`
+}
+
+// GatewayGatewayFinalizeTrainingRunMaterializationBody defines model for gatewayGatewayFinalizeTrainingRunMaterializationBody.
+type GatewayGatewayFinalizeTrainingRunMaterializationBody struct {
+	// ModelId Trainer-returned model id. Must be run-scoped, e.g. "{run_id}:train:0".
+	ModelId string `json:"modelId"`
+}
+
+// GatewayGatewayGetDatasetUploadEndpointBody defines model for gatewayGatewayGetDatasetUploadEndpointBody.
+type GatewayGatewayGetDatasetUploadEndpointBody struct {
+	// FilenameToSize A mapping from the file name to its size in bytes.
+	FilenameToSize map[string]string `json:"filenameToSize"`
+
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `json:"readMask,omitempty"`
+}
+
+// GatewayGatewayGetEvaluatorUploadEndpointBody defines model for gatewayGatewayGetEvaluatorUploadEndpointBody.
+type GatewayGatewayGetEvaluatorUploadEndpointBody struct {
+	FilenameToSize map[string]string `json:"filenameToSize"`
+	ReadMask       *string           `json:"readMask,omitempty"`
+}
+
+// GatewayGatewayGetModelUploadEndpointBody defines model for gatewayGatewayGetModelUploadEndpointBody.
+type GatewayGatewayGetModelUploadEndpointBody struct {
+	// EnableResumableUpload If true, enable resumable upload instead of PUT.
+	EnableResumableUpload *bool `json:"enableResumableUpload,omitempty"`
+
+	// FilenameToSize A mapping from the file name to its size in bytes.
+	FilenameToSize map[string]string `json:"filenameToSize"`
+
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `json:"readMask,omitempty"`
+}
+
+// GatewayGatewayImportModelBody defines model for gatewayGatewayImportModelBody.
+type GatewayGatewayImportModelBody struct {
+	// AwsS3Source AWS S3 source details.
+	// Must be set when importing from AWS S3.
+	AwsS3Source *GatewayAwsS3ModelSource `json:"awsS3Source,omitempty"`
+
+	// AzureBlobSource Azure Blob Storage source details.
+	// Must be set when importing from Azure Blob Storage.
+	AzureBlobSource *GatewayAzureBlobModelSource `json:"azureBlobSource,omitempty"`
+}
+
+// GatewayGatewayLoadTrainingSessionStateBody LoadTrainingSessionState loads/switches the LoRA adapter on a
+// session. The `Execute*` prefix is the Fireworks-internal convention for
+// side-effecting state transitions on an existing resource (vs. AIP-136's
+// `LoadStateTrainingSession`); we keep it for repo-wide consistency.
+type GatewayGatewayLoadTrainingSessionStateBody struct {
+	// Path Adapter checkpoint path to load into the training session.
+	Path string `json:"path"`
+}
+
+// GatewayGatewayLogTrainingSessionMetricsBody defines model for gatewayGatewayLogTrainingSessionMetricsBody.
+type GatewayGatewayLogTrainingSessionMetricsBody struct {
+	// Points Batch of metric observations. Server caps the per-request batch size to
+	// bound upsert statement parameter count.
+	Points []GatewayMetricPoint `json:"points"`
+}
+
+// GatewayGatewayMatchDeploymentShapeVersionsBody defines model for gatewayGatewayMatchDeploymentShapeVersionsBody.
+type GatewayGatewayMatchDeploymentShapeVersionsBody struct {
+	// CreateDeploymentRequest The deployment create request to match deployment shape versions for. The full CreateDeploymentRequest schema is accepted here — including fields like `deployment.enableAddons` that affect shape compatibility — only the most common fields are listed below. See the Create Deployment reference page for the complete request schema.
+	CreateDeploymentRequest struct {
+		// Deployment The properties of the deployment being created.
+		Deployment *struct {
+			// BaseModel The base model the deployment will serve.
+			BaseModel *string `json:"baseModel,omitempty"`
+
+			// EnableAddons If true, the deployment can serve LoRA addons. When set, only shapes with the MULTI_LORA capability are returned.
+			EnableAddons *bool `json:"enableAddons,omitempty"`
+		} `json:"deployment,omitempty"`
+	} `json:"createDeploymentRequest"`
+}
+
+// GatewayGatewayPrepareModelBody defines model for gatewayGatewayPrepareModelBody.
+type GatewayGatewayPrepareModelBody struct {
+	// Abort If true, abort an active prepare job and clear prepare tracking state.
+	// No new prepare job is launched in this request.
+	Abort *bool `json:"abort,omitempty"`
+
+	// AcceleratorCount Number of accelerators (GPUs) to use for quantization. Defaults to 8 if unset.
+	AcceleratorCount *int32               `json:"acceleratorCount,omitempty"`
+	Precision        *DeploymentPrecision `json:"precision,omitempty"`
+	ReadMask         *string              `json:"readMask,omitempty"`
+}
+
+// GatewayGatewayPreviewEvaluationBody defines model for gatewayGatewayPreviewEvaluationBody.
+type GatewayGatewayPreviewEvaluationBody struct {
+	MaxSamples *int32 `json:"maxSamples,omitempty"`
+	SampleData string `json:"sampleData"`
+}
+
+// GatewayGatewayPreviewEvaluatorBody defines model for gatewayGatewayPreviewEvaluatorBody.
+type GatewayGatewayPreviewEvaluatorBody struct {
+	Evaluator  GatewayEvaluator `json:"evaluator"`
+	MaxSamples *int32           `json:"maxSamples,omitempty"`
+	SampleData []string         `json:"sampleData"`
+}
+
+// GatewayGatewayPromoteCheckpointBody Promote a checkpoint to a model. Pass the `name` returned by
+// ListRlorTrainerJobCheckpoints verbatim; the server parses the trainer id
+// out of the resource name and reads the trainer's stored hot_load_bucket_url
+// — the same authoritative source the list endpoint uses — to locate the
+// checkpoint in GCS. Callers do NOT need to pass `trainer_job_id` or
+// `hot_load_deployment_id` when `name` is the nested form.
+type GatewayGatewayPromoteCheckpointBody struct {
+	// AsyncPromotion Optional request-level opt-in for long-running checkpoint promotion.
+	// When false or unset, the server preserves the legacy synchronous response
+	// shape and returns `model`. When true, the server may return `operation`;
+	// callers must poll GetOperation until completion and read the promoted
+	// model from the operation response.
+	AsyncPromotion      *bool   `json:"asyncPromotion,omitempty"`
+	BaseModel           string  `json:"baseModel"`
+	HotLoadDeploymentId *string `json:"hotLoadDeploymentId,omitempty"`
+	OutputModel         string  `json:"outputModel"`
+	TrainerJobId        *string `json:"trainerJobId,omitempty"`
+}
+
+// GatewayGatewayPromoteTrainingSessionCheckpointBody defines model for gatewayGatewayPromoteTrainingSessionCheckpointBody.
+type GatewayGatewayPromoteTrainingSessionCheckpointBody struct {
+	// BaseModel Base Model resource name the training run started from.
+	BaseModel string `json:"baseModel"`
+
+	// OutputModel Output Model resource name (accounts/{a}/models/{m}); the account must
+	// match the checkpoint's account.
+	OutputModel string `json:"outputModel"`
+}
+
+// GatewayGatewayQueryUsageCostsBody Request for grouped usage cost subtotals over a time range.
+type GatewayGatewayQueryUsageCostsBody struct {
+	// EndTime Exclusive upper bound for usage event timestamps.
+	EndTime *time.Time `json:"endTime,omitempty"`
+
+	// Filter Optional exact-match filters. All populated fields are ANDed.
+	Filter *GatewayUsageCostFilter `json:"filter,omitempty"`
+
+	// GroupBy Dimensions to group by. At most two dimensions may be combined. HOUR and
+	// DAY are mutually exclusive. SESSION is intentionally filter-only to
+	// prevent high-cardinality enumeration.
+	GroupBy *[]QueryUsageCostsRequestDimension `json:"groupBy,omitempty"`
+
+	// PageSize For paginated queries, the maximum number of grouped values to return. A
+	// page can contain more rows when each value spans multiple time buckets.
+	// Zero uses the server default; values above the maximum are clamped.
+	PageSize *int32 `json:"pageSize,omitempty"`
+
+	// PageToken Opaque token from a previous response. Set this to retrieve the next page
+	// while keeping all other request fields unchanged.
+	PageToken *string `json:"pageToken,omitempty"`
+
+	// Scope ACCOUNT requires account administrator access. SELF derives the user ID
+	// from the authenticated principal.
+	Scope *GatewayQueryUsageCostsRequestScope `json:"scope,omitempty"`
+
+	// StartTime Inclusive lower bound for usage event timestamps.
+	StartTime *time.Time `json:"startTime,omitempty"`
+}
+
+// GatewayGatewayRejectUserUsageLimitIncreaseRequestBody defines model for gatewayGatewayRejectUserUsageLimitIncreaseRequestBody.
+type GatewayGatewayRejectUserUsageLimitIncreaseRequestBody = map[string]interface{}
+
+// GatewayGatewayResumeDpoJobBody defines model for gatewayGatewayResumeDpoJobBody.
+type GatewayGatewayResumeDpoJobBody = map[string]interface{}
+
+// GatewayGatewayResumeReinforcementFineTuningJobBody defines model for gatewayGatewayResumeReinforcementFineTuningJobBody.
+type GatewayGatewayResumeReinforcementFineTuningJobBody = map[string]interface{}
+
+// GatewayGatewayResumeRlorTrainerJobBody defines model for gatewayGatewayResumeRlorTrainerJobBody.
+type GatewayGatewayResumeRlorTrainerJobBody = map[string]interface{}
+
+// GatewayGatewayResumeSupervisedFineTuningJobBody defines model for gatewayGatewayResumeSupervisedFineTuningJobBody.
+type GatewayGatewayResumeSupervisedFineTuningJobBody = map[string]interface{}
+
+// GatewayGatewayRollbackEvaluatorBody Rolls an evaluator back to the configuration captured by a specific revision.
+type GatewayGatewayRollbackEvaluatorBody = map[string]interface{}
+
+// GatewayGatewayScaleDeploymentBody defines model for gatewayGatewayScaleDeploymentBody.
+type GatewayGatewayScaleDeploymentBody struct {
+	// ReplicaCount The desired number of replicas.
+	ReplicaCount *int32 `json:"replicaCount,omitempty"`
+}
+
+// GatewayGatewaySplitDatasetBody defines model for gatewayGatewaySplitDatasetBody.
+type GatewayGatewaySplitDatasetBody struct {
+	ChunkSize *int32 `json:"chunkSize,omitempty"`
+
+	// Parent The parent account ID of the requester.
+	Parent *string `json:"parent,omitempty"`
+}
+
+// GatewayGatewaySyncRlorTrainerJobCheckpointBody defines model for gatewayGatewaySyncRlorTrainerJobCheckpointBody.
+type GatewayGatewaySyncRlorTrainerJobCheckpointBody struct {
+	// Region Runtime region for the SINGLE_REGION side of the sync.
+	//
+	// If target_availability is MANAGED_DURABLE, this is the source region that
+	// already contains the checkpoint. If target_availability is SINGLE_REGION,
+	// this is the destination region that should receive a runtime-local copy.
+	// If unset, the trainer job's configured region is used.
+	Region *GatewayRegion `json:"region,omitempty"`
+
+	// TargetAvailability Target storage availability to ensure.
+	//
+	// If unset or AVAILABILITY_CLASS_UNSPECIFIED, the server treats this as
+	// MANAGED_DURABLE: it ensures a durable managed copy exists, using `region`
+	// as the source runtime region or the trainer job's configured region when
+	// `region` is also unset. Set SINGLE_REGION to explicitly stage a durable
+	// checkpoint into `region` before restoring there.
+	//
+	// The operation is idempotent: if the requested target availability already
+	// exists, the server returns the checkpoint with its current availability.
+	TargetAvailability *CheckpointAvailabilityAvailabilityClass `json:"targetAvailability,omitempty"`
+}
+
+// GatewayGatewayTestEvaluationBody defines model for gatewayGatewayTestEvaluationBody.
+type GatewayGatewayTestEvaluationBody struct {
+	Evaluation GatewayEvaluation `json:"evaluation"`
+	SampleData string            `json:"sampleData"`
+}
+
+// GatewayGatewayUndeleteDeploymentBody defines model for gatewayGatewayUndeleteDeploymentBody.
+type GatewayGatewayUndeleteDeploymentBody = map[string]interface{}
+
+// GatewayGatewayValidateAssertionsBody Validate the code assertions. Recommended before creating the evaluation.
+type GatewayGatewayValidateAssertionsBody struct {
+	Assertions []GatewayAssertion `json:"assertions"`
+}
+
+// GatewayGatewayValidateDatasetUploadBody defines model for gatewayGatewayValidateDatasetUploadBody.
+type GatewayGatewayValidateDatasetUploadBody = map[string]interface{}
+
+// GatewayGatewayValidateEvaluatorUploadBody defines model for gatewayGatewayValidateEvaluatorUploadBody.
+type GatewayGatewayValidateEvaluatorUploadBody = map[string]interface{}
+
+// GatewayGetAccountServerlessTokenUsageResponse defines model for gatewayGetAccountServerlessTokenUsageResponse.
+type GatewayGetAccountServerlessTokenUsageResponse struct {
+	AverageTokensPerMinuteByBaseModel          *[]GatewayTimeSeries `json:"averageTokensPerMinuteByBaseModel,omitempty"`
+	PeakCachedPromptTokensPerMinuteByBaseModel *[]GatewayTimeSeries `json:"peakCachedPromptTokensPerMinuteByBaseModel,omitempty"`
+
+	// PeakGeneratedTokensPerMinuteByBaseModel Peak TPM per base model and token category.
+	PeakGeneratedTokensPerMinuteByBaseModel      *[]GatewayTimeSeries `json:"peakGeneratedTokensPerMinuteByBaseModel,omitempty"`
+	PeakRejectedPromptTokensPerMinuteByBaseModel *[]GatewayTimeSeries `json:"peakRejectedPromptTokensPerMinuteByBaseModel,omitempty"`
+	PeakUncachedPromptTokensPerMinuteByBaseModel *[]GatewayTimeSeries `json:"peakUncachedPromptTokensPerMinuteByBaseModel,omitempty"`
+	TotalPeakCachedPromptTokensPerMinute         *GatewayTimeSeries   `json:"totalPeakCachedPromptTokensPerMinute,omitempty"`
+
+	// TotalPeakGeneratedTokensPerMinute Account-wide peak TPM by token category.
+	TotalPeakGeneratedTokensPerMinute      *GatewayTimeSeries `json:"totalPeakGeneratedTokensPerMinute,omitempty"`
+	TotalPeakUncachedPromptTokensPerMinute *GatewayTimeSeries `json:"totalPeakUncachedPromptTokensPerMinute,omitempty"`
 }
 
 // GatewayGetAccountUsageFilterOptionsResponse Distinct filter values for the account/time range (separate from GetAccountUsage).
 type GatewayGetAccountUsageFilterOptionsResponse = map[string]interface{}
 
-// GatewayGetBatchJobLogsResponse defines model for gatewayGetBatchJobLogsResponse.
-type GatewayGetBatchJobLogsResponse struct {
-	Entries *[]GatewayLogEntry `json:"entries,omitempty"`
-
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
-}
+// GatewayGetAccountUsageRequestUsageType - USAGE_TYPE_UNSPECIFIED: Default value. When specified (or when usage_type field is not set),
+// returns usage data for all deployment types: serverless requests, dedicated deployments,
+// and training jobs.
+//   - SERVERLESS: Returns only serverless usage data.
+//
+// Filters the response to include only usage from serverless API requests.
+//   - DEDICATED_DEPLOYMENT: Returns only dedicated deployment usage data.
+//
+// Filters the response to include only usage from dedicated deployments.
+//   - TRAINING: Returns only training job usage data (SFT/DPO token usage and RFT / service-mode
+//
+// trainer GPU-seconds usage). Inference deployments serving rollouts for RFT /
+// online RL are reported under DEDICATED_DEPLOYMENT (not TRAINING) to avoid
+// double counting GPU time.
+type GatewayGetAccountUsageRequestUsageType string
 
 // GatewayGetBillingSummaryResponse defines model for gatewayGetBillingSummaryResponse.
 type GatewayGetBillingSummaryResponse struct {
 	LineItems *[]GatewayLineItem `json:"lineItems,omitempty"`
+
+	// UsageBuckets Per-bucket breakdown, populated only when the request sets a
+	// non-UNSPECIFIED granularity. One bucket per period at that granularity.
+	UsageBuckets *[]GatewayUsageBucket `json:"usageBuckets,omitempty"`
 }
 
 // GatewayGetDatasetDownloadEndpointResponse defines model for gatewayGetDatasetDownloadEndpointResponse.
@@ -7282,8 +8421,6 @@ type GatewayGetDpoJobMetricsFileResponse struct {
 }
 
 // GatewayGetEvaluationJobExecutionLogEndpointResponse Response carries the stream log URL (for VirtualizedLogViewer).
-//
-// Next ID: 4
 type GatewayGetEvaluationJobExecutionLogEndpointResponse struct {
 	// ContentType Content type for the log file (e.g. "text/plain").
 	// Only set when execution_log_signed_uri is present.
@@ -7313,12 +8450,6 @@ type GatewayGetEvaluatorUploadEndpointResponse struct {
 	FilenameToSignedUrls *map[string]string `json:"filenameToSignedUrls,omitempty"`
 }
 
-// GatewayGetLeaderboardResponse defines model for gatewayGetLeaderboardResponse.
-type GatewayGetLeaderboardResponse struct {
-	// Leaderboard The leaderboard resource.
-	Leaderboard *GatewayLeaderboard `json:"leaderboard,omitempty"`
-}
-
 // GatewayGetLedgerResponse defines model for gatewayGetLedgerResponse.
 type GatewayGetLedgerResponse struct {
 	// Ledger The contents of the ledger.
@@ -7344,6 +8475,19 @@ type GatewayGetModelVersionCountResponse struct {
 	Count *int32 `json:"count,omitempty"`
 }
 
+// GatewayGetReinforcementFineTuningJobMetricsFileResponse defines model for gatewayGetReinforcementFineTuningJobMetricsFileResponse.
+type GatewayGetReinforcementFineTuningJobMetricsFileResponse struct {
+	// SignedUrl The signed URL for the metrics file.
+	SignedUrl *string `json:"signedUrl,omitempty"`
+}
+
+// GatewayGetRlorTrainerJobPublicLogsResponse defines model for gatewayGetRlorTrainerJobPublicLogsResponse.
+type GatewayGetRlorTrainerJobPublicLogsResponse struct {
+	// SignedUrl Signed URL for the public trainer logs file (human-readable status updates).
+	// The URL expires after 24 hours and should be fetched dynamically when needed.
+	SignedUrl *string `json:"signedUrl,omitempty"`
+}
+
 // GatewayGetTerminationMessageResponse defines model for gatewayGetTerminationMessageResponse.
 type GatewayGetTerminationMessageResponse struct {
 	// Message The termination message.
@@ -7360,11 +8504,18 @@ type GatewayIdentityProvider struct {
 	// DomainUrl The domain URL.
 	DomainUrl *string `json:"domainUrl,omitempty"`
 
+	// EnableIdpInitiatedSso Enable IdP-initiated SAML (Security Assertion Markup Language) single sign-on.
+	// When enabled, users can start the login flow from their identity provider's
+	// portal (e.g., Okta app launcher) instead of from the Fireworks login page.
+	// Only supported for SAML identity providers.
+	EnableIdpInitiatedSso *bool `json:"enableIdpInitiatedSso,omitempty"`
+
 	// EnableJitUserProvisioning Enable Just-In-Time (JIT) user provisioning.
 	// When enabled, users are automatically created in the account on first SSO login
 	// if they don't already exist. When disabled, users must be pre-provisioned
 	// before they can authenticate via SSO.
 	EnableJitUserProvisioning *bool `json:"enableJitUserProvisioning,omitempty"`
+	EnforceSso                *bool `json:"enforceSso,omitempty"`
 
 	// IssuerUrl The OIDC issuer URL.
 	IssuerUrl *string `json:"issuerUrl,omitempty"`
@@ -7374,11 +8525,14 @@ type GatewayIdentityProvider struct {
 	// Only applies when enable_jit_user_provisioning is true and RBAC V2 is enabled.
 	// If empty or unset, defaults to "inference-user" (least privilege).
 	// If RBAC V2 is not enabled for the account, JIT users always get "user" role.
-	JitDefaultRole *string                       `json:"jitDefaultRole,omitempty"`
-	Name           *string                       `json:"name,omitempty"`
-	OidcConfig     *GatewayOidcConfig            `json:"oidcConfig,omitempty"`
-	SamlConfig     *GatewaySamlConfig            `json:"samlConfig,omitempty"`
-	State          *GatewayIdentityProviderState `json:"state,omitempty"`
+	JitDefaultRole *string            `json:"jitDefaultRole,omitempty"`
+	Name           *string            `json:"name,omitempty"`
+	OidcConfig     *GatewayOidcConfig `json:"oidcConfig,omitempty"`
+
+	// SamlConfig SAML Configuration
+	// Exactly one of metadata_url or metadata_xml must be provided.
+	SamlConfig *GatewaySamlConfig            `json:"samlConfig,omitempty"`
+	State      *GatewayIdentityProviderState `json:"state,omitempty"`
 
 	// Status Contains information about the identity provider status.
 	Status        *GatewayStatus `json:"status,omitempty"`
@@ -7426,6 +8580,12 @@ type GatewayJobProgress struct {
 // GatewayJobState JobState represents the state an asynchronous job can be in.
 //
 //   - JOB_STATE_PAUSED: Job is paused, typically due to account suspension or manual intervention.
+//   - JOB_STATE_DELETED: Job has been deleted.
+//   - JOB_STATE_ARCHIVED: User-facing state for jobs whose row is retained post-delete (e.g. RLOR
+//
+// trainers within the checkpoint retention window). The internal row is
+// still in JOB_STATE_DELETED; the gateway translates it to ARCHIVED on
+// public responses.
 type GatewayJobState string
 
 // GatewayLLMAssertion defines model for gatewayLLMAssertion.
@@ -7436,46 +8596,22 @@ type GatewayLLMAssertion struct {
 	Providers          []GatewayProvider       `json:"providers"`
 }
 
-// GatewayLeaderboard defines model for gatewayLeaderboard.
-type GatewayLeaderboard struct {
-	// CreateTime Create time (server populated).
-	CreateTime *time.Time `json:"createTime,omitempty"`
+// GatewayLearningRateScheduler Learning-rate scheduler applied on top of the base learning rate (after the
+// shared learning_rate_warmup_steps warmup). It mirrors the trainer-side
+// fireworks.training.sdk.training_spec.LRSchedulerSpec discriminated union:
+// the schedule variant that is set selects the shape, and each variant carries
+// only the knobs that apply to it. Add a new schedule by adding a message and
+// one `oneof schedule` entry; existing clients are unaffected. When unset,
+// the trainer uses the legacy constant schedule.
+type GatewayLearningRateScheduler struct {
+	// Constant Constant learning rate held flat after warmup (legacy default). No decay knobs.
+	Constant *GatewayConstantLRSchedule `json:"constant,omitempty"`
 
-	// Description Optional description.
-	Description *string `json:"description,omitempty"`
+	// Cosine Cosine annealing from the peak learning rate toward min_lr_ratio after warmup.
+	Cosine *GatewayCosineLRSchedule `json:"cosine,omitempty"`
 
-	// DisplayName Human-friendly display name.
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// JobCount Computed count of jobs attached to this leaderboard.
-	JobCount *int32  `json:"jobCount,omitempty"`
-	Name     *string `json:"name,omitempty"`
-
-	// Source Optional source-based selection for jobs.
-	Source *GatewayLeaderboardSource `json:"source,omitempty"`
-
-	// UpdateTime Update time (server populated).
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-}
-
-// GatewayLeaderboardSource defines model for gatewayLeaderboardSource.
-type GatewayLeaderboardSource struct {
-	// Datasets Restrict to datasets (optional).
-	Datasets *[]LeaderboardDatasetFilter `json:"datasets,omitempty"`
-
-	// Evaluator Restrict to a single evaluator (optional).
-	Evaluator *string `json:"evaluator,omitempty"`
-
-	// LastDuration Preferred: relative duration window (e.g., last 7d, 24h).
-	LastDuration *string `json:"lastDuration,omitempty"`
-
-	// TimeInterval Preferred: absolute time interval window.
-	TimeInterval *LeaderboardTimeInterval `json:"timeInterval,omitempty"`
-
-	// TimeWindow Deprecated: prefer last_duration or time_interval.
-	//
-	// e.g., "last_7d" or RFC3339 interval (optional)
-	TimeWindow *string `json:"timeWindow,omitempty"`
+	// Linear Linear decay from the peak learning rate toward min_lr_ratio after warmup.
+	Linear *GatewayLinearLRSchedule `json:"linear,omitempty"`
 }
 
 // GatewayLedgerEntry defines model for gatewayLedgerEntry.
@@ -7496,11 +8632,36 @@ type GatewayLineItem struct {
 	SecondaryGroupingKey   *string  `json:"secondaryGroupingKey,omitempty"`
 	SecondaryGroupingValue *string  `json:"secondaryGroupingValue,omitempty"`
 
+	// Series Product-line series for this line item (serverless / dedicated / training).
+	// Defaults to USAGE_TYPE_UNSPECIFIED when not classified.
+	Series *GatewayGetAccountUsageRequestUsageType `json:"series,omitempty"`
+
 	// TotalCost Represents an amount of money with its currency type.
 	TotalCost *TypeMoney `json:"totalCost,omitempty"`
 
 	// UnitAmount Represents an amount of money with its currency type.
 	UnitAmount *TypeMoney `json:"unitAmount,omitempty"`
+}
+
+// GatewayLinearLRSchedule Linear decay from the peak learning rate toward min_lr_ratio after warmup.
+type GatewayLinearLRSchedule struct {
+	// DecayRatio Fraction of total training steps over which to decay. 0 (unset) decays
+	// over the full run.
+	DecayRatio *float32 `json:"decayRatio,omitempty"`
+
+	// MinLrRatio Floor learning rate as a fraction of the peak learning rate (0.0 = decay to
+	// zero, 0.1 = decay to 10% of the peak learning rate).
+	MinLrRatio *float32 `json:"minLrRatio,omitempty"`
+}
+
+// GatewayListAccountServerlessRateLimitsResponse defines model for gatewayListAccountServerlessRateLimitsResponse.
+type GatewayListAccountServerlessRateLimitsResponse struct {
+	// RateLimits Snapshot of effective limits at the end of the requested range (or at the current time if
+	// `end` is unset), using the same resolution rules as the time series.
+	RateLimits *[]GatewayAccountRateLimit `json:"rateLimits,omitempty"`
+
+	// Series Time series of peak effective limits per interval, one series per deployment and metric.
+	Series *[]GatewayTimeSeries `json:"series,omitempty"`
 }
 
 // GatewayListAccountsResponse defines model for gatewayListAccountsResponse.
@@ -7527,25 +8688,13 @@ type GatewayListApiKeysResponse struct {
 
 // GatewayListAuditLogsResponse defines model for gatewayListAuditLogsResponse.
 type GatewayListAuditLogsResponse struct {
+	// AuditLogs Matching audit log entries. May be empty while `nextPageToken` is still set, which means the scan has not reached matching entries yet rather than that there are no results. This list may also be shorter than `page_size`.
 	AuditLogs *[]GatewayAuditLogEntry `json:"auditLogs,omitempty"`
 
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
+	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page. If this field is omitted, there are no subsequent pages. This is the only signal that results are exhausted: an empty `auditLogs` list or a short page does not mean the scan is finished.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 
-	// TotalSize The total number of request logs matching the request.
-	TotalSize *int32 `json:"totalSize,omitempty"`
-}
-
-// GatewayListAwsIamRoleBindingsResponse defines model for gatewayListAwsIamRoleBindingsResponse.
-type GatewayListAwsIamRoleBindingsResponse struct {
-	AwsIamRoleBindings *[]GatewayAwsIamRoleBinding `json:"awsIamRoleBindings,omitempty"`
-
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
-
-	// TotalSize The total number of AWS IAM role bindings.
+	// TotalSize Always 0 for audit logs. The number of matching entries is not known until the scan completes, so this field cannot be used to size a loop or compute a page count.
 	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
@@ -7558,18 +8707,6 @@ type GatewayListBatchInferenceJobsResponse struct {
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 
 	// TotalSize The total number of batch inference jobs.
-	TotalSize *int32 `json:"totalSize,omitempty"`
-}
-
-// GatewayListBatchJobsResponse defines model for gatewayListBatchJobsResponse.
-type GatewayListBatchJobsResponse struct {
-	BatchJobs *[]GatewayBatchJob `json:"batchJobs,omitempty"`
-
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
-
-	// TotalSize The total number of batch jobs.
 	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
@@ -7666,6 +8803,18 @@ type GatewayListDeploymentsResponse struct {
 	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
+// GatewayListDeveloperPassesResponse defines model for gatewayListDeveloperPassesResponse.
+type GatewayListDeveloperPassesResponse struct {
+	// DeveloperPasses The list of developer passes.
+	DeveloperPasses *[]GatewayDeveloperPass `json:"developerPasses,omitempty"`
+
+	// NextPageToken Token to retrieve the next page of results.
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+
+	// TotalSize The total number of developer passes matching the query.
+	TotalSize *int32 `json:"totalSize,omitempty"`
+}
+
 // GatewayListDpoJobsResponse defines model for gatewayListDpoJobsResponse.
 type GatewayListDpoJobsResponse struct {
 	DpoJobs *[]GatewayDpoJob `json:"dpoJobs,omitempty"`
@@ -7674,18 +8823,6 @@ type GatewayListDpoJobsResponse struct {
 	// If this field is omitted, there are no subsequent pages.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	TotalSize     *int32  `json:"totalSize,omitempty"`
-}
-
-// GatewayListEnvironmentsResponse defines model for gatewayListEnvironmentsResponse.
-type GatewayListEnvironmentsResponse struct {
-	Environments *[]GatewayEnvironment `json:"environments,omitempty"`
-
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
-
-	// TotalSize The total number of environments.
-	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
 // GatewayListEvaluationJobsResponse defines model for gatewayListEvaluationJobsResponse.
@@ -7721,39 +8858,15 @@ type GatewayListEvaluatorsResponse struct {
 	TotalSize     *int32              `json:"totalSize,omitempty"`
 }
 
-// GatewayListGenericDeploymentTypeVersionsResponse defines model for gatewayListGenericDeploymentTypeVersionsResponse.
-type GatewayListGenericDeploymentTypeVersionsResponse struct {
-	GenericDeploymentTypeVersions *[]GatewayGenericDeploymentTypeVersion `json:"genericDeploymentTypeVersions,omitempty"`
+// GatewayListExternalKeysResponse defines model for gatewayListExternalKeysResponse.
+type GatewayListExternalKeysResponse struct {
+	// ExternalKeys List of external keys.
+	ExternalKeys *[]GatewayExternalKey `json:"externalKeys,omitempty"`
 
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
+	// NextPageToken Next page token.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 
-	// TotalSize The total number of generic deployment type versions.
-	TotalSize *int32 `json:"totalSize,omitempty"`
-}
-
-// GatewayListGenericDeploymentTypesResponse defines model for gatewayListGenericDeploymentTypesResponse.
-type GatewayListGenericDeploymentTypesResponse struct {
-	GenericDeploymentTypes *[]GatewayGenericDeploymentType `json:"genericDeploymentTypes,omitempty"`
-
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
-
-	// TotalSize The total number of generic deployment.
-	TotalSize *int32 `json:"totalSize,omitempty"`
-}
-
-// GatewayListGenericDeploymentsResponse defines model for gatewayListGenericDeploymentsResponse.
-type GatewayListGenericDeploymentsResponse struct {
-	GenericDeployments *[]GatewayGenericDeployment `json:"genericDeployments,omitempty"`
-
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
-
-	// TotalSize The total number of generic deployment.
+	// TotalSize Total count.
 	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
@@ -7764,30 +8877,6 @@ type GatewayListIdentityProvidersResponse struct {
 	TotalSize         *int32                     `json:"totalSize,omitempty"`
 }
 
-// GatewayListLeaderboardEvaluationJobsResponse defines model for gatewayListLeaderboardEvaluationJobsResponse.
-type GatewayListLeaderboardEvaluationJobsResponse struct {
-	EvaluationJobs *[]GatewayEvaluationJob `json:"evaluationJobs,omitempty"`
-	NextPageToken  *string                 `json:"nextPageToken,omitempty"`
-	TotalSize      *int32                  `json:"totalSize,omitempty"`
-}
-
-// GatewayListLeaderboardsResponse defines model for gatewayListLeaderboardsResponse.
-type GatewayListLeaderboardsResponse struct {
-	Leaderboards  *[]GatewayLeaderboard `json:"leaderboards,omitempty"`
-	NextPageToken *string               `json:"nextPageToken,omitempty"`
-	TotalSize     *int32                `json:"totalSize,omitempty"`
-}
-
-// GatewayListMcpServersResponse defines model for gatewayListMcpServersResponse.
-type GatewayListMcpServersResponse struct {
-	McpServers *[]GatewayMcpServer `json:"mcpServers,omitempty"`
-
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string `json:"nextPageToken,omitempty"`
-	TotalSize     *int32  `json:"totalSize,omitempty"`
-}
-
 // GatewayListModelsResponse defines model for gatewayListModelsResponse.
 type GatewayListModelsResponse struct {
 	Models *[]GatewayModel `json:"models,omitempty"`
@@ -7796,28 +8885,6 @@ type GatewayListModelsResponse struct {
 	// If this field is omitted, there are no subsequent pages.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
 	TotalSize     *int32  `json:"totalSize,omitempty"`
-}
-
-// GatewayListNodePoolBindingsResponse defines model for gatewayListNodePoolBindingsResponse.
-type GatewayListNodePoolBindingsResponse struct {
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken    *string                   `json:"nextPageToken,omitempty"`
-	NodePoolBindings *[]GatewayNodePoolBinding `json:"nodePoolBindings,omitempty"`
-
-	// TotalSize The total number of node pool bindings.
-	TotalSize *int32 `json:"totalSize,omitempty"`
-}
-
-// GatewayListNodePoolsResponse defines model for gatewayListNodePoolsResponse.
-type GatewayListNodePoolsResponse struct {
-	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
-	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string            `json:"nextPageToken,omitempty"`
-	NodePools     *[]GatewayNodePool `json:"nodePools,omitempty"`
-
-	// TotalSize The total number of node pools.
-	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
 // GatewayListPricingPlansResponse defines model for gatewayListPricingPlansResponse.
@@ -7843,6 +8910,13 @@ type GatewayListReinforcementFineTuningJobsResponse struct {
 	NextPageToken               *string                              `json:"nextPageToken,omitempty"`
 	ReinforcementFineTuningJobs *[]GatewayReinforcementFineTuningJob `json:"reinforcementFineTuningJobs,omitempty"`
 	TotalSize                   *int32                               `json:"totalSize,omitempty"`
+}
+
+// GatewayListRlorTrainerJobCheckpointsResponse defines model for gatewayListRlorTrainerJobCheckpointsResponse.
+type GatewayListRlorTrainerJobCheckpointsResponse struct {
+	Checkpoints   *[]GatewayRlorTrainerJobCheckpoint `json:"checkpoints,omitempty"`
+	NextPageToken *string                            `json:"nextPageToken,omitempty"`
+	TotalSize     *int32                             `json:"totalSize,omitempty"`
 }
 
 // GatewayListRlorTrainerJobsResponse defines model for gatewayListRlorTrainerJobsResponse.
@@ -7872,14 +8946,17 @@ type GatewayListSecretsResponse struct {
 	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
-// GatewayListSnapshotsResponse defines model for gatewayListSnapshotsResponse.
-type GatewayListSnapshotsResponse struct {
+// GatewayListServerlessModelsResponse ListServerlessModelsResponse is the serverless catalog read shape: base
+// Models with their serverless_configs nested inside (each config carrying its
+// priced, SPOT-gated serverless_modes).
+type GatewayListServerlessModelsResponse struct {
+	Models *[]GatewayModel `json:"models,omitempty"`
+
 	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
 	// If this field is omitted, there are no subsequent pages.
-	NextPageToken *string            `json:"nextPageToken,omitempty"`
-	Snapshots     *[]GatewaySnapshot `json:"snapshots,omitempty"`
+	NextPageToken *string `json:"nextPageToken,omitempty"`
 
-	// TotalSize The total number of snapshots.
+	// TotalSize The total number of models.
 	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
@@ -7901,6 +8978,82 @@ type GatewayListTrailsResponse struct {
 	Trails        *[]GatewayTrail `json:"trails,omitempty"`
 }
 
+// GatewayListTrainingRunsResponse defines model for gatewayListTrainingRunsResponse.
+type GatewayListTrainingRunsResponse struct {
+	NextPageToken *string               `json:"nextPageToken,omitempty"`
+	TotalSize     *int32                `json:"totalSize,omitempty"`
+	TrainingRuns  *[]GatewayTrainingRun `json:"trainingRuns,omitempty"`
+}
+
+// GatewayListTrainingSessionCheckpointsResponse defines model for gatewayListTrainingSessionCheckpointsResponse.
+type GatewayListTrainingSessionCheckpointsResponse struct {
+	// NextPageToken Pass as page_token in a subsequent request to fetch the next page.
+	// Empty when there are no more results.
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+
+	// TotalSize Total number of checkpoints on the session across all pages.
+	TotalSize *int32 `json:"totalSize,omitempty"`
+
+	// TrainingSessionCheckpoints The checkpoints in this page, newest first.
+	TrainingSessionCheckpoints *[]GatewayTrainingSessionCheckpoint `json:"trainingSessionCheckpoints,omitempty"`
+}
+
+// GatewayListTrainingSessionChunkOutputsResponse defines model for gatewayListTrainingSessionChunkOutputsResponse.
+type GatewayListTrainingSessionChunkOutputsResponse struct {
+	Chunks        *[]GatewayTrainingSessionChunkOutput `json:"chunks,omitempty"`
+	NextPageToken *string                              `json:"nextPageToken,omitempty"`
+	TotalSize     *int32                               `json:"totalSize,omitempty"`
+}
+
+// GatewayListTrainingSessionTrainingCurvesResponse defines model for gatewayListTrainingSessionTrainingCurvesResponse.
+type GatewayListTrainingSessionTrainingCurvesResponse struct {
+	Curves        *[]GatewayTrainingCurve `json:"curves,omitempty"`
+	NextPageToken *string                 `json:"nextPageToken,omitempty"`
+	TotalSize     *int32                  `json:"totalSize,omitempty"`
+}
+
+// GatewayListTrainingSessionsResponse defines model for gatewayListTrainingSessionsResponse.
+type GatewayListTrainingSessionsResponse struct {
+	NextPageToken    *string                   `json:"nextPageToken,omitempty"`
+	TotalSize        *int32                    `json:"totalSize,omitempty"`
+	TrainingSessions *[]GatewayTrainingSession `json:"trainingSessions,omitempty"`
+}
+
+// GatewayListTrainingShapeVersionsResponse defines model for gatewayListTrainingShapeVersionsResponse.
+type GatewayListTrainingShapeVersionsResponse struct {
+	NextPageToken         *string                        `json:"nextPageToken,omitempty"`
+	TotalSize             *int32                         `json:"totalSize,omitempty"`
+	TrainingShapeVersions *[]GatewayTrainingShapeVersion `json:"trainingShapeVersions,omitempty"`
+}
+
+// GatewayListTrainingShapesResponse defines model for gatewayListTrainingShapesResponse.
+type GatewayListTrainingShapesResponse struct {
+	NextPageToken  *string                 `json:"nextPageToken,omitempty"`
+	TotalSize      *int32                  `json:"totalSize,omitempty"`
+	TrainingShapes *[]GatewayTrainingShape `json:"trainingShapes,omitempty"`
+}
+
+// GatewayListUserUsageLimitIncreaseRequestsResponse defines model for gatewayListUserUsageLimitIncreaseRequestsResponse.
+type GatewayListUserUsageLimitIncreaseRequestsResponse struct {
+	// NextPageToken A token to pass as page_token for the next page. Empty when none remain.
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+
+	// TotalSize The total number of matching requests.
+	TotalSize                      *int32                                  `json:"totalSize,omitempty"`
+	UserUsageLimitIncreaseRequests *[]GatewayUserUsageLimitIncreaseRequest `json:"userUsageLimitIncreaseRequests,omitempty"`
+}
+
+// GatewayListUserUsageLimitsResponse defines model for gatewayListUserUsageLimitsResponse.
+type GatewayListUserUsageLimitsResponse struct {
+	// NextPageToken A token to pass as page_token to retrieve the next page. Empty when there
+	// are no further pages.
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+
+	// UserUsageLimits One entry per user in the account (zero usage for users that incurred none
+	// this period), ordered by user id.
+	UserUsageLimits *[]GatewayUserUsageLimits `json:"userUsageLimits,omitempty"`
+}
+
 // GatewayListUsersResponse defines model for gatewayListUsersResponse.
 type GatewayListUsersResponse struct {
 	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
@@ -7912,74 +9065,25 @@ type GatewayListUsersResponse struct {
 	Users     *[]GatewayUser `json:"users,omitempty"`
 }
 
-// GatewayLogEntry defines model for gatewayLogEntry.
-type GatewayLogEntry struct {
-	// LogTime The timestamp of the log entry.
-	LogTime *time.Time `json:"logTime,omitempty"`
+// GatewayLogTrainingSessionMetricsResponse defines model for gatewayLogTrainingSessionMetricsResponse.
+type GatewayLogTrainingSessionMetricsResponse = map[string]interface{}
 
-	// Message The log messsage.
-	Message *string `json:"message,omitempty"`
+// GatewayMetricPoint MetricPoint is a single scalar observation from training. Append-only:
+// the (session, key, step) tuple is the natural key — duplicate writes
+// overwrite the stored value/timestamp so retries from the trainer are safe.
+type GatewayMetricPoint struct {
+	// Key Metric identifier (e.g. "reward", "loss", "accuracy"). Required.
+	Key *string `json:"key,omitempty"`
 
-	// Rank The rank which produced the log entry.
-	Rank *int32 `json:"rank,omitempty"`
+	// Step Training step the observation was made at. Monotonic per (session, key).
+	Step *string `json:"step,omitempty"`
+
+	// Timestamp Optional client-supplied wall-clock timestamp. Defaults to server time.
+	Timestamp *time.Time `json:"timestamp,omitempty"`
+
+	// Value Observed scalar value at this step.
+	Value *float64 `json:"value,omitempty"`
 }
-
-// GatewayMcpServer defines model for gatewayMcpServer.
-type GatewayMcpServer struct {
-	// Annotations Annotations to identify MCP properties.
-	// Key/value pairs may be used by external tools or other services.
-	Annotations *map[string]string `json:"annotations,omitempty"`
-
-	// ApiKeySecret The resource name of the secret to use for authenticating with the MCP server.
-	// e.g. accounts/my-account/secrets/my-secret
-	// If provided for a remote-hosted MCP, the endpoint will be validated for connectivity
-	// during creation.
-	ApiKeySecret *string `json:"apiKeySecret,omitempty"`
-
-	// AuthenticationType The authentication method required by this MCP server.
-	AuthenticationType *McpServerAuthenticationType `json:"authenticationType,omitempty"`
-
-	// CreateTime The creation time of the mcp.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// Description The description of the mcp. Must be fewer than 4000 characters long.
-	Description *string `json:"description,omitempty"`
-
-	// DisplayName Human-readable display name of the mcp. e.g. "My Mcp"
-	// Must be fewer than 64 characters long.
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// EndpointUrl The URL of the MCP server.
-	// Required if self_hosted is true. For managed MCPs, this will be populated
-	// after deployment.
-	EndpointUrl *string `json:"endpointUrl,omitempty"`
-
-	// MaxQps Max QPS of this MCP server. 0 means no ratelimit.
-	MaxQps *float64 `json:"maxQps,omitempty"`
-	Name   *string  `json:"name,omitempty"`
-
-	// Public Whether this MCP is publicly available to all Fireworks users.
-	// If false, only accessible to the account that created it.
-	Public *bool `json:"public,omitempty"`
-
-	// RemoteHosted Whether this MCP is remote-hosted (true) or managed by Fireworks (false).
-	RemoteHosted *bool `json:"remoteHosted,omitempty"`
-
-	// Simulated Whether this is a simulated MCP server.
-	Simulated *bool `json:"simulated,omitempty"`
-
-	// State The state of the mcp.
-	State *GatewayMcpServerState `json:"state,omitempty"`
-
-	// Status Contains detailed message when the last mcp operation fails.
-	Status *GatewayStatus `json:"status,omitempty"`
-
-	// UpdateTime The update time for the mcp.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-}
-
-// GatewayMcpServerState defines model for gatewayMcpServerState.
-type GatewayMcpServerState string
 
 // GatewayModel defines model for gatewayModel.
 type GatewayModel struct {
@@ -8028,6 +9132,9 @@ type GatewayModel struct {
 	// Must be fewer than 64 characters long.
 	DisplayName *string `json:"displayName,omitempty"`
 
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
+
 	// FineTuningJob If the model was created from a fine-tuning job, this is the fine-tuning
 	// job name.
 	FineTuningJob *string `json:"fineTuningJob,omitempty"`
@@ -8044,8 +9151,8 @@ type GatewayModel struct {
 
 	// Kind The kind of model.
 	// If not specified, the default is HF_PEFT_ADDON.
-	Kind *GatewayModelKind `json:"kind,omitempty"`
-	Name *string           `json:"name,omitempty"`
+	Kind *ModelKind `json:"kind,omitempty"`
+	Name *string    `json:"name,omitempty"`
 
 	// PeftDetails PEFT addon details.
 	// Required if kind is HF_PEFT_ADDON or HF_TEFT_ADDON.
@@ -8054,17 +9161,38 @@ type GatewayModel struct {
 	// Public If true, the model will be publicly readable.
 	Public *bool `json:"public,omitempty"`
 
-	// RlTunable If true, the model is RL tunable.
-	RlTunable    *bool              `json:"rlTunable,omitempty"`
-	SnapshotType *ModelSnapshotType `json:"snapshotType,omitempty"`
+	// RlFullParameterTunable V2 only. Whether the model supports full-parameter reinforcement learning (lora_rank = 0).
+	// True when validated POLICY_TRAINER + LORA_TRAINER training shapes exist plus a deployment shape.
+	RlFullParameterTunable *bool `json:"rlFullParameterTunable,omitempty"`
+
+	// RlLoraTunable V2 only. Whether the model supports LoRA reinforcement learning (lora_rank > 0).
+	// True when a validated LORA_TRAINER training shape exists plus a deployment shape.
+	RlLoraTunable *bool `json:"rlLoraTunable,omitempty"`
+
+	// RlTunable Deprecated: V1 training stack only — LoRA only, limited architecture support.
+	// If the model has use_training_v2=true, use rl_lora_tunable and
+	// rl_full_parameter_tunable instead.
+	RlTunable *bool `json:"rlTunable,omitempty"`
+
+	// ServerlessModes The serverless modes this base model is available on — the serverless read
+	// shape. Populated on read (e.g. serverless catalog reads); one entry
+	// per mode. Empty for non-serverless models.
+	ServerlessModes *[]GatewayServerlessMode `json:"serverlessModes,omitempty"`
+	SnapshotType    *ModelSnapshotType       `json:"snapshotType,omitempty"`
 
 	// State The state of the model.
 	State *GatewayModelState `json:"state,omitempty"`
 
 	// Status Contains detailed message when the last model operation fails.
-	Status                             *GatewayStatus         `json:"status,omitempty"`
-	SupportedPrecisions                *[]DeploymentPrecision `json:"supportedPrecisions,omitempty"`
-	SupportedPrecisionsWithCalibration *[]DeploymentPrecision `json:"supportedPrecisionsWithCalibration,omitempty"`
+	Status *GatewayStatus `json:"status,omitempty"`
+
+	// SupervisedFullParameterTunable V2 only. Whether the model supports full-parameter supervised fine-tuning and DPO (lora_rank = 0).
+	// True when a validated POLICY_TRAINER training shape exists.
+	SupervisedFullParameterTunable *bool `json:"supervisedFullParameterTunable,omitempty"`
+
+	// SupervisedLoraTunable V2 only. Whether the model supports LoRA supervised fine-tuning and DPO (lora_rank > 0).
+	// True when a validated LORA_TRAINER training shape exists.
+	SupervisedLoraTunable *bool `json:"supervisedLoraTunable,omitempty"`
 
 	// SupportsImageInput If set, images can be provided as input to the model.
 	SupportsImageInput *bool `json:"supportsImageInput,omitempty"`
@@ -8086,8 +9214,9 @@ type GatewayModel struct {
 	// TrainingContextLength The maximum context length supported by the model.
 	TrainingContextLength *int32 `json:"trainingContextLength,omitempty"`
 
-	// Tunable If true, the model can be fine-tuned. The value will be true if the tunable field is true, and
-	// the model is validated against the model_type field.
+	// Tunable Deprecated: V1 training stack only — LoRA only, limited architecture support.
+	// If the model has use_training_v2=true, use supervised_lora_tunable and
+	// supervised_full_parameter_tunable instead.
 	Tunable *bool `json:"tunable,omitempty"`
 
 	// UpdateTime The update time for the model.
@@ -8095,20 +9224,11 @@ type GatewayModel struct {
 
 	// UseHfApplyChatTemplate If true, the model will use the Hugging Face apply_chat_template API to apply the chat template.
 	UseHfApplyChatTemplate *bool `json:"useHfApplyChatTemplate,omitempty"`
-}
 
-// GatewayModelKind  - HF_BASE_MODEL: An LLM base model.
-//   - HF_PEFT_ADDON: A parameter-efficent fine-tuned addon.
-//   - HF_TEFT_ADDON: A token-eficient fine-tuned addon.
-//   - FLUMINA_BASE_MODEL: A Flumina base model.
-//   - FLUMINA_ADDON: A Flumina addon.
-//   - DRAFT_ADDON: A draft model used for speculative decoding in a deployment.
-//   - FIRE_AGENT: A FireAgent model.
-//   - LIVE_MERGE: A live-merge model.
-//   - CUSTOM_MODEL: A customized model
-//   - EMBEDDING_MODEL: An Embedding model.
-//   - SNAPSHOT_MODEL: A snapshot model.
-type GatewayModelKind string
+	// UseTrainingV2 If true, SFT jobs for this base model use service-mode (StatefulSet +
+	// orchestration sidecar) instead of the legacy batch Job path.
+	UseTrainingV2 *bool `json:"useTrainingV2,omitempty"`
+}
 
 // GatewayModelState - UPLOADING: The model is still being uploaded (upload is asynchronous).
 //   - READY: The model is ready to be used.
@@ -8126,116 +9246,17 @@ type GatewayModelVersion struct {
 // GatewayMultiRegion defines model for gatewayMultiRegion.
 type GatewayMultiRegion string
 
-// GatewayNodePool defines model for gatewayNodePool.
-type GatewayNodePool struct {
-	// Annotations Arbitrary, user-specified metadata.
-	// Keys and values must adhere to Kubernetes constraints: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
-	// Additionally, the "fireworks.ai/" prefix is reserved.
-	Annotations *map[string]string `json:"annotations,omitempty"`
-
-	// CreateTime The creation time of the node pool.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// DisplayName Human-readable display name of the node pool. e.g. "My Node Pool"
-	// Must be fewer than 64 characters long.
-	DisplayName *string             `json:"displayName,omitempty"`
-	EksNodePool *GatewayEksNodePool `json:"eksNodePool,omitempty"`
-
-	// FakeNodePool A fake node pool to be used with FakeCluster.
-	FakeNodePool *GatewayFakeNodePool `json:"fakeNodePool,omitempty"`
-
-	// MaxNodeCount https://cloud.google.com/kubernetes-engine/quotas
-	// Maximum number of nodes in this node pool. Must be a positive integer
-	// greater than or equal to min_node_count.
-	// If not specified, the default is 1.
-	MaxNodeCount *int32 `json:"maxNodeCount,omitempty"`
-
-	// MinNodeCount https://cloud.google.com/kubernetes-engine/quotas
-	// Minimum number of nodes in this node pool. Must be a non-negative integer
-	// less than or equal to max_node_count.
-	// If not specified, the default is 0.
-	MinNodeCount *int32  `json:"minNodeCount,omitempty"`
-	Name         *string `json:"name,omitempty"`
-
-	// NodePoolStats Live statistics of the node pool.
-	NodePoolStats *GatewayNodePoolStats `json:"nodePoolStats,omitempty"`
-
-	// OverprovisionNodeCount The number of nodes to overprovision by the autoscaler. Must be a
-	// non-negative integer and less than or equal to min_node_count and
-	// max_node_count-min_node_count.
-	// If not specified, the default is 0.
-	OverprovisionNodeCount *int32 `json:"overprovisionNodeCount,omitempty"`
-
-	// State The current state of the node pool.
-	State *GatewayNodePoolState `json:"state,omitempty"`
-
-	// Status Contains detailed message when the last node pool operation fails, e.g.
-	// when node pool is in FAILED state or when last node pool update fails.
-	Status *GatewayStatus `json:"status,omitempty"`
-
-	// UpdateTime The update time for the node pool.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-}
-
-// GatewayNodePoolBinding defines model for gatewayNodePoolBinding.
-type GatewayNodePoolBinding struct {
-	// AccountId The account ID that this binding is associated with.
-	AccountId *string `json:"accountId,omitempty"`
-
-	// ClusterId The cluster ID that this binding is associated with.
-	ClusterId *string `json:"clusterId,omitempty"`
-
-	// CreateTime The creation time of the node pool binding.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// NodePoolId The node pool ID that this binding is associated with.
-	NodePoolId *string `json:"nodePoolId,omitempty"`
-
-	// Principal The principal that is allowed use the node pool. This must be
-	// the email address of the user.
-	Principal string `json:"principal"`
-}
-
-// GatewayNodePoolState  - CREATING: The cluster is still being created.
-//   - READY: The node pool is ready to be used.
-//   - DELETING: The node pool is being deleted.
-//   - FAILED: Node pool is not operational.
-//
-// Consult 'status' for detailed messaging.
-// Node pool needs to be deleted and re-created.
-type GatewayNodePoolState string
-
-// GatewayNodePoolStats defines model for gatewayNodePoolStats.
-type GatewayNodePoolStats struct {
-	// BatchJobCount The key is the string representation of BatchJob.State (e.g. "RUNNING").
-	// The value is the number of batch jobs in that state allocated to this
-	// node pool.
-	BatchJobCount *map[string]int32 `json:"batchJobCount,omitempty"`
-
-	// BatchJobRanks The key is the string representation of BatchJob.State (e.g. "RUNNING").
-	// The value is the number of ranks allocated to batch jobs in that state in
-	// this node pool.
-	BatchJobRanks *map[string]int32 `json:"batchJobRanks,omitempty"`
-
-	// EnvironmentCount The number of environments connected to this node pool.
-	EnvironmentCount *int32 `json:"environmentCount,omitempty"`
-
-	// EnvironmentRanks The number of ranks in this node pool that are currently allocated
-	// to environment connections.
-	EnvironmentRanks *int32 `json:"environmentRanks,omitempty"`
-
-	// NodeCount The number of nodes currently available in this pool.
-	NodeCount *int32 `json:"nodeCount,omitempty"`
-
-	// RanksPerNode The number of ranks available per node. This is determined by the machine
-	// type of the nodes in this node pool.
-	RanksPerNode *int32 `json:"ranksPerNode,omitempty"`
-}
-
-// GatewayNotebookExecutor Execute a notebook file.
-type GatewayNotebookExecutor struct {
-	// NotebookFilename Path to a notebook file to be executed.
-	NotebookFilename string `json:"notebookFilename"`
+// GatewayNotificationSettings NotificationSettings configures notification preferences for an account.
+// (accounts/{account}/notificationSettings) when more notification categories
+// are added. Requires adding singleton support to the resource generator.
+type GatewayNotificationSettings struct {
+	// MonthlySpendThresholds Spend thresholds at which to send monthly usage warning emails.
+	// These should be below the account's monthly spend quota.
+	// Example: [{currency_code: "USD", units: 500}, {currency_code: "USD", units: 800}]
+	//   would alert at $500 and $800.
+	// Note: An alert at 80% of the monthly spend limit is always added
+	// in addition to the thresholds specified in this list.
+	MonthlySpendThresholds *[]TypeMoney `json:"monthlySpendThresholds,omitempty"`
 }
 
 // GatewayOidcConfig defines model for gatewayOidcConfig.
@@ -8243,6 +9264,12 @@ type GatewayOidcConfig struct {
 	ClientId     string `json:"clientId"`
 	ClientSecret string `json:"clientSecret"`
 	IssuerUrl    string `json:"issuerUrl"`
+}
+
+// GatewayOrpoConfig Hyperparameters for Odds Ratio Preference Optimization (ORPO) training.
+type GatewayOrpoConfig struct {
+	// Lambda Weight for the ORPO odds-ratio loss term.
+	Lambda *float32 `json:"lambda,omitempty"`
 }
 
 // GatewayPEFTDetails defines model for gatewayPEFTDetails.
@@ -8268,6 +9295,33 @@ type GatewayPlacement struct {
 	// Region The region where the deployment must be placed.
 	Region  *GatewayRegion   `json:"region,omitempty"`
 	Regions *[]GatewayRegion `json:"regions,omitempty"`
+}
+
+// GatewayPolicySettings Account-level policy settings (singleton per account). Holds model access and may grow with
+// other policy sections (e.g. regional residency) without separate top-level API resources.
+type GatewayPolicySettings struct {
+	// CmekRequired Whether new customer-data resources for this account must be CMEK-encrypted.
+	// Readable by the account, but only a Fireworks superuser can change it (the
+	// write path gates this explicitly). Enabling requires a READY primary
+	// ExternalKey.
+	CmekRequired *bool `json:"cmekRequired,omitempty"`
+
+	// DefaultPermissions Per-account default permissions. If unset, defaults to allow-all.
+	// This powers the UI's "Default" row.
+	DefaultPermissions *PolicySettingsModelPermissions `json:"defaultPermissions,omitempty"`
+	Name               *string                         `json:"name,omitempty"`
+
+	// Residency Restricts serving to one geography when set. An absent value leaves the
+	// account unrestricted.
+	Residency *GatewayMultiRegion `json:"residency,omitempty"`
+
+	// Rules Per-model override rows. A model not listed here uses default_permissions.
+	Rules      *[]PolicySettingsModelAccessRule `json:"rules,omitempty"`
+	UpdateTime *time.Time                       `json:"updateTime,omitempty"`
+
+	// ZeroDataRetention Zero Data Retention policy for the account. When absent, ZDR is not
+	// enforced. Independent of model access permissions and CMEK.
+	ZeroDataRetention *PolicySettingsZeroDataRetentionPolicy `json:"zeroDataRetention,omitempty"`
 }
 
 // GatewayPreviewEvaluationResponse defines model for gatewayPreviewEvaluationResponse.
@@ -8306,8 +9360,7 @@ type GatewayPreviewEvaluatorSampleResult struct {
 	Success        *string                            `json:"success,omitempty"`
 }
 
-// GatewayPricingPlan Next ID: 12
-// PricingPlan defines a custom billing plan for an account
+// GatewayPricingPlan PricingPlan defines a custom billing plan for an account
 // Each PricingPlan is associated with a contract, and describes the pricing terms for a specific service.
 type GatewayPricingPlan struct {
 	AcceleratorHourConfig *[]PricingPlanAcceleratorHourBillingConfig `json:"acceleratorHourConfig,omitempty"`
@@ -8324,6 +9377,22 @@ type GatewayPricingPlan struct {
 // GatewayPricingPlanState defines model for gatewayPricingPlanState.
 type GatewayPricingPlanState string
 
+// GatewayPromoteCheckpointResponse defines model for gatewayPromoteCheckpointResponse.
+type GatewayPromoteCheckpointResponse struct {
+	// Model The promoted model. Present only for synchronous promotion.
+	Model *GatewayModel `json:"model,omitempty"`
+
+	// Operation Long-running promotion operation. Present only for async promotion.
+	// Poll GetOperation on operation.name until done; the promoted model is
+	// returned in the operation response.
+	Operation *GooglelongrunningOperation `json:"operation,omitempty"`
+}
+
+// GatewayPromoteTrainingSessionCheckpointResponse defines model for gatewayPromoteTrainingSessionCheckpointResponse.
+type GatewayPromoteTrainingSessionCheckpointResponse struct {
+	Model *GatewayModel `json:"model,omitempty"`
+}
+
 // GatewayProvider defines model for gatewayProvider.
 type GatewayProvider struct {
 	Config *map[string]string `json:"config,omitempty"`
@@ -8331,16 +9400,31 @@ type GatewayProvider struct {
 	Label  *string            `json:"label,omitempty"`
 }
 
-// GatewayPythonExecutor Execute a Python process.
-type GatewayPythonExecutor struct {
-	// Args Command line arguments to pass to the Python process.
-	Args *[]string `json:"args,omitempty"`
+// GatewayPurpose Scheduling purpose for training jobs and deployments.
+type GatewayPurpose string
 
-	// Target A Python module or filename depending on TargetType.
-	Target string `json:"target"`
+// GatewayQueryUsageCostsRequestScope defines model for gatewayQueryUsageCostsRequestScope.
+type GatewayQueryUsageCostsRequestScope string
 
-	// TargetType The type of Python target to run.
-	TargetType PythonExecutorTargetType `json:"targetType"`
+// GatewayQueryUsageCostsResponse defines model for gatewayQueryUsageCostsResponse.
+type GatewayQueryUsageCostsResponse struct {
+	// AttributionCompleteness Whether the result may omit usage without a user ID. INCOMPLETE means the
+	// query filters by user, so historical unattributed usage may be excluded.
+	// The amount excluded is unknown.
+	AttributionCompleteness *QueryUsageCostsResponseAttributionCompleteness `json:"attributionCompleteness,omitempty"`
+
+	// EvaluationTime Time when this result was evaluated.
+	EvaluationTime *time.Time `json:"evaluationTime,omitempty"`
+
+	// NextPageToken Opaque token for the next page. Empty when no additional page is available.
+	NextPageToken *string `json:"nextPageToken,omitempty"`
+
+	// Rows Cost rows for the requested dimensions. A successful response contains at
+	// most 10,100 rows and is limited to 4 MiB.
+	Rows *[]GatewayUsageCostRow `json:"rows,omitempty"`
+
+	// Subtotal Subtotal for the complete query.
+	Subtotal *TypeMoney `json:"subtotal,omitempty"`
 }
 
 // GatewayQuota defines model for gatewayQuota.
@@ -8375,42 +9459,29 @@ type GatewayRedeemCreditCodeResponse struct {
 	Amount *TypeMoney `json:"amount,omitempty"`
 }
 
-// GatewayRegion - US_IOWA_1: GCP us-central1 (Iowa)
-//   - US_VIRGINIA_1: AWS us-east-1 (N. Virginia)
-//   - US_VIRGINIA_2: OCI us-ashburn-1 [HIDE_FROM_DOCS]
-//   - US_ILLINOIS_1: OCI us-chicago-1
-//   - AP_TOKYO_1: OCI ap-tokyo-1
-//   - EU_LONDON_1: OCI uk-london-1 [HIDE_FROM_DOCS]
-//   - US_ARIZONA_1: OCI us-phoenix-1
-//   - US_TEXAS_1: Lambda us-south-3 (C. Texas)
-//   - US_ILLINOIS_2: Lambda us-midwest-1 (Illinois)
-//   - EU_FRANKFURT_1: OCI eu-frankfurt-1
-//   - US_TEXAS_2: Lambda us-south-2 (N. Texas)
-//   - EU_PARIS_1: Nebius eu-west1 [HIDE_FROM_DOCS]
-//   - EU_HELSINKI_1: Nebius eu-north1 [HIDE_FROM_DOCS]
-//   - US_NEVADA_1: GCP us-west4 [HIDE_FROM_DOCS]
-//   - EU_ICELAND_1: Crusoe eu-iceland1
-//   - EU_ICELAND_2: Crusoe eu-iceland1 (network1)
-//   - US_WASHINGTON_1: Voltage Park us-pyl-1 (Detach audio cluster from control_plane)
-//   - US_WASHINGTON_2: Voltage Park us-seattle-2
-//   - EU_ICELAND_DEV_1: Crusoe eu-iceland1 (dev) [HIDE_FROM_DOCS]
-//   - US_WASHINGTON_3: Vultr Seattle 1
-//   - US_ARIZONA_2: Azure westus3 (Anysphere BYOC) [HIDE_FROM_DOCS]
-//   - AP_TOKYO_2: AWS ap-northeast-1
-//   - US_CALIFORNIA_1: AWS us-west-1 (N. California)
-//   - US_MISSOURI_1: Nebius us-central1 (Anysphere BYOC) [HIDE_FROM_DOCS]
-//   - US_UTAH_1: GCP us-west3 (Utah)
-//   - US_TEXAS_3: Crusoe us-southcentral1 [HIDE_FROM_DOCS]
-//   - US_ARIZONA_3: Coreweave us-west-04a-1 [HIDE_FROM_DOCS]
-//   - US_GEORGIA_1: DigitalOcean us-atl1
-//   - US_GEORGIA_2: Vultr Atlanta 1
-//   - US_WASHINGTON_4: Coreweave us-west-09b-1
-//   - US_GEORGIA_3: Alicloud us-southeast-1
-//   - NA_BRITISHCOLUMBIA_1: Fluidstack ca-west-1
-//   - US_GEORGIA_4: DigitalOcean us-atl1 MI350X
-//   - EU_ICELAND_3: Crusoe eu-iceland1 (Anysphere BYOC) [HIDE_FROM_DOCS]
-//   - US_OHIO_1: Lambda us-midwest-2 (Ohio)
-//   - US_NEWYORK_1: DigitalOcean nyc2
+// GatewayRefreshSessionTokenRequest Request to refresh an existing session JWT before it expires.
+type GatewayRefreshSessionTokenRequest struct {
+	// RefreshToken The refresh token used to mint a fresh access token.
+	RefreshToken *string `json:"refreshToken,omitempty"`
+}
+
+// GatewayRefreshSessionTokenResponse Response containing the refreshed session JWT.
+type GatewayRefreshSessionTokenResponse struct {
+	// ExpireTime When the new token expires.
+	ExpireTime *time.Time `json:"expireTime,omitempty"`
+
+	// RefreshExpireTime When the refresh token expires.
+	RefreshExpireTime *time.Time `json:"refreshExpireTime,omitempty"`
+
+	// RefreshToken Refresh token for subsequent refreshes. In V1 this may be unchanged;
+	// later versions may rotate it.
+	RefreshToken *string `json:"refreshToken,omitempty"`
+
+	// Token New signed JWT with fresh TTL and the same session claims.
+	Token *string `json:"token,omitempty"`
+}
+
+// GatewayRegion defines model for gatewayRegion.
 type GatewayRegion string
 
 // GatewayReinforcementFineTuningJob defines model for gatewayReinforcementFineTuningJob.
@@ -8438,6 +9509,9 @@ type GatewayReinforcementFineTuningJob struct {
 	Dataset     string  `json:"dataset"`
 	DisplayName *string `json:"displayName,omitempty"`
 
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
+
 	// EvalAutoCarveout Whether to auto-carve the dataset for eval.
 	EvalAutoCarveout *bool `json:"evalAutoCarveout,omitempty"`
 
@@ -8462,7 +9536,6 @@ type GatewayReinforcementFineTuningJob struct {
 	// MaxConcurrentRollouts Maximum number of concurrent rollouts during the RFT job.
 	MaxConcurrentRollouts    *int32  `json:"maxConcurrentRollouts,omitempty"`
 	MaxInferenceReplicaCount *int32  `json:"maxInferenceReplicaCount,omitempty"`
-	McpServer                *string `json:"mcpServer,omitempty"`
 	Name                     *string `json:"name,omitempty"`
 
 	// NodeCount The number of nodes to use for the fine-tuning job.
@@ -8473,9 +9546,17 @@ type GatewayReinforcementFineTuningJob struct {
 	// OutputStats The output dataset's aggregated stats for the evaluation job.
 	OutputStats *string `json:"outputStats,omitempty"`
 
+	// Purpose Scheduling purpose for this job.
+	Purpose *GatewayPurpose `json:"purpose,omitempty"`
+
 	// State JobState represents the state an asynchronous job can be in.
 	//
 	//  - JOB_STATE_PAUSED: Job is paused, typically due to account suspension or manual intervention.
+	//  - JOB_STATE_DELETED: Job has been deleted.
+	//  - JOB_STATE_ARCHIVED: User-facing state for jobs whose row is retained post-delete (e.g. RLOR
+	// trainers within the checkpoint retention window). The internal row is
+	// still in JOB_STATE_DELETED; the gateway translates it to ARCHIVED on
+	// public responses.
 	State  *GatewayJobState `json:"state,omitempty"`
 	Status *GatewayStatus   `json:"status,omitempty"`
 
@@ -8485,6 +9566,9 @@ type GatewayReinforcementFineTuningJob struct {
 
 	// TrainingConfig Common training configurations.
 	TrainingConfig *GatewayBaseTrainingConfig `json:"trainingConfig,omitempty"`
+
+	// UseReservation Whether to try the account's reservation capacity before falling back to shared trainer capacity.
+	UseReservation *bool `json:"useReservation,omitempty"`
 
 	// WandbConfig The Weights & Biases team/user account for logging training progress.
 	WandbConfig *GatewayWandbConfig `json:"wandbConfig,omitempty"`
@@ -8513,16 +9597,27 @@ type GatewayReinforcementFineTuningJobInferenceParameters struct {
 // GatewayReinforcementLearningLossConfig Loss method + hyperparameters for reinforcement-learning-style fine-tuning (e.g. RFT / RL trainers).
 // For preference jobs (DPO API), the default loss method is GRPO when METHOD_UNSPECIFIED.
 type GatewayReinforcementLearningLossConfig struct {
+	// Dpo DPO-specific configuration. Intended for METHOD=DPO.
+	Dpo *GatewayDpoConfig `json:"dpo,omitempty"`
+
 	// KlBeta KL coefficient (beta) override for GRPO-like methods.
 	// If unset, the trainer default is used.
 	KlBeta *float32                               `json:"klBeta,omitempty"`
 	Method *ReinforcementLearningLossConfigMethod `json:"method,omitempty"`
+
+	// Orpo ORPO-specific configuration. Intended for METHOD=ORPO.
+	Orpo *GatewayOrpoConfig `json:"orpo,omitempty"`
 }
 
 // GatewayReplicaStats defines model for gatewayReplicaStats.
 type GatewayReplicaStats struct {
 	// DownloadingModelReplicaCount Number of replicas downloading model weights.
 	DownloadingModelReplicaCount *int32 `json:"downloadingModelReplicaCount,omitempty"`
+
+	// EffectiveReplicaCount The effective number of replicas currently serving traffic, including
+	// fractional progress toward a replica that is not yet fully ready. Equals
+	// ready_replica_count when no replica is partially ready.
+	EffectiveReplicaCount *float32 `json:"effectiveReplicaCount,omitempty"`
 
 	// InitializingReplicaCount Number of replicas initializing the model server.
 	InitializingReplicaCount *int32 `json:"initializingReplicaCount,omitempty"`
@@ -8531,7 +9626,8 @@ type GatewayReplicaStats struct {
 	PendingSchedulingReplicaCount *int32 `json:"pendingSchedulingReplicaCount,omitempty"`
 
 	// ReadyReplicaCount Number of replicas that are ready and serving traffic.
-	ReadyReplicaCount *int32 `json:"readyReplicaCount,omitempty"`
+	ReadyReplicaCount     *int32 `json:"readyReplicaCount,omitempty"`
+	RevocableReplicaCount *int32 `json:"revocableReplicaCount,omitempty"`
 }
 
 // GatewayRlorTrainerJob defines model for gatewayRlorTrainerJob.
@@ -8554,7 +9650,15 @@ type GatewayRlorTrainerJob struct {
 	// Dataset The name of the dataset used for training.
 	Dataset           *string `json:"dataset,omitempty"`
 	DirectRouteHandle *string `json:"directRouteHandle,omitempty"`
-	DisplayName       *string `json:"displayName,omitempty"`
+
+	// DisableInactivityCleanup Disable trainer inactivity cleanup. When true, the trainer is not
+	// automatically stopped due to inactivity. GPU usage continues to accrue while
+	// the trainer is running.
+	DisableInactivityCleanup *bool   `json:"disableInactivityCleanup,omitempty"`
+	DisplayName              *string `json:"displayName,omitempty"`
+
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
 
 	// EvalAutoCarveout Whether to auto-carve the dataset for eval.
 	EvalAutoCarveout *bool `json:"evalAutoCarveout,omitempty"`
@@ -8571,17 +9675,31 @@ type GatewayRlorTrainerJob struct {
 	// Only valid for service-mode or keep-alive jobs.
 	HotLoadDeploymentId *string `json:"hotLoadDeploymentId,omitempty"`
 
+	// InactivityTimeout Trainer inactivity timeout. The trainer reports tracked activity,
+	// including trainer API operations and active-session heartbeats. If no
+	// tracked activity is observed for this duration, the trainer is
+	// automatically stopped. When unset or 0, defaults to 60 minutes. Set
+	// disable_inactivity_cleanup to true to disable automatic cleanup. GPU usage
+	// continues to accrue while the trainer is running.
+	InactivityTimeout *string `json:"inactivityTimeout,omitempty"`
+
 	// JobProgress Job progress.
 	JobProgress *GatewayJobProgress `json:"jobProgress,omitempty"`
 	KeepAlive   *bool               `json:"keepAlive,omitempty"`
 
 	// LossConfig Reinforcement learning loss method + hyperparameters for the underlying trainer.
 	LossConfig *GatewayReinforcementLearningLossConfig `json:"lossConfig,omitempty"`
-	Name       *string                                 `json:"name,omitempty"`
+
+	// ManagedBy For managed service use only. Users do not need to set this field.
+	ManagedBy *string `json:"managedBy,omitempty"`
+	Name      *string `json:"name,omitempty"`
 
 	// NodeCount The number of nodes to use for the fine-tuning job.
 	// If not specified, the default is 1.
 	NodeCount *int32 `json:"nodeCount,omitempty"`
+
+	// Purpose Scheduling purpose for this job.
+	Purpose *GatewayPurpose `json:"purpose,omitempty"`
 
 	// RewardWeights A list of reward metrics to use for training in format of "<reward_name>=<weight>".
 	RewardWeights *[]string `json:"rewardWeights,omitempty"`
@@ -8589,25 +9707,53 @@ type GatewayRlorTrainerJob struct {
 	// RolloutDeploymentName Rollout deployment name associated with this RLOR trainer job.
 	// This is optional. If not set, trainer will not trigger weight sync to rollout engine.
 	RolloutDeploymentName *string `json:"rolloutDeploymentName,omitempty"`
-
-	// ServiceMode Service-mode RLOR trainers currently support full-parameter tuning only. When enabled, `trainingConfig.loraRank` must be 0 (`loraRank>0` is rejected).
-	ServiceMode *bool `json:"serviceMode,omitempty"`
+	ServiceMode           *bool   `json:"serviceMode,omitempty"`
 
 	// State JobState represents the state an asynchronous job can be in.
 	//
 	//  - JOB_STATE_PAUSED: Job is paused, typically due to account suspension or manual intervention.
+	//  - JOB_STATE_DELETED: Job has been deleted.
+	//  - JOB_STATE_ARCHIVED: User-facing state for jobs whose row is retained post-delete (e.g. RLOR
+	// trainers within the checkpoint retention window). The internal row is
+	// still in JOB_STATE_DELETED; the gateway translates it to ARCHIVED on
+	// public responses.
 	State  *GatewayJobState `json:"state,omitempty"`
 	Status *GatewayStatus   `json:"status,omitempty"`
+
+	// TrainerReplicaCount Data-parallel replica count for service-mode trainers. When unset or 0,
+	// defaults to 1. Values greater than 1 launch replicated HSDP training.
+	TrainerReplicaCount *int32 `json:"trainerReplicaCount,omitempty"`
 
 	// TrainingConfig Common training configurations.
 	TrainingConfig *GatewayBaseTrainingConfig `json:"trainingConfig,omitempty"`
 
-	// UsePurpose Use dedicated resources for the job. The only supported value
-	// currently is "pilot". Defaults to empty.
-	UsePurpose *string `json:"usePurpose,omitempty"`
-
 	// WandbConfig The Weights & Biases team/user account for logging training progress.
 	WandbConfig *GatewayWandbConfig `json:"wandbConfig,omitempty"`
+}
+
+// GatewayRlorTrainerJobCheckpoint A checkpoint saved during an RLOR trainer job. Checkpoints are stored in GCS
+// and discovered on-demand (not persisted in the database).
+type GatewayRlorTrainerJobCheckpoint struct {
+	// Availability Storage availability known for this checkpoint. Physical storage URIs are
+	// intentionally not exposed; use restore_reference for restore workflows.
+	Availability *[]GatewayCheckpointAvailability `json:"availability,omitempty"`
+
+	// CheckpointType The type of checkpoint.
+	CheckpointType *GatewayCheckpointType `json:"checkpointType,omitempty"`
+
+	// CreateTime The creation time of the checkpoint (from GCS object metadata).
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	Name       *string    `json:"name,omitempty"`
+
+	// Promotable Whether this checkpoint can be promoted to a model.
+	// Only INFERENCE_BASE and INFERENCE_LORA checkpoints are promotable.
+	// INFERENCE_ARC_V2 and TRAINING_* checkpoints cannot be promoted directly.
+	Promotable       *bool   `json:"promotable,omitempty"`
+	RestoreReference *string `json:"restoreReference,omitempty"`
+
+	// UpdateTime The update time of the checkpoint. Equal to create_time since
+	// checkpoints are immutable GCS objects.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
 // GatewayRolloutStrategy The rollout strategy to use when deploying the model version.
@@ -8658,9 +9804,61 @@ type GatewayRouter struct {
 //   - DELETING: The router is being deleted.
 type GatewayRouterState string
 
-// GatewaySamlConfig defines model for gatewaySamlConfig.
+// GatewaySKUInfo defines model for gatewaySKUInfo.
+type GatewaySKUInfo struct {
+	// Amount Represents an amount of money with its currency type.
+	Amount *TypeMoney `json:"amount,omitempty"`
+	Sku    *string    `json:"sku,omitempty"`
+	Unit   *string    `json:"unit,omitempty"`
+}
+
+// GatewaySamlConfig SAML Configuration
+// Exactly one of metadata_url or metadata_xml must be provided.
 type GatewaySamlConfig struct {
-	MetadataUrl string `json:"metadataUrl"`
+	MetadataUrl *string `json:"metadataUrl,omitempty"`
+	MetadataXml *string `json:"metadataXml,omitempty"`
+
+	// SamlEmailAttribute The SAML attribute name that contains the user's email address.
+	// Different identity providers use different attribute names for email:
+	//   - Azure AD / ADFS / Okta: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress" (default)
+	//   - Rippling / some SAML IdPs: "email"
+	//   - X.500 / LDAP-based IdPs: "urn:oid:1.2.840.113549.1.9.1"
+	// If not set, defaults to "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress".
+	SamlEmailAttribute *string `json:"samlEmailAttribute,omitempty"`
+}
+
+// GatewayScalingSchedule defines model for gatewayScalingSchedule.
+type GatewayScalingSchedule struct {
+	// Description Human-readable description of the schedule.
+	// e.g., "Weekday business hours", "Wednesday peak load".
+	Description *string `json:"description,omitempty"`
+
+	// Disabled If true, this schedule is temporarily disabled without being deleted.
+	// Useful for holidays or temporary schedule changes.
+	Disabled *bool `json:"disabled,omitempty"`
+
+	// Duration Duration that the schedule remains active after the cron trigger.
+	// Must be between 300 seconds (5 minutes) and 604,800 seconds (7 days),
+	// and use whole-second precision. Schedules needing longer windows should
+	// raise the deployment's base min_replica_count instead.
+	// Example: "36000s" = 10 hours (e.g., 8am to 6pm).
+	Duration string `json:"duration"`
+
+	// MinReplicaCount Minimum number of replicas guaranteed when this schedule is active.
+	// When multiple schedules overlap, the effective minimum is the highest
+	// min_replica_count across all active schedules ("max wins").
+	// Must be >= 0 and <= the deployment's max_replica_count.
+	MinReplicaCount int32 `json:"minReplicaCount"`
+
+	// Schedule Cron expression defining when this schedule's window starts.
+	// Standard 5-field cron format: minute hour day-of-month month day-of-week.
+	// Examples: "0 8 * * Mon-Fri" (8am weekdays), "0 0 1 * *" (midnight on 1st of month).
+	Schedule string `json:"schedule"`
+
+	// Timezone IANA timezone for the cron expression. e.g., "America/New_York", "Europe/London", "UTC".
+	// Required because cron expressions without a timezone are ambiguous.
+	// DST transitions are handled automatically.
+	Timezone string `json:"timezone"`
 }
 
 // GatewaySecret defines model for gatewaySecret.
@@ -8673,32 +9871,61 @@ type GatewaySecret struct {
 	Value *string `json:"value,omitempty"`
 }
 
-// GatewayShellExecutor Execute a shell script.
-type GatewayShellExecutor struct {
-	Command string `json:"command"`
-}
-
-// GatewaySnapshot defines model for gatewaySnapshot.
-type GatewaySnapshot struct {
-	// CreateTime The creation time of the snapshot.
+// GatewayServerlessMode ServerlessMode is one way a serverless base model can be invoked — standard
+// serverless (default), Priority, Fast, or Spot — together with the invocation
+// recipe customers must use for it.
+//
+// It is a child resource of the base Model: the {ServerlessModeId} segment of
+// the resource name IS the mode name (default | priority | fast | spot). The
+// base model is the linking key for all of its serverless modes, even when a mode
+// is served through a different resource (a Fast router, a Spot deployment).
+//
+// Modes split into two classes:
+//   - Alternate-resource modes (usage_identifier set) — e.g. fast resolves to a
+//     router, spot to the spot deployment's own model id.
+//   - Flag modes (service_tier set) — e.g. priority uses the base model id plus
+//     a request-body service_tier flag.
+//
+// Pricing is sourced live from Orb (keyed by the resolved model name / tier),
+// so no price is stored on the mode.
+type GatewayServerlessMode struct {
 	CreateTime *time.Time `json:"createTime,omitempty"`
 
-	// ImageRef The URI of the container image for this snapshot.
-	ImageRef *string `json:"imageRef,omitempty"`
-	Name     *string `json:"name,omitempty"`
+	// Name The resource name, e.g.
+	// accounts/fireworks/models/kimi-k3/serverlessModes/fast.
+	// {AccountId} must be a serverless account (fireworks, ...);
+	// {ModelId} is the base model's id; {ServerlessModeId} is the mode name
+	// (default | priority | fast | spot).
+	Name *string `json:"name,omitempty"`
 
-	// State The state of the snapshot.
-	State *GatewaySnapshotState `json:"state,omitempty"`
+	// ServiceTier Invocation recipe: the service_tier request-body flag layered on top of the
+	// model id (e.g. "priority"). Only the priority mode sets this today.
+	ServiceTier *string `json:"serviceTier,omitempty"`
 
-	// Status The status code and message of the snapshot.
-	Status *GatewayStatus `json:"status,omitempty"`
+	// SkuInfos Per-mode token pricing, sourced live from Orb on read. Reuses the
+	// same SKUInfo type as Model.sku_infos (e.g. "LLM input tokens (uncached)",
+	// "LLM input tokens (cached)", "LLM output tokens"; google.type.Money at
+	// unit="1M tokens"). Resolved per tier (DEFAULT/PRIORITY/FAST/...). Empty on
+	// the stored config; only populated by ListServerlessModels.
+	//
+	// (api_only) keeps this derived field out of the database entirely (like
+	// Model.sku_infos): it is never persisted by the admin write path and never
+	// read back from storage, only computed live at read time.
+	SkuInfos   *[]GatewaySKUInfo `json:"skuInfos,omitempty"`
+	UpdateTime *time.Time        `json:"updateTime,omitempty"`
 
-	// UpdateTime The update time for the snapshot.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
+	// UpdatedBy The user who last mutated this mode (audit).
+	UpdatedBy *string `json:"updatedBy,omitempty"`
+
+	// UsageIdentifier Invocation recipe: the value to pass as "model" in inference requests.
+	// Empty means use the base model id. May reference a DIFFERENT resource
+	// than the base model — a model OR a router, e.g.
+	// accounts/fireworks/routers/kimi-k3-fast for fast.
+	UsageIdentifier *string `json:"usageIdentifier,omitempty"`
+
+	// UseCases Curated use-case tags driving discovery filters (e.g. "coding").
+	UseCases *[]string `json:"useCases,omitempty"`
 }
-
-// GatewaySnapshotState defines model for gatewaySnapshotState.
-type GatewaySnapshotState string
 
 // GatewaySplitDatasetResponse defines model for gatewaySplitDatasetResponse.
 type GatewaySplitDatasetResponse struct {
@@ -8732,7 +9959,10 @@ type GatewaySupervisedFineTuningJob struct {
 	// BaseModel The name of the base model to be fine-tuned
 	// Only one of 'base_model' or 'warm_start_from' should be specified.
 	BaseModel *string `json:"baseModel,omitempty"`
-	BatchSize *int32  `json:"batchSize,omitempty"`
+
+	// BatchSize Deprecated: legacy V1 token budget. Training V2 batches by samples via
+	// batch_size_samples.
+	BatchSize *int32 `json:"batchSize,omitempty"`
 
 	// BatchSizeSamples The number of samples per gradient batch.
 	BatchSizeSamples *int32     `json:"batchSizeSamples,omitempty"`
@@ -8746,8 +9976,11 @@ type GatewaySupervisedFineTuningJob struct {
 	Dataset     string  `json:"dataset"`
 	DisplayName *string `json:"displayName,omitempty"`
 
-	// EarlyStop Whether to stop training early if the validation loss does not improve.
+	// EarlyStop Deprecated: early stopping is not supported by managed training.
 	EarlyStop *bool `json:"earlyStop,omitempty"`
+
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
 
 	// Epochs The number of epochs to train for.
 	Epochs *int32 `json:"epochs,omitempty"`
@@ -8759,11 +9992,18 @@ type GatewaySupervisedFineTuningJob struct {
 	EvalAutoCarveout *bool `json:"evalAutoCarveout,omitempty"`
 
 	// EvaluationDataset The name of a separate dataset to use for evaluation.
-	EvaluationDataset         *string `json:"evaluationDataset,omitempty"`
-	GradientAccumulationSteps *int32  `json:"gradientAccumulationSteps,omitempty"`
+	EvaluationDataset *string `json:"evaluationDataset,omitempty"`
+
+	// GradientAccumulationSteps Deprecated: legacy V1 gradient accumulation. Training V2 batches by
+	// samples via batch_size_samples and rejects this field when set.
+	GradientAccumulationSteps *int32 `json:"gradientAccumulationSteps,omitempty"`
 
 	// IsTurbo Whether to run the fine-tuning job in turbo mode.
-	IsTurbo       *bool   `json:"isTurbo,omitempty"`
+	IsTurbo *bool `json:"isTurbo,omitempty"`
+
+	// JinjaTemplate Deprecated: literal Jinja templates are not supported by Training V2.
+	// Conversation rendering is selected from the base model's registered
+	// renderer configuration instead.
 	JinjaTemplate *string `json:"jinjaTemplate,omitempty"`
 
 	// JobProgress Job progress.
@@ -8776,15 +10016,28 @@ type GatewaySupervisedFineTuningJob struct {
 	// LoraRank The rank of the LoRA layers.
 	LoraRank *int32 `json:"loraRank,omitempty"`
 
+	// LrScheduler The learning-rate schedule (constant/linear/cosine + per-type knobs).
+	// When unset, the trainer uses the legacy constant schedule.
+	LrScheduler *GatewayLearningRateScheduler `json:"lrScheduler,omitempty"`
+
 	// MaxContextLength The maximum context length to use with the model.
 	MaxContextLength     *int32  `json:"maxContextLength,omitempty"`
 	MetricsFileSignedUrl *string `json:"metricsFileSignedUrl,omitempty"`
-	MtpEnabled           *bool   `json:"mtpEnabled,omitempty"`
-	MtpFreezeBaseModel   *bool   `json:"mtpFreezeBaseModel,omitempty"`
-	MtpNumDraftTokens    *int32  `json:"mtpNumDraftTokens,omitempty"`
-	Name                 *string `json:"name,omitempty"`
 
-	// Nodes The number of nodes to use for the fine-tuning job.
+	// MtpEnabled Deprecated: MTP is no longer supported by managed training. This field is
+	// retained for API wire compatibility only.
+	MtpEnabled *bool `json:"mtpEnabled,omitempty"`
+
+	// MtpFreezeBaseModel Deprecated: see mtp_enabled.
+	MtpFreezeBaseModel *bool `json:"mtpFreezeBaseModel,omitempty"`
+
+	// MtpNumDraftTokens Deprecated: see mtp_enabled.
+	MtpNumDraftTokens *int32  `json:"mtpNumDraftTokens,omitempty"`
+	Name              *string `json:"name,omitempty"`
+
+	// Nodes Deprecated: multi-node scheduling is now handled by the cookbook
+	// orchestrator in V2 workflows. This field is ignored for V2 jobs and
+	// will be removed in a future release.
 	Nodes *int32 `json:"nodes,omitempty"`
 
 	// OptimizerWeightDecay Weight decay (L2 regularization) for optimizer.
@@ -8793,12 +10046,20 @@ type GatewaySupervisedFineTuningJob struct {
 	// OutputModel The model ID to be assigned to the resulting fine-tuned model. If not specified, the job ID will be used.
 	OutputModel *string `json:"outputModel,omitempty"`
 
-	// Region The region where the fine-tuning job is located.
-	Region *GatewayRegion `json:"region,omitempty"`
+	// Purpose Scheduling purpose for this job.
+	Purpose *GatewayPurpose `json:"purpose,omitempty"`
+
+	// RenderSamplesSignedUrl The signed URL for orchestrator-rendered token IDs and loss masks.
+	RenderSamplesSignedUrl *string `json:"renderSamplesSignedUrl,omitempty"`
 
 	// State JobState represents the state an asynchronous job can be in.
 	//
 	//  - JOB_STATE_PAUSED: Job is paused, typically due to account suspension or manual intervention.
+	//  - JOB_STATE_DELETED: Job has been deleted.
+	//  - JOB_STATE_ARCHIVED: User-facing state for jobs whose row is retained post-delete (e.g. RLOR
+	// trainers within the checkpoint retention window). The internal row is
+	// still in JOB_STATE_DELETED; the gateway translates it to ARCHIVED on
+	// public responses.
 	State  *GatewayJobState `json:"state,omitempty"`
 	Status *GatewayStatus   `json:"status,omitempty"`
 
@@ -8809,10 +10070,6 @@ type GatewaySupervisedFineTuningJob struct {
 	// UpdateTime The update time for the supervised fine-tuning job.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 
-	// UsePurpose Use dedicated resources for the job. The only supported value
-	// currently is "pilot". Defaults to empty.
-	UsePurpose *string `json:"usePurpose,omitempty"`
-
 	// WandbConfig The Weights & Biases team/user account for logging training progress.
 	WandbConfig *GatewayWandbConfig `json:"wandbConfig,omitempty"`
 
@@ -8821,15 +10078,42 @@ type GatewaySupervisedFineTuningJob struct {
 	WarmStartFrom *string `json:"warmStartFrom,omitempty"`
 }
 
+// GatewaySyncRlorTrainerJobCheckpointResponse defines model for gatewaySyncRlorTrainerJobCheckpointResponse.
+type GatewaySyncRlorTrainerJobCheckpointResponse struct {
+	// Checkpoint The checkpoint after the sync attempt, including the availability classes
+	// known to the control plane. A successful regional-to-durable sync normally
+	// returns both SINGLE_REGION and MANAGED_DURABLE availability; a successful
+	// durable-to-regional sync normally returns MANAGED_DURABLE plus
+	// SINGLE_REGION for the requested region.
+	Checkpoint *GatewayRlorTrainerJobCheckpoint `json:"checkpoint,omitempty"`
+}
+
 // GatewayTEFTDetails defines model for gatewayTEFTDetails.
 type GatewayTEFTDetails = map[string]interface{}
 
+// GatewayTimeSeries defines model for gatewayTimeSeries.
+type GatewayTimeSeries struct {
+	Labels *map[string]string        `json:"labels,omitempty"`
+	Values *[]GatewayTimeSeriesPoint `json:"values,omitempty"`
+}
+
+// GatewayTimeSeriesPoint defines model for gatewayTimeSeriesPoint.
+type GatewayTimeSeriesPoint struct {
+	Timestamp *string `json:"timestamp,omitempty"`
+	Value     *string `json:"value,omitempty"`
+}
+
 // GatewayTrail defines model for gatewayTrail.
 type GatewayTrail struct {
-	CreateTime  *time.Time `json:"createTime,omitempty"`
-	CreatedBy   *string    `json:"createdBy,omitempty"`
-	Description *string    `json:"description,omitempty"`
-	DisplayName *string    `json:"displayName,omitempty"`
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	CreatedBy  *string    `json:"createdBy,omitempty"`
+
+	// DefaultModel Default model for requests through this trail.
+	// Format: "{provider}/{model_id}" (e.g., "anthropic/claude-3-5-sonnet-20240620").
+	// Can be overridden per request.
+	DefaultModel *string `json:"defaultModel,omitempty"`
+	Description  *string `json:"description,omitempty"`
+	DisplayName  *string `json:"displayName,omitempty"`
 
 	// LangfuseConfig Langfuse configuration for this trail, inherited from the account at creation time.
 	// Contains API credentials for a Project within the customer's Langfuse Organization.
@@ -8837,6 +10121,273 @@ type GatewayTrail struct {
 	// If empty, the default Langfuse Organization/Project will be used.
 	LangfuseConfig *string `json:"langfuseConfig,omitempty"`
 	Name           *string `json:"name,omitempty"`
+
+	// ProviderKey Provider API key for this trail.
+	// When creating a trail: provide the raw API key (e.g., "sk-ant-api03-xxxx...")
+	// After creation: this field contains a secret reference (e.g., "accounts/{account_id}/secrets/trail-xxx-provider-key")
+	// The LiteLLM gateway retrieves the actual key from Secret Manager using this reference.
+	// Can be overridden by specifying api_key in the request body.
+	ProviderKey *string    `json:"providerKey,omitempty"`
+	UpdateTime  *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayTrailMetrics Metrics for a trail, fetched from the tracing service.
+type GatewayTrailMetrics struct {
+	// CompletionTokenCount Number of completion tokens across all traces in this trail.
+	CompletionTokenCount *string `json:"completionTokenCount,omitempty"`
+
+	// FirstTraceTime Timestamp of the first trace in this trail.
+	FirstTraceTime *time.Time `json:"firstTraceTime,omitempty"`
+
+	// LastTraceTime Timestamp of the most recent trace in this trail.
+	LastTraceTime *time.Time `json:"lastTraceTime,omitempty"`
+
+	// PromptTokenCount Number of prompt tokens across all traces in this trail.
+	PromptTokenCount *string `json:"promptTokenCount,omitempty"`
+
+	// TotalTokenCount Number of total tokens across all traces in this trail.
+	TotalTokenCount *string `json:"totalTokenCount,omitempty"`
+
+	// TotalTraceCount Total number of traces collected for this trail.
+	TotalTraceCount *string `json:"totalTraceCount,omitempty"`
+}
+
+// GatewayTrainerShardingScheme Structured parallelism/sharding profile used by trainer launches.
+type GatewayTrainerShardingScheme struct {
+	// ContextParallelism Context-parallel degree. 0 means unspecified (server defaults to 1).
+	ContextParallelism *int32 `json:"contextParallelism,omitempty"`
+
+	// ExpertParallelism Expert-parallel degree. 0 means unspecified (server defaults to 1).
+	ExpertParallelism *int32 `json:"expertParallelism,omitempty"`
+
+	// PipelineParallelism Pipeline-parallel degree. 0 means unspecified (server defaults to 1).
+	PipelineParallelism *int32 `json:"pipelineParallelism,omitempty"`
+
+	// SequenceParallelism Whether sequence parallelism should be enabled.
+	SequenceParallelism *bool `json:"sequenceParallelism,omitempty"`
+
+	// TensorParallelism Tensor-parallel degree. 0 means unspecified (server defaults to 1).
+	TensorParallelism *int32 `json:"tensorParallelism,omitempty"`
+}
+
+// GatewayTrainingCurve TrainingCurve is a contiguous time series of (step, value) pairs aligned
+// by index, for a single metric on a TrainingSession. Item type in the
+// AIP-132 list response for ListTrainingSessionTrainingCurves.
+type GatewayTrainingCurve struct {
+	// MetricKey Metric key (e.g. "reward", "loss"). Natural key per session.
+	MetricKey *string `json:"metricKey,omitempty"`
+
+	// Steps Step values; aligned by index with `values`.
+	Steps *[]string `json:"steps,omitempty"`
+
+	// Values Scalar observations; aligned by index with `steps`.
+	Values *[]float64 `json:"values,omitempty"`
+}
+
+// GatewayTrainingRun TrainingRun is the durable, account-owned model lineage created by the Tinker
+// SDK's create_lora_training_client. A TrainingSession (the ServiceClient
+// connection) may host many runs, and a single run may span sessions across
+// resume.
+type GatewayTrainingRun struct {
+	// BaseModel Base model resource name the run fine-tunes (accounts/{a}/models/{m}).
+	// Set once at create_model and immutable thereafter.
+	BaseModel  *string    `json:"baseModel,omitempty"`
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	CreatedBy  *string    `json:"createdBy,omitempty"`
+
+	// LoraRank LoRA rank for this run. Set once at create_model.
+	LoraRank *int32  `json:"loraRank,omitempty"`
+	Name     *string `json:"name,omitempty"`
+
+	// SourceTrainingSessionId The TrainingSession this run was first created under (its source session).
+	// A run is created under a session but persists across sessions — it can
+	// later be loaded under a different session — so this records the originating
+	// session for lineage. Set once at create and immutable.
+	SourceTrainingSessionId *string `json:"sourceTrainingSessionId,omitempty"`
+
+	// State Materialization state for the trainer-side model backing this run.
+	//
+	// UNSPECIFIED is reserved for legacy rows created before the explicit state
+	// machine existed; reconcilers must not sweep it.
+	//
+	//  - EXPIRED: Clean lifecycle expiry (owning session went idle / was torn down), not a
+	// trainer failure. Distinct from FAILED so callers can tell the two apart.
+	State      *GatewayTrainingRunState `json:"state,omitempty"`
+	Status     *GatewayStatus           `json:"status,omitempty"`
+	UpdateTime *time.Time               `json:"updateTime,omitempty"`
+}
+
+// GatewayTrainingRunState Materialization state for the trainer-side model backing this run.
+//
+// UNSPECIFIED is reserved for legacy rows created before the explicit state
+// machine existed; reconcilers must not sweep it.
+//
+//   - EXPIRED: Clean lifecycle expiry (owning session went idle / was torn down), not a
+//
+// trainer failure. Distinct from FAILED so callers can tell the two apart.
+type GatewayTrainingRunState string
+
+// GatewayTrainingSession TrainingSession represents a single training context on a shared trainer.
+// It starts with a base model reference and can have LoRA adapters loaded or
+// promoted via LoadTrainingSessionState. Each session gets its own
+// inference route in the API gateway.
+type GatewayTrainingSession struct {
+	// BaseModel Base model resource name (accounts/{a}/models/{m}). Supplied at create_model
+	// (bind), not at create_session (reserve) — so OPTIONAL at the wire level and
+	// set-once / IMMUTABLE thereafter.
+	BaseModel  *string    `json:"baseModel,omitempty"`
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	CreatedBy  *string    `json:"createdBy,omitempty"`
+
+	// DisplayName Human-readable display name of the training session. e.g. "Training session"
+	// Must be fewer than 64 characters long.
+	DisplayName *string `json:"displayName,omitempty"`
+	Name        *string `json:"name,omitempty"`
+
+	// ReferenceState ReferenceState indicates whether the session currently references the
+	// base model or a loaded LoRA adapter. Updated automatically when
+	// LoadTrainingSessionState is called.
+	//
+	//  - BASE: Session is using the base model (no adapter loaded).
+	//  - ADAPTER: Session has a LoRA adapter loaded.
+	ReferenceState *TrainingSessionReferenceState `json:"referenceState,omitempty"`
+
+	// State AIP-216 lifecycle. DELETING is observable when DeleteTrainingSession
+	// releases the shared-trainer binding before the row is removed; Create
+	// is synchronous today and lands in READY directly, so no CREATING
+	// value is declared until an async Create path actually emits it
+	// (minimal-surface rule).
+	State      *GatewayTrainingSessionState `json:"state,omitempty"`
+	Status     *GatewayStatus               `json:"status,omitempty"`
+	UpdateTime *time.Time                   `json:"updateTime,omitempty"`
+}
+
+// GatewayTrainingSessionCheckpoint A checkpoint saved during a TrainingSession. Returned by
+// ListTrainingSessionCheckpoints and, when promotable, can be turned into a
+// customer-owned Model via PromoteTrainingSessionCheckpoint.
+type GatewayTrainingSessionCheckpoint struct {
+	// Availability Where the checkpoint's bytes are available — at most one entry per
+	// (availability_class, region). MANAGED_DURABLE for the durable copy;
+	// SINGLE_REGION for a region-local copy.
+	Availability *[]GatewayCheckpointAvailability `json:"availability,omitempty"`
+
+	// CheckpointName The name given to this checkpoint when it was saved (e.g. "step-5").
+	CheckpointName *string `json:"checkpointName,omitempty"`
+
+	// CheckpointType The kind of artifact — TRAINING_LORA for resumable training state,
+	// INFERENCE_LORA for an adapter that can be promoted to a Model.
+	CheckpointType *GatewayCheckpointType `json:"checkpointType,omitempty"`
+	CreateTime     *time.Time             `json:"createTime,omitempty"`
+	Name           *string                `json:"name,omitempty"`
+
+	// Promotable True when this checkpoint can be promoted to an inference Model
+	// (inference adapters). False for resumable training-state checkpoints.
+	Promotable *bool `json:"promotable,omitempty"`
+
+	// UpdateTime Mirrors create_time. Checkpoints are immutable once saved, so there is
+	// no separate update event; present for resource-shape uniformity.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayTrainingSessionChunkOutput defines model for gatewayTrainingSessionChunkOutput.
+type GatewayTrainingSessionChunkOutput struct {
+	// CheckpointPath Server-signed URL (24h TTL) suitable for direct browser download. Empty
+	// string when signing is unavailable for the underlying object.
+	CheckpointPath *string                      `json:"checkpointPath,omitempty"`
+	CreateTime     *time.Time                   `json:"createTime,omitempty"`
+	Distribution   *GatewayDistributionSnapshot `json:"distribution,omitempty"`
+	EndOfEpoch     *bool                        `json:"endOfEpoch,omitempty"`
+	EpochId        *string                      `json:"epochId,omitempty"`
+
+	// EpochStreamlogPath Server-signed URL (24h TTL). Empty when signing is unavailable.
+	EpochStreamlogPath *string    `json:"epochStreamlogPath,omitempty"`
+	Name               *string    `json:"name,omitempty"`
+	OutputDatasetName  *string    `json:"outputDatasetName,omitempty"`
+	Step               *int32     `json:"step,omitempty"`
+	UpdateTime         *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayTrainingSessionState AIP-216 lifecycle. DELETING is observable when DeleteTrainingSession
+// releases the shared-trainer binding before the row is removed; Create
+// is synchronous today and lands in READY directly, so no CREATING
+// value is declared until an async Create path actually emits it
+// (minimal-surface rule).
+type GatewayTrainingSessionState string
+
+// GatewayTrainingShape defines model for gatewayTrainingShape.
+type GatewayTrainingShape struct {
+	// AcceleratorCount Total number of accelerators used by the job.
+	AcceleratorCount *int32 `json:"acceleratorCount,omitempty"`
+
+	// AcceleratorType The type of accelerator to use.
+	AcceleratorType *GatewayAcceleratorType `json:"acceleratorType,omitempty"`
+	BaseModel       string                  `json:"baseModel"`
+
+	// BaseModelWeightPrecision Default precision for base weights during training (prefer BF16; QLoRA/QAT omitted).
+	BaseModelWeightPrecision *GatewayWeightPrecision `json:"baseModelWeightPrecision,omitempty"`
+
+	// CreateTime The creation time of the training shape.
+	CreateTime             *time.Time `json:"createTime,omitempty"`
+	DeploymentShapeVersion *string    `json:"deploymentShapeVersion,omitempty"`
+
+	// Description The description of the training shape. Must be fewer than 1000 characters long.
+	Description *string `json:"description,omitempty"`
+
+	// DisplayName Human-readable display name of the training shape. e.g. "Llama3 70B H200 BF16"
+	// Must be fewer than 64 characters long.
+	DisplayName *string `json:"displayName,omitempty"`
+
+	// MaxSupportedContextLength Capacity limits validated for this shape.
+	MaxSupportedContextLength *int32 `json:"maxSupportedContextLength,omitempty"`
+
+	// MinTotalAcceleratorCount Minimum total accelerator count (world size, across all data-parallel
+	// replicas) this shape has been validated at.
+	// Written from shape-validation CI evidence; do not hand-edit downward.
+	MinTotalAcceleratorCount *int32 `json:"minTotalAcceleratorCount,omitempty"`
+
+	// ModelType The model type of the base model (e.g. "llama", "qwen").
+	ModelType *string `json:"modelType,omitempty"`
+	Name      *string `json:"name,omitempty"`
+
+	// NodeCount Node count validated for the launch profile.
+	NodeCount *int32 `json:"nodeCount,omitempty"`
+
+	// ParameterCount The parameter count of the base model, used for billion-parameter bucket matching.
+	ParameterCount *string `json:"parameterCount,omitempty"`
+
+	// TrainerImageTag The validated trainer runtime image tag used for numerics verification.
+	TrainerImageTag string `json:"trainerImageTag"`
+
+	// TrainerMode Trainer mode used for the validated launch profile.
+	TrainerMode *TrainingShapeTrainerMode `json:"trainerMode,omitempty"`
+
+	// TrainerShardingScheme Structured sharding/parallelism profile validated for the trainer launch.
+	TrainerShardingScheme *GatewayTrainerShardingScheme `json:"trainerShardingScheme,omitempty"`
+
+	// UpdateTime The update time for the training shape.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayTrainingShapeVersion defines model for gatewayTrainingShapeVersion.
+type GatewayTrainingShapeVersion struct {
+	CreateTime *time.Time `json:"createTime,omitempty"`
+
+	// LatestValidated If true, this version is the latest validated version (at most one per shape).
+	LatestValidated *bool   `json:"latestValidated,omitempty"`
+	Name            *string `json:"name,omitempty"`
+
+	// Public If true, this version will be publicly readable.
+	Public *bool `json:"public,omitempty"`
+
+	// Snapshot Full snapshot of the TrainingShape at this version.
+	Snapshot *GatewayTrainingShape `json:"snapshot,omitempty"`
+
+	// UpdateTime Last update time of mutable fields such as validated/public.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Validated Whether this version has been validated through capacity tests.
+	// Only superusers can set this flag.
+	Validated *bool `json:"validated,omitempty"`
 }
 
 // GatewayTransformed defines model for gatewayTransformed.
@@ -8844,6 +10395,66 @@ type GatewayTransformed struct {
 	Filter          *string        `json:"filter,omitempty"`
 	OriginalFormat  *DatasetFormat `json:"originalFormat,omitempty"`
 	SourceDatasetId string         `json:"sourceDatasetId"`
+}
+
+// GatewayUsageBucket Line items for a single time bucket. The bucket size matches the request's
+// granularity (one day for DAILY, the only granularity supported today;
+// coarser buckets such as monthly may be added later).
+type GatewayUsageBucket struct {
+	// EndTime End of the bucket.
+	EndTime   *time.Time         `json:"endTime,omitempty"`
+	LineItems *[]GatewayLineItem `json:"lineItems,omitempty"`
+
+	// StartTime Start of the bucket.
+	StartTime *time.Time `json:"startTime,omitempty"`
+}
+
+// GatewayUsageCostDimensions Grouping values for one usage cost row. Fields not requested in group_by are
+// left empty.
+type GatewayUsageCostDimensions struct {
+	// ApiKeyId Stable API key ID.
+	ApiKeyId *string `json:"apiKeyId,omitempty"`
+
+	// Model Canonical model resource name.
+	Model *string `json:"model,omitempty"`
+
+	// StartTime Start of the UTC HOUR or DAY bucket intersected with the requested range.
+	// The first bucket may start at the request's start_time.
+	StartTime *time.Time `json:"startTime,omitempty"`
+
+	// UnattributedDimensions Requested dimensions that were absent from the billing event. More than
+	// one dimension may be absent when the query groups by two dimensions.
+	UnattributedDimensions *[]QueryUsageCostsRequestDimension `json:"unattributedDimensions,omitempty"`
+
+	// UnknownModel Whether a populated billing model could not be mapped to a public model.
+	// The internal model value is not exposed.
+	UnknownModel *bool `json:"unknownModel,omitempty"`
+
+	// User User resource name.
+	User *string `json:"user,omitempty"`
+}
+
+// GatewayUsageCostFilter Exact property filters for a usage cost query. Populated fields are ANDed.
+type GatewayUsageCostFilter struct {
+	// ApiKeyId Stable API key ID. This is never plaintext key material.
+	ApiKeyId *string `json:"apiKeyId,omitempty"`
+	Model    *string `json:"model,omitempty"`
+
+	// SessionId Exact client session ID. Valid only for self-scoped queries. This value is
+	// used only as a filter and is never returned in the response.
+	SessionId *string `json:"sessionId,omitempty"`
+	User      *string `json:"user,omitempty"`
+}
+
+// GatewayUsageCostRow One row in a usage cost query.
+type GatewayUsageCostRow struct {
+	// Dimensions Grouping values for one usage cost row. Fields not requested in group_by are
+	// left empty.
+	Dimensions *GatewayUsageCostDimensions `json:"dimensions,omitempty"`
+
+	// Subtotal Usage priced with the applicable subscription prices. This excludes fixed
+	// fees and invoice-level discounts, minimums, credits, and taxes.
+	Subtotal *TypeMoney `json:"subtotal,omitempty"`
 }
 
 // GatewayUser defines model for gatewayUser.
@@ -8859,7 +10470,11 @@ type GatewayUser struct {
 	Email *string `json:"email,omitempty"`
 	Name  *string `json:"name,omitempty"`
 
-	// Role The user's role: admin, user, contributor, or inference-user.
+	// PermissionPreset The permission preset for this user. Only valid when role is "custom".
+	PermissionPreset *string `json:"permissionPreset,omitempty"`
+
+	// Role The user's role: admin, user, contributor, inference-user, or custom.
+	// When set to "custom", the user's permissions are governed by permission_preset.
 	Role           string `json:"role"`
 	ServiceAccount *bool  `json:"serviceAccount,omitempty"`
 
@@ -8878,6 +10493,68 @@ type GatewayUserState string
 
 // GatewayUserUploaded defines model for gatewayUserUploaded.
 type GatewayUserUploaded = map[string]interface{}
+
+// GatewayUserUsageLimitIncreaseRequest UserUsageLimitIncreaseRequest is a member's request to raise their per-user
+// serverless cap; an admin approves (applies the override) or rejects it. Full
+// history is kept: one row per request.
+type GatewayUserUsageLimitIncreaseRequest struct {
+	// CreateTime When the request was filed.
+	CreateTime *time.Time `json:"createTime,omitempty"`
+
+	// DecidedBy The admin who approved or rejected it (user id, else email). Unset while
+	// PENDING.
+	DecidedBy *string `json:"decidedBy,omitempty"`
+
+	// DecisionTime When the request was approved or rejected. Unset while PENDING.
+	DecisionTime *time.Time `json:"decisionTime,omitempty"`
+	Name         *string    `json:"name,omitempty"`
+
+	// PreviousLimit The user's effective cap when the request was filed.
+	PreviousLimit *TypeMoney `json:"previousLimit,omitempty"`
+
+	// RequestState Current state; server-owned (set on create and admin decision).
+	RequestState *UserUsageLimitIncreaseRequestRequestState `json:"requestState,omitempty"`
+
+	// RequestedLimit Requested per-user cap. Must exceed the current effective cap.
+	RequestedLimit TypeMoney `json:"requestedLimit"`
+
+	// UserId The user the request is for. Self-serve only: a member may request only for
+	// themselves, so this is also the requester.
+	UserId string `json:"userId"`
+}
+
+// GatewayUserUsageLimits UserUsageLimits is a single user's usage-limits singleton: their optional
+// override cap, their resolved effective cap, their current-period usage, and
+// whether (and until when) they are over their limit. There is exactly one per
+// user. The override cap is stored; the effective cap, usage, enforcement mode,
+// and exceeded_until are computed at read time.
+type GatewayUserUsageLimits struct {
+	// EffectiveLimit The user's resolved effective cap: their override, else the account
+	// default. Unset means the user has no cap (unlimited). Computed at read
+	// time; not stored.
+	EffectiveLimit *TypeMoney `json:"effectiveLimit,omitempty"`
+
+	// EnforcementMode Enforcement mode from the governing account policy. Read from the account
+	// usage-limits at read time; not stored on the user row.
+	EnforcementMode *GatewayAccountUsageLimitsEnforcementMode `json:"enforcementMode,omitempty"`
+
+	// ExceededUntil When set, the user is over their limit and blocked until this time (the end
+	// of the current consumption period). Unset when the user is not over limit.
+	// Computed at read time; not stored.
+	ExceededUntil *time.Time `json:"exceededUntil,omitempty"`
+
+	// LimitOverride The user's override cap. Unset means inherit the account default.
+	LimitOverride *TypeMoney `json:"limitOverride,omitempty"`
+	Name          *string    `json:"name,omitempty"`
+
+	// UpdateTime The time this user's override was last set or changed. Unset when the user
+	// has no override (they inherit the account default); it tracks the override
+	// row, not account-default changes.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Used Current-period usage. Computed at read time; not stored.
+	Used *TypeMoney `json:"used,omitempty"`
+}
 
 // GatewayValidateAssertionsResponse defines model for gatewayValidateAssertionsResponse.
 type GatewayValidateAssertionsResponse struct {
@@ -8920,6 +10597,15 @@ type GatewayWandbConfig struct {
 	// Url The URL for the wandb service.
 	Url *string `json:"url,omitempty"`
 }
+
+// GatewayWeightPrecision The weight precision for model training/inference.
+//
+//   - BFLOAT16: no quantization applied
+//   - INT8: enable 8-bit quantization with LLM.int8()
+//   - NF4: enable 4-bit quantization with LLM.nf4()
+//   - FP8: base model quantization in FP8
+//   - FP4_FP8: base model linear module quantization in FP4, mixed with experts and some special keys/layers in FP8.
+type GatewayWeightPrecision string
 
 // GatewayWeightedRandomStrategy Use replica count as weight.
 type GatewayWeightedRandomStrategy = map[string]interface{}
@@ -9170,10 +10856,12 @@ type GatewayGetAccountUsageFilterOptionsParams struct {
 	StartTime time.Time `form:"startTime" json:"startTime"`
 	EndTime   time.Time `form:"endTime" json:"endTime"`
 
-	// UsageType If not specified, loads filter options for both usage streams.
+	// UsageType If not specified, loads filter options for serverless and dedicated usage only.
 	//
-	//  - SERVERLESS: Serverless filter dimensions only (model_name, api_key_id, annotations.*).
+	//  - SERVERLESS: Serverless filter dimensions only (model_name, api_key_id, api_key_name, user_id, session_id, annotations.*).
 	//  - DEDICATED_DEPLOYMENT: Dedicated deployment filter dimensions (deployment_name, annotations.team, .project, .environment).
+	//  - TRAINING: Training filter dimensions (job_id, training_session_id, job_type,
+	// usage_type, accelerator_type, base_model).
 	UsageType *GatewayGetAccountUsageFilterOptionsParamsUsageType `form:"usageType,omitempty" json:"usageType,omitempty"`
 }
 
@@ -9205,55 +10893,14 @@ type GatewayListAuditLogsParams struct {
 	// token.
 	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
 
-	// Filter Unused but required to use existing ListRequest functionality.
+	// Filter Optional. An AIP-160 filter expression (https://google.aip.dev/160) over the fields `message`, `resource`, `email`, `api_key_id`, `event_type`, and `target_api_key_id`. Use `=` for an exact match and `:` for a substring match, for example `email="user@example.com"` or `message:"Create"`.
 	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
 
-	// OrderBy Unused but required to use existing ListRequest functionality.
+	// OrderBy Unused. Audit log entries are always returned ordered by timestamp descending (newest first).
 	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
 
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayListAwsIamRoleBindingsParams defines parameters for GatewayListAwsIamRoleBindings.
-type GatewayListAwsIamRoleBindingsParams struct {
-	// PageSize The maximum number of bindings to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous ListAwsIamRoleBindings call.
-	// Provide this to retrieve the subsequent page. When paginating, all other
-	// parameters provided to ListAwsIamRoleBindings must match the call that
-	// provided the page token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// Filter Only bindings satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "name".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayDeleteAwsIamRoleBindingJSONBody defines parameters for GatewayDeleteAwsIamRoleBinding.
-type GatewayDeleteAwsIamRoleBindingJSONBody struct {
-	// CreateTime The creation time of the AWS IAM role binding.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// Principal The principal that is allowed to assume the AWS IAM role. This must be
-	// the email address of the user.
-	Principal *string `json:"principal,omitempty"`
-
-	// Role The AWS IAM role ARN that is allowed to be assumed by the principal.
-	Role *string `json:"role,omitempty"`
 }
 
 // GatewayListBatchInferenceJobsParams defines parameters for GatewayListBatchInferenceJobs.
@@ -9296,144 +10943,6 @@ type GatewayGetBatchInferenceJobParams struct {
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
-// GatewayListBatchJobsParams defines parameters for GatewayListBatchJobs.
-type GatewayListBatchJobsParams struct {
-	// PageSize The maximum number of batch jobs to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous ListBatchJobs call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListBatchJobs must match the call that provided the page
-	// token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// Filter Only batch jobs satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "create_time desc".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayGetBatchJobParams defines parameters for GatewayGetBatchJob.
-type GatewayGetBatchJobParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayUpdateBatchJobJSONBody defines parameters for GatewayUpdateBatchJob.
-type GatewayUpdateBatchJobJSONBody struct {
-	// Annotations Arbitrary, user-specified metadata.
-	// Keys and values must adhere to Kubernetes constraints: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
-	// Additionally, the "fireworks.ai/" prefix is reserved.
-	Annotations *map[string]string `json:"annotations,omitempty"`
-
-	// CreateTime The creation time of the batch job.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// CreatedBy The email address of the user who created this batch job.
-	CreatedBy *string `json:"createdBy,omitempty"`
-
-	// DisplayName Human-readable display name of the batch job. e.g. "My Batch Job"
-	// Must be fewer than 64 characters long.
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// EndTime The time when the batch job completed, failed, or was cancelled.
-	EndTime *time.Time `json:"endTime,omitempty"`
-
-	// EnvVars Environment variables to be passed during this job's execution.
-	EnvVars *map[string]string `json:"envVars,omitempty"`
-
-	// EnvironmentId The ID of the environment that this batch job should use. e.g. my-env
-	// If specified, image_ref must not be specified.
-	EnvironmentId *string `json:"environmentId,omitempty"`
-
-	// ImageRef The container image used by this job. If specified, environment_id and
-	// snapshot_id must not be specified.
-	ImageRef   *string `json:"imageRef,omitempty"`
-	NodePoolId string  `json:"nodePoolId"`
-
-	// NotebookExecutor Execute a notebook file.
-	NotebookExecutor *GatewayNotebookExecutor `json:"notebookExecutor,omitempty"`
-
-	// NumRanks For GPU node pools: one GPU per rank w/ host packing,
-	// for CPU node pools: one host per rank.
-	NumRanks *int32 `json:"numRanks,omitempty"`
-
-	// PythonExecutor Execute a Python process.
-	PythonExecutor *GatewayPythonExecutor `json:"pythonExecutor,omitempty"`
-
-	// Role The ARN of the AWS IAM role that the batch job should assume.
-	// If not specified, the connection will fall back to the node
-	// pool's node_role.
-	Role *string `json:"role,omitempty"`
-
-	// Shared Whether the batch job is shared with all users in the account.
-	// This allows all users to update, delete, clone, and create environments
-	// using the batch job.
-	Shared *bool `json:"shared,omitempty"`
-
-	// ShellExecutor Execute a shell script.
-	ShellExecutor *GatewayShellExecutor `json:"shellExecutor,omitempty"`
-
-	// SnapshotId The ID of the snapshot used by this batch job.
-	// If specified, environment_id must be specified and image_ref must not be
-	// specified.
-	SnapshotId *string `json:"snapshotId,omitempty"`
-
-	// StartTime The time when the batch job started running.
-	StartTime *time.Time `json:"startTime,omitempty"`
-
-	// State The current state of the batch job.
-	State *GatewayBatchJobState `json:"state,omitempty"`
-
-	// Status Detailed information about the current status of the batch job.
-	Status *string `json:"status,omitempty"`
-
-	// UpdateTime The update time for the batch job.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-}
-
-// GatewayGetBatchJobLogsParams defines parameters for GatewayGetBatchJobLogs.
-type GatewayGetBatchJobLogsParams struct {
-	// Ranks Ranks, for which to fetch logs.
-	Ranks *[]int32 `form:"ranks,omitempty" json:"ranks,omitempty"`
-
-	// PageSize The maximum number of log entries to return. The maximum page_size is 10,000,
-	// values above 10,000 will be coerced to 10,000.
-	// If unspecified, the default is 100.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous GetBatchJobLogsRequest call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to GetBatchJobLogsRequest must match the call that provided the page
-	// token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// StartTime Entries before this timestamp won't be returned.
-	// If not specified, up to page_size last records will be returned.
-	StartTime *time.Time `form:"startTime,omitempty" json:"startTime,omitempty"`
-
-	// Filter Only entries matching this filter will be returned.
-	// Currently only basic substring match is performed.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// StartFromHead Pagination direction, time-wise reverse direction by default (false).
-	StartFromHead *bool `form:"startFromHead,omitempty" json:"startFromHead,omitempty"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
 // GatewayGetBillingSummaryParams defines parameters for GatewayGetBillingSummary.
 type GatewayGetBillingSummaryParams struct {
 	// StartTime Start time for the billing period.
@@ -9449,6 +10958,35 @@ type GatewayGetBillingSummaryParams struct {
 	//   start_time: 2025-10-05T00:00:00Z
 	//   end_time: 2025-10-07T00:00:00Z (Oct 7 is excluded)
 	EndTime time.Time `form:"endTime" json:"endTime"`
+
+	// Granularity Requested breakdown granularity. Defaults to UNSPECIFIED (no breakdown).
+	Granularity *GatewayGetBillingSummaryParamsGranularity `form:"granularity,omitempty" json:"granularity,omitempty"`
+}
+
+// GatewayGetBillingSummaryParamsGranularity defines parameters for GatewayGetBillingSummary.
+type GatewayGetBillingSummaryParamsGranularity string
+
+// GatewayGetBillingSettingsParams defines parameters for GatewayGetBillingSettings.
+type GatewayGetBillingSettingsParams struct {
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayUpdateBillingSettingsJSONBody defines parameters for GatewayUpdateBillingSettings.
+type GatewayUpdateBillingSettingsJSONBody struct {
+	// CreditAutoReloadAmount The amount to auto-reload the account's credit balance.
+	// Must be less than $100,000.
+	CreditAutoReloadAmount *TypeMoney `json:"creditAutoReloadAmount,omitempty"`
+
+	// CreditAutoReloadThreshold The threshold at which to auto-reload the account's credit balance.
+	// Must be less than $100,000.
+	CreditAutoReloadThreshold *TypeMoney `json:"creditAutoReloadThreshold,omitempty"`
+
+	// EnableCreditAutoReload If true, the account will auto-reload its credit balance.
+	EnableCreditAutoReload *bool `json:"enableCreditAutoReload,omitempty"`
+
+	// UpdateTime The time the billing settings were last updated.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
 // GatewayGetAccountUsageParams defines parameters for GatewayGetAccountUsage.
@@ -9462,14 +11000,19 @@ type GatewayGetAccountUsageParams struct {
 	EndTime time.Time `form:"endTime" json:"endTime"`
 
 	// UsageType Usage type to query usage for
-	// If not specified, returns all usage types (both serverless and dedicated deployments).
+	// If not specified, returns all usage types (serverless, dedicated deployments, and training).
 	//
 	//  - USAGE_TYPE_UNSPECIFIED: Default value. When specified (or when usage_type field is not set),
-	// returns usage data for all deployment types: both serverless requests and dedicated deployments.
+	// returns usage data for all deployment types: serverless requests, dedicated deployments,
+	// and training jobs.
 	//  - SERVERLESS: Returns only serverless usage data.
 	// Filters the response to include only usage from serverless API requests.
 	//  - DEDICATED_DEPLOYMENT: Returns only dedicated deployment usage data.
 	// Filters the response to include only usage from dedicated deployments.
+	//  - TRAINING: Returns only training job usage data (SFT/DPO token usage and RFT / service-mode
+	// trainer GPU-seconds usage). Inference deployments serving rollouts for RFT /
+	// online RL are reported under DEDICATED_DEPLOYMENT (not TRAINING) to avoid
+	// double counting GPU time.
 	UsageType *GatewayGetAccountUsageParamsUsageType `form:"usageType,omitempty" json:"usageType,omitempty"`
 
 	// Timezone IANA timezone identifier for daily aggregation (e.g., "America/Los_Angeles", "Europe/London").
@@ -9477,6 +11020,23 @@ type GatewayGetAccountUsageParams struct {
 	// If not specified or empty, defaults to "UTC".
 	// See: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 	Timezone *string `form:"timezone,omitempty" json:"timezone,omitempty"`
+
+	// GroupBy Dimensions to group usage by (multiple values allowed; each is a separate GROUP BY column).
+	// Serverless: "model_name", "api_key_id", "api_key_name", "user_id", "session_id", "annotations.team", "annotations.project", "annotations.environment".
+	// Dedicated: "deployment_name", "accelerator_type", and the same annotation keys.
+	// Training: "job_id", "training_session_id", "job_type", "usage_type", "accelerator_type", "base_model", and the same annotation keys.
+	// When usage_type is unspecified, dimensions that apply only to one stream are ignored on the others
+	// (e.g. "deployment_name" is ignored for serverless and training; "model_name" / "api_key_id" / "api_key_name" / "user_id" / "session_id"
+	// are ignored for dedicated and training; "job_id" / "training_session_id" / "job_type" are ignored for serverless and dedicated).
+	// "session_id" is the opaque client session from billing properties (serverless-only, high cardinality):
+	// prefer filtering by a single session; grouping by it can fan out to one row per session.
+	// Example: ["annotations.team", "model_name"] or ["user_id", "model_name"] or ["api_key_id", "api_key_name"].
+	// If empty: serverless aggregates by model name; dedicated defaults to deployment and accelerator type;
+	// training aggregates by job_id, training_session_id, job_type, usage_type, accelerator_type and base_model.
+	GroupBy *[]string `form:"groupBy,omitempty" json:"groupBy,omitempty"`
+
+	// Filter This is a request variable of the map type. The query format is "map_name[key]=value", e.g. If the map name is Age, the key type is string, and the value type is integer, the query parameter is expressed as Age["bob"]=18
+	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
 }
 
 // GatewayGetAccountUsageParamsUsageType defines parameters for GatewayGetAccountUsage.
@@ -9607,6 +11167,9 @@ type GatewayUpdateDatasetJSONBody struct {
 	CreatedBy   *string `json:"createdBy,omitempty"`
 	DisplayName *string `json:"displayName,omitempty"`
 
+	// EncryptionState CMEK encryption state (authoritative, immutable, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
+
 	// EstimatedTokenCount The estimated number of tokens in the dataset.
 	EstimatedTokenCount *string                  `json:"estimatedTokenCount,omitempty"`
 	EvalProtocol        *GatewayEvalProtocol     `json:"evalProtocol,omitempty"`
@@ -9702,9 +11265,7 @@ type GatewayUpdateDeployedModelJSONBody struct {
 	Model       *string `json:"model,omitempty"`
 
 	// Public If true, the deployed model will be publicly reachable.
-	Public *bool `json:"public,omitempty"`
-
-	// Serverless This field is not applicable when deploying a LoRA addon and should be omitted or set to false. LoRA models require a dedicated deployment. True if the underlying deployment is managed by Fireworks.
+	Public     *bool `json:"public,omitempty"`
 	Serverless *bool `json:"serverless,omitempty"`
 
 	// State The state of the deployed model.
@@ -9758,6 +11319,10 @@ type GatewayCreateDeploymentShapeParams struct {
 type GatewayGetDeploymentShapeParams struct {
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+
+	// SkipShapeValidation If true, returns the latest version regardless of validation status.
+	// By default, returns the latest validated version.
+	SkipShapeValidation *bool `form:"skipShapeValidation,omitempty" json:"skipShapeValidation,omitempty"`
 }
 
 // GatewayUpdateDeploymentShapeJSONBody defines parameters for GatewayUpdateDeploymentShape.
@@ -9769,7 +11334,12 @@ type GatewayUpdateDeploymentShapeJSONBody struct {
 	// AcceleratorType The type of accelerator to use.
 	// If not specified, the default is NVIDIA_A100_80GB.
 	AcceleratorType *GatewayAcceleratorType `json:"acceleratorType,omitempty"`
-	BaseModel       string                  `json:"baseModel"`
+
+	// BaseModel Mutable, but only via UpdateDeploymentShape and only to a compatible model:
+	// one with the same model_type, parameter_count, and embedding status. The
+	// derived model_type / parameter_count fields (OUTPUT_ONLY, IMMUTABLE) are
+	// therefore preserved across a swap. Any incompatible change is rejected.
+	BaseModel string `json:"baseModel"`
 
 	// CreateTime The creation time of the deployment shape.
 	CreateTime *time.Time `json:"createTime,omitempty"`
@@ -9780,6 +11350,9 @@ type GatewayUpdateDeploymentShapeJSONBody struct {
 	// DisableDeploymentSizeValidation If true, the deployment size validation is disabled.
 	DisableDeploymentSizeValidation *bool `json:"disableDeploymentSizeValidation,omitempty"`
 
+	// DisableSpeculativeDecoding DEPRECATED: This field is a no-op. Speculative decoding is configured on deployment.
+	DisableSpeculativeDecoding *bool `json:"disableSpeculativeDecoding,omitempty"`
+
 	// DisplayName Human-readable display name of the deployment shape. e.g. "My Deployment Shape"
 	// Must be fewer than 64 characters long.
 	DisplayName *string `json:"displayName,omitempty"`
@@ -9787,7 +11360,7 @@ type GatewayUpdateDeploymentShapeJSONBody struct {
 	// DraftModel The draft model name for speculative decoding. e.g. accounts/fireworks/models/my-draft-model
 	// If empty, speculative decoding using a draft model is disabled.
 	// Default is the base model's default_draft_model.
-	// this behavior.
+	// Deprecated: set default_draft_model on the base model instead.
 	DraftModel *string `json:"draftModel,omitempty"`
 
 	// DraftTokenCount The number of candidate tokens to generate per step for speculative
@@ -9796,6 +11369,7 @@ type GatewayUpdateDeploymentShapeJSONBody struct {
 	DraftTokenCount *int32 `json:"draftTokenCount,omitempty"`
 
 	// EnableAddons If true, LORA addons are enabled for deployments created from this shape.
+	// Deprecated: set enable_addons on the deployment instead.
 	EnableAddons *bool `json:"enableAddons,omitempty"`
 
 	// EnableSessionAffinity Whether to apply sticky routing based on `user` field.
@@ -9868,6 +11442,9 @@ type GatewayGetDeploymentShapeVersionParams struct {
 
 // GatewayUpdateDeploymentShapeVersionJSONBody defines parameters for GatewayUpdateDeploymentShapeVersion.
 type GatewayUpdateDeploymentShapeVersionJSONBody struct {
+	// Capabilities The capabilities supported by this deployment shape version.
+	Capabilities *[]DeploymentShapeVersionCapability `json:"capabilities,omitempty"`
+
 	// CreateTime The creation time of the deployment shape version. Lists will be ordered by this field.
 	CreateTime *time.Time `json:"createTime,omitempty"`
 
@@ -9972,6 +11549,12 @@ type GatewayUpdateDeploymentJSONBody struct {
 	// ActiveModelVersion The model version that is currently active and applied to running replicas of a deployment.
 	ActiveModelVersion *string `json:"activeModelVersion,omitempty"`
 
+	// Annotations Annotations to identify deployment properties.
+	// Key/value pairs may be used by external tools or other services.
+	// Customer-managed keys supplied during deployment creation must begin with "custom/"; bare keys return HTTP 403 (PERMISSION_DENIED). See [Deployment Tags](/deployments/deployment-tags) for tag management and migration guidance.
+	// Responses to regular account users include only customer-owned tags with keys under the "custom/" prefix.
+	Annotations *map[string]string `json:"annotations,omitempty"`
+
 	// AutoTune The performance profile to use for this deployment.
 	AutoTune          *GatewayAutoTune          `json:"autoTune,omitempty"`
 	AutoscalingPolicy *GatewayAutoscalingPolicy `json:"autoscalingPolicy,omitempty"`
@@ -10044,9 +11627,6 @@ type GatewayUpdateDeploymentJSONBody struct {
 	// EnableHotReloadLatestAddon Allows up to 1 addon at a time to be loaded, and will merge it into the base model.
 	EnableHotReloadLatestAddon *bool `json:"enableHotReloadLatestAddon,omitempty"`
 
-	// EnableMtp If true, MTP is enabled for this deployment.
-	EnableMtp *bool `json:"enableMtp,omitempty"`
-
 	// EnableSessionAffinity Whether to apply sticky routing based on `user` field.
 	// Serverless will be set to true when creating deployment.
 	EnableSessionAffinity *bool `json:"enableSessionAffinity,omitempty"`
@@ -10056,6 +11636,20 @@ type GatewayUpdateDeploymentJSONBody struct {
 	ExpireTime        *time.Time                   `json:"expireTime,omitempty"`
 	HotLoadBucketType *DeploymentHotLoadBucketType `json:"hotLoadBucketType,omitempty"`
 	HotLoadBucketUrl  *string                      `json:"hotLoadBucketUrl,omitempty"`
+	HotLoadTrainerJob *string                      `json:"hotLoadTrainerJob,omitempty"`
+
+	// HotLoadTransitionType Controls hot-load reload semantics for this deployment.
+	// ASYNC (default when enable_hot_load is set) pauses the generator/prefiller
+	// mid-flight and skips draining in-flight requests during hot load.
+	// SYNC drains in-flight requests before applying the new model.
+	HotLoadTransitionType *DeploymentHotLoadTransitionType `json:"hotLoadTransitionType,omitempty"`
+
+	// MaxConcurrencyPerReplica The maximum number of concurrent (in-flight) requests a single replica
+	// will accept before shedding load. Requests that arrive while a replica is
+	// already at this limit are rejected early with HTTP 429 instead of
+	// queueing — a per-replica admission gate for controlling tail latency.
+	// When unset (0), the platform default is used.
+	MaxConcurrencyPerReplica *int32 `json:"maxConcurrencyPerReplica,omitempty"`
 
 	// MaxContextLength The maximum context length supported by the model (context window).
 	// If set to 0 or not specified, the model's default maximum context length will be used.
@@ -10084,6 +11678,9 @@ type GatewayUpdateDeploymentJSONBody struct {
 
 	// Precision The precision with which the model should be served.
 	Precision *DeploymentPrecision `json:"precision,omitempty"`
+
+	// Preemptible When true, this deployment runs as preemptible.
+	Preemptible *bool `json:"preemptible,omitempty"`
 
 	// PricingPlanId Optional pricing plan ID for custom billing configuration.
 	// If set, this deployment will use the pricing plan's billing rules
@@ -10160,6 +11757,57 @@ type GatewayGetDeploymentMetricsParams struct {
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
+// GatewayListDeveloperPassesParams defines parameters for GatewayListDeveloperPasses.
+type GatewayListDeveloperPassesParams struct {
+	// PageSize Maximum number of developer passes to return.
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken Page token from a previous ListDeveloperPasses call.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+
+	// Filter Filter expression (e.g., "state=ACTIVE")
+	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
+
+	// OrderBy Order by expression (e.g., "create_time desc")
+	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayGetDeveloperPassParams defines parameters for GatewayGetDeveloperPass.
+type GatewayGetDeveloperPassParams struct {
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayUpdateDeveloperPassJSONBody defines parameters for GatewayUpdateDeveloperPass.
+type GatewayUpdateDeveloperPassJSONBody struct {
+	Annotations *GatewayDeveloperPassAnnotation `json:"annotations,omitempty"`
+
+	// AutoRenew Whether the developer pass will automatically renew upon expiry.
+	AutoRenew *bool `json:"autoRenew,omitempty"`
+
+	// CreateTime Creation timestamp.
+	CreateTime *time.Time `json:"createTime,omitempty"`
+
+	// EndTime The time at which the developer pass ends.
+	EndTime *time.Time `json:"endTime,omitempty"`
+
+	// LastRenewTime The time at which the developer pass was last renewed.
+	LastRenewTime *time.Time                 `json:"lastRenewTime,omitempty"`
+	State         *GatewayDeveloperPassState `json:"state,omitempty"`
+
+	// StatusMessage Additional context for the current state, such as a payment decline reason.
+	StatusMessage *string `json:"statusMessage,omitempty"`
+
+	// UpdateTime Last update timestamp.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Version The version of developer pass (V1 = weekly, V2 = monthly).
+	Version *DeveloperPassVersion `json:"version,omitempty"`
+}
+
 // GatewayListDpoJobsParams defines parameters for GatewayListDpoJobs.
 type GatewayListDpoJobsParams struct {
 	// PageSize The maximum number of dpo jobs to return. The maximum page_size is 200,
@@ -10185,6 +11833,11 @@ type GatewayListDpoJobsParams struct {
 
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+
+	// IncludeArchived If true, include archived (post-delete retention) jobs in the response.
+	// Archived jobs are inert (no resources running, no further billing) but
+	// their checkpoints remain promotable until the retention window expires.
+	IncludeArchived *bool `form:"includeArchived,omitempty" json:"includeArchived,omitempty"`
 }
 
 // GatewayCreateDpoJobParams defines parameters for GatewayCreateDpoJob.
@@ -10197,83 +11850,6 @@ type GatewayCreateDpoJobParams struct {
 type GatewayGetDpoJobParams struct {
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayListEnvironmentsParams defines parameters for GatewayListEnvironments.
-type GatewayListEnvironmentsParams struct {
-	// PageSize The maximum number of environments to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous ListEnvironments call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListEnvironments must match the call that provided the page
-	// token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// Filter Only environments satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "name".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayGetEnvironmentParams defines parameters for GatewayGetEnvironment.
-type GatewayGetEnvironmentParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayUpdateEnvironmentJSONBody defines parameters for GatewayUpdateEnvironment.
-type GatewayUpdateEnvironmentJSONBody struct {
-	// Annotations Arbitrary, user-specified metadata.
-	// Keys and values must adhere to Kubernetes constraints: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
-	// Additionally, the "fireworks.ai/" prefix is reserved.
-	Annotations *map[string]string `json:"annotations,omitempty"`
-
-	// BaseImageRef The URI of the base container image used for this environment.
-	BaseImageRef *string `json:"baseImageRef,omitempty"`
-
-	// Connection Information about the current environment connection.
-	Connection *GatewayEnvironmentConnection `json:"connection,omitempty"`
-
-	// CreateTime The creation time of the environment.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// CreatedBy The email address of the user who created this environment.
-	CreatedBy   *string `json:"createdBy,omitempty"`
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// ImageRef The URI of the container image used for this environment. This is a
-	// image is an immutable snapshot of the base_image_ref when the environment
-	// was created.
-	ImageRef *string `json:"imageRef,omitempty"`
-
-	// Shared Whether the environment is shared with all users in the account.
-	// This allows all users to connect, disconnect, update, delete, clone, and
-	// create batch jobs using the environment.
-	Shared *bool `json:"shared,omitempty"`
-
-	// SnapshotImageRef The URI of the latest container image snapshot for this environment.
-	SnapshotImageRef *string `json:"snapshotImageRef,omitempty"`
-
-	// State The current state of the environment.
-	State *GatewayEnvironmentState `json:"state,omitempty"`
-
-	// Status The current error status of the environment.
-	Status *GatewayStatus `json:"status,omitempty"`
-
-	// UpdateTime The update time for the environment.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
 // GatewayListEvaluationJobsParams defines parameters for GatewayListEvaluationJobs.
@@ -10336,14 +11912,17 @@ type GatewayUpdateEvaluatorJSONBody struct {
 	DefaultDataset *string             `json:"defaultDataset,omitempty"`
 	Description    *string             `json:"description,omitempty"`
 	DisplayName    *string             `json:"displayName,omitempty"`
-	EntryPoint     *string             `json:"entryPoint,omitempty"`
-	Requirements   *string             `json:"requirements,omitempty"`
+
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
+	EntryPoint      *string                 `json:"entryPoint,omitempty"`
+	Requirements    *string                 `json:"requirements,omitempty"`
 
 	// Source Source information for the evaluator codebase.
-	Source     *GatewayEvaluatorSource `json:"source,omitempty"`
-	State      *GatewayEvaluatorState  `json:"state,omitempty"`
-	Status     *GatewayStatus          `json:"status,omitempty"`
-	UpdateTime *time.Time              `json:"updateTime,omitempty"`
+	Source     *EvaluatorSource       `json:"source,omitempty"`
+	State      *GatewayEvaluatorState `json:"state,omitempty"`
+	Status     *GatewayStatus         `json:"status,omitempty"`
+	UpdateTime *time.Time             `json:"updateTime,omitempty"`
 }
 
 // GatewayUpdateEvaluatorParams defines parameters for GatewayUpdateEvaluator.
@@ -10384,170 +11963,51 @@ type GatewayGetEvaluatorSourceCodeEndpointParams struct {
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
-// GatewayListGenericDeploymentTypesParams defines parameters for GatewayListGenericDeploymentTypes.
-type GatewayListGenericDeploymentTypesParams struct {
-	// PageSize The maximum number of generic deployment types to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
+// GatewayListExternalKeysParams defines parameters for GatewayListExternalKeys.
+type GatewayListExternalKeysParams struct {
+	// PageSize Page size.
 	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
 
-	// PageToken A page token, received from a previous ListGenericDeploymentTypeRequest call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListGenericDeploymentTypeRequest must match the call that provided the page
-	// token.
+	// PageToken Page token.
 	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
 
-	// Filter Only generic deployments satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
+	// Filter Filter expression.
 	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
 
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "create_time".
+	// OrderBy Order by.
 	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
 
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
-// GatewayCreateGenericDeploymentTypeParams defines parameters for GatewayCreateGenericDeploymentType.
-type GatewayCreateGenericDeploymentTypeParams struct {
-	// GenericDeploymentTypeId The id of the generic deployment type
-	GenericDeploymentTypeId string `form:"genericDeploymentTypeId" json:"genericDeploymentTypeId"`
-}
-
-// GatewayDeleteGenericDeploymentTypeParams defines parameters for GatewayDeleteGenericDeploymentType.
-type GatewayDeleteGenericDeploymentTypeParams struct {
-	// Hard If true, this will perform a hard deletion.
-	Hard *bool `form:"hard,omitempty" json:"hard,omitempty"`
-}
-
-// GatewayListGenericDeploymentTypeVersionsParams defines parameters for GatewayListGenericDeploymentTypeVersions.
-type GatewayListGenericDeploymentTypeVersionsParams struct {
-	// PageSize The maximum number of generic deployment type versions to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous ListGenericDeploymentTypeVersionRequest call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListGenericDeploymentTypeVersionRequest must match the call that provided the page
-	// token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// Filter Only generic deployment type versions satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "create_time".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-
+// GatewayDeleteExternalKeyParams defines parameters for GatewayDeleteExternalKey.
+type GatewayDeleteExternalKeyParams struct {
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
-// GatewayUpdateGenericDeploymentTypeJSONBody defines parameters for GatewayUpdateGenericDeploymentType.
-type GatewayUpdateGenericDeploymentTypeJSONBody struct {
-	// CreateTime The creation time of the generic deployment type.
+// GatewayGetExternalKeyParams defines parameters for GatewayGetExternalKey.
+type GatewayGetExternalKeyParams struct {
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayUpdateExternalKeyJSONBody defines parameters for GatewayUpdateExternalKey.
+type GatewayUpdateExternalKeyJSONBody struct {
+	// CreateTime Creation timestamp.
 	CreateTime *time.Time `json:"createTime,omitempty"`
-	ImageTag   *string    `json:"imageTag,omitempty"`
 
-	// UpdateTime The update time for the generic deployment type.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-}
+	// DisplayName Display name for the external key.
+	DisplayName *string `json:"displayName,omitempty"`
 
-// GatewayDeleteGenericDeploymentTypeVersionParams defines parameters for GatewayDeleteGenericDeploymentTypeVersion.
-type GatewayDeleteGenericDeploymentTypeVersionParams struct {
-	// Hard If true, this will perform a hard deletion.
-	Hard *bool `form:"hard,omitempty" json:"hard,omitempty"`
-}
+	// State Current state of the external key.
+	State *GatewayExternalKeyState `json:"state,omitempty"`
 
-// GatewayGetGenericDeploymentTypeVersionParams defines parameters for GatewayGetGenericDeploymentTypeVersion.
-type GatewayGetGenericDeploymentTypeVersionParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
+	// Status Contains information about the external key status.
+	Status *GatewayStatus `json:"status,omitempty"`
 
-// GatewayListGenericDeploymentsParams defines parameters for GatewayListGenericDeployments.
-type GatewayListGenericDeploymentsParams struct {
-	// PageSize The maximum number of generic deployments to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous ListGenericDeploymentRequest call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListGenericDeploymentRequest must match the call that provided the page
-	// token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// Filter Only generic deployments satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "create_time".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayCreateGenericDeploymentParams defines parameters for GatewayCreateGenericDeployment.
-type GatewayCreateGenericDeploymentParams struct {
-	// GenericDeploymentId The ID of the deployment. If not specified, a random ID will be generated.
-	GenericDeploymentId *string `form:"genericDeploymentId,omitempty" json:"genericDeploymentId,omitempty"`
-
-	// ValidateOnly If true, this will not create the deployment, but will return the deployment
-	// that would be created.
-	ValidateOnly *bool `form:"validateOnly,omitempty" json:"validateOnly,omitempty"`
-}
-
-// GatewayDeleteGenericDeploymentParams defines parameters for GatewayDeleteGenericDeployment.
-type GatewayDeleteGenericDeploymentParams struct {
-	// Hard If true, this will perform a hard deletion.
-	Hard *bool `form:"hard,omitempty" json:"hard,omitempty"`
-
-	// IgnoreChecks If true, this will ignore checks and force the deletion of a deployment that is currently
-	// deployed and is in use.
-	IgnoreChecks *bool `form:"ignoreChecks,omitempty" json:"ignoreChecks,omitempty"`
-}
-
-// GatewayGetGenericDeploymentParams defines parameters for GatewayGetGenericDeployment.
-type GatewayGetGenericDeploymentParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayUpdateGenericDeploymentJSONBody defines parameters for GatewayUpdateGenericDeployment.
-type GatewayUpdateGenericDeploymentJSONBody struct {
-	// CreateTime The creation time of the generic deployment.
-	CreateTime            *time.Time `json:"createTime,omitempty"`
-	GenericDeploymentType string     `json:"genericDeploymentType"`
-
-	// Placement The desired geographic region where the deployment must be placed. Exactly one field will be
-	// specified.
-	Placement     GatewayPlacement       `json:"placement"`
-	ReleaseValues map[string]interface{} `json:"releaseValues"`
-
-	// State  - CREATING: The deployment is still being created.
-	//  - READY: The deployment is ready to be used.
-	//  - FAILED: The deployment failed to be created.
-	//  - UPDATING: There are in-progress updates happening with the deployment.
-	//  - DELETING: The deployment is being deleted
-	//  - DELETED: The deployment has been deleted.
-	State *GatewayGenericDeploymentState `json:"state,omitempty"`
-
-	// UpdateTime The update time for the generic deployment.
+	// UpdateTime Last update timestamp.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
@@ -10591,11 +12051,18 @@ type GatewayUpdateIdentityProviderJSONBody struct {
 	// DomainUrl The domain URL.
 	DomainUrl *string `json:"domainUrl,omitempty"`
 
+	// EnableIdpInitiatedSso Enable IdP-initiated SAML (Security Assertion Markup Language) single sign-on.
+	// When enabled, users can start the login flow from their identity provider's
+	// portal (e.g., Okta app launcher) instead of from the Fireworks login page.
+	// Only supported for SAML identity providers.
+	EnableIdpInitiatedSso *bool `json:"enableIdpInitiatedSso,omitempty"`
+
 	// EnableJitUserProvisioning Enable Just-In-Time (JIT) user provisioning.
 	// When enabled, users are automatically created in the account on first SSO login
 	// if they don't already exist. When disabled, users must be pre-provisioned
 	// before they can authenticate via SSO.
 	EnableJitUserProvisioning *bool `json:"enableJitUserProvisioning,omitempty"`
+	EnforceSso                *bool `json:"enforceSso,omitempty"`
 
 	// IssuerUrl The OIDC issuer URL.
 	IssuerUrl *string `json:"issuerUrl,omitempty"`
@@ -10605,131 +12072,18 @@ type GatewayUpdateIdentityProviderJSONBody struct {
 	// Only applies when enable_jit_user_provisioning is true and RBAC V2 is enabled.
 	// If empty or unset, defaults to "inference-user" (least privilege).
 	// If RBAC V2 is not enabled for the account, JIT users always get "user" role.
-	JitDefaultRole *string                       `json:"jitDefaultRole,omitempty"`
-	OidcConfig     *GatewayOidcConfig            `json:"oidcConfig,omitempty"`
-	SamlConfig     *GatewaySamlConfig            `json:"samlConfig,omitempty"`
-	State          *GatewayIdentityProviderState `json:"state,omitempty"`
+	JitDefaultRole *string            `json:"jitDefaultRole,omitempty"`
+	OidcConfig     *GatewayOidcConfig `json:"oidcConfig,omitempty"`
+
+	// SamlConfig SAML Configuration
+	// Exactly one of metadata_url or metadata_xml must be provided.
+	SamlConfig *GatewaySamlConfig            `json:"samlConfig,omitempty"`
+	State      *GatewayIdentityProviderState `json:"state,omitempty"`
 
 	// Status Contains information about the identity provider status.
 	Status        *GatewayStatus `json:"status,omitempty"`
 	TenantDomains *[]string      `json:"tenantDomains,omitempty"`
 	UpdateTime    *time.Time     `json:"updateTime,omitempty"`
-}
-
-// GatewayListLeaderboardsParams defines parameters for GatewayListLeaderboards.
-type GatewayListLeaderboardsParams struct {
-	PageSize  *int32  `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-	Filter    *string `form:"filter,omitempty" json:"filter,omitempty"`
-	OrderBy   *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-	ReadMask  *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayGetLeaderboardParams defines parameters for GatewayGetLeaderboard.
-type GatewayGetLeaderboardParams struct {
-	// ReadMask Optional read mask for leaderboard fields.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayListLeaderboardEvaluationJobsParams defines parameters for GatewayListLeaderboardEvaluationJobs.
-type GatewayListLeaderboardEvaluationJobsParams struct {
-	PageSize  *int32  `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-	Filter    *string `form:"filter,omitempty" json:"filter,omitempty"`
-	OrderBy   *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-}
-
-// GatewayListMcpServersParams defines parameters for GatewayListMcpServers.
-type GatewayListMcpServersParams struct {
-	// PageSize The maximum number of mcp servers to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous ListMcpServers call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListMcpServers must match the call that provided the page
-	// token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// Filter Only mcp server satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "name".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayCreateMcpServerParams defines parameters for GatewayCreateMcpServer.
-type GatewayCreateMcpServerParams struct {
-	// McpServerId ID of the mcp server.
-	McpServerId string `form:"mcpServerId" json:"mcpServerId"`
-}
-
-// GatewayGetMcpServerParams defines parameters for GatewayGetMcpServer.
-type GatewayGetMcpServerParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayUpdateMcpServerJSONBody defines parameters for GatewayUpdateMcpServer.
-type GatewayUpdateMcpServerJSONBody struct {
-	// Annotations Annotations to identify MCP properties.
-	// Key/value pairs may be used by external tools or other services.
-	Annotations *map[string]string `json:"annotations,omitempty"`
-
-	// ApiKeySecret The resource name of the secret to use for authenticating with the MCP server.
-	// e.g. accounts/my-account/secrets/my-secret
-	// If provided for a remote-hosted MCP, the endpoint will be validated for connectivity
-	// during creation.
-	ApiKeySecret *string `json:"apiKeySecret,omitempty"`
-
-	// AuthenticationType The authentication method required by this MCP server.
-	AuthenticationType *McpServerAuthenticationType `json:"authenticationType,omitempty"`
-
-	// CreateTime The creation time of the mcp.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// Description The description of the mcp. Must be fewer than 4000 characters long.
-	Description *string `json:"description,omitempty"`
-
-	// DisplayName Human-readable display name of the mcp. e.g. "My Mcp"
-	// Must be fewer than 64 characters long.
-	DisplayName *string `json:"displayName,omitempty"`
-
-	// EndpointUrl The URL of the MCP server.
-	// Required if self_hosted is true. For managed MCPs, this will be populated
-	// after deployment.
-	EndpointUrl *string `json:"endpointUrl,omitempty"`
-
-	// MaxQps Max QPS of this MCP server. 0 means no ratelimit.
-	MaxQps *float64 `json:"maxQps,omitempty"`
-
-	// Public Whether this MCP is publicly available to all Fireworks users.
-	// If false, only accessible to the account that created it.
-	Public *bool `json:"public,omitempty"`
-
-	// RemoteHosted Whether this MCP is remote-hosted (true) or managed by Fireworks (false).
-	RemoteHosted *bool `json:"remoteHosted,omitempty"`
-
-	// Simulated Whether this is a simulated MCP server.
-	Simulated *bool `json:"simulated,omitempty"`
-
-	// State The state of the mcp.
-	State *GatewayMcpServerState `json:"state,omitempty"`
-
-	// Status Contains detailed message when the last mcp operation fails.
-	Status *GatewayStatus `json:"status,omitempty"`
-
-	// UpdateTime The update time for the mcp.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
 // GatewayListModelsParams defines parameters for GatewayListModels.
@@ -10813,6 +12167,9 @@ type GatewayUpdateModelJSONBody struct {
 	// Must be fewer than 64 characters long.
 	DisplayName *string `json:"displayName,omitempty"`
 
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
+
 	// FineTuningJob If the model was created from a fine-tuning job, this is the fine-tuning
 	// job name.
 	FineTuningJob *string `json:"fineTuningJob,omitempty"`
@@ -10829,7 +12186,7 @@ type GatewayUpdateModelJSONBody struct {
 
 	// Kind The kind of model.
 	// If not specified, the default is HF_PEFT_ADDON.
-	Kind *GatewayModelKind `json:"kind,omitempty"`
+	Kind *ModelKind `json:"kind,omitempty"`
 
 	// PeftDetails PEFT addon details.
 	// Required if kind is HF_PEFT_ADDON or HF_TEFT_ADDON.
@@ -10838,17 +12195,38 @@ type GatewayUpdateModelJSONBody struct {
 	// Public If true, the model will be publicly readable.
 	Public *bool `json:"public,omitempty"`
 
-	// RlTunable If true, the model is RL tunable.
-	RlTunable    *bool              `json:"rlTunable,omitempty"`
-	SnapshotType *ModelSnapshotType `json:"snapshotType,omitempty"`
+	// RlFullParameterTunable V2 only. Whether the model supports full-parameter reinforcement learning (lora_rank = 0).
+	// True when validated POLICY_TRAINER + LORA_TRAINER training shapes exist plus a deployment shape.
+	RlFullParameterTunable *bool `json:"rlFullParameterTunable,omitempty"`
+
+	// RlLoraTunable V2 only. Whether the model supports LoRA reinforcement learning (lora_rank > 0).
+	// True when a validated LORA_TRAINER training shape exists plus a deployment shape.
+	RlLoraTunable *bool `json:"rlLoraTunable,omitempty"`
+
+	// RlTunable Deprecated: V1 training stack only — LoRA only, limited architecture support.
+	// If the model has use_training_v2=true, use rl_lora_tunable and
+	// rl_full_parameter_tunable instead.
+	RlTunable *bool `json:"rlTunable,omitempty"`
+
+	// ServerlessModes The serverless modes this base model is available on — the serverless read
+	// shape. Populated on read (e.g. serverless catalog reads); one entry
+	// per mode. Empty for non-serverless models.
+	ServerlessModes *[]GatewayServerlessMode `json:"serverlessModes,omitempty"`
+	SnapshotType    *ModelSnapshotType       `json:"snapshotType,omitempty"`
 
 	// State The state of the model.
 	State *GatewayModelState `json:"state,omitempty"`
 
 	// Status Contains detailed message when the last model operation fails.
-	Status                             *GatewayStatus         `json:"status,omitempty"`
-	SupportedPrecisions                *[]DeploymentPrecision `json:"supportedPrecisions,omitempty"`
-	SupportedPrecisionsWithCalibration *[]DeploymentPrecision `json:"supportedPrecisionsWithCalibration,omitempty"`
+	Status *GatewayStatus `json:"status,omitempty"`
+
+	// SupervisedFullParameterTunable V2 only. Whether the model supports full-parameter supervised fine-tuning and DPO (lora_rank = 0).
+	// True when a validated POLICY_TRAINER training shape exists.
+	SupervisedFullParameterTunable *bool `json:"supervisedFullParameterTunable,omitempty"`
+
+	// SupervisedLoraTunable V2 only. Whether the model supports LoRA supervised fine-tuning and DPO (lora_rank > 0).
+	// True when a validated LORA_TRAINER training shape exists.
+	SupervisedLoraTunable *bool `json:"supervisedLoraTunable,omitempty"`
 
 	// SupportsImageInput If set, images can be provided as input to the model.
 	SupportsImageInput *bool `json:"supportsImageInput,omitempty"`
@@ -10870,8 +12248,9 @@ type GatewayUpdateModelJSONBody struct {
 	// TrainingContextLength The maximum context length supported by the model.
 	TrainingContextLength *int32 `json:"trainingContextLength,omitempty"`
 
-	// Tunable If true, the model can be fine-tuned. The value will be true if the tunable field is true, and
-	// the model is validated against the model_type field.
+	// Tunable Deprecated: V1 training stack only — LoRA only, limited architecture support.
+	// If the model has use_training_v2=true, use supervised_lora_tunable and
+	// supervised_full_parameter_tunable instead.
 	Tunable *bool `json:"tunable,omitempty"`
 
 	// UpdateTime The update time for the model.
@@ -10879,6 +12258,10 @@ type GatewayUpdateModelJSONBody struct {
 
 	// UseHfApplyChatTemplate If true, the model will use the Hugging Face apply_chat_template API to apply the chat template.
 	UseHfApplyChatTemplate *bool `json:"useHfApplyChatTemplate,omitempty"`
+
+	// UseTrainingV2 If true, SFT jobs for this base model use service-mode (StatefulSet +
+	// orchestration sidecar) instead of the legacy batch Job path.
+	UseTrainingV2 *bool `json:"useTrainingV2,omitempty"`
 }
 
 // GatewayCreateModelVersionParams defines parameters for GatewayCreateModelVersion.
@@ -10904,138 +12287,29 @@ type GatewayValidateModelUploadParams struct {
 	ConfigOnly *bool `form:"configOnly,omitempty" json:"configOnly,omitempty"`
 }
 
-// GatewayListNodePoolBindingsParams defines parameters for GatewayListNodePoolBindings.
-type GatewayListNodePoolBindingsParams struct {
-	// PageSize The maximum number of bindings to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+// GatewayUpdatePolicySettingsJSONBody defines parameters for GatewayUpdatePolicySettings.
+type GatewayUpdatePolicySettingsJSONBody struct {
+	// CmekRequired Whether new customer-data resources for this account must be CMEK-encrypted.
+	// Readable by the account, but only a Fireworks superuser can change it (the
+	// write path gates this explicitly). Enabling requires a READY primary
+	// ExternalKey.
+	CmekRequired *bool `json:"cmekRequired,omitempty"`
 
-	// PageToken A page token, received from a previous ListNodePoolBindings call.
-	// Provide this to retrieve the subsequent page. When paginating, all other
-	// parameters provided to ListNodePoolBindings must match the call that
-	// provided the page token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+	// DefaultPermissions Per-account default permissions. If unset, defaults to allow-all.
+	// This powers the UI's "Default" row.
+	DefaultPermissions *PolicySettingsModelPermissions `json:"defaultPermissions,omitempty"`
 
-	// Filter Only bindings satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
+	// Residency Restricts serving to one geography when set. An absent value leaves the
+	// account unrestricted.
+	Residency *GatewayMultiRegion `json:"residency,omitempty"`
 
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "name".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+	// Rules Per-model override rows. A model not listed here uses default_permissions.
+	Rules      *[]PolicySettingsModelAccessRule `json:"rules,omitempty"`
+	UpdateTime *time.Time                       `json:"updateTime,omitempty"`
 
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayDeleteNodePoolBindingJSONBody defines parameters for GatewayDeleteNodePoolBinding.
-type GatewayDeleteNodePoolBindingJSONBody struct {
-	// ClusterId The cluster ID that this binding is associated with.
-	ClusterId *string `json:"clusterId,omitempty"`
-
-	// CreateTime The creation time of the node pool binding.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// NodePoolId The node pool ID that this binding is associated with.
-	NodePoolId *string `json:"nodePoolId,omitempty"`
-
-	// Principal The principal that is allowed use the node pool. This must be
-	// the email address of the user.
-	Principal *string `json:"principal,omitempty"`
-}
-
-// GatewayListNodePoolsParams defines parameters for GatewayListNodePools.
-type GatewayListNodePoolsParams struct {
-	// PageSize The maximum number of node pools to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
-	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
-
-	// PageToken A page token, received from a previous ListNodePools call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListNodePools must match the call that provided the page
-	// token.
-	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
-
-	// Filter Only node pools satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
-	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
-
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "name".
-	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
-
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayGetNodePoolParams defines parameters for GatewayGetNodePool.
-type GatewayGetNodePoolParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
-}
-
-// GatewayUpdateNodePoolJSONBody defines parameters for GatewayUpdateNodePool.
-type GatewayUpdateNodePoolJSONBody struct {
-	// Annotations Arbitrary, user-specified metadata.
-	// Keys and values must adhere to Kubernetes constraints: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
-	// Additionally, the "fireworks.ai/" prefix is reserved.
-	Annotations *map[string]string `json:"annotations,omitempty"`
-
-	// CreateTime The creation time of the node pool.
-	CreateTime *time.Time `json:"createTime,omitempty"`
-
-	// DisplayName Human-readable display name of the node pool. e.g. "My Node Pool"
-	// Must be fewer than 64 characters long.
-	DisplayName *string             `json:"displayName,omitempty"`
-	EksNodePool *GatewayEksNodePool `json:"eksNodePool,omitempty"`
-
-	// FakeNodePool A fake node pool to be used with FakeCluster.
-	FakeNodePool *GatewayFakeNodePool `json:"fakeNodePool,omitempty"`
-
-	// MaxNodeCount https://cloud.google.com/kubernetes-engine/quotas
-	// Maximum number of nodes in this node pool. Must be a positive integer
-	// greater than or equal to min_node_count.
-	// If not specified, the default is 1.
-	MaxNodeCount *int32 `json:"maxNodeCount,omitempty"`
-
-	// MinNodeCount https://cloud.google.com/kubernetes-engine/quotas
-	// Minimum number of nodes in this node pool. Must be a non-negative integer
-	// less than or equal to max_node_count.
-	// If not specified, the default is 0.
-	MinNodeCount *int32 `json:"minNodeCount,omitempty"`
-
-	// NodePoolStats Live statistics of the node pool.
-	NodePoolStats *GatewayNodePoolStats `json:"nodePoolStats,omitempty"`
-
-	// OverprovisionNodeCount The number of nodes to overprovision by the autoscaler. Must be a
-	// non-negative integer and less than or equal to min_node_count and
-	// max_node_count-min_node_count.
-	// If not specified, the default is 0.
-	OverprovisionNodeCount *int32 `json:"overprovisionNodeCount,omitempty"`
-
-	// State The current state of the node pool.
-	State *GatewayNodePoolState `json:"state,omitempty"`
-
-	// Status Contains detailed message when the last node pool operation fails, e.g.
-	// when node pool is in FAILED state or when last node pool update fails.
-	Status *GatewayStatus `json:"status,omitempty"`
-
-	// UpdateTime The update time for the node pool.
-	UpdateTime *time.Time `json:"updateTime,omitempty"`
-}
-
-// GatewayGetNodePoolStatsParams defines parameters for GatewayGetNodePoolStats.
-type GatewayGetNodePoolStatsParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+	// ZeroDataRetention Zero Data Retention policy for the account. When absent, ZDR is not
+	// enforced. Independent of model access permissions and CMEK.
+	ZeroDataRetention *PolicySettingsZeroDataRetentionPolicy `json:"zeroDataRetention,omitempty"`
 }
 
 // GatewayListPricingPlansParams defines parameters for GatewayListPricingPlans.
@@ -11157,6 +12431,92 @@ type GatewayGetReinforcementFineTuningJobParams struct {
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
+// GatewayUpdateReinforcementFineTuningJobJSONBody defines parameters for GatewayUpdateReinforcementFineTuningJob.
+type GatewayUpdateReinforcementFineTuningJobJSONBody struct {
+	// AcceleratorSeconds Accelerator seconds used by the job, keyed by accelerator type (e.g., "NVIDIA_H100_80GB"). Updated when job completes or is cancelled.
+	AcceleratorSeconds *map[string]string `json:"acceleratorSeconds,omitempty"`
+
+	// AwsS3Config The AWS configuration for S3 dataset access.
+	AwsS3Config *GatewayAwsS3Config `json:"awsS3Config,omitempty"`
+
+	// AzureBlobStorageConfig The Azure configuration for Blob Storage dataset access.
+	AzureBlobStorageConfig *GatewayAzureBlobStorageConfig `json:"azureBlobStorageConfig,omitempty"`
+
+	// ChunkSize Data chunking for rollout, default size 200, enabled when dataset > 300. Valid range is 1-10,000.
+	ChunkSize *int32 `json:"chunkSize,omitempty"`
+
+	// CompletedTime The completed time for the reinforcement fine-tuning job.
+	CompletedTime *time.Time `json:"completedTime,omitempty"`
+	CreateTime    *time.Time `json:"createTime,omitempty"`
+
+	// CreatedBy The email address of the user who initiated this fine-tuning job.
+	CreatedBy *string `json:"createdBy,omitempty"`
+
+	// Dataset The name of the dataset used for training.
+	Dataset     string  `json:"dataset"`
+	DisplayName *string `json:"displayName,omitempty"`
+
+	// EncryptionState CMEK encryption state (authoritative, stamped at creation).
+	EncryptionState *GatewayEncryptionState `json:"encryptionState,omitempty"`
+
+	// EvalAutoCarveout Whether to auto-carve the dataset for eval.
+	EvalAutoCarveout *bool `json:"evalAutoCarveout,omitempty"`
+
+	// EvaluationDataset The name of a separate dataset to use for evaluation.
+	EvaluationDataset *string `json:"evaluationDataset,omitempty"`
+
+	// Evaluator The evaluator resource name to use for RLOR fine-tuning job.
+	Evaluator string `json:"evaluator"`
+
+	// InferenceParameters RFT inference parameters.
+	InferenceParameters *GatewayReinforcementFineTuningJobInferenceParameters `json:"inferenceParameters,omitempty"`
+
+	// JobProgress Job progress.
+	JobProgress *GatewayJobProgress `json:"jobProgress,omitempty"`
+
+	// LossConfig Reinforcement learning loss method + hyperparameters for the underlying trainers.
+	LossConfig *GatewayReinforcementLearningLossConfig `json:"lossConfig,omitempty"`
+
+	// MaxConcurrentEvaluations Maximum number of concurrent evaluations during the RFT job.
+	MaxConcurrentEvaluations *int32 `json:"maxConcurrentEvaluations,omitempty"`
+
+	// MaxConcurrentRollouts Maximum number of concurrent rollouts during the RFT job.
+	MaxConcurrentRollouts    *int32 `json:"maxConcurrentRollouts,omitempty"`
+	MaxInferenceReplicaCount *int32 `json:"maxInferenceReplicaCount,omitempty"`
+
+	// NodeCount The number of nodes to use for the fine-tuning job.
+	// If not specified, the default is 1.
+	NodeCount     *int32  `json:"nodeCount,omitempty"`
+	OutputMetrics *string `json:"outputMetrics,omitempty"`
+
+	// OutputStats The output dataset's aggregated stats for the evaluation job.
+	OutputStats *string `json:"outputStats,omitempty"`
+
+	// Purpose Scheduling purpose for this job.
+	Purpose *GatewayPurpose `json:"purpose,omitempty"`
+
+	// State JobState represents the state an asynchronous job can be in.
+	//
+	//  - JOB_STATE_PAUSED: Job is paused, typically due to account suspension or manual intervention.
+	//  - JOB_STATE_DELETED: Job has been deleted.
+	//  - JOB_STATE_ARCHIVED: User-facing state for jobs whose row is retained post-delete (e.g. RLOR
+	// trainers within the checkpoint retention window). The internal row is
+	// still in JOB_STATE_DELETED; the gateway translates it to ARCHIVED on
+	// public responses.
+	State  *GatewayJobState `json:"state,omitempty"`
+	Status *GatewayStatus   `json:"status,omitempty"`
+
+	// TrainerLogsSignedUrl The signed URL for the trainer logs file (stdout/stderr).
+	// Only populated if the account has trainer log reading enabled.
+	TrainerLogsSignedUrl *string `json:"trainerLogsSignedUrl,omitempty"`
+
+	// TrainingConfig Common training configurations.
+	TrainingConfig *GatewayBaseTrainingConfig `json:"trainingConfig,omitempty"`
+
+	// WandbConfig The Weights & Biases team/user account for logging training progress.
+	WandbConfig *GatewayWandbConfig `json:"wandbConfig,omitempty"`
+}
+
 // GatewayListRlorTrainerJobsParams defines parameters for GatewayListRlorTrainerJobs.
 type GatewayListRlorTrainerJobsParams struct {
 	// PageSize The maximum number of fine-tuning jobs to return. The maximum page_size is 200,
@@ -11182,18 +12542,42 @@ type GatewayListRlorTrainerJobsParams struct {
 
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+
+	// IncludeArchived If true, include archived (post-delete retention) jobs in the response.
+	// Archived jobs are inert (no resources running, no further billing) but
+	// their checkpoints remain promotable until the retention window expires.
+	// Default false matches the customer-facing list semantics — archived jobs
+	// are hidden unless explicitly requested.
+	IncludeArchived *bool `form:"includeArchived,omitempty" json:"includeArchived,omitempty"`
 }
 
 // GatewayCreateRlorTrainerJobParams defines parameters for GatewayCreateRlorTrainerJob.
 type GatewayCreateRlorTrainerJobParams struct {
 	// RlorTrainerJobId ID of the RLOR trainer job, a random UUID will be generated if not specified.
 	RlorTrainerJobId *string `form:"rlorTrainerJobId,omitempty" json:"rlorTrainerJobId,omitempty"`
+
+	// TrainingShape Optional validated training-shape selector for service-mode launches.
+	// Accepted formats:
+	// - accounts/{account}/trainingShapes/{shape}
+	// - accounts/{account}/trainingShapes/{shape}/versions/{version}
+	// - accounts/{account}/trainingShapes/{shape}/versions/latest
+	// When a shape (without /versions/*) is provided, the latest validated version is used.
+	TrainingShape *string `form:"trainingShape,omitempty" json:"trainingShape,omitempty"`
 }
 
 // GatewayGetRlorTrainerJobParams defines parameters for GatewayGetRlorTrainerJob.
 type GatewayGetRlorTrainerJobParams struct {
 	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayListRlorTrainerJobCheckpointsParams defines parameters for GatewayListRlorTrainerJobCheckpoints.
+type GatewayListRlorTrainerJobCheckpointsParams struct {
+	// PageSize Maximum number of checkpoints to return. Default is 50, max is 200.
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken Page token from a previous call.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
 }
 
 // GatewayListRoutersParams defines parameters for GatewayListRouters.
@@ -11300,38 +12684,57 @@ type GatewayUpdateSecretJSONBody struct {
 	Value *string `json:"value,omitempty"`
 }
 
-// GatewayListSnapshotsParams defines parameters for GatewayListSnapshots.
-type GatewayListSnapshotsParams struct {
-	// PageSize The maximum number of snapshots to return. The maximum page_size is 200,
-	// values above 200 will be coerced to 200.
-	// If unspecified, the default is 50.
+// GatewayListServerlessModelsParams defines parameters for GatewayListServerlessModels.
+type GatewayListServerlessModelsParams struct {
+	// PageSize The maximum number of models to return. The maximum page_size is 200,
+	// values above 200 will be coerced to 200. If unspecified, the default is 50.
 	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
 
-	// PageToken A page token, received from a previous ListEnvironments call. Provide this
-	// to retrieve the subsequent page. When paginating, all other parameters
-	// provided to ListEnvironments must match the call that provided the page
-	// token.
+	// PageToken A page token, received from a previous ListServerlessModels call.
 	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
 
-	// Filter Only snapshots satisfying the provided filter (if specified) will be
-	// returned. See https://google.aip.dev/160 for the filter grammar.
+	// Filter AIP-160 filter. See https://google.aip.dev/160 for the grammar.
 	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
 
-	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
-	// The default sort order is ascending. To specify a descending order for a
-	// field, append a " desc" suffix. e.g. "foo desc,bar"
-	// Subfields are specified with a "." character. e.g. "foo.bar"
-	// If not specified, the default order is by "create_time".
+	// OrderBy A comma-separated list of fields to order by.
 	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
 
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields
+	// will be returned.
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
-// GatewayGetSnapshotParams defines parameters for GatewayGetSnapshot.
-type GatewayGetSnapshotParams struct {
-	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
-	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+// GatewayListAccountServerlessRateLimitsParams defines parameters for GatewayListAccountServerlessRateLimits.
+type GatewayListAccountServerlessRateLimitsParams struct {
+	// Deployment If set, only return limits for this deployment resource name.
+	Deployment *string `form:"deployment,omitempty" json:"deployment,omitempty"`
+
+	// Start Start of the time range for time series data. Defaults to 30 days before `end`.
+	Start *time.Time `form:"start,omitempty" json:"start,omitempty"`
+
+	// End End of the time range for time series data. Defaults to the request time.
+	End *time.Time `form:"end,omitempty" json:"end,omitempty"`
+
+	// Interval Step size for the time series: each point is the peak effective limit observed within that
+	// window. Defaults to 4 hours.
+	Interval *string `form:"interval,omitempty" json:"interval,omitempty"`
+}
+
+// GatewayGetAccountServerlessTokenUsageParams defines parameters for GatewayGetAccountServerlessTokenUsage.
+type GatewayGetAccountServerlessTokenUsageParams struct {
+	// Start Start of the time range. Defaults to 30 days before `end`.
+	Start *time.Time `form:"start,omitempty" json:"start,omitempty"`
+
+	// End End of the time range. Defaults to the request time.
+	End *time.Time `form:"end,omitempty" json:"end,omitempty"`
+
+	// Interval Step size for each point (peak or average TPM within each window). Defaults to 4 hours.
+	Interval *string `form:"interval,omitempty" json:"interval,omitempty"`
+
+	// IncludePeakTokensPerMinuteByBaseModel Whether to include each section in the response. At least one must be true; otherwise the
+	// request fails with INVALID_ARGUMENT.
+	IncludePeakTokensPerMinuteByBaseModel    *bool `form:"includePeakTokensPerMinuteByBaseModel,omitempty" json:"includePeakTokensPerMinuteByBaseModel,omitempty"`
+	IncludeAverageTokensPerMinuteByBaseModel *bool `form:"includeAverageTokensPerMinuteByBaseModel,omitempty" json:"includeAverageTokensPerMinuteByBaseModel,omitempty"`
 }
 
 // GatewayListSupervisedFineTuningJobsParams defines parameters for GatewayListSupervisedFineTuningJobs.
@@ -11411,6 +12814,297 @@ type GatewayGetTrailParams struct {
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
+// GatewayUpdateTrailJSONBody defines parameters for GatewayUpdateTrail.
+type GatewayUpdateTrailJSONBody struct {
+	CreateTime *time.Time `json:"createTime,omitempty"`
+	CreatedBy  *string    `json:"createdBy,omitempty"`
+
+	// DefaultModel Default model for requests through this trail.
+	// Format: "{provider}/{model_id}" (e.g., "anthropic/claude-3-5-sonnet-20240620").
+	// Can be overridden per request.
+	DefaultModel *string `json:"defaultModel,omitempty"`
+	Description  *string `json:"description,omitempty"`
+	DisplayName  *string `json:"displayName,omitempty"`
+
+	// LangfuseConfig Langfuse configuration for this trail, inherited from the account at creation time.
+	// Contains API credentials for a Project within the customer's Langfuse Organization.
+	// Serialized JSON format: {"public_key":"pk-lf-xxx","secret_key":"sk-lf-xxx","host":"https://langfuse-prod.fireworks.ai"}
+	// If empty, the default Langfuse Organization/Project will be used.
+	LangfuseConfig *string `json:"langfuseConfig,omitempty"`
+
+	// ProviderKey Provider API key for this trail.
+	// When creating a trail: provide the raw API key (e.g., "sk-ant-api03-xxxx...")
+	// After creation: this field contains a secret reference (e.g., "accounts/{account_id}/secrets/trail-xxx-provider-key")
+	// The LiteLLM gateway retrieves the actual key from Secret Manager using this reference.
+	// Can be overridden by specifying api_key in the request body.
+	ProviderKey *string    `json:"providerKey,omitempty"`
+	UpdateTime  *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayListTrainingRunsParams defines parameters for GatewayListTrainingRuns.
+type GatewayListTrainingRunsParams struct {
+	PageSize  *int32  `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+	Filter    *string `form:"filter,omitempty" json:"filter,omitempty"`
+	OrderBy   *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+	ReadMask  *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayGetTrainingRunParams defines parameters for GatewayGetTrainingRun.
+type GatewayGetTrainingRunParams struct {
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayListTrainingSessionsParams defines parameters for GatewayListTrainingSessions.
+type GatewayListTrainingSessionsParams struct {
+	PageSize  *int32  `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+	Filter    *string `form:"filter,omitempty" json:"filter,omitempty"`
+	OrderBy   *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+	ReadMask  *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayCreateTrainingSessionParams defines parameters for GatewayCreateTrainingSession.
+type GatewayCreateTrainingSessionParams struct {
+	TrainingSessionId *string `form:"trainingSessionId,omitempty" json:"trainingSessionId,omitempty"`
+}
+
+// GatewayGetTrainingSessionParams defines parameters for GatewayGetTrainingSession.
+type GatewayGetTrainingSessionParams struct {
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayListTrainingSessionCheckpointsParams defines parameters for GatewayListTrainingSessionCheckpoints.
+type GatewayListTrainingSessionCheckpointsParams struct {
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken Opaque cursor from a previous response's next_page_token; resume
+	// listing after it. Do not parse or construct this value.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+}
+
+// GatewayListTrainingSessionChunkOutputsParams defines parameters for GatewayListTrainingSessionChunkOutputs.
+type GatewayListTrainingSessionChunkOutputsParams struct {
+	PageSize  *int32  `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+
+	// Filter AIP filter expression evaluated against TrainingSessionChunkOutput's
+	// FilterDefs (step, end_of_epoch, epoch_id, output_dataset_name, etc).
+	// Empty = no filter.
+	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
+
+	// OrderBy AIP order-by clause evaluated against TrainingSessionChunkOutput's
+	// OrderDefs. Empty defaults to "step asc" (chunks appear in training order).
+	OrderBy  *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayCreateTrainingSessionChunkOutputParams defines parameters for GatewayCreateTrainingSessionChunkOutput.
+type GatewayCreateTrainingSessionChunkOutputParams struct {
+	// TrainingSessionChunkOutputId Optional client-chosen id; server generates one if empty. The natural
+	// key on the row is (session, step) — server rejects duplicates.
+	TrainingSessionChunkOutputId *string `form:"trainingSessionChunkOutputId,omitempty" json:"trainingSessionChunkOutputId,omitempty"`
+}
+
+// GatewayListTrainingSessionTrainingCurvesParams defines parameters for GatewayListTrainingSessionTrainingCurves.
+type GatewayListTrainingSessionTrainingCurvesParams struct {
+	// MetricKeys Metric keys to project (a row-selector over the returned curves, NOT
+	// an AIP-160 predicate — see `filter` below). Empty = all metrics.
+	MetricKeys *[]string `form:"metricKeys,omitempty" json:"metricKeys,omitempty"`
+
+	// MaxPoints Optional server-side downsampling cap per curve. 0 disables downsampling.
+	MaxPoints *int32 `form:"maxPoints,omitempty" json:"maxPoints,omitempty"`
+
+	// PageSize Standard List fields (AIP-132).
+	PageSize  *int32  `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+
+	// Filter AIP-160 filter — predicate over curve rows (e.g. step ranges). Distinct
+	// from `metric_keys`, which is a projection over which metrics to return.
+	Filter   *string `form:"filter,omitempty" json:"filter,omitempty"`
+	OrderBy  *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayListTrainingShapesParams defines parameters for GatewayListTrainingShapes.
+type GatewayListTrainingShapesParams struct {
+	// PageSize The maximum number of resources to return. Max page_size is 200; values above 200 are coerced to 200.
+	// If unspecified, the default is 50.
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken A page token from a previous ListTrainingShapes call.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+
+	// Filter Filter per AIP-160.
+	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
+
+	// OrderBy Order by fields, default "create_time".
+	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayCreateTrainingShapeParams defines parameters for GatewayCreateTrainingShape.
+type GatewayCreateTrainingShapeParams struct {
+	// TrainingShapeId The ID of the training shape. If not specified, a random ID will be generated.
+	// Must follow AIP-122 segment format and start with a letter.
+	TrainingShapeId *string `form:"trainingShapeId,omitempty" json:"trainingShapeId,omitempty"`
+}
+
+// GatewayGetTrainingShapeParams defines parameters for GatewayGetTrainingShape.
+type GatewayGetTrainingShapeParams struct {
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayUpdateTrainingShapeJSONBody defines parameters for GatewayUpdateTrainingShape.
+type GatewayUpdateTrainingShapeJSONBody struct {
+	// AcceleratorCount Total number of accelerators used by the job.
+	AcceleratorCount *int32 `json:"acceleratorCount,omitempty"`
+
+	// AcceleratorType The type of accelerator to use.
+	AcceleratorType *GatewayAcceleratorType `json:"acceleratorType,omitempty"`
+	BaseModel       string                  `json:"baseModel"`
+
+	// BaseModelWeightPrecision Default precision for base weights during training (prefer BF16; QLoRA/QAT omitted).
+	BaseModelWeightPrecision *GatewayWeightPrecision `json:"baseModelWeightPrecision,omitempty"`
+
+	// CreateTime The creation time of the training shape.
+	CreateTime             *time.Time `json:"createTime,omitempty"`
+	DeploymentShapeVersion *string    `json:"deploymentShapeVersion,omitempty"`
+
+	// Description The description of the training shape. Must be fewer than 1000 characters long.
+	Description *string `json:"description,omitempty"`
+
+	// DisplayName Human-readable display name of the training shape. e.g. "Llama3 70B H200 BF16"
+	// Must be fewer than 64 characters long.
+	DisplayName *string `json:"displayName,omitempty"`
+
+	// MaxSupportedContextLength Capacity limits validated for this shape.
+	MaxSupportedContextLength *int32 `json:"maxSupportedContextLength,omitempty"`
+
+	// MinTotalAcceleratorCount Minimum total accelerator count (world size, across all data-parallel
+	// replicas) this shape has been validated at.
+	// Written from shape-validation CI evidence; do not hand-edit downward.
+	MinTotalAcceleratorCount *int32 `json:"minTotalAcceleratorCount,omitempty"`
+
+	// ModelType The model type of the base model (e.g. "llama", "qwen").
+	ModelType *string `json:"modelType,omitempty"`
+
+	// NodeCount Node count validated for the launch profile.
+	NodeCount *int32 `json:"nodeCount,omitempty"`
+
+	// ParameterCount The parameter count of the base model, used for billion-parameter bucket matching.
+	ParameterCount *string `json:"parameterCount,omitempty"`
+
+	// TrainerImageTag The validated trainer runtime image tag used for numerics verification.
+	TrainerImageTag string `json:"trainerImageTag"`
+
+	// TrainerMode Trainer mode used for the validated launch profile.
+	TrainerMode *TrainingShapeTrainerMode `json:"trainerMode,omitempty"`
+
+	// TrainerShardingScheme Structured sharding/parallelism profile validated for the trainer launch.
+	TrainerShardingScheme *GatewayTrainerShardingScheme `json:"trainerShardingScheme,omitempty"`
+
+	// UpdateTime The update time for the training shape.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayListTrainingShapeVersionsParams defines parameters for GatewayListTrainingShapeVersions.
+type GatewayListTrainingShapeVersionsParams struct {
+	// PageSize The maximum number of versions to return. Max page_size is 200; values above 200 are coerced.
+	// If unspecified, the default is 50.
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken A page token from a previous ListTrainingShapeVersions call.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+
+	// Filter Filter per AIP-160.
+	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
+
+	// OrderBy Order by fields, default "create_time".
+	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayGetTrainingShapeVersionParams defines parameters for GatewayGetTrainingShapeVersion.
+type GatewayGetTrainingShapeVersionParams struct {
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayUpdateTrainingShapeVersionJSONBody defines parameters for GatewayUpdateTrainingShapeVersion.
+type GatewayUpdateTrainingShapeVersionJSONBody struct {
+	CreateTime *time.Time `json:"createTime,omitempty"`
+
+	// LatestValidated If true, this version is the latest validated version (at most one per shape).
+	LatestValidated *bool `json:"latestValidated,omitempty"`
+
+	// Public If true, this version will be publicly readable.
+	Public *bool `json:"public,omitempty"`
+
+	// Snapshot Full snapshot of the TrainingShape at this version.
+	Snapshot *GatewayTrainingShape `json:"snapshot,omitempty"`
+
+	// UpdateTime Last update time of mutable fields such as validated/public.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Validated Whether this version has been validated through capacity tests.
+	// Only superusers can set this flag.
+	Validated *bool `json:"validated,omitempty"`
+}
+
+// GatewayListUserUsageLimitIncreaseRequestsParams defines parameters for GatewayListUserUsageLimitIncreaseRequests.
+type GatewayListUserUsageLimitIncreaseRequestsParams struct {
+	// Filter Filter expression. If empty, all requests are returned.
+	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
+
+	// PageSize Maximum number of requests to return. Coerced to a default when unset and to
+	// a maximum when too large.
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken A page token from a previous call; only marks where the next page starts.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+
+	// OrderBy A comma-separated list of fields to order by. Defaults to "create_time".
+	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields are returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayUpdateAccountUsageLimitsJSONBody defines parameters for GatewayUpdateAccountUsageLimits.
+type GatewayUpdateAccountUsageLimitsJSONBody struct {
+	// DefaultUserLimit The default per-user cap applied to every user without an override. Unset
+	// means no default cap (users are unlimited unless individually capped).
+	DefaultUserLimit *TypeMoney `json:"defaultUserLimit,omitempty"`
+
+	// EnforcementMode Enforcement mode applied to the per-user caps in this account.
+	EnforcementMode *GatewayAccountUsageLimitsEnforcementMode `json:"enforcementMode,omitempty"`
+
+	// UpdateTime The time the account usage limits (default cap / enforcement mode) were
+	// last updated. Unset until the account row is first written.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Used Account-wide current-period usage (the sum across users). Computed at read
+	// time; not stored.
+	Used *TypeMoney `json:"used,omitempty"`
+}
+
+// GatewayListUserUsageLimitsParams defines parameters for GatewayListUserUsageLimits.
+type GatewayListUserUsageLimitsParams struct {
+	// PageSize Maximum number of users to return. Coerced to a default when unset and to a
+	// maximum when too large.
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken A page token from a previous ListUserUsageLimits call. page_size still
+	// bounds every page; the token only marks where the next page starts.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+}
+
 // GatewayListUsersParams defines parameters for GatewayListUsers.
 type GatewayListUsersParams struct {
 	// PageSize The maximum number of users to return. The maximum page_size is 200,
@@ -11464,7 +13158,11 @@ type GatewayUpdateUserJSONBody struct {
 	// Email The user's email address.
 	Email *string `json:"email,omitempty"`
 
-	// Role The user's role: admin, user, contributor, or inference-user.
+	// PermissionPreset The permission preset for this user. Only valid when role is "custom".
+	PermissionPreset *string `json:"permissionPreset,omitempty"`
+
+	// Role The user's role: admin, user, contributor, inference-user, or custom.
+	// When set to "custom", the user's permissions are governed by permission_preset.
 	Role           string `json:"role"`
 	ServiceAccount *bool  `json:"serviceAccount,omitempty"`
 
@@ -11496,6 +13194,34 @@ type GatewayListApiKeysParams struct {
 	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
+// GatewayUpdateUserUsageLimitsJSONBody defines parameters for GatewayUpdateUserUsageLimits.
+type GatewayUpdateUserUsageLimitsJSONBody struct {
+	// EffectiveLimit The user's resolved effective cap: their override, else the account
+	// default. Unset means the user has no cap (unlimited). Computed at read
+	// time; not stored.
+	EffectiveLimit *TypeMoney `json:"effectiveLimit,omitempty"`
+
+	// EnforcementMode Enforcement mode from the governing account policy. Read from the account
+	// usage-limits at read time; not stored on the user row.
+	EnforcementMode *GatewayAccountUsageLimitsEnforcementMode `json:"enforcementMode,omitempty"`
+
+	// ExceededUntil When set, the user is over their limit and blocked until this time (the end
+	// of the current consumption period). Unset when the user is not over limit.
+	// Computed at read time; not stored.
+	ExceededUntil *time.Time `json:"exceededUntil,omitempty"`
+
+	// LimitOverride The user's override cap. Unset means inherit the account default.
+	LimitOverride *TypeMoney `json:"limitOverride,omitempty"`
+
+	// UpdateTime The time this user's override was last set or changed. Unset when the user
+	// has no override (they inherit the account default); it tracks the override
+	// row, not account-default changes.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+
+	// Used Current-period usage. Computed at read time; not stored.
+	Used *TypeMoney `json:"used,omitempty"`
+}
+
 // ListResponsesV1ResponsesGetParams defines parameters for ListResponsesV1ResponsesGet.
 type ListResponsesV1ResponsesGetParams struct {
 	Limit  *int    `form:"limit,omitempty" json:"limit,omitempty"`
@@ -11503,56 +13229,47 @@ type ListResponsesV1ResponsesGetParams struct {
 	Before *string `form:"before,omitempty" json:"before,omitempty"`
 }
 
-// GatewayCreateAwsIamRoleBindingJSONRequestBody defines body for GatewayCreateAwsIamRoleBinding for application/json ContentType.
-type GatewayCreateAwsIamRoleBindingJSONRequestBody = GatewayAwsIamRoleBinding
-
-// GatewayDeleteAwsIamRoleBindingJSONRequestBody defines body for GatewayDeleteAwsIamRoleBinding for application/json ContentType.
-type GatewayDeleteAwsIamRoleBindingJSONRequestBody GatewayDeleteAwsIamRoleBindingJSONBody
-
 // GatewayCreateBatchInferenceJobJSONRequestBody defines body for GatewayCreateBatchInferenceJob for application/json ContentType.
 type GatewayCreateBatchInferenceJobJSONRequestBody = GatewayBatchInferenceJob
 
-// GatewayCreateBatchJobJSONRequestBody defines body for GatewayCreateBatchJob for application/json ContentType.
-type GatewayCreateBatchJobJSONRequestBody = GatewayBatchJob
+// GatewayUpdateBillingSettingsJSONRequestBody defines body for GatewayUpdateBillingSettings for application/json ContentType.
+type GatewayUpdateBillingSettingsJSONRequestBody GatewayUpdateBillingSettingsJSONBody
 
-// GatewayUpdateBatchJobJSONRequestBody defines body for GatewayUpdateBatchJob for application/json ContentType.
-type GatewayUpdateBatchJobJSONRequestBody GatewayUpdateBatchJobJSONBody
-
-// GatewayCancelBatchJobJSONRequestBody defines body for GatewayCancelBatchJob for application/json ContentType.
-type GatewayCancelBatchJobJSONRequestBody = GatewayCancelBatchJobBody
-
-// GatewayBatchDeleteBatchJobsJSONRequestBody defines body for GatewayBatchDeleteBatchJobs for application/json ContentType.
-type GatewayBatchDeleteBatchJobsJSONRequestBody = GatewayBatchDeleteBatchJobsBody
+// GatewayPromoteCheckpointJSONRequestBody defines body for GatewayPromoteCheckpoint for application/json ContentType.
+type GatewayPromoteCheckpointJSONRequestBody = GatewayGatewayPromoteCheckpointBody
 
 // GatewayCreateClusterJSONRequestBody defines body for GatewayCreateCluster for application/json ContentType.
-type GatewayCreateClusterJSONRequestBody = GatewayCreateClusterBody
+type GatewayCreateClusterJSONRequestBody = GatewayGatewayCreateClusterBody
 
 // GatewayUpdateClusterJSONRequestBody defines body for GatewayUpdateCluster for application/json ContentType.
 type GatewayUpdateClusterJSONRequestBody GatewayUpdateClusterJSONBody
 
 // GatewayCreateDatasetJSONRequestBody defines body for GatewayCreateDataset for application/json ContentType.
-type GatewayCreateDatasetJSONRequestBody = GatewayCreateDatasetBody
+type GatewayCreateDatasetJSONRequestBody = GatewayGatewayCreateDatasetBody
 
 // GatewayUpdateDatasetJSONRequestBody defines body for GatewayUpdateDataset for application/json ContentType.
 type GatewayUpdateDatasetJSONRequestBody GatewayUpdateDatasetJSONBody
 
 // GatewayGetDatasetUploadEndpointJSONRequestBody defines body for GatewayGetDatasetUploadEndpoint for application/json ContentType.
-type GatewayGetDatasetUploadEndpointJSONRequestBody = GatewayGetDatasetUploadEndpointBody
+type GatewayGetDatasetUploadEndpointJSONRequestBody = GatewayGatewayGetDatasetUploadEndpointBody
 
 // GatewaySplitDatasetJSONRequestBody defines body for GatewaySplitDataset for application/json ContentType.
-type GatewaySplitDatasetJSONRequestBody = GatewaySplitDatasetBody
+type GatewaySplitDatasetJSONRequestBody = GatewayGatewaySplitDatasetBody
 
 // GatewayUploadDatasetFileMultipartRequestBody defines body for GatewayUploadDatasetFile for multipart/form-data ContentType.
 type GatewayUploadDatasetFileMultipartRequestBody GatewayUploadDatasetFileMultipartBody
 
 // GatewayValidateDatasetUploadJSONRequestBody defines body for GatewayValidateDatasetUpload for application/json ContentType.
-type GatewayValidateDatasetUploadJSONRequestBody = GatewayValidateDatasetUploadBody
+type GatewayValidateDatasetUploadJSONRequestBody = GatewayGatewayValidateDatasetUploadBody
 
 // GatewayCreateDeployedModelJSONRequestBody defines body for GatewayCreateDeployedModel for application/json ContentType.
 type GatewayCreateDeployedModelJSONRequestBody = GatewayDeployedModel
 
 // GatewayUpdateDeployedModelJSONRequestBody defines body for GatewayUpdateDeployedModel for application/json ContentType.
 type GatewayUpdateDeployedModelJSONRequestBody GatewayUpdateDeployedModelJSONBody
+
+// GatewayMatchDeploymentShapeVersionsJSONRequestBody defines body for GatewayMatchDeploymentShapeVersions for application/json ContentType.
+type GatewayMatchDeploymentShapeVersionsJSONRequestBody = GatewayGatewayMatchDeploymentShapeVersionsBody
 
 // GatewayCreateDeploymentShapeJSONRequestBody defines body for GatewayCreateDeploymentShape for application/json ContentType.
 type GatewayCreateDeploymentShapeJSONRequestBody = GatewayDeploymentShape
@@ -11570,82 +13287,67 @@ type GatewayCreateDeploymentJSONRequestBody = GatewayDeployment
 type GatewayUpdateDeploymentJSONRequestBody GatewayUpdateDeploymentJSONBody
 
 // GatewayScaleDeploymentJSONRequestBody defines body for GatewayScaleDeployment for application/json ContentType.
-type GatewayScaleDeploymentJSONRequestBody = GatewayScaleDeploymentBody
+type GatewayScaleDeploymentJSONRequestBody = GatewayGatewayScaleDeploymentBody
 
 // GatewayUndeleteDeploymentJSONRequestBody defines body for GatewayUndeleteDeployment for application/json ContentType.
-type GatewayUndeleteDeploymentJSONRequestBody = GatewayUndeleteDeploymentBody
+type GatewayUndeleteDeploymentJSONRequestBody = GatewayGatewayUndeleteDeploymentBody
+
+// GatewayCreateDeveloperPassJSONRequestBody defines body for GatewayCreateDeveloperPass for application/json ContentType.
+type GatewayCreateDeveloperPassJSONRequestBody = GatewayDeveloperPass
+
+// GatewayUpdateDeveloperPassJSONRequestBody defines body for GatewayUpdateDeveloperPass for application/json ContentType.
+type GatewayUpdateDeveloperPassJSONRequestBody GatewayUpdateDeveloperPassJSONBody
 
 // GatewayCreateDpoJobJSONRequestBody defines body for GatewayCreateDpoJob for application/json ContentType.
 type GatewayCreateDpoJobJSONRequestBody = GatewayDpoJob
 
 // GatewayCancelDpoJobJSONRequestBody defines body for GatewayCancelDpoJob for application/json ContentType.
-type GatewayCancelDpoJobJSONRequestBody = GatewayCancelDpoJobBody
+type GatewayCancelDpoJobJSONRequestBody = GatewayGatewayCancelDpoJobBody
 
 // GatewayResumeDpoJobJSONRequestBody defines body for GatewayResumeDpoJob for application/json ContentType.
-type GatewayResumeDpoJobJSONRequestBody = GatewayResumeDpoJobBody
-
-// GatewayCreateEnvironmentJSONRequestBody defines body for GatewayCreateEnvironment for application/json ContentType.
-type GatewayCreateEnvironmentJSONRequestBody = GatewayCreateEnvironmentBody
-
-// GatewayUpdateEnvironmentJSONRequestBody defines body for GatewayUpdateEnvironment for application/json ContentType.
-type GatewayUpdateEnvironmentJSONRequestBody GatewayUpdateEnvironmentJSONBody
-
-// GatewayConnectEnvironmentJSONRequestBody defines body for GatewayConnectEnvironment for application/json ContentType.
-type GatewayConnectEnvironmentJSONRequestBody = GatewayConnectEnvironmentBody
-
-// GatewayDisconnectEnvironmentJSONRequestBody defines body for GatewayDisconnectEnvironment for application/json ContentType.
-type GatewayDisconnectEnvironmentJSONRequestBody = GatewayDisconnectEnvironmentBody
-
-// GatewayBatchDeleteEnvironmentsJSONRequestBody defines body for GatewayBatchDeleteEnvironments for application/json ContentType.
-type GatewayBatchDeleteEnvironmentsJSONRequestBody = GatewayBatchDeleteEnvironmentsBody
+type GatewayResumeDpoJobJSONRequestBody = GatewayGatewayResumeDpoJobBody
 
 // GatewayCreateEvaluationJobJSONRequestBody defines body for GatewayCreateEvaluationJob for application/json ContentType.
-type GatewayCreateEvaluationJobJSONRequestBody = GatewayCreateEvaluationJobBody
+type GatewayCreateEvaluationJobJSONRequestBody = GatewayGatewayCreateEvaluationJobBody
 
 // GatewayCreateEvaluationJSONRequestBody defines body for GatewayCreateEvaluation for application/json ContentType.
-type GatewayCreateEvaluationJSONRequestBody = GatewayCreateEvaluationBody
+type GatewayCreateEvaluationJSONRequestBody = GatewayGatewayCreateEvaluationBody
 
 // GatewayPreviewEvaluationJSONRequestBody defines body for GatewayPreviewEvaluation for application/json ContentType.
-type GatewayPreviewEvaluationJSONRequestBody = GatewayPreviewEvaluationBody
+type GatewayPreviewEvaluationJSONRequestBody = GatewayGatewayPreviewEvaluationBody
 
 // GatewayValidateAssertionsJSONRequestBody defines body for GatewayValidateAssertions for application/json ContentType.
-type GatewayValidateAssertionsJSONRequestBody = GatewayValidateAssertionsBody
+type GatewayValidateAssertionsJSONRequestBody = GatewayGatewayValidateAssertionsBody
 
 // GatewayCreateEvaluatorJSONRequestBody defines body for GatewayCreateEvaluator for application/json ContentType.
-type GatewayCreateEvaluatorJSONRequestBody = GatewayCreateEvaluatorBody
+type GatewayCreateEvaluatorJSONRequestBody = GatewayGatewayCreateEvaluatorBody
 
 // GatewayUpdateEvaluatorJSONRequestBody defines body for GatewayUpdateEvaluator for application/json ContentType.
 type GatewayUpdateEvaluatorJSONRequestBody GatewayUpdateEvaluatorJSONBody
 
 // GatewayAliasEvaluatorVersionJSONRequestBody defines body for GatewayAliasEvaluatorVersion for application/json ContentType.
-type GatewayAliasEvaluatorVersionJSONRequestBody = GatewayAliasEvaluatorVersionBody
+type GatewayAliasEvaluatorVersionJSONRequestBody = GatewayGatewayAliasEvaluatorVersionBody
 
 // GatewayRollbackEvaluatorJSONRequestBody defines body for GatewayRollbackEvaluator for application/json ContentType.
-type GatewayRollbackEvaluatorJSONRequestBody = GatewayRollbackEvaluatorBody
+type GatewayRollbackEvaluatorJSONRequestBody = GatewayGatewayRollbackEvaluatorBody
 
 // GatewayGetEvaluatorUploadEndpointJSONRequestBody defines body for GatewayGetEvaluatorUploadEndpoint for application/json ContentType.
-type GatewayGetEvaluatorUploadEndpointJSONRequestBody = GatewayGetEvaluatorUploadEndpointBody
+type GatewayGetEvaluatorUploadEndpointJSONRequestBody = GatewayGatewayGetEvaluatorUploadEndpointBody
 
 // GatewayValidateEvaluatorUploadJSONRequestBody defines body for GatewayValidateEvaluatorUpload for application/json ContentType.
-type GatewayValidateEvaluatorUploadJSONRequestBody = GatewayValidateEvaluatorUploadBody
+type GatewayValidateEvaluatorUploadJSONRequestBody = GatewayGatewayValidateEvaluatorUploadBody
 
 // GatewayPreviewEvaluatorJSONRequestBody defines body for GatewayPreviewEvaluator for application/json ContentType.
-type GatewayPreviewEvaluatorJSONRequestBody = GatewayPreviewEvaluatorBody
+type GatewayPreviewEvaluatorJSONRequestBody = GatewayGatewayPreviewEvaluatorBody
 
 // GatewayCreateEvaluatorV2JSONRequestBody defines body for GatewayCreateEvaluatorV2 for application/json ContentType.
-type GatewayCreateEvaluatorV2JSONRequestBody = GatewayCreateEvaluatorV2Body
+type GatewayCreateEvaluatorV2JSONRequestBody = GatewayGatewayCreateEvaluatorV2Body
 
-// GatewayCreateGenericDeploymentTypeJSONRequestBody defines body for GatewayCreateGenericDeploymentType for application/json ContentType.
-type GatewayCreateGenericDeploymentTypeJSONRequestBody = GatewayGenericDeploymentType
+// GatewayCreateExternalKeyJSONRequestBody defines body for GatewayCreateExternalKey for application/json ContentType.
+type GatewayCreateExternalKeyJSONRequestBody = GatewayExternalKey
 
-// GatewayUpdateGenericDeploymentTypeJSONRequestBody defines body for GatewayUpdateGenericDeploymentType for application/json ContentType.
-type GatewayUpdateGenericDeploymentTypeJSONRequestBody GatewayUpdateGenericDeploymentTypeJSONBody
-
-// GatewayCreateGenericDeploymentJSONRequestBody defines body for GatewayCreateGenericDeployment for application/json ContentType.
-type GatewayCreateGenericDeploymentJSONRequestBody = GatewayGenericDeployment
-
-// GatewayUpdateGenericDeploymentJSONRequestBody defines body for GatewayUpdateGenericDeployment for application/json ContentType.
-type GatewayUpdateGenericDeploymentJSONRequestBody GatewayUpdateGenericDeploymentJSONBody
+// GatewayUpdateExternalKeyJSONRequestBody defines body for GatewayUpdateExternalKey for application/json ContentType.
+type GatewayUpdateExternalKeyJSONRequestBody GatewayUpdateExternalKeyJSONBody
 
 // GatewayCreateIdentityProviderJSONRequestBody defines body for GatewayCreateIdentityProvider for application/json ContentType.
 type GatewayCreateIdentityProviderJSONRequestBody = GatewayIdentityProvider
@@ -11653,17 +13355,8 @@ type GatewayCreateIdentityProviderJSONRequestBody = GatewayIdentityProvider
 // GatewayUpdateIdentityProviderJSONRequestBody defines body for GatewayUpdateIdentityProvider for application/json ContentType.
 type GatewayUpdateIdentityProviderJSONRequestBody GatewayUpdateIdentityProviderJSONBody
 
-// GatewayCreateLeaderboardJSONRequestBody defines body for GatewayCreateLeaderboard for application/json ContentType.
-type GatewayCreateLeaderboardJSONRequestBody = GatewayCreateLeaderboardBody
-
-// GatewayCreateMcpServerJSONRequestBody defines body for GatewayCreateMcpServer for application/json ContentType.
-type GatewayCreateMcpServerJSONRequestBody = GatewayMcpServer
-
-// GatewayUpdateMcpServerJSONRequestBody defines body for GatewayUpdateMcpServer for application/json ContentType.
-type GatewayUpdateMcpServerJSONRequestBody GatewayUpdateMcpServerJSONBody
-
 // GatewayCreateModelJSONRequestBody defines body for GatewayCreateModel for application/json ContentType.
-type GatewayCreateModelJSONRequestBody = GatewayCreateModelBody
+type GatewayCreateModelJSONRequestBody = GatewayGatewayCreateModelBody
 
 // GatewayUpdateModelJSONRequestBody defines body for GatewayUpdateModel for application/json ContentType.
 type GatewayUpdateModelJSONRequestBody GatewayUpdateModelJSONBody
@@ -11672,31 +13365,19 @@ type GatewayUpdateModelJSONRequestBody GatewayUpdateModelJSONBody
 type GatewayCreateModelVersionJSONRequestBody = GatewayModelVersion
 
 // GatewayDeployModelVersionJSONRequestBody defines body for GatewayDeployModelVersion for application/json ContentType.
-type GatewayDeployModelVersionJSONRequestBody = GatewayDeployModelVersionBody
+type GatewayDeployModelVersionJSONRequestBody = GatewayGatewayDeployModelVersionBody
 
 // GatewayGetModelUploadEndpointJSONRequestBody defines body for GatewayGetModelUploadEndpoint for application/json ContentType.
-type GatewayGetModelUploadEndpointJSONRequestBody = GatewayGetModelUploadEndpointBody
+type GatewayGetModelUploadEndpointJSONRequestBody = GatewayGatewayGetModelUploadEndpointBody
 
 // GatewayImportModelJSONRequestBody defines body for GatewayImportModel for application/json ContentType.
-type GatewayImportModelJSONRequestBody = GatewayImportModelBody
+type GatewayImportModelJSONRequestBody = GatewayGatewayImportModelBody
 
 // GatewayPrepareModelJSONRequestBody defines body for GatewayPrepareModel for application/json ContentType.
-type GatewayPrepareModelJSONRequestBody = GatewayPrepareModelBody
+type GatewayPrepareModelJSONRequestBody = GatewayGatewayPrepareModelBody
 
-// GatewayCreateNodePoolBindingJSONRequestBody defines body for GatewayCreateNodePoolBinding for application/json ContentType.
-type GatewayCreateNodePoolBindingJSONRequestBody = GatewayNodePoolBinding
-
-// GatewayDeleteNodePoolBindingJSONRequestBody defines body for GatewayDeleteNodePoolBinding for application/json ContentType.
-type GatewayDeleteNodePoolBindingJSONRequestBody GatewayDeleteNodePoolBindingJSONBody
-
-// GatewayCreateNodePoolJSONRequestBody defines body for GatewayCreateNodePool for application/json ContentType.
-type GatewayCreateNodePoolJSONRequestBody = GatewayCreateNodePoolBody
-
-// GatewayUpdateNodePoolJSONRequestBody defines body for GatewayUpdateNodePool for application/json ContentType.
-type GatewayUpdateNodePoolJSONRequestBody GatewayUpdateNodePoolJSONBody
-
-// GatewayBatchDeleteNodePoolsJSONRequestBody defines body for GatewayBatchDeleteNodePools for application/json ContentType.
-type GatewayBatchDeleteNodePoolsJSONRequestBody = GatewayBatchDeleteNodePoolsBody
+// GatewayUpdatePolicySettingsJSONRequestBody defines body for GatewayUpdatePolicySettings for application/json ContentType.
+type GatewayUpdatePolicySettingsJSONRequestBody GatewayUpdatePolicySettingsJSONBody
 
 // GatewayUpdateQuotaJSONRequestBody defines body for GatewayUpdateQuota for application/json ContentType.
 type GatewayUpdateQuotaJSONRequestBody GatewayUpdateQuotaJSONBody
@@ -11704,26 +13385,29 @@ type GatewayUpdateQuotaJSONRequestBody GatewayUpdateQuotaJSONBody
 // GatewayCreateReinforcementFineTuningJobJSONRequestBody defines body for GatewayCreateReinforcementFineTuningJob for application/json ContentType.
 type GatewayCreateReinforcementFineTuningJobJSONRequestBody = GatewayReinforcementFineTuningJob
 
+// GatewayUpdateReinforcementFineTuningJobJSONRequestBody defines body for GatewayUpdateReinforcementFineTuningJob for application/json ContentType.
+type GatewayUpdateReinforcementFineTuningJobJSONRequestBody GatewayUpdateReinforcementFineTuningJobJSONBody
+
 // GatewayCancelReinforcementFineTuningJobJSONRequestBody defines body for GatewayCancelReinforcementFineTuningJob for application/json ContentType.
-type GatewayCancelReinforcementFineTuningJobJSONRequestBody = GatewayCancelReinforcementFineTuningJobBody
+type GatewayCancelReinforcementFineTuningJobJSONRequestBody = GatewayGatewayCancelReinforcementFineTuningJobBody
 
 // GatewayDebugReinforcementFineTuningJobJSONRequestBody defines body for GatewayDebugReinforcementFineTuningJob for application/json ContentType.
-type GatewayDebugReinforcementFineTuningJobJSONRequestBody = GatewayDebugReinforcementFineTuningJobBody
+type GatewayDebugReinforcementFineTuningJobJSONRequestBody = GatewayGatewayDebugReinforcementFineTuningJobBody
 
 // GatewayResumeReinforcementFineTuningJobJSONRequestBody defines body for GatewayResumeReinforcementFineTuningJob for application/json ContentType.
-type GatewayResumeReinforcementFineTuningJobJSONRequestBody = GatewayResumeReinforcementFineTuningJobBody
+type GatewayResumeReinforcementFineTuningJobJSONRequestBody = GatewayGatewayResumeReinforcementFineTuningJobBody
 
 // GatewayCreateRlorTrainerJobJSONRequestBody defines body for GatewayCreateRlorTrainerJob for application/json ContentType.
 type GatewayCreateRlorTrainerJobJSONRequestBody = GatewayRlorTrainerJob
 
-// GatewayCancelRlorTrainerJobJSONRequestBody defines body for GatewayCancelRlorTrainerJob for application/json ContentType.
-type GatewayCancelRlorTrainerJobJSONRequestBody = GatewayCancelRlorTrainerJobBody
+// GatewaySyncRlorTrainerJobCheckpointJSONRequestBody defines body for GatewaySyncRlorTrainerJobCheckpoint for application/json ContentType.
+type GatewaySyncRlorTrainerJobCheckpointJSONRequestBody = GatewayGatewaySyncRlorTrainerJobCheckpointBody
 
-// GatewayExecuteRlorTrainStepJSONRequestBody defines body for GatewayExecuteRlorTrainStep for application/json ContentType.
-type GatewayExecuteRlorTrainStepJSONRequestBody = GatewayExecuteRlorTrainStepBody
+// GatewayCancelRlorTrainerJobJSONRequestBody defines body for GatewayCancelRlorTrainerJob for application/json ContentType.
+type GatewayCancelRlorTrainerJobJSONRequestBody = GatewayGatewayCancelRlorTrainerJobBody
 
 // GatewayResumeRlorTrainerJobJSONRequestBody defines body for GatewayResumeRlorTrainerJob for application/json ContentType.
-type GatewayResumeRlorTrainerJobJSONRequestBody = GatewayResumeRlorTrainerJobBody
+type GatewayResumeRlorTrainerJobJSONRequestBody = GatewayGatewayResumeRlorTrainerJobBody
 
 // GatewayCreateRouterJSONRequestBody defines body for GatewayCreateRouter for application/json ContentType.
 type GatewayCreateRouterJSONRequestBody = GatewayRouter
@@ -11737,23 +13421,71 @@ type GatewayCreateSecretJSONRequestBody = GatewaySecret
 // GatewayUpdateSecretJSONRequestBody defines body for GatewayUpdateSecret for application/json ContentType.
 type GatewayUpdateSecretJSONRequestBody GatewayUpdateSecretJSONBody
 
-// GatewayCreateSnapshotJSONRequestBody defines body for GatewayCreateSnapshot for application/json ContentType.
-type GatewayCreateSnapshotJSONRequestBody = GatewaySnapshot
-
 // GatewayCreateSupervisedFineTuningJobJSONRequestBody defines body for GatewayCreateSupervisedFineTuningJob for application/json ContentType.
 type GatewayCreateSupervisedFineTuningJobJSONRequestBody = GatewaySupervisedFineTuningJob
 
 // GatewayCancelSupervisedFineTuningJobJSONRequestBody defines body for GatewayCancelSupervisedFineTuningJob for application/json ContentType.
-type GatewayCancelSupervisedFineTuningJobJSONRequestBody = GatewayCancelSupervisedFineTuningJobBody
+type GatewayCancelSupervisedFineTuningJobJSONRequestBody = GatewayGatewayCancelSupervisedFineTuningJobBody
 
 // GatewayResumeSupervisedFineTuningJobJSONRequestBody defines body for GatewayResumeSupervisedFineTuningJob for application/json ContentType.
-type GatewayResumeSupervisedFineTuningJobJSONRequestBody = GatewayResumeSupervisedFineTuningJobBody
+type GatewayResumeSupervisedFineTuningJobJSONRequestBody = GatewayGatewayResumeSupervisedFineTuningJobBody
 
 // GatewayEstimateSupervisedFineTuningJobCostJSONRequestBody defines body for GatewayEstimateSupervisedFineTuningJobCost for application/json ContentType.
 type GatewayEstimateSupervisedFineTuningJobCostJSONRequestBody = GatewaySupervisedFineTuningJob
 
 // GatewayCreateTrailJSONRequestBody defines body for GatewayCreateTrail for application/json ContentType.
 type GatewayCreateTrailJSONRequestBody = GatewayTrail
+
+// GatewayUpdateTrailJSONRequestBody defines body for GatewayUpdateTrail for application/json ContentType.
+type GatewayUpdateTrailJSONRequestBody GatewayUpdateTrailJSONBody
+
+// GatewayCreateTrainingRunJSONRequestBody defines body for GatewayCreateTrainingRun for application/json ContentType.
+type GatewayCreateTrainingRunJSONRequestBody = GatewayTrainingRun
+
+// GatewayAbortTrainingRunMaterializationJSONRequestBody defines body for GatewayAbortTrainingRunMaterialization for application/json ContentType.
+type GatewayAbortTrainingRunMaterializationJSONRequestBody = GatewayGatewayAbortTrainingRunMaterializationBody
+
+// GatewayFinalizeTrainingRunMaterializationJSONRequestBody defines body for GatewayFinalizeTrainingRunMaterialization for application/json ContentType.
+type GatewayFinalizeTrainingRunMaterializationJSONRequestBody = GatewayGatewayFinalizeTrainingRunMaterializationBody
+
+// GatewayCreateTrainingSessionJSONRequestBody defines body for GatewayCreateTrainingSession for application/json ContentType.
+type GatewayCreateTrainingSessionJSONRequestBody = GatewayTrainingSession
+
+// GatewayPromoteTrainingSessionCheckpointJSONRequestBody defines body for GatewayPromoteTrainingSessionCheckpoint for application/json ContentType.
+type GatewayPromoteTrainingSessionCheckpointJSONRequestBody = GatewayGatewayPromoteTrainingSessionCheckpointBody
+
+// GatewayCreateTrainingSessionChunkOutputJSONRequestBody defines body for GatewayCreateTrainingSessionChunkOutput for application/json ContentType.
+type GatewayCreateTrainingSessionChunkOutputJSONRequestBody = GatewayTrainingSessionChunkOutput
+
+// GatewayLoadTrainingSessionStateJSONRequestBody defines body for GatewayLoadTrainingSessionState for application/json ContentType.
+type GatewayLoadTrainingSessionStateJSONRequestBody = GatewayGatewayLoadTrainingSessionStateBody
+
+// GatewayLogTrainingSessionMetricsJSONRequestBody defines body for GatewayLogTrainingSessionMetrics for application/json ContentType.
+type GatewayLogTrainingSessionMetricsJSONRequestBody = GatewayGatewayLogTrainingSessionMetricsBody
+
+// GatewayCreateTrainingShapeJSONRequestBody defines body for GatewayCreateTrainingShape for application/json ContentType.
+type GatewayCreateTrainingShapeJSONRequestBody = GatewayTrainingShape
+
+// GatewayUpdateTrainingShapeJSONRequestBody defines body for GatewayUpdateTrainingShape for application/json ContentType.
+type GatewayUpdateTrainingShapeJSONRequestBody GatewayUpdateTrainingShapeJSONBody
+
+// GatewayUpdateTrainingShapeVersionJSONRequestBody defines body for GatewayUpdateTrainingShapeVersion for application/json ContentType.
+type GatewayUpdateTrainingShapeVersionJSONRequestBody GatewayUpdateTrainingShapeVersionJSONBody
+
+// GatewayQueryUsageCostsJSONRequestBody defines body for GatewayQueryUsageCosts for application/json ContentType.
+type GatewayQueryUsageCostsJSONRequestBody = GatewayGatewayQueryUsageCostsBody
+
+// GatewayCreateUserUsageLimitIncreaseRequestJSONRequestBody defines body for GatewayCreateUserUsageLimitIncreaseRequest for application/json ContentType.
+type GatewayCreateUserUsageLimitIncreaseRequestJSONRequestBody = GatewayUserUsageLimitIncreaseRequest
+
+// GatewayApproveUserUsageLimitIncreaseRequestJSONRequestBody defines body for GatewayApproveUserUsageLimitIncreaseRequest for application/json ContentType.
+type GatewayApproveUserUsageLimitIncreaseRequestJSONRequestBody = GatewayGatewayApproveUserUsageLimitIncreaseRequestBody
+
+// GatewayRejectUserUsageLimitIncreaseRequestJSONRequestBody defines body for GatewayRejectUserUsageLimitIncreaseRequest for application/json ContentType.
+type GatewayRejectUserUsageLimitIncreaseRequestJSONRequestBody = GatewayGatewayRejectUserUsageLimitIncreaseRequestBody
+
+// GatewayUpdateAccountUsageLimitsJSONRequestBody defines body for GatewayUpdateAccountUsageLimits for application/json ContentType.
+type GatewayUpdateAccountUsageLimitsJSONRequestBody GatewayUpdateAccountUsageLimitsJSONBody
 
 // GatewayCreateUserJSONRequestBody defines body for GatewayCreateUser for application/json ContentType.
 type GatewayCreateUserJSONRequestBody = GatewayUser
@@ -11762,13 +13494,19 @@ type GatewayCreateUserJSONRequestBody = GatewayUser
 type GatewayUpdateUserJSONRequestBody GatewayUpdateUserJSONBody
 
 // GatewayCreateApiKeyJSONRequestBody defines body for GatewayCreateApiKey for application/json ContentType.
-type GatewayCreateApiKeyJSONRequestBody = GatewayCreateApiKeyBody
+type GatewayCreateApiKeyJSONRequestBody = GatewayGatewayCreateApiKeyBody
 
 // GatewayDeleteApiKeyJSONRequestBody defines body for GatewayDeleteApiKey for application/json ContentType.
-type GatewayDeleteApiKeyJSONRequestBody = GatewayDeleteApiKeyBody
+type GatewayDeleteApiKeyJSONRequestBody = GatewayGatewayDeleteApiKeyBody
+
+// GatewayUpdateUserUsageLimitsJSONRequestBody defines body for GatewayUpdateUserUsageLimits for application/json ContentType.
+type GatewayUpdateUserUsageLimitsJSONRequestBody GatewayUpdateUserUsageLimitsJSONBody
 
 // GatewayTestEvaluationJSONRequestBody defines body for GatewayTestEvaluation for application/json ContentType.
-type GatewayTestEvaluationJSONRequestBody = GatewayTestEvaluationBody
+type GatewayTestEvaluationJSONRequestBody = GatewayGatewayTestEvaluationBody
+
+// GatewayRefreshSessionTokenJSONRequestBody defines body for GatewayRefreshSessionToken for application/json ContentType.
+type GatewayRefreshSessionTokenJSONRequestBody = GatewayRefreshSessionTokenRequest
 
 // CreateChatCompletionV1ChatCompletionsPostJSONRequestBody defines body for CreateChatCompletionV1ChatCompletionsPost for application/json ContentType.
 type CreateChatCompletionV1ChatCompletionsPostJSONRequestBody = ChatCompletionRequest
@@ -14919,6 +16657,32 @@ func (t *ChatCompletionRequest_Thinking) MergeThinkingConfigDisabled(v ThinkingC
 	return err
 }
 
+// AsThinkingConfigAdaptive returns the union data inside the ChatCompletionRequest_Thinking as a ThinkingConfigAdaptive
+func (t ChatCompletionRequest_Thinking) AsThinkingConfigAdaptive() (ThinkingConfigAdaptive, error) {
+	var body ThinkingConfigAdaptive
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromThinkingConfigAdaptive overwrites any union data inside the ChatCompletionRequest_Thinking as the provided ThinkingConfigAdaptive
+func (t *ChatCompletionRequest_Thinking) FromThinkingConfigAdaptive(v ThinkingConfigAdaptive) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeThinkingConfigAdaptive performs a merge with any union data inside the ChatCompletionRequest_Thinking, using the provided ThinkingConfigAdaptive
+func (t *ChatCompletionRequest_Thinking) MergeThinkingConfigAdaptive(v ThinkingConfigAdaptive) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t ChatCompletionRequest_Thinking) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -14971,6 +16735,32 @@ func (t *ChatCompletionRequest_ToolChoice) FromFunctionSelection(v FunctionSelec
 
 // MergeFunctionSelection performs a merge with any union data inside the ChatCompletionRequest_ToolChoice, using the provided FunctionSelection
 func (t *ChatCompletionRequest_ToolChoice) MergeFunctionSelection(v FunctionSelection) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsAllowedToolsSelection returns the union data inside the ChatCompletionRequest_ToolChoice as a AllowedToolsSelection
+func (t ChatCompletionRequest_ToolChoice) AsAllowedToolsSelection() (AllowedToolsSelection, error) {
+	var body AllowedToolsSelection
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromAllowedToolsSelection overwrites any union data inside the ChatCompletionRequest_ToolChoice as the provided AllowedToolsSelection
+func (t *ChatCompletionRequest_ToolChoice) FromAllowedToolsSelection(v AllowedToolsSelection) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeAllowedToolsSelection performs a merge with any union data inside the ChatCompletionRequest_ToolChoice, using the provided AllowedToolsSelection
+func (t *ChatCompletionRequest_ToolChoice) MergeAllowedToolsSelection(v AllowedToolsSelection) error {
 	b, err := json.Marshal(v)
 	if err != nil {
 		return err
@@ -15803,6 +17593,32 @@ func (t *CompletionRequest_Thinking) MergeThinkingConfigDisabled(v ThinkingConfi
 	return err
 }
 
+// AsThinkingConfigAdaptive returns the union data inside the CompletionRequest_Thinking as a ThinkingConfigAdaptive
+func (t CompletionRequest_Thinking) AsThinkingConfigAdaptive() (ThinkingConfigAdaptive, error) {
+	var body ThinkingConfigAdaptive
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromThinkingConfigAdaptive overwrites any union data inside the CompletionRequest_Thinking as the provided ThinkingConfigAdaptive
+func (t *CompletionRequest_Thinking) FromThinkingConfigAdaptive(v ThinkingConfigAdaptive) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeThinkingConfigAdaptive performs a merge with any union data inside the CompletionRequest_Thinking, using the provided ThinkingConfigAdaptive
+func (t *CompletionRequest_Thinking) MergeThinkingConfigAdaptive(v ThinkingConfigAdaptive) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
 func (t CompletionRequest_Thinking) MarshalJSON() ([]byte, error) {
 	b, err := t.union.MarshalJSON()
 	return b, err
@@ -15995,6 +17811,68 @@ func (t CreateResponse_ToolChoice) MarshalJSON() ([]byte, error) {
 }
 
 func (t *CreateResponse_ToolChoice) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsNewLogProbsContentSamplingMask0 returns the union data inside the NewLogProbsContent_SamplingMask as a NewLogProbsContentSamplingMask0
+func (t NewLogProbsContent_SamplingMask) AsNewLogProbsContentSamplingMask0() (NewLogProbsContentSamplingMask0, error) {
+	var body NewLogProbsContentSamplingMask0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromNewLogProbsContentSamplingMask0 overwrites any union data inside the NewLogProbsContent_SamplingMask as the provided NewLogProbsContentSamplingMask0
+func (t *NewLogProbsContent_SamplingMask) FromNewLogProbsContentSamplingMask0(v NewLogProbsContentSamplingMask0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeNewLogProbsContentSamplingMask0 performs a merge with any union data inside the NewLogProbsContent_SamplingMask, using the provided NewLogProbsContentSamplingMask0
+func (t *NewLogProbsContent_SamplingMask) MergeNewLogProbsContentSamplingMask0(v NewLogProbsContentSamplingMask0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsNewLogProbsContentSamplingMask1 returns the union data inside the NewLogProbsContent_SamplingMask as a NewLogProbsContentSamplingMask1
+func (t NewLogProbsContent_SamplingMask) AsNewLogProbsContentSamplingMask1() (NewLogProbsContentSamplingMask1, error) {
+	var body NewLogProbsContentSamplingMask1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromNewLogProbsContentSamplingMask1 overwrites any union data inside the NewLogProbsContent_SamplingMask as the provided NewLogProbsContentSamplingMask1
+func (t *NewLogProbsContent_SamplingMask) FromNewLogProbsContentSamplingMask1(v NewLogProbsContentSamplingMask1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeNewLogProbsContentSamplingMask1 performs a merge with any union data inside the NewLogProbsContent_SamplingMask, using the provided NewLogProbsContentSamplingMask1
+func (t *NewLogProbsContent_SamplingMask) MergeNewLogProbsContentSamplingMask1(v NewLogProbsContentSamplingMask1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t NewLogProbsContent_SamplingMask) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *NewLogProbsContent_SamplingMask) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }
@@ -16393,6 +18271,94 @@ func (t ResponseFormat_Schema) MarshalJSON() ([]byte, error) {
 }
 
 func (t *ResponseFormat_Schema) UnmarshalJSON(b []byte) error {
+	err := t.union.UnmarshalJSON(b)
+	return err
+}
+
+// AsThinkingConfigEnabledEffort0 returns the union data inside the ThinkingConfigEnabled_Effort as a ThinkingConfigEnabledEffort0
+func (t ThinkingConfigEnabled_Effort) AsThinkingConfigEnabledEffort0() (ThinkingConfigEnabledEffort0, error) {
+	var body ThinkingConfigEnabledEffort0
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromThinkingConfigEnabledEffort0 overwrites any union data inside the ThinkingConfigEnabled_Effort as the provided ThinkingConfigEnabledEffort0
+func (t *ThinkingConfigEnabled_Effort) FromThinkingConfigEnabledEffort0(v ThinkingConfigEnabledEffort0) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeThinkingConfigEnabledEffort0 performs a merge with any union data inside the ThinkingConfigEnabled_Effort, using the provided ThinkingConfigEnabledEffort0
+func (t *ThinkingConfigEnabled_Effort) MergeThinkingConfigEnabledEffort0(v ThinkingConfigEnabledEffort0) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsThinkingConfigEnabledEffort1 returns the union data inside the ThinkingConfigEnabled_Effort as a ThinkingConfigEnabledEffort1
+func (t ThinkingConfigEnabled_Effort) AsThinkingConfigEnabledEffort1() (ThinkingConfigEnabledEffort1, error) {
+	var body ThinkingConfigEnabledEffort1
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromThinkingConfigEnabledEffort1 overwrites any union data inside the ThinkingConfigEnabled_Effort as the provided ThinkingConfigEnabledEffort1
+func (t *ThinkingConfigEnabled_Effort) FromThinkingConfigEnabledEffort1(v ThinkingConfigEnabledEffort1) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeThinkingConfigEnabledEffort1 performs a merge with any union data inside the ThinkingConfigEnabled_Effort, using the provided ThinkingConfigEnabledEffort1
+func (t *ThinkingConfigEnabled_Effort) MergeThinkingConfigEnabledEffort1(v ThinkingConfigEnabledEffort1) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+// AsThinkingConfigEnabledEffort2 returns the union data inside the ThinkingConfigEnabled_Effort as a ThinkingConfigEnabledEffort2
+func (t ThinkingConfigEnabled_Effort) AsThinkingConfigEnabledEffort2() (ThinkingConfigEnabledEffort2, error) {
+	var body ThinkingConfigEnabledEffort2
+	err := json.Unmarshal(t.union, &body)
+	return body, err
+}
+
+// FromThinkingConfigEnabledEffort2 overwrites any union data inside the ThinkingConfigEnabled_Effort as the provided ThinkingConfigEnabledEffort2
+func (t *ThinkingConfigEnabled_Effort) FromThinkingConfigEnabledEffort2(v ThinkingConfigEnabledEffort2) error {
+	b, err := json.Marshal(v)
+	t.union = b
+	return err
+}
+
+// MergeThinkingConfigEnabledEffort2 performs a merge with any union data inside the ThinkingConfigEnabled_Effort, using the provided ThinkingConfigEnabledEffort2
+func (t *ThinkingConfigEnabled_Effort) MergeThinkingConfigEnabledEffort2(v ThinkingConfigEnabledEffort2) error {
+	b, err := json.Marshal(v)
+	if err != nil {
+		return err
+	}
+
+	merged, err := runtime.JSONMerge(t.union, b)
+	t.union = merged
+	return err
+}
+
+func (t ThinkingConfigEnabled_Effort) MarshalJSON() ([]byte, error) {
+	b, err := t.union.MarshalJSON()
+	return b, err
+}
+
+func (t *ThinkingConfigEnabled_Effort) UnmarshalJSON(b []byte) error {
 	err := t.union.UnmarshalJSON(b)
 	return err
 }

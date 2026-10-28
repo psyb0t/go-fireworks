@@ -1,15 +1,15 @@
 #!/bin/bash
 # Downloads the Fireworks AI OpenAPI spec into api/. The spec is not committed;
-# `go generate` fetches it as its first step. Stainless hosts the spec under a
-# URL that carries a content hash and changes on every update, so the current
-# URL is read from the `.stats.yml` of the Fireworks Python SDK repo.
+# `go generate` fetches it as its first step. Fireworks AI publishes the merged
+# spec behind its API reference at a fixed URL, so the script downloads it
+# directly.
 set -euo pipefail
 trap 'on_error "$?" "$LINENO"' ERR
 
 LOG_FILE="${LOG_FILE:-/tmp/$(basename "$0" .sh).log}"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
-readonly STATS_URL="https://raw.githubusercontent.com/fw-ai-external/python-sdk/main/.stats.yml"
+readonly SPEC_URL="https://docs.fireworks.ai/merged.openapi.yaml"
 readonly DOWNLOAD_TIMEOUT_SECONDS=60
 readonly SPEC_NAME="openapi.yaml"
 SPEC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/api"
@@ -44,27 +44,16 @@ main() {
 	# shellcheck disable=SC2064 # expand tmp now, the local is gone when EXIT fires
 	trap "rm -f -- '${tmp}'" EXIT
 
-	local stats spec_url
-	log INFO "downloading stats=${STATS_URL}"
-	stats="$(wget -q -T "$DOWNLOAD_TIMEOUT_SECONDS" -O - "$STATS_URL")"
-	spec_url="$(printf '%s\n' "$stats" |
-		sed -n 's/^openapi_spec_url:[[:space:]]*//p' |
-		tr -d "\"'\r")"
-	if [ -z "$spec_url" ]; then
-		log ERROR "no openapi_spec_url in stats=${STATS_URL}"
-		exit 1
-	fi
-
-	log INFO "downloading spec=${SPEC_NAME} url=${spec_url}"
+	log INFO "downloading spec=${SPEC_NAME} url=${SPEC_URL}"
 	wget -q \
 		-T "$DOWNLOAD_TIMEOUT_SECONDS" \
 		-O "$tmp" \
-		"$spec_url"
+		"$SPEC_URL"
 
 	# The spec is YAML and the image has no YAML parser, so check for the
-	# top-level openapi key instead of parsing it.
-	if ! grep -qE '^openapi: ' "$tmp"; then
-		log ERROR "downloaded file is not an OpenAPI document spec=${SPEC_NAME}"
+	# top-level openapi 3.x and paths keys instead of parsing it.
+	if ! grep -qE '^openapi: [^0-9]?3\.' "$tmp" || ! grep -qE '^paths:' "$tmp"; then
+		log ERROR "downloaded file is not an OpenAPI 3.x document spec=${SPEC_NAME}"
 		exit 1
 	fi
 

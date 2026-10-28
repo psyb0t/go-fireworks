@@ -4,6 +4,13 @@ generate:
 output: client.gen.go
 output-options:
   resolve-type-name-collisions: true
+  # The spec files GetApiKey and UpdateApiKey under a malformed path that
+  # repeats {account_id} and {user_id} and has no {keyId} segment for the key
+  # ID parameter, so oapi-codegen rejects it and the real URL is unknown.
+  # Remove the exclusion once the spec fixes the path.
+  exclude-operation-ids:
+    - Gateway_GetApiKey
+    - Gateway_UpdateApiKey
   # Plain `type: number` without a format maps to float32 by default. float32
   # loses precision, so map it to float64.
   type-mapping:
