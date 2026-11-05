@@ -2261,14 +2261,6 @@ type ClientInterface interface {
 	//
 	// Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
 	//
-	// Explore our cookbooks for detailed examples:
-	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
-	//
 	// Takes any type of body and a specified content type.
 	//
 	// Corresponds with POST /v1/responses (the `CreateResponseV1ResponsesPost` operationId).
@@ -2277,14 +2269,6 @@ type ClientInterface interface {
 	// CreateResponseV1ResponsesPost Create Response
 	//
 	// Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
-	//
-	// Explore our cookbooks for detailed examples:
-	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -7614,14 +7598,6 @@ func (c *Client) ListResponsesV1ResponsesGet(ctx context.Context, params *ListRe
 //
 // Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
 //
-// Explore our cookbooks for detailed examples:
-//
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
-//
 // Takes any type of body and a specified content type.
 //
 // Corresponds with POST /v1/responses (the `CreateResponseV1ResponsesPost` operationId).
@@ -7640,14 +7616,6 @@ func (c *Client) CreateResponseV1ResponsesPostWithBody(ctx context.Context, cont
 // CreateResponseV1ResponsesPost Create Response
 //
 // Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
-//
-// Explore our cookbooks for detailed examples:
-//
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 //
 // Takes a body of the `application/json` content type.
 //
@@ -25096,14 +25064,6 @@ type ClientWithResponsesInterface interface {
 	//
 	// Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
 	//
-	// Explore our cookbooks for detailed examples:
-	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
-	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
 	// Corresponds with POST /v1/responses (the `CreateResponseV1ResponsesPost` operationId).
@@ -25112,14 +25072,6 @@ type ClientWithResponsesInterface interface {
 	// CreateResponseV1ResponsesPostWithResponse Create Response
 	//
 	// Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
-	//
-	// Explore our cookbooks for detailed examples:
-	//
-	// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-	// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-	// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-	// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-	// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -38522,14 +38474,6 @@ func (c *ClientWithResponses) ListResponsesV1ResponsesGetWithResponse(ctx contex
 //
 // Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
 //
-// Explore our cookbooks for detailed examples:
-//
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
-//
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
 // Corresponds with POST /v1/responses (the `CreateResponseV1ResponsesPost` operationId).
@@ -38544,14 +38488,6 @@ func (c *ClientWithResponses) CreateResponseV1ResponsesPostWithBodyWithResponse(
 // CreateResponseV1ResponsesPostWithResponse Create Response
 //
 // Creates a model response, optionally interacting with custom tools via the Model Context Protocol (MCP). This endpoint supports conversational continuation and streaming.
-//
-// Explore our cookbooks for detailed examples:
-//
-// - [Basic MCP Usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb)
-// - [Streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb)
-// - [Conversational History with `previous_response_id`](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_previous_response_cookbook.ipynb)
-// - [Basic Streaming](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_streaming_example.ipynb)
-// - [Controlling Response Storage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb)
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //

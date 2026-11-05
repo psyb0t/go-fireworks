@@ -2,6 +2,10 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.2.1, 2026-11-05
+
+- Documentation only. The generated doc comments for `CreateResponseV1ResponsesPost`, `CreateResponseV1ResponsesPostWithBody` and the `CreateResponse.Store` field no longer link to the Fireworks cookbook notebooks, which the upstream spec dropped.
+
 ## v0.2.0, 2026-10-28
 
 - The client is generated from the spec Fireworks publishes at `https://docs.fireworks.ai/merged.openapi.yaml`. The Stainless-hosted copy of the spec it used before is no longer publicly readable, so scheduled regeneration had stopped.

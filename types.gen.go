@@ -5729,7 +5729,7 @@ type CreateResponse struct {
 	// Reasoning Configuration for reasoning output. When enabled, the model will return its reasoning process along with the response.
 	Reasoning *map[string]interface{} `json:"reasoning,omitempty"`
 
-	// Store Whether to store the response. When set to false, the response will not be stored and will not be retrievable via the API. This is useful for ephemeral or sensitive data. See an example in our [Controlling Response Storage cookbook](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/mcp_server_with_store_false_argument.ipynb). Default is True.
+	// Store Whether to store the response. When set to false, the response will not be stored and will not be retrievable via the API. This is useful for ephemeral or sensitive data. Default is True.
 	Store *bool `json:"store,omitempty"`
 
 	// Stream Whether to stream the response back as Server-Sent Events (SSE). When true, tokens are sent incrementally as they are generated. Default is False.
@@ -5744,7 +5744,7 @@ type CreateResponse struct {
 	// ToolChoice Controls which (if any) tool the model should use. Can be 'none' (never call tools), 'auto' (model decides), 'required' (must call at least one tool), or an object specifying a particular tool to call. Default is 'auto'.
 	ToolChoice *CreateResponse_ToolChoice `json:"tool_choice,omitempty"`
 
-	// Tools A list of MCP tools the model may call. See our cookbooks for examples on [basic MCP usage](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_examples.ipynb) and [streaming with MCP](https://github.com/fw-ai/cookbook/blob/main/archived/learn/response-api/fireworks_mcp_with_streaming.ipynb).
+	// Tools A list of MCP tools the model may call.
 	Tools *[]map[string]interface{} `json:"tools,omitempty"`
 
 	// TopP An alternative to temperature sampling, called nucleus sampling, where the model considers the results of tokens with top_p probability mass. So 0.1 means only tokens comprising the top 10% probability mass are considered. Default is 1.0. We generally recommend altering this or temperature but not both.
@@ -6584,7 +6584,7 @@ type GatewayApiKey struct {
 	// Email Email of the user who owns this API key.
 	Email *string `json:"email,omitempty"`
 
-	// ExpireTime Timestamp indicating when the API key will expire. If not set, the key never expires.
+	// ExpireTime Timestamp indicating when the API key will expire. API keys have a maximum expiration of 1 year (365 days); a value later than that is rejected. If not set on create, the key expires 1 year after creation.
 	ExpireTime *time.Time `json:"expireTime,omitempty"`
 
 	// IsFirepass True when this key is a FirePass inference key.
