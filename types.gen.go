@@ -2962,6 +2962,36 @@ func (e GatewayRegion) Valid() bool {
 	}
 }
 
+// Defines values for GatewayReservationState.
+const (
+	GatewayReservationStateACTIVE           GatewayReservationState = "ACTIVE"
+	GatewayReservationStateDELETED          GatewayReservationState = "DELETED"
+	GatewayReservationStateDELETING         GatewayReservationState = "DELETING"
+	GatewayReservationStateEXPIRED          GatewayReservationState = "EXPIRED"
+	GatewayReservationStateSTATEUNSPECIFIED GatewayReservationState = "STATE_UNSPECIFIED"
+	GatewayReservationStateUPDATING         GatewayReservationState = "UPDATING"
+)
+
+// Valid indicates whether the value is a known member of the GatewayReservationState enum.
+func (e GatewayReservationState) Valid() bool {
+	switch e {
+	case GatewayReservationStateACTIVE:
+		return true
+	case GatewayReservationStateDELETED:
+		return true
+	case GatewayReservationStateDELETING:
+		return true
+	case GatewayReservationStateEXPIRED:
+		return true
+	case GatewayReservationStateSTATEUNSPECIFIED:
+		return true
+	case GatewayReservationStateUPDATING:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for GatewayRolloutStrategy.
 const (
 	GatewayRolloutStrategyROLLOUTSTRATEGYHOTRELOAD   GatewayRolloutStrategy = "ROLLOUT_STRATEGY_HOT_RELOAD"
@@ -5869,6 +5899,44 @@ type FunctionSelection struct {
 // FunctionSelectionType defines model for FunctionSelection.Type.
 type FunctionSelectionType string
 
+// GetAccountAcceleratorUsageResponseAcceleratorUsageByType Accelerator capacity and usage counts for one accelerator type.
+type GetAccountAcceleratorUsageResponseAcceleratorUsageByType struct {
+	// AcceleratorType The accelerator type.
+	AcceleratorType *GatewayAcceleratorType `json:"acceleratorType,omitempty"`
+
+	// AllocatedAcceleratorCount Total accelerators currently allocated across deployments and training
+	// jobs.
+	AllocatedAcceleratorCount *string `json:"allocatedAcceleratorCount,omitempty"`
+
+	// DownloadingModelAcceleratorCount Accelerators held by deployment replicas downloading model weights.
+	DownloadingModelAcceleratorCount *string `json:"downloadingModelAcceleratorCount,omitempty"`
+
+	// InitializingAcceleratorCount Accelerators held by deployment replicas starting up, including replicas
+	// that are restarting or retrying.
+	InitializingAcceleratorCount *string `json:"initializingAcceleratorCount,omitempty"`
+
+	// OnDemandAllocatedAcceleratorCount Allocated accelerators that do not count toward the account's
+	// reservations.
+	OnDemandAllocatedAcceleratorCount *string `json:"onDemandAllocatedAcceleratorCount,omitempty"`
+
+	// PendingAcceleratorCount Total accelerators requested by deployments and training jobs that are
+	// not allocated yet.
+	PendingAcceleratorCount *string `json:"pendingAcceleratorCount,omitempty"`
+
+	// PendingSchedulingAcceleratorCount Accelerators requested by deployment replicas still waiting for capacity.
+	PendingSchedulingAcceleratorCount *string `json:"pendingSchedulingAcceleratorCount,omitempty"`
+
+	// ReadyAcceleratorCount Accelerators held by deployment replicas that are ready and serving
+	// traffic.
+	ReadyAcceleratorCount *string `json:"readyAcceleratorCount,omitempty"`
+
+	// ReservedAcceleratorCount Accelerators reserved by the account's reservations that are in effect.
+	ReservedAcceleratorCount *string `json:"reservedAcceleratorCount,omitempty"`
+
+	// ReservedAllocatedAcceleratorCount Allocated accelerators that count toward the account's reservations.
+	ReservedAllocatedAcceleratorCount *string `json:"reservedAllocatedAcceleratorCount,omitempty"`
+}
+
 // HTTPValidationError defines model for HTTPValidationError.
 type HTTPValidationError struct {
 	Detail *[]ValidationError `json:"detail,omitempty"`
@@ -8356,6 +8424,15 @@ type GatewayGatewayValidateDatasetUploadBody = map[string]interface{}
 // GatewayGatewayValidateEvaluatorUploadBody defines model for gatewayGatewayValidateEvaluatorUploadBody.
 type GatewayGatewayValidateEvaluatorUploadBody = map[string]interface{}
 
+// GatewayGetAccountAcceleratorUsageResponse Response with the account's reserved accelerator capacity, allocated
+// accelerators, and pending accelerator demand across deployments and training
+// jobs.
+type GatewayGetAccountAcceleratorUsageResponse struct {
+	// UsageByType Accelerator counts by accelerator type. Groups with no reserved,
+	// allocated, or pending accelerators are omitted.
+	UsageByType *[]GetAccountAcceleratorUsageResponseAcceleratorUsageByType `json:"usageByType,omitempty"`
+}
+
 // GatewayGetAccountServerlessTokenUsageResponse defines model for gatewayGetAccountServerlessTokenUsageResponse.
 type GatewayGetAccountServerlessTokenUsageResponse struct {
 	AverageTokensPerMinuteByBaseModel          *[]GatewayTimeSeries `json:"averageTokensPerMinuteByBaseModel,omitempty"`
@@ -8910,6 +8987,17 @@ type GatewayListReinforcementFineTuningJobsResponse struct {
 	NextPageToken               *string                              `json:"nextPageToken,omitempty"`
 	ReinforcementFineTuningJobs *[]GatewayReinforcementFineTuningJob `json:"reinforcementFineTuningJobs,omitempty"`
 	TotalSize                   *int32                               `json:"totalSize,omitempty"`
+}
+
+// GatewayListReservationsResponse defines model for gatewayListReservationsResponse.
+type GatewayListReservationsResponse struct {
+	// NextPageToken A token, which can be sent as `page_token` to retrieve the next page.
+	// If this field is omitted, there are no subsequent pages.
+	NextPageToken *string               `json:"nextPageToken,omitempty"`
+	Reservations  *[]GatewayReservation `json:"reservations,omitempty"`
+
+	// TotalSize The total number of reservations.
+	TotalSize *int32 `json:"totalSize,omitempty"`
 }
 
 // GatewayListRlorTrainerJobCheckpointsResponse defines model for gatewayListRlorTrainerJobCheckpointsResponse.
@@ -9629,6 +9717,68 @@ type GatewayReplicaStats struct {
 	ReadyReplicaCount     *int32 `json:"readyReplicaCount,omitempty"`
 	RevocableReplicaCount *int32 `json:"revocableReplicaCount,omitempty"`
 }
+
+// GatewayReservation defines model for gatewayReservation.
+type GatewayReservation struct {
+	// AcceleratorType The type of accelerator for this reservation.
+	AcceleratorType GatewayAcceleratorType `json:"acceleratorType"`
+
+	// CreateTime The creation time of the reservation.
+	CreateTime *time.Time `json:"createTime,omitempty"`
+
+	// CreatedBy The email address of the user who created this reservation.
+	CreatedBy *string `json:"createdBy,omitempty"`
+
+	// Description Description of the reservation.
+	Description *string `json:"description,omitempty"`
+
+	// DisplayName Human-readable display name of the reservation. e.g. "My Reservation"
+	// Must be fewer than 64 characters long.
+	DisplayName *string `json:"displayName,omitempty"`
+
+	// EndTime The timestamp at which the reservation ends (exclusive).
+	EndTime *time.Time `json:"endTime,omitempty"`
+
+	// MultiRegion The multi-region for this reservation.
+	MultiRegion *GatewayMultiRegion `json:"multiRegion,omitempty"`
+
+	// Name The resource name of the reservation, e.g. "accounts/my-account/reservations/abcdef".
+	Name *string `json:"name,omitempty"`
+
+	// Region The region for this reservation.
+	Region *GatewayRegion `json:"region,omitempty"`
+
+	// ReservedCount The number of accelerators reserved.
+	ReservedCount int32 `json:"reservedCount"`
+
+	// StartTime The timestamp at which the reservation starts (inclusive).
+	StartTime *time.Time `json:"startTime,omitempty"`
+
+	// State The lifecycle state of the reservation.
+	//
+	//
+	//  - ACTIVE: The reservation's capacity is available.
+	//  - EXPIRED: The reservation has ended.
+	//  - DELETING: The reservation is being deleted.
+	//  - DELETED: The reservation has been deleted.
+	//  - UPDATING: The reservation's capacity is being provisioned or updated.
+	State *GatewayReservationState `json:"state,omitempty"`
+
+	// TargetedConsumption Reserved for future use. Currently has no effect.
+	TargetedConsumption *bool `json:"targetedConsumption,omitempty"`
+
+	// UpdateTime The update time for the reservation.
+	UpdateTime *time.Time `json:"updateTime,omitempty"`
+}
+
+// GatewayReservationState The lifecycle state of the reservation.
+//
+//   - ACTIVE: The reservation's capacity is available.
+//   - EXPIRED: The reservation has ended.
+//   - DELETING: The reservation is being deleted.
+//   - DELETED: The reservation has been deleted.
+//   - UPDATING: The reservation's capacity is being provisioned or updated.
+type GatewayReservationState string
 
 // GatewayRlorTrainerJob defines model for gatewayRlorTrainerJob.
 type GatewayRlorTrainerJob struct {
@@ -12515,6 +12665,40 @@ type GatewayUpdateReinforcementFineTuningJobJSONBody struct {
 
 	// WandbConfig The Weights & Biases team/user account for logging training progress.
 	WandbConfig *GatewayWandbConfig `json:"wandbConfig,omitempty"`
+}
+
+// GatewayListReservationsParams defines parameters for GatewayListReservations.
+type GatewayListReservationsParams struct {
+	// PageSize The maximum number of reservations to return. The maximum page_size is 200,
+	// values above 200 will be coerced to 200.
+	// If unspecified, the default is 50.
+	PageSize *int32 `form:"pageSize,omitempty" json:"pageSize,omitempty"`
+
+	// PageToken A page token, received from a previous ListReservations call. Provide this
+	// to retrieve the subsequent page. When paginating, all other parameters
+	// provided to ListReservations must match the call that provided the page
+	// token.
+	PageToken *string `form:"pageToken,omitempty" json:"pageToken,omitempty"`
+
+	// Filter Only reservations satisfying the provided filter (if specified) will be
+	// returned. See https://google.aip.dev/160 for the filter grammar.
+	Filter *string `form:"filter,omitempty" json:"filter,omitempty"`
+
+	// OrderBy A comma-separated list of fields to order by. e.g. "foo,bar"
+	// The default sort order is ascending. To specify a descending order for a
+	// field, append a " desc" suffix. e.g. "foo desc,bar"
+	// Subfields are specified with a "." character. e.g. "foo.bar"
+	// If not specified, the default order is by "start_time".
+	OrderBy *string `form:"orderBy,omitempty" json:"orderBy,omitempty"`
+
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
+}
+
+// GatewayGetReservationParams defines parameters for GatewayGetReservation.
+type GatewayGetReservationParams struct {
+	// ReadMask The fields to be returned in the response. If empty or "*", all fields will be returned.
+	ReadMask *string `form:"readMask,omitempty" json:"readMask,omitempty"`
 }
 
 // GatewayListRlorTrainerJobsParams defines parameters for GatewayListRlorTrainerJobs.

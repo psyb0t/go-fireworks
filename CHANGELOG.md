@@ -2,6 +2,14 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.2.2, 2026-11-18
+
+- Generated from Fireworks spec version 5.10.0.
+- Added the reservations endpoints: `GatewayListReservations`, `GatewayGetReservation` and `GatewayGetAccountAcceleratorUsage`, each with a `WithResponse` variant on `Client` and `ClientWithResponses`, plus the `NewGatewayListReservationsRequest`, `NewGatewayGetReservationRequest` and `NewGatewayGetAccountAcceleratorUsageRequest` builders and matching `Parse...Response` functions.
+- Added the types `GatewayReservation`, `GatewayReservationState` (with constants `GatewayReservationStateACTIVE`, `GatewayReservationStateUPDATING`, `GatewayReservationStateDELETING`, `GatewayReservationStateDELETED`, `GatewayReservationStateEXPIRED` and `GatewayReservationStateSTATEUNSPECIFIED`), `GatewayListReservationsParams`, `GatewayGetReservationParams` and the response types for the new calls.
+- The new methods are also added to `ClientInterface` and `ClientWithResponsesInterface`, so custom implementations or mocks of those interfaces need the new methods.
+- Raised the Go version in `go.mod` from 1.26.10 to 1.26.11, which fixes the `net/http` vulnerability GO-2026-6859 found by govulncheck. The development image and the setup note in the agent skill use 1.26.11 too.
+
 ## v0.2.1, 2026-11-05
 
 - Documentation only. The generated doc comments for `CreateResponseV1ResponsesPost`, `CreateResponseV1ResponsesPostWithBody` and the `CreateResponse.Store` field no longer link to the Fireworks cookbook notebooks, which the upstream spec dropped.

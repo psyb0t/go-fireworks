@@ -100,6 +100,15 @@ type ClientInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id} (the `GatewayGetAccount` operationId).
 	GatewayGetAccount(ctx context.Context, accountId string, params *GatewayGetAccountParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayGetAccountAcceleratorUsage Get Accelerator Usage
+	//
+	// Gets the account's reserved accelerator capacity, allocated accelerators,
+	// and pending accelerator demand across deployments and training jobs,
+	// grouped by accelerator type.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/acceleratorUsage (the `GatewayGetAccountAcceleratorUsage` operationId).
+	GatewayGetAccountAcceleratorUsage(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayGetAccountUsageFilterOptions Distinct filter values for an account/time range (serverless + dedicated; for FE, separate -yet mirrors GetAccountUsage).
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/accountUsageFilterOptions (the `GatewayGetAccountUsageFilterOptions` operationId).
@@ -1371,6 +1380,20 @@ type ClientInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:resume (the `GatewayResumeReinforcementFineTuningJob` operationId).
 	GatewayResumeReinforcementFineTuningJob(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayResumeReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
+	// GatewayListReservations List Reservations
+	//
+	// Lists reservations for an account.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/reservations (the `GatewayListReservations` operationId).
+	GatewayListReservations(ctx context.Context, accountId string, params *GatewayListReservationsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	// GatewayGetReservation Get Reservation
+	//
+	// Gets a reservation by name.
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/reservations/{reservation_id} (the `GatewayGetReservation` operationId).
+	GatewayGetReservation(ctx context.Context, accountId string, reservationId string, params *GatewayGetReservationParams, reqEditors ...RequestEditorFn) (*http.Response, error)
+
 	// GatewayListRlorTrainerJobs List Reinforcement Fine-tuning Steps
 	//
 	// Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs (the `GatewayListRlorTrainerJobs` operationId).
@@ -2324,6 +2347,25 @@ func (c *Client) GatewayListAccounts(ctx context.Context, params *GatewayListAcc
 // Corresponds with GET /v1/accounts/{account_id} (the `GatewayGetAccount` operationId).
 func (c *Client) GatewayGetAccount(ctx context.Context, accountId string, params *GatewayGetAccountParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGatewayGetAccountRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetAccountAcceleratorUsage Get Accelerator Usage
+//
+// Gets the account's reserved accelerator capacity, allocated accelerators,
+// and pending accelerator demand across deployments and training jobs,
+// grouped by accelerator type.
+//
+// Corresponds with GET /v1/accounts/{account_id}/acceleratorUsage (the `GatewayGetAccountAcceleratorUsage` operationId).
+func (c *Client) GatewayGetAccountAcceleratorUsage(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetAccountAcceleratorUsageRequest(c.Server, accountId)
 	if err != nil {
 		return nil, err
 	}
@@ -5467,6 +5509,40 @@ func (c *Client) GatewayResumeReinforcementFineTuningJob(ctx context.Context, ac
 	return c.Client.Do(req)
 }
 
+// GatewayListReservations List Reservations
+//
+// Lists reservations for an account.
+//
+// Corresponds with GET /v1/accounts/{account_id}/reservations (the `GatewayListReservations` operationId).
+func (c *Client) GatewayListReservations(ctx context.Context, accountId string, params *GatewayListReservationsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayListReservationsRequest(c.Server, accountId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// GatewayGetReservation Get Reservation
+//
+// Gets a reservation by name.
+//
+// Corresponds with GET /v1/accounts/{account_id}/reservations/{reservation_id} (the `GatewayGetReservation` operationId).
+func (c *Client) GatewayGetReservation(ctx context.Context, accountId string, reservationId string, params *GatewayGetReservationParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewGatewayGetReservationRequest(c.Server, accountId, reservationId, params)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
 // GatewayListRlorTrainerJobs List Reinforcement Fine-tuning Steps
 //
 // Corresponds with GET /v1/accounts/{account_id}/rlorTrainerJobs (the `GatewayListRlorTrainerJobs` operationId).
@@ -7853,6 +7929,40 @@ func NewGatewayGetAccountRequest(server string, accountId string, params *Gatewa
 			rawQueryFragments = append(rawQueryFragments, encoded)
 		}
 		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayGetAccountAcceleratorUsageRequest constructs an http.Request for the GatewayGetAccountAcceleratorUsage method
+func NewGatewayGetAccountAcceleratorUsageRequest(server string, accountId string) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/acceleratorUsage", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
 	}
 
 	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
@@ -16811,6 +16921,183 @@ func NewGatewayResumeReinforcementFineTuningJobRequestWithBody(server string, ac
 	return req, nil
 }
 
+// NewGatewayListReservationsRequest constructs an http.Request for the GatewayListReservations method
+func NewGatewayListReservationsRequest(server string, accountId string, params *GatewayListReservationsParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/reservations", pathParam0)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.PageSize != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageSize", *params.PageSize, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "integer", Format: "int32"}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.PageToken != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "pageToken", *params.PageToken, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.Filter != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "filter", *params.Filter, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.OrderBy != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "orderBy", *params.OrderBy, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
+// NewGatewayGetReservationRequest constructs an http.Request for the GatewayGetReservation method
+func NewGatewayGetReservationRequest(server string, accountId string, reservationId string, params *GatewayGetReservationParams) (*http.Request, error) {
+	var err error
+
+	var pathParam0 string
+
+	pathParam0, err = runtime.StyleParamWithOptions("simple", false, "account_id", accountId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	var pathParam1 string
+
+	pathParam1, err = runtime.StyleParamWithOptions("simple", false, "reservation_id", reservationId, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationPath, Type: "string", Format: ""})
+	if err != nil {
+		return nil, err
+	}
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/v1/accounts/%s/reservations/%s", pathParam0, pathParam1)
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	if params != nil {
+		// queryValues collects non-styled parameters (passthrough, JSON)
+		// that are safe to round-trip through url.Values.Encode().
+		queryValues := queryURL.Query()
+		// rawQueryFragments collects pre-encoded query fragments from
+		// styled parameters, preserving literal commas as delimiters
+		// per the OpenAPI spec (e.g. "color=blue,black,brown").
+		var rawQueryFragments []string
+
+		if params.ReadMask != nil {
+
+			if queryFrag, err := runtime.StyleParamWithOptions("form", true, "readMask", *params.ReadMask, runtime.StyleParamOptions{ParamLocation: runtime.ParamLocationQuery, Type: "string", Format: ""}); err != nil {
+				return nil, err
+			} else {
+				for _, qp := range strings.Split(queryFrag, "&") {
+					rawQueryFragments = append(rawQueryFragments, qp)
+				}
+			}
+
+		}
+
+		if encoded := queryValues.Encode(); encoded != "" {
+			rawQueryFragments = append(rawQueryFragments, encoded)
+		}
+		queryURL.RawQuery = strings.Join(rawQueryFragments, "&")
+	}
+
+	req, err := http.NewRequest(http.MethodGet, queryURL.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return req, nil
+}
+
 // NewGatewayListRlorTrainerJobsRequest constructs an http.Request for the GatewayListRlorTrainerJobs method
 func NewGatewayListRlorTrainerJobsRequest(server string, accountId string, params *GatewayListRlorTrainerJobsParams) (*http.Request, error) {
 	var err error
@@ -22659,6 +22946,17 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with GET /v1/accounts/{account_id} (the `GatewayGetAccount` operationId).
 	GatewayGetAccountWithResponse(ctx context.Context, accountId string, params *GatewayGetAccountParams, reqEditors ...RequestEditorFn) (*GatewayGetAccountResponse, error)
 
+	// GatewayGetAccountAcceleratorUsageWithResponse Get Accelerator Usage
+	//
+	// Gets the account's reserved accelerator capacity, allocated accelerators,
+	// and pending accelerator demand across deployments and training jobs,
+	// grouped by accelerator type.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/acceleratorUsage (the `GatewayGetAccountAcceleratorUsage` operationId).
+	GatewayGetAccountAcceleratorUsageWithResponse(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*GatewayGetAccountAcceleratorUsageResponse2, error)
+
 	// GatewayGetAccountUsageFilterOptionsWithResponse Distinct filter values for an account/time range (serverless + dedicated; for FE, separate -yet mirrors GetAccountUsage).
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -24086,6 +24384,24 @@ type ClientWithResponsesInterface interface {
 	// Corresponds with POST /v1/accounts/{account_id}/reinforcementFineTuningJobs/{reinforcement_fine_tuning_job_id}:resume (the `GatewayResumeReinforcementFineTuningJob` operationId).
 	GatewayResumeReinforcementFineTuningJobWithResponse(ctx context.Context, accountId string, reinforcementFineTuningJobId string, body GatewayResumeReinforcementFineTuningJobJSONRequestBody, reqEditors ...RequestEditorFn) (*GatewayResumeReinforcementFineTuningJobResponse, error)
 
+	// GatewayListReservationsWithResponse List Reservations
+	//
+	// Lists reservations for an account.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/reservations (the `GatewayListReservations` operationId).
+	GatewayListReservationsWithResponse(ctx context.Context, accountId string, params *GatewayListReservationsParams, reqEditors ...RequestEditorFn) (*GatewayListReservationsResponse2, error)
+
+	// GatewayGetReservationWithResponse Get Reservation
+	//
+	// Gets a reservation by name.
+	//
+	// Returns a wrapper object for the known response body format(s).
+	//
+	// Corresponds with GET /v1/accounts/{account_id}/reservations/{reservation_id} (the `GatewayGetReservation` operationId).
+	GatewayGetReservationWithResponse(ctx context.Context, accountId string, reservationId string, params *GatewayGetReservationParams, reqEditors ...RequestEditorFn) (*GatewayGetReservationResponse, error)
+
 	// GatewayListRlorTrainerJobsWithResponse List Reinforcement Fine-tuning Steps
 	//
 	// Returns a wrapper object for the known response body format(s).
@@ -25187,6 +25503,47 @@ func (r GatewayGetAccountResponse) StatusCode() int {
 
 // ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
 func (r GatewayGetAccountResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetAccountAcceleratorUsageResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayGetAccountAcceleratorUsageResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetAccountAcceleratorUsageResponse2) GetJSON200() *GatewayGetAccountAcceleratorUsageResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetAccountAcceleratorUsageResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetAccountAcceleratorUsageResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetAccountAcceleratorUsageResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetAccountAcceleratorUsageResponse2) ContentType() string {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.Header.Get("Content-Type")
 	}
@@ -30564,6 +30921,88 @@ func (r GatewayResumeReinforcementFineTuningJobResponse) ContentType() string {
 	return ""
 }
 
+type GatewayListReservationsResponse2 struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayListReservationsResponse
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayListReservationsResponse2) GetJSON200() *GatewayListReservationsResponse {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayListReservationsResponse2) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayListReservationsResponse2) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayListReservationsResponse2) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayListReservationsResponse2) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
+type GatewayGetReservationResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+	// JSON200 the response for an HTTP 200 `application/json` response
+	JSON200 *GatewayReservation
+}
+
+// GetJSON200 returns the response for an HTTP 200 `application/json` response
+func (r GatewayGetReservationResponse) GetJSON200() *GatewayReservation {
+	return r.JSON200
+}
+
+// GetBody returns the raw response body bytes
+func (r GatewayGetReservationResponse) GetBody() []byte {
+	return r.Body
+}
+
+// Status returns HTTPResponse.Status
+func (r GatewayGetReservationResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r GatewayGetReservationResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// ContentType is a convenience method to retrieve the Content-Type value from the HTTP response headers
+func (r GatewayGetReservationResponse) ContentType() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Header.Get("Content-Type")
+	}
+	return ""
+}
+
 type GatewayListRlorTrainerJobsResponse2 struct {
 	Body         []byte
 	HTTPResponse *http.Response
@@ -34206,6 +34645,23 @@ func (c *ClientWithResponses) GatewayGetAccountWithResponse(ctx context.Context,
 	return ParseGatewayGetAccountResponse(rsp)
 }
 
+// GatewayGetAccountAcceleratorUsageWithResponse Get Accelerator Usage
+//
+// Gets the account's reserved accelerator capacity, allocated accelerators,
+// and pending accelerator demand across deployments and training jobs,
+// grouped by accelerator type.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/acceleratorUsage (the `GatewayGetAccountAcceleratorUsage` operationId).
+func (c *ClientWithResponses) GatewayGetAccountAcceleratorUsageWithResponse(ctx context.Context, accountId string, reqEditors ...RequestEditorFn) (*GatewayGetAccountAcceleratorUsageResponse2, error) {
+	rsp, err := c.GatewayGetAccountAcceleratorUsage(ctx, accountId, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetAccountAcceleratorUsageResponse2(rsp)
+}
+
 // GatewayGetAccountUsageFilterOptionsWithResponse Distinct filter values for an account/time range (serverless + dedicated; for FE, separate -yet mirrors GetAccountUsage).
 //
 // Returns a wrapper object for the known response body format(s).
@@ -36751,6 +37207,36 @@ func (c *ClientWithResponses) GatewayResumeReinforcementFineTuningJobWithRespons
 	return ParseGatewayResumeReinforcementFineTuningJobResponse(rsp)
 }
 
+// GatewayListReservationsWithResponse List Reservations
+//
+// Lists reservations for an account.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/reservations (the `GatewayListReservations` operationId).
+func (c *ClientWithResponses) GatewayListReservationsWithResponse(ctx context.Context, accountId string, params *GatewayListReservationsParams, reqEditors ...RequestEditorFn) (*GatewayListReservationsResponse2, error) {
+	rsp, err := c.GatewayListReservations(ctx, accountId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayListReservationsResponse2(rsp)
+}
+
+// GatewayGetReservationWithResponse Get Reservation
+//
+// Gets a reservation by name.
+//
+// Returns a wrapper object for the known response body format(s).
+//
+// Corresponds with GET /v1/accounts/{account_id}/reservations/{reservation_id} (the `GatewayGetReservation` operationId).
+func (c *ClientWithResponses) GatewayGetReservationWithResponse(ctx context.Context, accountId string, reservationId string, params *GatewayGetReservationParams, reqEditors ...RequestEditorFn) (*GatewayGetReservationResponse, error) {
+	rsp, err := c.GatewayGetReservation(ctx, accountId, reservationId, params, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseGatewayGetReservationResponse(rsp)
+}
+
 // GatewayListRlorTrainerJobsWithResponse List Reinforcement Fine-tuning Steps
 //
 // Returns a wrapper object for the known response body format(s).
@@ -38598,6 +39084,32 @@ func ParseGatewayGetAccountResponse(rsp *http.Response) (*GatewayGetAccountRespo
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GatewayAccount
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetAccountAcceleratorUsageResponse2 parses an HTTP response from a GatewayGetAccountAcceleratorUsageWithResponse call
+func ParseGatewayGetAccountAcceleratorUsageResponse2(rsp *http.Response) (*GatewayGetAccountAcceleratorUsageResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetAccountAcceleratorUsageResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayGetAccountAcceleratorUsageResponse
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -42016,6 +42528,58 @@ func ParseGatewayResumeReinforcementFineTuningJobResponse(rsp *http.Response) (*
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
 		var dest GatewayReinforcementFineTuningJob
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayListReservationsResponse2 parses an HTTP response from a GatewayListReservationsWithResponse call
+func ParseGatewayListReservationsResponse2(rsp *http.Response) (*GatewayListReservationsResponse2, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayListReservationsResponse2{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayListReservationsResponse
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
+
+	}
+
+	return response, nil
+}
+
+// ParseGatewayGetReservationResponse parses an HTTP response from a GatewayGetReservationWithResponse call
+func ParseGatewayGetReservationResponse(rsp *http.Response) (*GatewayGetReservationResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &GatewayGetReservationResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest GatewayReservation
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
