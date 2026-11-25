@@ -283,6 +283,30 @@ func (e AnthropicContentBlockSourceType) Valid() bool {
 	}
 }
 
+// Defines values for AnthropicCreateMessageParamsServiceTier.
+const (
+	AnthropicCreateMessageParamsServiceTierAuto         AnthropicCreateMessageParamsServiceTier = "auto"
+	AnthropicCreateMessageParamsServiceTierPriority     AnthropicCreateMessageParamsServiceTier = "priority"
+	AnthropicCreateMessageParamsServiceTierSpot         AnthropicCreateMessageParamsServiceTier = "spot"
+	AnthropicCreateMessageParamsServiceTierStandardOnly AnthropicCreateMessageParamsServiceTier = "standard_only"
+)
+
+// Valid indicates whether the value is a known member of the AnthropicCreateMessageParamsServiceTier enum.
+func (e AnthropicCreateMessageParamsServiceTier) Valid() bool {
+	switch e {
+	case AnthropicCreateMessageParamsServiceTierAuto:
+		return true
+	case AnthropicCreateMessageParamsServiceTierPriority:
+		return true
+	case AnthropicCreateMessageParamsServiceTierSpot:
+		return true
+	case AnthropicCreateMessageParamsServiceTierStandardOnly:
+		return true
+	default:
+		return false
+	}
+}
+
 // Defines values for AnthropicEffortLevel.
 const (
 	AnthropicEffortLevelHigh   AnthropicEffortLevel = "high"
@@ -1177,6 +1201,7 @@ const (
 	ChatCompletionRequestServiceTierDefault  ChatCompletionRequestServiceTier = "default"
 	ChatCompletionRequestServiceTierFlex     ChatCompletionRequestServiceTier = "flex"
 	ChatCompletionRequestServiceTierPriority ChatCompletionRequestServiceTier = "priority"
+	ChatCompletionRequestServiceTierSpot     ChatCompletionRequestServiceTier = "spot"
 )
 
 // Valid indicates whether the value is a known member of the ChatCompletionRequestServiceTier enum.
@@ -1189,6 +1214,8 @@ func (e ChatCompletionRequestServiceTier) Valid() bool {
 	case ChatCompletionRequestServiceTierFlex:
 		return true
 	case ChatCompletionRequestServiceTierPriority:
+		return true
+	case ChatCompletionRequestServiceTierSpot:
 		return true
 	default:
 		return false
@@ -1399,6 +1426,7 @@ const (
 	CompletionRequestServiceTierDefault  CompletionRequestServiceTier = "default"
 	CompletionRequestServiceTierFlex     CompletionRequestServiceTier = "flex"
 	CompletionRequestServiceTierPriority CompletionRequestServiceTier = "priority"
+	CompletionRequestServiceTierSpot     CompletionRequestServiceTier = "spot"
 )
 
 // Valid indicates whether the value is a known member of the CompletionRequestServiceTier enum.
@@ -1411,6 +1439,8 @@ func (e CompletionRequestServiceTier) Valid() bool {
 	case CompletionRequestServiceTierFlex:
 		return true
 	case CompletionRequestServiceTierPriority:
+		return true
+	case CompletionRequestServiceTierSpot:
 		return true
 	default:
 		return false
@@ -3577,6 +3607,9 @@ type AnthropicCreateMessageParams struct {
 	// RawOutput Return raw output from the model.
 	RawOutput *bool `json:"raw_output,omitempty"`
 
+	// ServiceTier The service tier to use for the request. Set "priority" for Priority tier or "spot" for Spot.
+	ServiceTier *AnthropicCreateMessageParamsServiceTier `json:"service_tier,omitempty"`
+
 	// StopSequences Custom text sequences that will cause the model to stop generating.
 	//
 	// Models will normally stop when they have naturally completed their turn, which will result in a response `stop_reason` of `"end_turn"`.
@@ -3698,6 +3731,9 @@ type AnthropicCreateMessageParams struct {
 	// Examples: 0.7
 	TopP *float64 `json:"top_p,omitempty"`
 }
+
+// AnthropicCreateMessageParamsServiceTier The service tier to use for the request. Set "priority" for Priority tier or "spot" for Spot.
+type AnthropicCreateMessageParamsServiceTier string
 
 // AnthropicCreateMessageParamsSystem0 defines model for AnthropicCreateMessageParams.System.0.
 type AnthropicCreateMessageParamsSystem0 = string
@@ -4791,7 +4827,7 @@ type ChatCompletionRequest struct {
 	// Seed Random seed for deterministic sampling.
 	Seed *int `json:"seed,omitempty"`
 
-	// ServiceTier The service tier to use for the request. Specifies the processing type used for serving the request. Only "priority" is supported, while all other values will be treated as "default" tier.
+	// ServiceTier The service tier to use for the request. Set "priority" for Priority tier or "spot" for Spot.
 	ServiceTier *ChatCompletionRequestServiceTier `json:"service_tier,omitempty"`
 
 	// Speculation Speculative decoding prompt or token IDs to speed up generation.
@@ -4964,7 +5000,7 @@ type ChatCompletionRequestReasoningHistory string
 // ChatCompletionRequestSamplingMask defines model for ChatCompletionRequest.SamplingMask.
 type ChatCompletionRequestSamplingMask string
 
-// ChatCompletionRequestServiceTier The service tier to use for the request. Specifies the processing type used for serving the request. Only "priority" is supported, while all other values will be treated as "default" tier.
+// ChatCompletionRequestServiceTier The service tier to use for the request. Set "priority" for Priority tier or "spot" for Spot.
 type ChatCompletionRequestServiceTier string
 
 // ChatCompletionRequestSpeculation0 defines model for ChatCompletionRequest.Speculation.0.
@@ -5462,7 +5498,7 @@ type CompletionRequest struct {
 	// Seed Random seed for deterministic sampling.
 	Seed *int `json:"seed,omitempty"`
 
-	// ServiceTier The service tier to use for the request. Specifies the processing type used for serving the request. Only "priority" is supported, while all other values will be treated as "default" tier.
+	// ServiceTier The service tier to use for the request. Set "priority" for Priority tier or "spot" for Spot.
 	ServiceTier *CompletionRequestServiceTier `json:"service_tier,omitempty"`
 
 	// Speculation Speculative decoding prompt or token IDs to speed up generation.
@@ -5615,7 +5651,7 @@ type CompletionRequestReasoningHistory string
 // CompletionRequestSamplingMask defines model for CompletionRequest.SamplingMask.
 type CompletionRequestSamplingMask string
 
-// CompletionRequestServiceTier The service tier to use for the request. Specifies the processing type used for serving the request. Only "priority" is supported, while all other values will be treated as "default" tier.
+// CompletionRequestServiceTier The service tier to use for the request. Set "priority" for Priority tier or "spot" for Spot.
 type CompletionRequestServiceTier string
 
 // CompletionRequestSpeculation0 defines model for CompletionRequest.Speculation.0.

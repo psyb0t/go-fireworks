@@ -2,6 +2,12 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.2.3, 2026-11-25
+
+- Added the `service_tier` option to Anthropic message requests: the `AnthropicCreateMessageParams.ServiceTier` field with the new type `AnthropicCreateMessageParamsServiceTier` and the constants `AnthropicCreateMessageParamsServiceTierAuto`, `AnthropicCreateMessageParamsServiceTierPriority`, `AnthropicCreateMessageParamsServiceTierSpot` and `AnthropicCreateMessageParamsServiceTierStandardOnly`.
+- Added the `spot` service tier value as `ChatCompletionRequestServiceTierSpot` and `CompletionRequestServiceTierSpot`. The `Valid` methods of both enums now accept it.
+- Updated the doc comments for `ChatCompletionRequest.ServiceTier` and `CompletionRequest.ServiceTier`: set "priority" for Priority tier or "spot" for Spot.
+
 ## v0.2.2, 2026-11-18
 
 - Generated from Fireworks spec version 5.10.0.
